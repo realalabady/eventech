@@ -23,7 +23,7 @@ Decided 2026-07-25 after a full review of all 50 docs. Product-shaping decisions
 
 | # | Phase | Contents |
 |---|-------|----------|
-| 0 | Foundation | Repo, Next.js 15 + TS strict + Tailwind v4, Firebase project, tooling, CI |
+| 0 | Foundation | Repo, Next.js (16 at scaffold time — guides' "15" superseded by latest stable) + TS strict + Tailwind v4, Firebase project, tooling, CI |
 | 1 | Design System | Tokens (§8), theme system, base components |
 | 2 | Authentication | Login, registration, Google OAuth, onboarding, roles, protected routes |
 | 3 | Organizer Foundation | Organization profiles, branding, team management, member roles |
