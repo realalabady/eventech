@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+/*
+ * EvenTech design tokens.
+ * Canonical source: guides/50_CANONICAL_DECISIONS.md §8.
+ * Dark is the DEFAULT theme (:root). Light is applied via the `.light` class.
+ * Never hardcode colors/spacing/radius in components — use tokens only.
+ */
+
+:root {
+  /* Neutrals — dark (default) */
+  --background: #0a0a0b;
+  --surface: #111113;
+  --card: #16161a;
+  --border: #26262b;
+  --foreground: #f5f5f6;
+  --muted: #a1a1aa;
+
+  /* Accents — dark theme */
+  --primary: #3b82f6;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #f43f5e;
+  --info: #38bdf8;
+  --accent: #8b5cf6;
+}
+
+.light {
+  /* Neutrals — light */
+  --background: #fafafa;
+  --surface: #f4f4f5;
+  --card: #ffffff;
+  --border: #e4e4e7;
+  --foreground: #18181b;
+  --muted: #71717a;
+
+  /* Accents — light theme */
+  --primary: #2563eb;
+  --success: #059669;
+  --warning: #d97706;
+  --danger: #e11d48;
+  --info: #0284c7;
+  --accent: #7c3aed;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+  --color-accent: var(--accent);
+
+  /* Typography — Geist (3 weights: 400/500/600), Arabic fallback for RTL */
+  --font-sans:
+    var(--font-geist-sans), var(--font-arabic), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+
+  /* Radius scale — canonical §8 (cards 24, inputs 16, buttons pill, dialogs 28) */
+  --radius-xs: 0.5rem; /* 8px */
+  --radius-sm: 0.75rem; /* 12px */
+  --radius-md: 1rem; /* 16px */
+  --radius-lg: 1.25rem; /* 20px */
+  --radius-xl: 1.5rem; /* 24px */
+  --radius-2xl: 1.75rem; /* 28px */
+
+  /* Layout */
+  --container-content: 90rem; /* 1440px max content width */
+  --container-reading: 45rem; /* 720px reading width */
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}

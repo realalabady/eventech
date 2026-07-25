@@ -1,0 +1,19 @@
+{
+  "metadata": {
+    "title": "EvenTech — The Operating System for Event Production",
+    "description": "Plan, manage, launch, and execute events professionally. Built for the music industry first."
+  },
+  "common": {
+    "appName": "EvenTech",
+    "loading": "Loading…",
+    "errorTitle": "Something went wrong",
+    "retry": "Try again",
+    "comingSoon": "Coming soon"
+  },
+  "home": {
+    "badge": "Foundation phase",
+    "title": "The operating system for event production",
+    "tagline": "Plan, manage, launch, and execute events like a professional production studio — not a form filler.",
+    "status": "Platform under construction"
+  }
+}

@@ -1,0 +1,10 @@
+rules_version = '2';
+
+// EvenTech — deny-by-default (guides/50_CANONICAL_DECISIONS.md §7).
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
