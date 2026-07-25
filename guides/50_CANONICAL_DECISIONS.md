@@ -15,7 +15,9 @@ Decided 2026-07-25 after a full review of all 50 docs. Product-shaping decisions
 2. **Artists are full MVP citizens** — `artists` root collection, public `/artists` and `/artists/[slug]` pages, an Artists step in the event wizard, `artistIds[]` on events.
 3. **Multiple ticket types in MVP** — per-event ticket tiers (name, price, quantity). Not a single price. (Early-bird/group/transfer/waitlist mechanics remain v2.0 per guide 20.)
 4. **Dark-first theme** — dark is the default experience; light is fully supported and designed independently. (Overrides guide 02's light-only palette framing.)
-5. **i18n from day 1 — zero hardcoded UI strings** (overrides guide 20's "i18n is future"). Library: **next-intl** with locale routing (`app/[locale]/`). Locales: `en` (default) + `ar` (RTL, GCC market). Every user-facing string lives in `messages/{locale}.json`, namespaced by feature (`auth.login.title`). `dir` is set per locale; layouts must be RTL-safe (logical CSS properties). ESLint enforces no JSX string literals. A test asserts locale files stay key-identical.
+5. **i18n from day 1 — zero hardcoded UI strings** (overrides guide 20's "i18n is future"). Library: **next-intl** with locale routing (`app/[locale]/`). Locales: `en` (default) + `ar` (RTL, GCC market). Every user-facing string lives in `messages/{locale}.json`, namespaced by feature (`auth.login.title`). `dir` is set per locale; layouts must be RTL-safe (logical CSS properties).
+
+   Enforcement: `react/jsx-no-literals` (`noStrings`, `ignoreProps`) scoped to `app/`/`components/`/`features/`, plus a test asserting locale files stay key-identical. Rationale and the known gap (visible string props such as `placeholder`/`alt` are not machine-checked) are documented in `AGENTS.md`.
 
 ---
 

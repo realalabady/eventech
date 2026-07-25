@@ -17,6 +17,15 @@ Premium event management SaaS (music industry first). Next.js (App Router) + Typ
 ## Non-negotiable rules
 
 - **i18n: ZERO hardcoded UI strings.** Every user-facing string lives in `messages/en.json` + `messages/ar.json` (key-identical — enforced by `tests/messages.test.ts`). Locales: `en` (default), `ar` (RTL). Use logical CSS properties (`ms-*`/`me-*`, `start`/`end`) — never `ml-*`/`mr-*` for direction-sensitive spacing.
+
+  **i18n enforcement — how and why.** Machine-enforced by [`react/jsx-no-literals`](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-no-literals.md) in `eslint.config.mjs`, scoped to `app/`, `components/`, `features/`. Chosen over `eslint-plugin-i18next` because the rule ships with `eslint-config-next` (zero new dependencies), is well documented, and catches the actual failure mode: visible text sitting in JSX.
+
+  Settings and their reasons:
+  - `noStrings: true` — flags any bare text node in JSX. This is the rule's whole point.
+  - `ignoreProps: true` — props are mostly non-visible (`className`, `href`, `id`, `data-*`). Flagging them would drown the signal.
+  - **Known gap:** because props are ignored, _visible_ string props (`placeholder`, `alt`, `aria-label`, `title`) are not caught. Always pass those through `t()` by hand; reviewers should check them. If this gap ever bites, add `eslint-plugin-i18next` and configure `no-literal-string` with an attribute allowlist.
+  - **Vendored files excluded:** `components/ui/**` (shadcn) and the ReactBits files are third-party code we re-generate; our own wrappers around them must still pass. shadcn's few internal strings (e.g. the dialog's sr-only close label) are tracked separately.
+
 - **Design tokens only** — never hardcode colors/spacing/radius/shadows. Tokens live in `app/globals.css`; canonical values in guide 50 §8. Dark is the default theme.
 - **Security-sensitive logic runs in Cloud Functions only** (QR, tickets, approvals, roles, emails). Never trust the client.
 - **Component sourcing ladder:** shadcn/ui → 21st.dev → ReactBits → custom (last resort).

@@ -10,11 +10,34 @@
     "retry": "Try again",
     "comingSoon": "Coming soon"
   },
+  "nav": {
+    "signIn": "Sign in",
+    "getStarted": "Start planning"
+  },
   "home": {
-    "badge": "Foundation phase",
-    "title": "The operating system for event production",
-    "tagline": "Plan, manage, launch, and execute events like a professional production studio — not a form filler.",
-    "status": "Platform under construction"
+    "title": "Run the show, not the paperwork",
+    "tagline": "One workspace for planning, ticketing, and running live events. Built for the people who put them on.",
+    "cta": "Start planning",
+    "secondaryCta": "See the design system",
+    "upcoming": "Live on EvenTech",
+    "attending": "{count} going",
+    "events": {
+      "neonCoast": {
+        "title": "Neon Coast Festival",
+        "date": "Fri, Aug 14 · 21:00",
+        "venue": "Rooftop Stage, Jeddah"
+      },
+      "midnight": {
+        "title": "Midnight Frequencies",
+        "date": "Sat, Aug 22 · 23:00",
+        "venue": "Warehouse District"
+      },
+      "goldenHour": {
+        "title": "Golden Hour Sessions",
+        "date": "Sun, Sep 7 · 17:30",
+        "venue": "Beach Club"
+      }
+    }
   },
   "theme": {
     "toggle": "Change theme",
