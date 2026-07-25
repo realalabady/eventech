@@ -4,10 +4,18 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Geist, Geist_Mono, Noto_Sans_Arabic } from "next/font/google";
 import { notFound } from "next/navigation";
 
+import { Toaster } from "@/components/ui/sonner";
 import { getDirection } from "@/i18n/direction";
 import { routing } from "@/i18n/routing";
 
 import "../globals.css";
+
+/**
+ * Dark is the default theme; this pre-hydration script removes the `dark`
+ * class before first paint when the user chose light (or system+light),
+ * preventing a theme flash. Storage key must match store/theme-store.ts.
+ */
+const THEME_INIT_SCRIPT = `(function(){try{var t=localStorage.getItem("evntech-theme");var l=window.matchMedia("(prefers-color-scheme: light)").matches;if(t==="light"||(t==="system"&&l)){document.documentElement.classList.remove("dark")}}catch(e){}})();`;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -62,10 +70,15 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={getDirection(locale)}
-      className={`${geistSans.variable} ${geistMono.variable} ${notoSansArabic.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${notoSansArabic.variable} dark h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        <NextIntlClientProvider>
+          {children}
+          <Toaster />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

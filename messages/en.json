@@ -15,5 +15,43 @@
     "title": "The operating system for event production",
     "tagline": "Plan, manage, launch, and execute events like a professional production studio — not a form filler.",
     "status": "Platform under construction"
+  },
+  "theme": {
+    "toggle": "Change theme",
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System"
+  },
+  "design": {
+    "title": "Design system",
+    "subtitle": "EvenTech tokens, components, and motion. Canonical source: guide 50.",
+    "colors": "Color tokens",
+    "typography": "Typography",
+    "typeSample": "Run the show, not the paperwork",
+    "bodySample": "Organizers plan, launch, and execute events with full control over every detail.",
+    "buttons": "Buttons",
+    "primary": "Create event",
+    "secondary": "Save draft",
+    "outline": "Preview",
+    "ghost": "Dismiss",
+    "destructive": "Cancel event",
+    "forms": "Forms",
+    "emailLabel": "Work email",
+    "emailPlaceholder": "you@studio.com",
+    "emailHelper": "We only use this for booking confirmations.",
+    "cards": "Cards",
+    "cardTitle": "Neon Coast Festival",
+    "cardBody": "Rooftop stage, two headliners, and a sold-out waitlist within a week.",
+    "cardAction": "Open workspace",
+    "feedback": "Feedback",
+    "openDialog": "Open dialog",
+    "dialogTitle": "Publish this event?",
+    "dialogBody": "Attendees will be able to discover and book it immediately.",
+    "confirm": "Publish",
+    "close": "Not yet",
+    "loadingStates": "Loading states",
+    "motion": "Motion",
+    "counterLabel": "Tickets sold",
+    "blurSample": "Production, perfected."
   }
 }
