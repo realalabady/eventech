@@ -130,6 +130,7 @@
       "accepted": "تم الانضمام. جارٍ فتح مساحة العمل."
     },
     "nav": {
+      "events": "الفعاليات",
       "team": "الفريق",
       "settings": "الإعدادات",
       "branding": "الهوية",
@@ -193,6 +194,167 @@
       "invalidIban": "رقم الآيبان لا يبدو صحيحاً.",
       "invalidImageType": "استخدم صورة بصيغة JPG أو PNG أو WebP.",
       "imageTooLarge": "يجب أن تكون الصور أقل من 20 ميجابايت.",
+      "alreadyExists": "هذا موجود بالفعل.",
+      "permissionDenied": "ليست لديك صلاحية للقيام بذلك.",
+      "validationFailed": "تحقق من البيانات وحاول مجدداً.",
+      "notFound": "لم نتمكن من العثور على ذلك.",
+      "authRequired": "سجّل الدخول للمتابعة.",
+      "unknown": "حدث خطأ ما. حاول مرة أخرى."
+    }
+  },
+  "event": {
+    "list": {
+      "title": "الفعاليات",
+      "subtitle": "كل ما تنتجه في مكان واحد.",
+      "create": "فعالية جديدة",
+      "empty": "لا توجد فعاليات بعد.",
+      "emptyHint": "ابدأ واحدة وسنجهّز لك الجدول الزمني والمهام.",
+      "untitled": "فعالية بلا عنوان",
+      "noDate": "لم يُحدد تاريخ"
+    },
+    "status": {
+      "draft": "مسودة",
+      "planning": "قيد التخطيط",
+      "published": "منشورة",
+      "live": "جارية",
+      "completed": "منتهية",
+      "cancelled": "ملغاة",
+      "archived": "مؤرشفة"
+    },
+    "wizard": {
+      "stepLabel": "الخطوة {current} من {total}",
+      "next": "متابعة",
+      "back": "رجوع",
+      "saving": "جارٍ الحفظ…",
+      "saved": "تم الحفظ",
+      "saveFailed": "تعذّر الحفظ. تحقق من اتصالك."
+    },
+    "steps": {
+      "basics": "الأساسيات",
+      "venue": "المكان",
+      "schedule": "التوقيت",
+      "artists": "الفنانون",
+      "tickets": "التذاكر",
+      "branding": "الهوية",
+      "team": "الفريق",
+      "payment": "الدفع",
+      "review": "المراجعة"
+    },
+    "basics": {
+      "titleLabel": "اسم الفعالية",
+      "titlePlaceholder": "ليلة افتتاح الساحل المضيء",
+      "categoryLabel": "التصنيف",
+      "categoryPlaceholder": "اختر تصنيفاً",
+      "descriptionLabel": "الوصف",
+      "descriptionPlaceholder": "من سيؤدي، وما طبيعة الليلة، ولماذا يستحق الحضور."
+    },
+    "venue": {
+      "heading": "أين ستقام؟",
+      "current": "تم تحديد المكان",
+      "nameLabel": "اسم المكان",
+      "namePlaceholder": "مسرح السطح",
+      "addressLabel": "العنوان",
+      "addressPlaceholder": "طريق الملك عبدالله",
+      "cityLabel": "المدينة",
+      "cityPlaceholder": "جدة",
+      "add": "حفظ المكان"
+    },
+    "schedule": {
+      "startLabel": "فتح الأبواب",
+      "endLabel": "الانتهاء",
+      "hint": "الأوقات بتوقيتك المحلي."
+    },
+    "artists": {
+      "heading": "من سيؤدي؟",
+      "nameLabel": "اسم الفنان",
+      "namePlaceholder": "دي جي سلطان",
+      "add": "إضافة للقائمة",
+      "empty": "لم تتم إضافة فنانين بعد.",
+      "hint": "اختياري. يمكنك الإعلان عن القائمة لاحقاً."
+    },
+    "tickets": {
+      "heading": "أنواع التذاكر",
+      "hint": "اجعل السعر 0 لفئة مجانية. الفعاليات المدفوعة تتطلب تفاصيلك البنكية قبل النشر.",
+      "nameLabel": "الاسم",
+      "namePlaceholder": "عادية",
+      "priceLabel": "السعر",
+      "currencyLabel": "العملة",
+      "quantityLabel": "الكمية",
+      "add": "إضافة نوع تذكرة",
+      "remove": "إزالة",
+      "empty": "أضف نوع تذكرة واحداً على الأقل.",
+      "capacity": "السعة الإجمالية: {count}",
+      "free": "هذه الفعالية مجانية."
+    },
+    "branding": {
+      "heading": "اللون المميز",
+      "hint": "يُستخدم في صفحة الفعالية العامة.",
+      "colorLabel": "اللون"
+    },
+    "team": {
+      "heading": "الفريق والمهام",
+      "hint": "جهّزنا جدولاً زمنياً للإنتاج ومهام أولية عند إنشاء الفعالية. إسنادها يأتي مع أدوات الإنتاج."
+    },
+    "payment": {
+      "heading": "استلام المدفوعات",
+      "ready": "التفاصيل البنكية محفوظة. سيحوّل الحضور ويرفعون الإيصال.",
+      "missing": "هذه الفعالية مدفوعة، لذا تحتاج تفاصيل بنكية قبل النشر.",
+      "free": "هذه الفعالية مجانية، فلا حاجة لتفاصيل بنكية.",
+      "goToSettings": "إضافة التفاصيل البنكية"
+    },
+    "review": {
+      "heading": "جاهز للنشر؟",
+      "hint": "النشر يجعل الفعالية عامة ويفتح الحجز.",
+      "publish": "نشر الفعالية",
+      "published": "تم النشر. فعاليتك الآن مباشرة.",
+      "incomplete": "أكمل ما يلي قبل النشر:"
+    },
+    "categories": {
+      "concert": "حفل موسيقي",
+      "clubNight": "ليلة نادي",
+      "festival": "مهرجان",
+      "liveBand": "فرقة حية",
+      "beachParty": "حفل شاطئ",
+      "rooftopParty": "حفل سطح",
+      "privateEvent": "فعالية خاصة"
+    },
+    "fields": {
+      "title": "اسم الفعالية",
+      "category": "التصنيف",
+      "venue": "المكان",
+      "startDate": "وقت البدء",
+      "endDate": "وقت الانتهاء",
+      "ticketTypes": "أنواع التذاكر"
+    },
+    "errors": {
+      "titleTooShort": "أعطِ الفعالية اسماً من 3 أحرف على الأقل.",
+      "titleTooLong": "الاسم طويل جداً.",
+      "categoryRequired": "اختر تصنيفاً.",
+      "descriptionTooLong": "أبقِ النص أقل من 5000 حرف.",
+      "venueNameRequired": "أدخل اسم المكان.",
+      "venueNameTooLong": "اسم المكان طويل جداً.",
+      "venueAddressRequired": "أدخل العنوان.",
+      "venueAddressTooLong": "العنوان طويل جداً.",
+      "venueCityRequired": "أدخل المدينة.",
+      "venueCityTooLong": "اسم المدينة طويل جداً.",
+      "startRequired": "حدد وقت البدء.",
+      "endRequired": "حدد وقت الانتهاء.",
+      "endBeforeStart": "يجب أن يكون وقت الانتهاء بعد البدء.",
+      "artistNameRequired": "أدخل اسم الفنان.",
+      "artistNameTooLong": "الاسم طويل جداً.",
+      "ticketNameRequired": "سمِّ نوع التذكرة.",
+      "ticketNameTooLong": "الاسم طويل جداً.",
+      "priceRequired": "أدخل السعر.",
+      "priceNegative": "لا يمكن أن يكون السعر سالباً.",
+      "priceTooHigh": "السعر مرتفع جداً.",
+      "currencyInvalid": "استخدم رمز عملة من 3 أحرف.",
+      "quantityRequired": "أدخل الكمية.",
+      "quantityNotInteger": "يجب أن تكون الكمية عدداً صحيحاً.",
+      "quantityTooLow": "يجب أن تكون الكمية 1 على الأقل.",
+      "quantityTooHigh": "الكمية مرتفعة جداً.",
+      "eventIncomplete": "لا تزال بعض التفاصيل ناقصة.",
+      "paymentDetailsRequired": "أضف تفاصيلك البنكية قبل نشر فعالية مدفوعة.",
+      "emailNotVerified": "أكّد بريدك الإلكتروني قبل النشر.",
       "alreadyExists": "هذا موجود بالفعل.",
       "permissionDenied": "ليست لديك صلاحية للقيام بذلك.",
       "validationFailed": "تحقق من البيانات وحاول مجدداً.",

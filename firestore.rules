@@ -69,6 +69,49 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // Phase 4 — Event management.
+    match /events/{eventId} {
+      // Published events are public; drafts stay inside the organization.
+      allow get, list: if resource.data.status == 'published'
+        || isAdmin()
+        || (resource.data.organizationId is string
+            && isActiveMember(resource.data.organizationId));
+      // createEvent / saveEventDraft / publishEvent only — status, slug,
+      // capacity and sold counts must never be client-writable.
+      allow write: if false;
+    }
+
+    match /venues/{venueId} {
+      allow get, list: if true;
+      allow write: if false;  // createVenue only
+    }
+
+    match /artists/{artistId} {
+      allow get, list: if true;
+      allow write: if false;  // createArtist only
+    }
+
+    match /timeline/{itemId} {
+      allow get, list: if isSignedIn()
+        && resource.data.organizationId is string
+        && isActiveMember(resource.data.organizationId);
+      allow write: if false;
+    }
+
+    match /tasks/{taskId} {
+      allow get, list: if isSignedIn()
+        && resource.data.organizationId is string
+        && isActiveMember(resource.data.organizationId);
+      allow write: if false;
+    }
+
+    match /activityLogs/{logId} {
+      allow get, list: if isSignedIn()
+        && resource.data.organizationId is string
+        && isActiveMember(resource.data.organizationId);
+      allow write: if false;
+    }
+
     match /auditLogs/{logId} {
       allow read, write: if false;  // server-side only, never client-readable
     }

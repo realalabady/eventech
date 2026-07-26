@@ -1,12 +1,13 @@
 "use client";
 
-import { Settings, Users } from "lucide-react";
+import { CalendarDays, Settings, Users } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
 
 import { Link, usePathname } from "@/i18n/navigation";
 
 const ITEMS = [
+  { href: "/workspace/events", key: "events", icon: CalendarDays },
   { href: "/workspace/team", key: "team", icon: Users },
   { href: "/workspace/settings", key: "settings", icon: Settings },
 ] as const;

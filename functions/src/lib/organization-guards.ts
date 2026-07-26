@@ -53,8 +53,11 @@ export async function requireMemberRole(
   return role;
 }
 
-/** URL-safe slug, unique across organizations. */
-export async function buildUniqueSlug(name: string): Promise<string> {
+/** URL-safe slug, unique within the given collection. */
+export async function buildUniqueSlug(
+  name: string,
+  collection = "organizations",
+): Promise<string> {
   const base =
     name
       .toLowerCase()
@@ -69,7 +72,7 @@ export async function buildUniqueSlug(name: string): Promise<string> {
   for (let attempt = 0; attempt < 25; attempt += 1) {
     const candidate = attempt === 0 ? base : `${base}-${attempt + 1}`;
     const taken = await db
-      .collection("organizations")
+      .collection(collection)
       .where("slug", "==", candidate)
       .limit(1)
       .get();

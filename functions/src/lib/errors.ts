@@ -15,6 +15,11 @@ export const ERROR_CODES = [
   "INVALID_QR",
   "RATE_LIMITED",
   "SERVER_ERROR",
+  // Publish-time gates (guide 50 §8): an event cannot go live while required
+  // fields are missing, and a paid event needs the organization's bank details.
+  "EVENT_INCOMPLETE",
+  "PAYMENT_DETAILS_REQUIRED",
+  "EMAIL_NOT_VERIFIED",
 ] as const;
 
 export type ErrorCode = (typeof ERROR_CODES)[number];

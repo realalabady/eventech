@@ -20,3 +20,8 @@ export {
   updateMemberRole,
   removeMember,
 } from "./organization/manage-members";
+
+export { createEvent } from "./event/create-event";
+export { saveEventDraft } from "./event/save-event-draft";
+export { publishEvent } from "./event/publish-event";
+export { createVenue, createArtist } from "./event/catalog";

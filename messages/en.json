@@ -130,6 +130,7 @@
       "accepted": "You are in. Opening your workspace."
     },
     "nav": {
+      "events": "Events",
       "team": "Team",
       "settings": "Settings",
       "branding": "Branding",
@@ -193,6 +194,167 @@
       "invalidIban": "That does not look like a valid IBAN.",
       "invalidImageType": "Use a JPG, PNG, or WebP image.",
       "imageTooLarge": "Images must be under 20 MB.",
+      "alreadyExists": "That already exists.",
+      "permissionDenied": "You do not have permission to do that.",
+      "validationFailed": "Check the details and try again.",
+      "notFound": "We could not find that.",
+      "authRequired": "Sign in to continue.",
+      "unknown": "Something went wrong. Try again."
+    }
+  },
+  "event": {
+    "list": {
+      "title": "Events",
+      "subtitle": "Everything you are producing, in one place.",
+      "create": "New event",
+      "empty": "No events yet.",
+      "emptyHint": "Start one and we will set up its timeline and tasks for you.",
+      "untitled": "Untitled event",
+      "noDate": "No date set"
+    },
+    "status": {
+      "draft": "Draft",
+      "planning": "Planning",
+      "published": "Published",
+      "live": "Live",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "archived": "Archived"
+    },
+    "wizard": {
+      "stepLabel": "Step {current} of {total}",
+      "next": "Continue",
+      "back": "Back",
+      "saving": "Saving…",
+      "saved": "Saved",
+      "saveFailed": "Could not save. Check your connection."
+    },
+    "steps": {
+      "basics": "Basics",
+      "venue": "Venue",
+      "schedule": "Schedule",
+      "artists": "Lineup",
+      "tickets": "Tickets",
+      "branding": "Branding",
+      "team": "Team",
+      "payment": "Payment",
+      "review": "Review"
+    },
+    "basics": {
+      "titleLabel": "Event name",
+      "titlePlaceholder": "Neon Coast Opening Night",
+      "categoryLabel": "Category",
+      "categoryPlaceholder": "Choose a category",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Who is playing, what the night is, why people should come."
+    },
+    "venue": {
+      "heading": "Where is it?",
+      "current": "Venue set",
+      "nameLabel": "Venue name",
+      "namePlaceholder": "Rooftop Stage",
+      "addressLabel": "Address",
+      "addressPlaceholder": "King Abdullah Road",
+      "cityLabel": "City",
+      "cityPlaceholder": "Jeddah",
+      "add": "Save venue"
+    },
+    "schedule": {
+      "startLabel": "Doors open",
+      "endLabel": "Ends",
+      "hint": "Times are in your local timezone."
+    },
+    "artists": {
+      "heading": "Who is playing?",
+      "nameLabel": "Artist name",
+      "namePlaceholder": "DJ Sultan",
+      "add": "Add to lineup",
+      "empty": "No artists added yet.",
+      "hint": "Optional. You can announce the lineup later."
+    },
+    "tickets": {
+      "heading": "Ticket types",
+      "hint": "Set a price of 0 for a free tier. Paid events need your bank details before publishing.",
+      "nameLabel": "Name",
+      "namePlaceholder": "Standard",
+      "priceLabel": "Price",
+      "currencyLabel": "Currency",
+      "quantityLabel": "Quantity",
+      "add": "Add ticket type",
+      "remove": "Remove",
+      "empty": "Add at least one ticket type.",
+      "capacity": "Total capacity: {count}",
+      "free": "This event is free."
+    },
+    "branding": {
+      "heading": "Accent colour",
+      "hint": "Used on the public event page.",
+      "colorLabel": "Colour"
+    },
+    "team": {
+      "heading": "Team and tasks",
+      "hint": "We seeded a production timeline and starter tasks when you created this event. Assigning them arrives with the production tools."
+    },
+    "payment": {
+      "heading": "Getting paid",
+      "ready": "Bank details are on file. Attendees will transfer and upload a receipt.",
+      "missing": "This event is paid, so you need bank details before publishing.",
+      "free": "This event is free, so no bank details are needed.",
+      "goToSettings": "Add bank details"
+    },
+    "review": {
+      "heading": "Ready to publish?",
+      "hint": "Publishing makes the event public and opens bookings.",
+      "publish": "Publish event",
+      "published": "Published. Your event is live.",
+      "incomplete": "Finish these before publishing:"
+    },
+    "categories": {
+      "concert": "Concert",
+      "clubNight": "Club night",
+      "festival": "Festival",
+      "liveBand": "Live band",
+      "beachParty": "Beach party",
+      "rooftopParty": "Rooftop party",
+      "privateEvent": "Private event"
+    },
+    "fields": {
+      "title": "Event name",
+      "category": "Category",
+      "venue": "Venue",
+      "startDate": "Start time",
+      "endDate": "End time",
+      "ticketTypes": "Ticket types"
+    },
+    "errors": {
+      "titleTooShort": "Give the event a name of at least 3 characters.",
+      "titleTooLong": "That name is too long.",
+      "categoryRequired": "Choose a category.",
+      "descriptionTooLong": "Keep this under 5000 characters.",
+      "venueNameRequired": "Enter the venue name.",
+      "venueNameTooLong": "That venue name is too long.",
+      "venueAddressRequired": "Enter the address.",
+      "venueAddressTooLong": "That address is too long.",
+      "venueCityRequired": "Enter the city.",
+      "venueCityTooLong": "That city name is too long.",
+      "startRequired": "Set a start time.",
+      "endRequired": "Set an end time.",
+      "endBeforeStart": "The end time must be after the start.",
+      "artistNameRequired": "Enter the artist's name.",
+      "artistNameTooLong": "That name is too long.",
+      "ticketNameRequired": "Name this ticket type.",
+      "ticketNameTooLong": "That name is too long.",
+      "priceRequired": "Enter a price.",
+      "priceNegative": "Price cannot be negative.",
+      "priceTooHigh": "That price is too high.",
+      "currencyInvalid": "Use a 3-letter currency code.",
+      "quantityRequired": "Enter a quantity.",
+      "quantityNotInteger": "Quantity must be a whole number.",
+      "quantityTooLow": "Quantity must be at least 1.",
+      "quantityTooHigh": "That quantity is too high.",
+      "eventIncomplete": "Some details are still missing.",
+      "paymentDetailsRequired": "Add your bank details before publishing a paid event.",
+      "emailNotVerified": "Confirm your email address before publishing.",
       "alreadyExists": "That already exists.",
       "permissionDenied": "You do not have permission to do that.",
       "validationFailed": "Check the details and try again.",
