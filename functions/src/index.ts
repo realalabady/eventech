@@ -8,3 +8,12 @@ setGlobalOptions({ region: "europe-west1", maxInstances: 10 });
 
 export { completeOnboarding } from "./auth/complete-onboarding";
 export { assignUserRole } from "./auth/assign-user-role";
+
+export { createOrganization } from "./organization/create-organization";
+export { updateOrganization } from "./organization/update-organization";
+export {
+  inviteMember,
+  acceptInvitation,
+  updateMemberRole,
+  removeMember,
+} from "./organization/manage-members";

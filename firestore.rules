@@ -2,7 +2,7 @@ rules_version = '2';
 
 // EvenTech Firestore rules — deny-by-default (guides/50_CANONICAL_DECISIONS.md §7).
 // Account role comes from custom claims; org-scoped permissions come from
-// organizationMembers lookups. Collections are opened up phase by phase.
+// organizationMembers lookups. Collections open up phase by phase.
 service cloud.firestore {
   match /databases/{database}/documents {
 
@@ -18,7 +18,20 @@ service cloud.firestore {
       return isSignedIn() && request.auth.token.role == 'admin';
     }
 
-    // Fields only Cloud Functions may ever write.
+    function memberPath(orgId) {
+      return /databases/$(database)/documents/organizationMembers/$(orgId + '_' + request.auth.uid);
+    }
+
+    function isActiveMember(orgId) {
+      return isSignedIn()
+        && exists(memberPath(orgId))
+        && get(memberPath(orgId)).data.status == 'active';
+    }
+
+    function memberRole(orgId) {
+      return get(memberPath(orgId)).data.role;
+    }
+
     function protectedUserFieldsUnchanged() {
       return request.resource.data.diff(resource.data).affectedKeys()
         .hasAny(['role', 'accountStatus', 'organizationIds', 'stats', 'createdAt', 'uid']) == false;
@@ -26,18 +39,38 @@ service cloud.firestore {
 
     // Phase 2 — Authentication.
     match /users/{userId} {
-      // A user reads their own profile; admins read any.
       allow get: if isSelf(userId) || isAdmin();
       allow list: if isAdmin();
-
-      // Creation happens in the completeOnboarding Cloud Function only.
-      allow create: if false;
-
-      // Users edit their own profile, but never role/status/aggregates.
+      allow create: if false;  // completeOnboarding only
       allow update: if isSelf(userId) && protectedUserFieldsUnchanged();
+      allow delete: if false;  // Cloud Function only, so cleanup + audit run
+    }
 
-      // Deletion goes through a Cloud Function so cleanup + audit logging run.
-      allow delete: if false;
+    // Phase 3 — Organizer foundation.
+    match /organizations/{orgId} {
+      // Public profiles are readable by anyone (canonical §7); verification
+      // only grants a badge, it does not gate visibility.
+      allow get, list: if true;
+      // Every mutation runs through createOrganization / updateOrganization so
+      // slug, verified, ownerId and counters cannot be forged.
+      allow write: if false;
+    }
+
+    match /organizationMembers/{memberId} {
+      // Team members see their own roster; an invitee can find the invitation
+      // addressed to their email (queries must filter on that email).
+      allow get, list: if isSignedIn() && (
+        isAdmin()
+        || resource.data.email == request.auth.token.email
+        || (resource.data.organizationId is string
+            && isActiveMember(resource.data.organizationId))
+      );
+      // inviteMember / acceptInvitation / updateMemberRole / removeMember only.
+      allow write: if false;
+    }
+
+    match /auditLogs/{logId} {
+      allow read, write: if false;  // server-side only, never client-readable
     }
 
     // Everything else stays denied until its phase lands.

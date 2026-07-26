@@ -86,7 +86,9 @@
       "emailStatus": "Email",
       "confirmed": "Confirmed",
       "unconfirmed": "Not confirmed",
-      "signOut": "Sign out"
+      "signOut": "Sign out",
+      "becomeOrganizer": "Start organizing events",
+      "openWorkspace": "Open workspace"
     },
     "roles": {
       "attendee": "Attendee",
@@ -107,6 +109,95 @@
       "popupClosed": "The Google window closed before sign-in finished.",
       "networkError": "Connection problem. Check your network.",
       "notConfigured": "Firebase is not configured yet. Add your keys to .env.local.",
+      "unknown": "Something went wrong. Try again."
+    }
+  },
+  "organization": {
+    "create": {
+      "title": "Set up your organization",
+      "subtitle": "This is the profile attendees see on your event pages.",
+      "nameLabel": "Organization name",
+      "namePlaceholder": "Neon Coast Productions",
+      "descriptionLabel": "What do you put on?",
+      "descriptionPlaceholder": "Rooftop and beach parties along the Red Sea coast.",
+      "submit": "Create organization",
+      "note": "You can change any of this later."
+    },
+    "invites": {
+      "title": "You have been invited",
+      "body": "{organization} invited you to join as {role}.",
+      "accept": "Accept",
+      "accepted": "You are in. Opening your workspace."
+    },
+    "nav": {
+      "team": "Team",
+      "settings": "Settings",
+      "branding": "Branding",
+      "backToSite": "Back to site"
+    },
+    "settings": {
+      "title": "Organization settings",
+      "profileHeading": "Profile",
+      "profileHint": "Shown on your public organizer page.",
+      "brandingHeading": "Branding",
+      "brandingHint": "Your logo, cover, and accent colour.",
+      "paymentHeading": "Bank details",
+      "paymentHint": "Attendees transfer to this account and upload a receipt. Required before you can publish a paid event.",
+      "websiteLabel": "Website",
+      "websitePlaceholder": "https://neoncoast.com",
+      "colorLabel": "Accent colour",
+      "logoLabel": "Logo",
+      "coverLabel": "Cover image",
+      "upload": "Upload image",
+      "bankNameLabel": "Bank name",
+      "accountHolderLabel": "Account holder",
+      "ibanLabel": "IBAN",
+      "save": "Save changes",
+      "saved": "Saved."
+    },
+    "team": {
+      "title": "Team",
+      "subtitle": "Invite the people who run your events with you.",
+      "inviteHeading": "Invite someone",
+      "emailLabel": "Their email",
+      "roleLabel": "Role",
+      "titleLabel": "Job title",
+      "titlePlaceholder": "Stage manager",
+      "titleHint": "Shown on the team list. Does not change permissions.",
+      "invite": "Send invitation",
+      "invited": "Invitation created. They will see it next time they sign in.",
+      "membersHeading": "Members",
+      "pending": "Pending",
+      "remove": "Remove",
+      "empty": "No one else yet."
+    },
+    "roles": {
+      "owner": "Owner",
+      "manager": "Manager",
+      "staff": "Staff",
+      "scanner": "Scanner"
+    },
+    "errors": {
+      "nameTooShort": "Enter at least 2 characters.",
+      "nameTooLong": "That name is too long.",
+      "descriptionTooLong": "Keep this under 1000 characters.",
+      "invalidUrl": "Enter a full URL, including https://",
+      "invalidColor": "Pick a colour.",
+      "invalidEmail": "Enter a valid email address.",
+      "invalidRole": "Choose a role.",
+      "titleTooLong": "That title is too long.",
+      "bankNameRequired": "Enter the bank name.",
+      "bankNameTooLong": "That bank name is too long.",
+      "accountHolderRequired": "Enter the account holder's name.",
+      "accountHolderTooLong": "That name is too long.",
+      "invalidIban": "That does not look like a valid IBAN.",
+      "invalidImageType": "Use a JPG, PNG, or WebP image.",
+      "imageTooLarge": "Images must be under 20 MB.",
+      "alreadyExists": "That already exists.",
+      "permissionDenied": "You do not have permission to do that.",
+      "validationFailed": "Check the details and try again.",
+      "notFound": "We could not find that.",
+      "authRequired": "Sign in to continue.",
       "unknown": "Something went wrong. Try again."
     }
   },

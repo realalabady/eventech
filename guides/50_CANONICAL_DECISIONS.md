@@ -17,6 +17,10 @@ Decided 2026-07-25 after a full review of all 50 docs. Product-shaping decisions
 4. **Dark-first theme** — dark is the default experience; light is fully supported and designed independently. (Overrides guide 02's light-only palette framing.)
 5. **i18n from day 1 — zero hardcoded UI strings** (overrides guide 20's "i18n is future"). Library: **next-intl** with locale routing (`app/[locale]/`). Locales: `en` (default) + `ar` (RTL, GCC market). Every user-facing string lives in `messages/{locale}.json`, namespaced by feature (`auth.login.title`). `dir` is set per locale; layouts must be RTL-safe (logical CSS properties).
 
+6. **One organization per user** (Phase 3 decision). Guide 21's `organizationIds[]` is kept as an array for forward compatibility but holds at most one id in MVP; custom claims carry a single `organizationId`. No org switcher — matches guide 41's sidebar. Multi-org is v2.
+7. **Team invites are in-app, not email, in MVP.** `inviteMember` writes an `organizationMembers` doc with `status: "invited"`; the invitee sees and accepts it on next sign-in. The Resend invitation email is wired in Phase 7 without changing this model.
+8. **Bank details are collected in organization settings, not at creation.** Publishing a *paid* event is blocked server-side until `organization.payment.iban` exists (enforced in Phase 4's `publishEvent`).
+
    Enforcement: `react/jsx-no-literals` (`noStrings`, `ignoreProps`) scoped to `app/`/`components/`/`features/`, plus a test asserting locale files stay key-identical. Rationale and the known gap (visible string props such as `placeholder`/`alt` are not machine-checked) are documented in `AGENTS.md`.
 
 ---

@@ -1,8 +1,37 @@
 rules_version = '2';
 
-// EvenTech — deny-by-default (guides/50_CANONICAL_DECISIONS.md §7).
+// EvenTech Storage rules — deny-by-default (guides/50_CANONICAL_DECISIONS.md §7).
 service firebase.storage {
   match /b/{bucket}/o {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isImage() {
+      return request.resource.contentType.matches('image/(jpeg|png|webp)');
+    }
+
+    // 20 MB ceiling (canonical §7).
+    function withinSizeLimit() {
+      return request.resource.size < 20 * 1024 * 1024;
+    }
+
+    function canManageOrg(orgId) {
+      return isSignedIn()
+        && firestore.exists(/databases/(default)/documents/organizationMembers/$(orgId + '_' + request.auth.uid))
+        && firestore.get(/databases/(default)/documents/organizationMembers/$(orgId + '_' + request.auth.uid)).data.role in ['owner', 'manager'];
+    }
+
+    // Organization logo and cover: world-readable, owner/manager to write.
+    match /organizations/{orgId}/{imageType}/{fileName} {
+      allow read: if true;
+      allow write: if imageType in ['logo', 'cover']
+        && canManageOrg(orgId)
+        && isImage()
+        && withinSizeLimit();
+    }
+
     match /{allPaths=**} {
       allow read, write: if false;
     }

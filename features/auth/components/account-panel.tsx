@@ -68,9 +68,25 @@ export function AccountPanel() {
         </div>
       </dl>
 
-      <Button variant="outline" disabled={busy} onClick={handleSignOut}>
-        {t("account.signOut")}
-      </Button>
+      <div className="flex flex-wrap items-center gap-3">
+        <Button
+          nativeButton={false}
+          render={
+            <Link
+              href={
+                claims?.organizationId ? "/workspace/team" : "/organizer/new"
+              }
+            />
+          }
+        >
+          {claims?.organizationId
+            ? t("account.openWorkspace")
+            : t("account.becomeOrganizer")}
+        </Button>
+        <Button variant="outline" disabled={busy} onClick={handleSignOut}>
+          {t("account.signOut")}
+        </Button>
+      </div>
     </div>
   );
 }

@@ -86,7 +86,9 @@
       "emailStatus": "البريد الإلكتروني",
       "confirmed": "مؤكَّد",
       "unconfirmed": "غير مؤكَّد",
-      "signOut": "تسجيل الخروج"
+      "signOut": "تسجيل الخروج",
+      "becomeOrganizer": "ابدأ تنظيم الفعاليات",
+      "openWorkspace": "فتح مساحة العمل"
     },
     "roles": {
       "attendee": "حاضر",
@@ -107,6 +109,95 @@
       "popupClosed": "أُغلقت نافذة جوجل قبل اكتمال تسجيل الدخول.",
       "networkError": "مشكلة في الاتصال. تحقق من شبكتك.",
       "notConfigured": "لم يتم إعداد Firebase بعد. أضف المفاتيح إلى ملف .env.local.",
+      "unknown": "حدث خطأ ما. حاول مرة أخرى."
+    }
+  },
+  "organization": {
+    "create": {
+      "title": "أنشئ مؤسستك",
+      "subtitle": "هذا هو الملف الذي يراه الحضور في صفحات فعالياتك.",
+      "nameLabel": "اسم المؤسسة",
+      "namePlaceholder": "إنتاجات الساحل المضيء",
+      "descriptionLabel": "ما نوع الفعاليات التي تقيمها؟",
+      "descriptionPlaceholder": "حفلات على الأسطح والشواطئ على ساحل البحر الأحمر.",
+      "submit": "إنشاء المؤسسة",
+      "note": "يمكنك تعديل كل ذلك لاحقاً."
+    },
+    "invites": {
+      "title": "لديك دعوة",
+      "body": "دعتك {organization} للانضمام بصفة {role}.",
+      "accept": "قبول",
+      "accepted": "تم الانضمام. جارٍ فتح مساحة العمل."
+    },
+    "nav": {
+      "team": "الفريق",
+      "settings": "الإعدادات",
+      "branding": "الهوية",
+      "backToSite": "العودة للموقع"
+    },
+    "settings": {
+      "title": "إعدادات المؤسسة",
+      "profileHeading": "الملف التعريفي",
+      "profileHint": "يظهر في صفحتك العامة كمنظّم.",
+      "brandingHeading": "الهوية البصرية",
+      "brandingHint": "شعارك وصورة الغلاف واللون المميز.",
+      "paymentHeading": "التفاصيل البنكية",
+      "paymentHint": "يحوّل الحضور إلى هذا الحساب ويرفعون الإيصال. مطلوبة قبل نشر أي فعالية مدفوعة.",
+      "websiteLabel": "الموقع الإلكتروني",
+      "websitePlaceholder": "https://neoncoast.com",
+      "colorLabel": "اللون المميز",
+      "logoLabel": "الشعار",
+      "coverLabel": "صورة الغلاف",
+      "upload": "رفع صورة",
+      "bankNameLabel": "اسم البنك",
+      "accountHolderLabel": "اسم صاحب الحساب",
+      "ibanLabel": "رقم الآيبان",
+      "save": "حفظ التغييرات",
+      "saved": "تم الحفظ."
+    },
+    "team": {
+      "title": "الفريق",
+      "subtitle": "ادعُ من يديرون الفعاليات معك.",
+      "inviteHeading": "دعوة شخص",
+      "emailLabel": "بريده الإلكتروني",
+      "roleLabel": "الدور",
+      "titleLabel": "المسمى الوظيفي",
+      "titlePlaceholder": "مدير المسرح",
+      "titleHint": "يظهر في قائمة الفريق. لا يغيّر الصلاحيات.",
+      "invite": "إرسال الدعوة",
+      "invited": "تم إنشاء الدعوة. سيراها عند تسجيل دخوله القادم.",
+      "membersHeading": "الأعضاء",
+      "pending": "بانتظار القبول",
+      "remove": "إزالة",
+      "empty": "لا يوجد أحد بعد."
+    },
+    "roles": {
+      "owner": "المالك",
+      "manager": "مدير",
+      "staff": "طاقم العمل",
+      "scanner": "ماسح التذاكر"
+    },
+    "errors": {
+      "nameTooShort": "أدخل حرفين على الأقل.",
+      "nameTooLong": "الاسم طويل جداً.",
+      "descriptionTooLong": "أبقِ النص أقل من 1000 حرف.",
+      "invalidUrl": "أدخل رابطاً كاملاً يبدأ بـ https://",
+      "invalidColor": "اختر لوناً.",
+      "invalidEmail": "أدخل بريداً إلكترونياً صحيحاً.",
+      "invalidRole": "اختر دوراً.",
+      "titleTooLong": "المسمى طويل جداً.",
+      "bankNameRequired": "أدخل اسم البنك.",
+      "bankNameTooLong": "اسم البنك طويل جداً.",
+      "accountHolderRequired": "أدخل اسم صاحب الحساب.",
+      "accountHolderTooLong": "الاسم طويل جداً.",
+      "invalidIban": "رقم الآيبان لا يبدو صحيحاً.",
+      "invalidImageType": "استخدم صورة بصيغة JPG أو PNG أو WebP.",
+      "imageTooLarge": "يجب أن تكون الصور أقل من 20 ميجابايت.",
+      "alreadyExists": "هذا موجود بالفعل.",
+      "permissionDenied": "ليست لديك صلاحية للقيام بذلك.",
+      "validationFailed": "تحقق من البيانات وحاول مجدداً.",
+      "notFound": "لم نتمكن من العثور على ذلك.",
+      "authRequired": "سجّل الدخول للمتابعة.",
       "unknown": "حدث خطأ ما. حاول مرة أخرى."
     }
   },
