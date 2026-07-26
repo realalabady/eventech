@@ -6,6 +6,11 @@ import {
   type Firestore,
 } from "firebase/firestore";
 import {
+  connectFunctionsEmulator,
+  getFunctions,
+  type Functions,
+} from "firebase/functions";
+import {
   connectStorageEmulator,
   getStorage,
   type FirebaseStorage,
@@ -47,10 +52,17 @@ export function getFirebaseStorage(): FirebaseStorage {
   return storage;
 }
 
+export function getFirebaseFunctions(): Functions {
+  const functions = getFunctions(getFirebaseApp());
+  connectEmulatorsOnce(undefined, undefined, undefined, functions);
+  return functions;
+}
+
 function connectEmulatorsOnce(
   auth?: Auth,
   db?: Firestore,
   storage?: FirebaseStorage,
+  functions?: Functions,
 ): void {
   if (!shouldUseEmulators() || emulatorsConnected) {
     return;
@@ -60,12 +72,14 @@ function connectEmulatorsOnce(
   const resolvedAuth = auth ?? getAuth(app);
   const resolvedDb = db ?? getFirestore(app);
   const resolvedStorage = storage ?? getStorage(app);
+  const resolvedFunctions = functions ?? getFunctions(app);
 
   connectAuthEmulator(resolvedAuth, "http://127.0.0.1:9099", {
     disableWarnings: true,
   });
   connectFirestoreEmulator(resolvedDb, "127.0.0.1", 8080);
   connectStorageEmulator(resolvedStorage, "127.0.0.1", 9199);
+  connectFunctionsEmulator(resolvedFunctions, "127.0.0.1", 5001);
 
   emulatorsConnected = true;
 }

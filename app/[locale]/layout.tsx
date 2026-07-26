@@ -5,6 +5,7 @@ import { Geist, Geist_Mono, Noto_Sans_Arabic } from "next/font/google";
 import { notFound } from "next/navigation";
 
 import { Toaster } from "@/components/ui/sonner";
+import { AuthProvider } from "@/features/auth/components/auth-provider";
 import { getDirection } from "@/i18n/direction";
 import { routing } from "@/i18n/routing";
 
@@ -76,8 +77,10 @@ export default async function LocaleLayout({
       <body className="flex min-h-full flex-col">
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <NextIntlClientProvider>
-          {children}
-          <Toaster />
+          <AuthProvider>
+            {children}
+            <Toaster />
+          </AuthProvider>
         </NextIntlClientProvider>
       </body>
     </html>

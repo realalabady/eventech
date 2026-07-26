@@ -1,9 +1,46 @@
 rules_version = '2';
 
-// EvenTech — deny-by-default (guides/50_CANONICAL_DECISIONS.md §7).
-// Permissions are granted explicitly, per collection, as features land.
+// EvenTech Firestore rules — deny-by-default (guides/50_CANONICAL_DECISIONS.md §7).
+// Account role comes from custom claims; org-scoped permissions come from
+// organizationMembers lookups. Collections are opened up phase by phase.
 service cloud.firestore {
   match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isSelf(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.role == 'admin';
+    }
+
+    // Fields only Cloud Functions may ever write.
+    function protectedUserFieldsUnchanged() {
+      return request.resource.data.diff(resource.data).affectedKeys()
+        .hasAny(['role', 'accountStatus', 'organizationIds', 'stats', 'createdAt', 'uid']) == false;
+    }
+
+    // Phase 2 — Authentication.
+    match /users/{userId} {
+      // A user reads their own profile; admins read any.
+      allow get: if isSelf(userId) || isAdmin();
+      allow list: if isAdmin();
+
+      // Creation happens in the completeOnboarding Cloud Function only.
+      allow create: if false;
+
+      // Users edit their own profile, but never role/status/aggregates.
+      allow update: if isSelf(userId) && protectedUserFieldsUnchanged();
+
+      // Deletion goes through a Cloud Function so cleanup + audit logging run.
+      allow delete: if false;
+    }
+
+    // Everything else stays denied until its phase lands.
     match /{document=**} {
       allow read, write: if false;
     }

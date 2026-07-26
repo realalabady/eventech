@@ -13,6 +13,7 @@ Premium event management SaaS (music industry first). Next.js (App Router) + Typ
 
 1. **`guides/50_CANONICAL_DECISIONS.md`** — the single source of truth. It overrides every other guide (and the README) wherever they conflict.
 2. `README.md` — reading order for the rest of `guides/` (00–49).
+3. **`CLAUDE_TASKS.md`** — standing design brief. Every UI change is **refinement, not replacement**: never rebuild the project, swap the design system, or redesign a page from scratch. Brand identity, IA, navigation, page hierarchy, and the color palette stay fixed; only visual and interaction quality improve. Before implementing any design work, state what will change, why, and which files. After, report improvements, components touched, motion changes, and performance impact.
 
 ## Non-negotiable rules
 

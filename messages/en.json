@@ -39,6 +39,77 @@
       }
     }
   },
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your workspace.",
+      "submit": "Sign in",
+      "noAccount": "New to EvenTech?",
+      "registerLink": "Create an account"
+    },
+    "register": {
+      "title": "Create your account",
+      "subtitle": "Start planning events in minutes.",
+      "submit": "Create account",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Sign in"
+    },
+    "forgot": {
+      "title": "Reset your password",
+      "subtitle": "We will email you a link to choose a new password.",
+      "submit": "Send reset link",
+      "sent": "If that email has an account, a reset link is on its way.",
+      "backToLogin": "Back to sign in"
+    },
+    "verify": {
+      "title": "Confirm your email",
+      "subtitle": "We sent a confirmation link to {email}. Confirm it to publish events and approve bookings.",
+      "resend": "Resend the link",
+      "sent": "Link sent. Check your inbox.",
+      "verified": "Your email is confirmed.",
+      "continue": "Continue"
+    },
+    "fields": {
+      "name": "Full name",
+      "namePlaceholder": "Layla Al-Harbi",
+      "email": "Email",
+      "emailPlaceholder": "you@studio.com",
+      "password": "Password",
+      "passwordHint": "At least 8 characters.",
+      "forgotLink": "Forgot password?"
+    },
+    "google": "Continue with Google",
+    "divider": "or",
+    "account": {
+      "title": "Your account",
+      "role": "Role",
+      "emailStatus": "Email",
+      "confirmed": "Confirmed",
+      "unconfirmed": "Not confirmed",
+      "signOut": "Sign out"
+    },
+    "roles": {
+      "attendee": "Attendee",
+      "organizer": "Organizer",
+      "admin": "Super Admin"
+    },
+    "errors": {
+      "invalidEmail": "Enter a valid email address.",
+      "passwordRequired": "Enter your password.",
+      "passwordTooShort": "Use at least 8 characters.",
+      "passwordTooLong": "That password is too long.",
+      "nameTooShort": "Enter your full name.",
+      "nameTooLong": "That name is too long.",
+      "invalidCredentials": "That email or password is not right.",
+      "emailInUse": "An account already uses that email.",
+      "weakPassword": "Choose a stronger password.",
+      "tooManyRequests": "Too many attempts. Try again shortly.",
+      "popupClosed": "The Google window closed before sign-in finished.",
+      "networkError": "Connection problem. Check your network.",
+      "notConfigured": "Firebase is not configured yet. Add your keys to .env.local.",
+      "unknown": "Something went wrong. Try again."
+    }
+  },
   "theme": {
     "toggle": "Change theme",
     "dark": "Dark",

@@ -68,6 +68,7 @@ export default async function HomePage({ params }: HomePageProps) {
               <Button
                 size="lg"
                 variant="ghost"
+                nativeButton={false}
                 render={<Link href="/design" />}
               >
                 {t("secondaryCta")}
