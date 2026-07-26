@@ -146,6 +146,14 @@ events(status,startDate) · events(organizationId,status) · bookings(eventId,st
 
 **Runtime:** Node.js 22, TypeScript, **Gen 2**, single region (multi-region ready). Emulators mandatory in dev.
 
+**Regions:** Firestore in **`me-central2` (Dammam, Saudi Arabia)**; Cloud Functions in **`me-central1` (Doha, Qatar)**.
+
+Chosen over the auto-assigned `nam5` (US) because the product is Saudi-first and attendee PII plus organizer IBANs should stay in the Gulf. Firestore's location is permanent, so it was moved while the database was still empty.
+
+They are not co-located because **Cloud Functions is not available in `me-central2`** — Dammam is a restricted-service region that hosts Firestore but not Functions. `me-central1` is the nearest Functions region (~400 km), so the several Firestore round trips each callable makes stay within the Gulf instead of crossing to Europe or the US.
+
+The region is declared twice and the two MUST stay in sync: `functions/src/index.ts` (`setGlobalOptions`) and `FUNCTIONS_REGION` in `firebase/client.ts`. A mismatch makes every callable 404.
+
 ### Canonical names (resolves 09/22/25 vs 44/46)
 - Auth/profile: `completeOnboarding` (callable — replaces auth onCreate trigger), `deleteUserData`, `assignUserRole` (admin-only)
 - Organization: `createOrganization`, `inviteMember`, `acceptInvitation`, `removeMember`, `updateMemberRole`, `becomeOrganizer`

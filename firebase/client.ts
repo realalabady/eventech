@@ -52,8 +52,15 @@ export function getFirebaseStorage(): FirebaseStorage {
   return storage;
 }
 
+/**
+ * Callables live in me-central1 (Doha) — the nearest Cloud Functions region to
+ * the Firestore database in me-central2 (Dammam), which does not host Functions.
+ * The region MUST match functions/src/index.ts or every call 404s.
+ */
+export const FUNCTIONS_REGION = "me-central1";
+
 export function getFirebaseFunctions(): Functions {
-  const functions = getFunctions(getFirebaseApp());
+  const functions = getFunctions(getFirebaseApp(), FUNCTIONS_REGION);
   connectEmulatorsOnce(undefined, undefined, undefined, functions);
   return functions;
 }

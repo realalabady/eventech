@@ -1,7 +1,11 @@
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { httpsCallable } from "firebase/functions";
 
-import { getFirebaseFunctions, getFirebaseStorage } from "@/firebase/client";
+import {
+  getFirebaseAuth,
+  getFirebaseFunctions,
+  getFirebaseStorage,
+} from "@/firebase/client";
 
 import type {
   BrandingValues,
@@ -51,14 +55,27 @@ async function call<TPayload extends object, TData = undefined>(
   }
 }
 
-export function createOrganization(payload: {
+/**
+ * Membership changes rewrite custom claims server-side, but the client keeps
+ * its old ID token until it is explicitly refreshed. Without this the route
+ * guards still see the previous role and bounce the user straight back.
+ */
+async function refreshClaims(): Promise<void> {
+  await getFirebaseAuth().currentUser?.getIdToken(true);
+}
+
+export async function createOrganization(payload: {
   name: string;
   description?: string;
 }) {
-  return call<typeof payload, { organizationId: string; slug: string }>(
-    "createOrganization",
-    payload,
-  );
+  const result = await call<
+    typeof payload,
+    { organizationId: string; slug: string }
+  >("createOrganization", payload);
+  if (result.ok) {
+    await refreshClaims();
+  }
+  return result;
 }
 
 export function updateProfile(
@@ -86,8 +103,12 @@ export function inviteMember(
   return call("inviteMember", { organizationId, ...values });
 }
 
-export function acceptInvitation(inviteId: string) {
-  return call("acceptInvitation", { inviteId });
+export async function acceptInvitation(inviteId: string) {
+  const result = await call("acceptInvitation", { inviteId });
+  if (result.ok) {
+    await refreshClaims();
+  }
+  return result;
 }
 
 export function updateMemberRole(

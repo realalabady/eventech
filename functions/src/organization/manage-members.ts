@@ -1,3 +1,4 @@
+import { getAuth } from "firebase-admin/auth";
 import { FieldValue, getFirestore } from "firebase-admin/firestore";
 import { HttpsError, onCall } from "firebase-functions/v2/https";
 
@@ -136,13 +137,25 @@ export const acceptInvitation = onCall<
     },
   );
   batch.delete(inviteRef);
-  batch.update(userRef, { organizationIds: [organizationId], updatedAt: now });
+  batch.update(userRef, {
+    role: "organizer",
+    organizationIds: [organizationId],
+    updatedAt: now,
+  });
   batch.update(db.collection("organizations").doc(organizationId), {
     memberCount: FieldValue.increment(1),
     updatedAt: now,
   });
 
   await batch.commit();
+
+  // Anyone who belongs to an organization works inside the workspace, so the
+  // account role becomes `organizer`; what they may actually do there is
+  // decided by the org-level member role (owner/manager/staff/scanner).
+  await getAuth().setCustomUserClaims(uid, {
+    role: "organizer",
+    organizationId,
+  });
 
   return { success: true, message: "Invitation accepted." };
 });
@@ -213,6 +226,7 @@ export const removeMember = onCall<
   if (data.status === "active" && data.userId) {
     // Free the user to join or create another organization.
     batch.update(db.collection("users").doc(data.userId), {
+      role: "attendee",
       organizationIds: [],
       updatedAt: now,
     });
@@ -222,6 +236,12 @@ export const removeMember = onCall<
     });
   }
   await batch.commit();
+
+  // Revoke workspace access; without this the removed member keeps an
+  // organizationId claim until their token happens to expire.
+  if (data.status === "active" && data.userId) {
+    await getAuth().setCustomUserClaims(data.userId, { role: "attendee" });
+  }
 
   return { success: true, message: "Member removed." };
 });
