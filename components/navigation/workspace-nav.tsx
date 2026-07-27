@@ -1,6 +1,14 @@
 "use client";
 
-import { CalendarDays, ScanLine, Settings, Ticket, Users } from "lucide-react";
+import {
+  CalendarDays,
+  KanbanSquare,
+  Route,
+  ScanLine,
+  Settings,
+  Ticket,
+  Users,
+} from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
 
@@ -8,6 +16,8 @@ import { Link, usePathname } from "@/i18n/navigation";
 
 const ITEMS = [
   { href: "/workspace/events", key: "events", icon: CalendarDays },
+  { href: "/workspace/timeline", key: "timeline", icon: Route },
+  { href: "/workspace/tasks", key: "tasks", icon: KanbanSquare },
   { href: "/workspace/bookings", key: "bookings", icon: Ticket },
   { href: "/workspace/scanner", key: "scanner", icon: ScanLine },
   { href: "/workspace/team", key: "team", icon: Users },

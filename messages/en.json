@@ -136,7 +136,9 @@
       "settings": "Settings",
       "branding": "Branding",
       "backToSite": "Back to site",
-      "scanner": "Scanner"
+      "scanner": "Scanner",
+      "timeline": "Timeline",
+      "tasks": "Tasks"
     },
     "settings": {
       "title": "Organization settings",
@@ -586,6 +588,90 @@
       "notDoorStaff": "You are not on this event's door team.",
       "authRequired": "Sign in to continue.",
       "unknown": "Something went wrong. Scan again."
+    }
+  },
+  "task": {
+    "board": {
+      "title": "Tasks",
+      "subtitle": "Everything the production still needs.",
+      "newTask": "New task",
+      "emptyColumn": "Nothing here.",
+      "failed": "We could not load the board. Try again in a moment."
+    },
+    "status": {
+      "todo": "To Do",
+      "in_progress": "In Progress",
+      "review": "Review",
+      "done": "Done"
+    },
+    "priority": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
+    "seeded": {
+      "confirmVenue": "Confirm the venue",
+      "confirmLineup": "Confirm the lineup",
+      "openBookings": "Open bookings",
+      "briefDoorStaff": "Brief the door staff"
+    },
+    "overdue": "Overdue · {date}",
+    "dialog": {
+      "create": "New task",
+      "edit": "Edit task",
+      "titleLabel": "Task",
+      "statusLabel": "Status",
+      "priorityLabel": "Priority",
+      "dueLabel": "Due date",
+      "save": "Save",
+      "delete": "Delete"
+    },
+    "errors": {
+      "permissionDenied": "You do not have permission to do that.",
+      "validationFailed": "Check the details and try again.",
+      "notFound": "We could not find that task.",
+      "authRequired": "Sign in to continue.",
+      "unknown": "Something went wrong. Try again."
+    }
+  },
+  "timeline": {
+    "title": "Timeline",
+    "subtitle": "Where each event stands, and what comes next.",
+    "stage": {
+      "planning": "Planning",
+      "venue": "Venue",
+      "artists": "Artists",
+      "production": "Production",
+      "marketing": "Marketing",
+      "published": "Published"
+    },
+    "nextUp": "Next up: {stage}",
+    "allDone": "Every milestone is done.",
+    "percent": "{percent}% complete",
+    "empty": "This event has no milestones.",
+    "failed": "We could not load the timeline. Try again in a moment.",
+    "errors": {
+      "permissionDenied": "You do not have permission to do that.",
+      "validationFailed": "Check the details and try again.",
+      "notFound": "We could not find that milestone.",
+      "authRequired": "Sign in to continue.",
+      "unknown": "Something went wrong. Try again."
+    }
+  },
+  "activity": {
+    "title": "Activity",
+    "empty": "Nothing has happened yet.",
+    "failed": "We could not load activity. Try again in a moment.",
+    "action": {
+      "createEvent": "Event created",
+      "publishEvent": "Event published",
+      "approveBooking": "Booking approved",
+      "generateTicket": "Ticket issued",
+      "checkInTicket": "Attendee checked in",
+      "moveTask": "Task moved",
+      "completeMilestone": "Milestone completed",
+      "reopenMilestone": "Milestone reopened",
+      "unknown": "Activity recorded"
     }
   }
 }

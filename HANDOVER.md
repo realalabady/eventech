@@ -38,7 +38,17 @@ Deployed and verified end to end against the live project on 2026-07-27, driving
 
 Set secrets with `--data-file`, never the interactive prompt: on Windows the masked prompt silently captures nothing when you paste into it, and piping a value adds a trailing newline that corrupts the key.
 
-**Next: Phase 8 — Production Tools + Analytics.** Timeline, Kanban, calendar, team communication, activity feed, analytics dashboards.
+### Phase 8 is sliced
+
+Too large for one pass, so it runs in three:
+
+- **8a — done, local only.** Timeline, Kanban, activity feed. `/workspace/timeline` and `/workspace/tasks`, plus `createTask` / `updateTask` / `deleteTask` / `setTimelineStage`. **Needs a deploy of `functions` and `firestore:indexes`** — the activity feed orders by `createdAt` and will show its failed state until `activityLogs(eventId, createdAt)` is built.
+- **8b — not started.** Calendar, team communication. Needs `calendarEvents`, `channels`, `messages` collections + rules, and FullCalendar restyled.
+- **8c — not started.** Analytics dashboards, Recharts lazy-loaded.
+
+**Open design question for 8c:** canonical §6 specifies `updateDashboardMetrics` as **Firestore triggers**, which this project cannot use (gotcha #0 — Firestore is in `me-central2`, Functions cannot run there). Either aggregate on read, or roll counters up from the callables that already run on approval and check-in. **Verify Cloud Scheduler is available in `me-central1` before designing around `generateDailyAnalytics`.**
+
+Two guide-41 conflicts were resolved in 8a and should not be relitigated: Kanban columns follow canonical §4 (_In Progress / Done_, not guide 41's _Doing / Completed_, which §4 explicitly overrides), and timeline stages keep the vocabulary `createEvent` actually seeds (_planning / venue / artists / production / marketing / published_) rather than guide 41's Idea→Execution list, because those documents already exist in the database.
 
 ## Decisions already locked — do not relitigate
 

@@ -136,7 +136,9 @@
       "settings": "الإعدادات",
       "branding": "الهوية",
       "backToSite": "العودة للموقع",
-      "scanner": "المسح"
+      "scanner": "المسح",
+      "timeline": "المسار",
+      "tasks": "المهام"
     },
     "settings": {
       "title": "إعدادات المؤسسة",
@@ -586,6 +588,90 @@
       "notDoorStaff": "لست ضمن فريق الباب لهذه الفعالية.",
       "authRequired": "سجّل الدخول للمتابعة.",
       "unknown": "حدث خطأ. امسح مرة أخرى."
+    }
+  },
+  "task": {
+    "board": {
+      "title": "المهام",
+      "subtitle": "كل ما يحتاجه الإنتاج.",
+      "newTask": "مهمة جديدة",
+      "emptyColumn": "لا شيء هنا.",
+      "failed": "تعذّر تحميل اللوحة. حاول بعد لحظات."
+    },
+    "status": {
+      "todo": "للتنفيذ",
+      "in_progress": "قيد التنفيذ",
+      "review": "للمراجعة",
+      "done": "مكتملة"
+    },
+    "priority": {
+      "low": "منخفضة",
+      "medium": "متوسطة",
+      "high": "عالية"
+    },
+    "seeded": {
+      "confirmVenue": "تأكيد المكان",
+      "confirmLineup": "تأكيد قائمة الفنانين",
+      "openBookings": "فتح الحجوزات",
+      "briefDoorStaff": "توجيه فريق الباب"
+    },
+    "overdue": "متأخرة · {date}",
+    "dialog": {
+      "create": "مهمة جديدة",
+      "edit": "تعديل المهمة",
+      "titleLabel": "المهمة",
+      "statusLabel": "الحالة",
+      "priorityLabel": "الأولوية",
+      "dueLabel": "تاريخ الاستحقاق",
+      "save": "حفظ",
+      "delete": "حذف"
+    },
+    "errors": {
+      "permissionDenied": "ليست لديك صلاحية لذلك.",
+      "validationFailed": "تحقّق من البيانات وحاول مجدداً.",
+      "notFound": "لم نتمكن من العثور على هذه المهمة.",
+      "authRequired": "سجّل الدخول للمتابعة.",
+      "unknown": "حدث خطأ. حاول مجدداً."
+    }
+  },
+  "timeline": {
+    "title": "المسار",
+    "subtitle": "أين وصلت كل فعالية، وما التالي.",
+    "stage": {
+      "planning": "التخطيط",
+      "venue": "المكان",
+      "artists": "الفنانون",
+      "production": "الإنتاج",
+      "marketing": "التسويق",
+      "published": "النشر"
+    },
+    "nextUp": "التالي: {stage}",
+    "allDone": "اكتملت جميع المراحل.",
+    "percent": "اكتمل {percent}%",
+    "empty": "لا توجد مراحل لهذه الفعالية.",
+    "failed": "تعذّر تحميل المسار. حاول بعد لحظات.",
+    "errors": {
+      "permissionDenied": "ليست لديك صلاحية لذلك.",
+      "validationFailed": "تحقّق من البيانات وحاول مجدداً.",
+      "notFound": "لم نتمكن من العثور على هذه المرحلة.",
+      "authRequired": "سجّل الدخول للمتابعة.",
+      "unknown": "حدث خطأ. حاول مجدداً."
+    }
+  },
+  "activity": {
+    "title": "النشاط",
+    "empty": "لم يحدث شيء بعد.",
+    "failed": "تعذّر تحميل النشاط. حاول بعد لحظات.",
+    "action": {
+      "createEvent": "أُنشئت الفعالية",
+      "publishEvent": "نُشرت الفعالية",
+      "approveBooking": "اعتُمد الحجز",
+      "generateTicket": "أُصدرت التذكرة",
+      "checkInTicket": "سُجّل دخول ضيف",
+      "moveTask": "نُقلت مهمة",
+      "completeMilestone": "اكتملت مرحلة",
+      "reopenMilestone": "أُعيد فتح مرحلة",
+      "unknown": "سُجّل نشاط"
     }
   }
 }
