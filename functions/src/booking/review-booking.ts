@@ -1,8 +1,12 @@
 import { FieldValue, getFirestore } from "firebase-admin/firestore";
+import { logger } from "firebase-functions";
 import { HttpsError, onCall } from "firebase-functions/v2/https";
 
+import { RESEND_API_KEY } from "../email/send-ticket-email";
 import type { CallableResponse } from "../lib/errors";
 import { requireAuth, requireMemberRole } from "../lib/organization-guards";
+import { TICKET_QR_SECRET } from "../lib/qr";
+import { issueTicketForBooking } from "../ticket/generate-ticket";
 
 type TicketType = {
   id: string;
@@ -21,13 +25,20 @@ type TicketType = {
  * re-reads the event: two organizers approving the last ticket at the same
  * moment cannot both succeed.
  *
- * Ticket and QR generation deliberately do not happen here — that is Phase 7,
- * which will hang off the approved status.
+ * Ticket issuance runs after the transaction commits, because rendering the QR
+ * and writing it to Storage cannot participate in a Firestore transaction. It
+ * is idempotent and keyed on the booking id, and the "already approved" branch
+ * falls through to it as well — so a booking that got approved but failed to
+ * produce a ticket is repaired simply by approving it again.
+ *
+ * A Firestore trigger would be the tidier decoupling, but Firestore lives in
+ * me-central2 and Functions cannot run there (canonical §6); calling inline
+ * avoids betting on cross-region Eventarc delivery.
  */
 export const approveBooking = onCall<
   { bookingId?: string },
   Promise<CallableResponse>
->(async (request) => {
+>({ secrets: [TICKET_QR_SECRET, RESEND_API_KEY] }, async (request) => {
   const { uid } = requireAuth(request);
   const bookingId = request.data?.bookingId;
   if (!bookingId) {
@@ -133,6 +144,20 @@ export const approveBooking = onCall<
       createdAt: FieldValue.serverTimestamp(),
     });
   });
+
+  try {
+    await issueTicketForBooking(bookingId);
+  } catch (error) {
+    // The booking is approved and its inventory is claimed; only the ticket is
+    // missing. Surface it so the organizer retries rather than assuming the
+    // attendee was emailed a QR that does not exist.
+    logger.error("Ticket issuance failed after approval", { bookingId, error });
+    throw new HttpsError(
+      "internal",
+      "Booking approved, but the ticket could not be issued. Approve again to retry.",
+      { code: "SERVER_ERROR" },
+    );
+  }
 
   return { success: true, message: "Booking approved." };
 });

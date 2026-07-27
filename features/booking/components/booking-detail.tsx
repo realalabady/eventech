@@ -7,6 +7,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AuthError } from "@/features/auth/components/auth-error";
+import { Link } from "@/i18n/navigation";
+
 import { useOrganizationPublic } from "../hooks/use-organization-public";
 
 import { useBooking } from "../hooks/use-bookings";
@@ -93,9 +95,24 @@ export function BookingDetail({ bookingId }: { bookingId: string }) {
       <AuthError message={error ? t(`errors.${error}`) : undefined} />
 
       {booking.status === "approved" ? (
-        <p className="rounded-md border border-success/30 bg-success/10 px-4 py-3 text-sm text-success">
-          {t("detail.approved")}
-        </p>
+        <div className="space-y-3 rounded-md border border-success/30 bg-success/10 px-4 py-3">
+          <p className="text-sm text-success">{t("detail.approved")}</p>
+          {booking.ticketId ? (
+            <Button
+              size="sm"
+              nativeButton={false}
+              render={<Link href={`/tickets/${booking.ticketId}`} />}
+            >
+              {t("detail.viewTicket")}
+            </Button>
+          ) : (
+            // Approval succeeded but issuance did not; approving again repairs
+            // it, so tell the attendee to wait rather than showing a dead link.
+            <p className="text-sm text-success/80">
+              {t("detail.ticketPending")}
+            </p>
+          )}
+        </div>
       ) : null}
 
       {booking.status === "rejected" && booking.rejectionReason ? (

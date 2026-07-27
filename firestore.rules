@@ -113,6 +113,31 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // Phase 7 — Tickets & check-in. A ticket carries the QR token, so reading it
+    // is equivalent to holding the ticket: the owner and the event's door staff,
+    // nobody else. Status only ever changes inside checkInTicket.
+    match /tickets/{ticketId} {
+      allow get, list: if isSignedIn() && (
+        resource.data.ownerId == request.auth.uid
+        || isAdmin()
+        || (resource.data.organizationId is string
+            && isActiveMember(resource.data.organizationId))
+      );
+      // generateTicket / checkInTicket only.
+      allow write: if false;
+    }
+
+    // Attendance records belong to the organization, not the attendee — they
+    // are operational data for the door, and they never change after the scan.
+    match /checkins/{checkinId} {
+      allow get, list: if isSignedIn() && (
+        isAdmin()
+        || (resource.data.organizationId is string
+            && isActiveMember(resource.data.organizationId))
+      );
+      allow write: if false;  // checkInTicket only
+    }
+
     match /timeline/{itemId} {
       allow get, list: if isSignedIn()
         && resource.data.organizationId is string

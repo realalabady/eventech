@@ -19,6 +19,8 @@ export type BookingDoc = {
   status: BookingStatus;
   payment: { receiptUrl: string; submittedAt: Timestamp | null } | null;
   rejectionReason: string | null;
+  /** Set by generateTicket once the booking is approved (Phase 7). */
+  ticketId: string | null;
   createdAt: Timestamp | null;
 };
 

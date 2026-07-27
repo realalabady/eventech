@@ -135,7 +135,8 @@
       "team": "Team",
       "settings": "Settings",
       "branding": "Branding",
-      "backToSite": "Back to site"
+      "backToSite": "Back to site",
+      "scanner": "Scanner"
     },
     "settings": {
       "title": "Organization settings",
@@ -441,18 +442,21 @@
       "upload": "Upload receipt",
       "uploaded": "Receipt received. The organizer will review it.",
       "reuploadHint": "Upload a corrected receipt to try again.",
-      "approved": "Approved. Your ticket arrives in the next release.",
+      "approved": "Approved. Your ticket is ready.",
       "rejectedReason": "Reason given: {reason}",
       "cancel": "Cancel booking",
       "notFound": "We could not find that booking.",
-      "noBankDetails": "The organizer has not added bank details yet."
+      "noBankDetails": "The organizer has not added bank details yet.",
+      "viewTicket": "View your ticket",
+      "ticketPending": "Your ticket is being issued — check back in a moment."
     },
     "list": {
       "title": "My bookings",
       "subtitle": "Everything you have requested.",
       "empty": "No bookings yet.",
       "emptyHint": "Find something on Discover.",
-      "view": "View"
+      "view": "View",
+      "viewTickets": "My tickets"
     },
     "review": {
       "title": "Bookings",
@@ -521,5 +525,67 @@
     "motion": "Motion",
     "counterLabel": "Tickets sold",
     "blurSample": "Production, perfected."
+  },
+  "ticket": {
+    "wallet": {
+      "title": "My tickets",
+      "subtitle": "Everything you are going to.",
+      "upcoming": "Upcoming",
+      "used": "Used",
+      "past": "Past",
+      "upcomingEmpty": "Nothing coming up.",
+      "usedEmpty": "No tickets have been scanned yet.",
+      "pastEmpty": "Nothing here yet.",
+      "empty": "No tickets yet.",
+      "emptyHint": "Approved bookings turn into tickets here.",
+      "failed": "We could not load your tickets. Try again in a moment."
+    },
+    "status": {
+      "active": "Valid",
+      "used": "Checked in",
+      "cancelled": "Void"
+    },
+    "admits": "{count} × {type}",
+    "detail": {
+      "subtitle": "Show this at the door.",
+      "qrAlt": "Entry QR code",
+      "brightnessHint": "Turn your screen brightness up before you scan.",
+      "spentHint": "This ticket has already been used.",
+      "type": "Admits",
+      "when": "When",
+      "checkedIn": "Checked in",
+      "notFound": "We could not find that ticket."
+    }
+  },
+  "scanner": {
+    "title": "Check-in",
+    "subtitle": "Scan a ticket to admit the guest.",
+    "previewLabel": "Look up only",
+    "previewHint": "Check a ticket without using it up.",
+    "cameraIdle": "Start the camera to scan tickets.",
+    "cameraBlocked": "No camera available. Use a scan gun or paste the code below.",
+    "startCamera": "Start camera",
+    "manualLabel": "Ticket code",
+    "manualSubmit": "Check",
+    "manualHint": "For hardware scanners, or when the camera cannot be used.",
+    "result": {
+      "admitted": "Admitted {count}",
+      "valid": {
+        "active": "Valid ticket",
+        "used": "Already checked in",
+        "cancelled": "Void ticket"
+      },
+      "holder": "{name} · {type}",
+      "quantity": "Admits {count}",
+      "unnamed": "Guest",
+      "usedAt": "Checked in {when}"
+    },
+    "errors": {
+      "invalidQr": "Not a valid ticket.",
+      "alreadyCheckedIn": "Already checked in.",
+      "notDoorStaff": "You are not on this event's door team.",
+      "authRequired": "Sign in to continue.",
+      "unknown": "Something went wrong. Scan again."
+    }
   }
 }

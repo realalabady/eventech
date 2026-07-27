@@ -33,3 +33,5 @@ export {
   rejectBooking,
   cancelBooking,
 } from "./booking/review-booking";
+
+export { validateTicket, checkInTicket } from "./ticket/check-in";

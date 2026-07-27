@@ -57,6 +57,14 @@ service firebase.storage {
       allow write: if isOwner(userId) && isReceiptFile() && withinSizeLimit();
     }
 
+    // QR images are never world-readable (canonical §7) and are never written
+    // from a browser — generateTicket writes them with the Admin SDK, which
+    // bypasses these rules. Reads go through the tokenised URL recorded on the
+    // ticket document, which only the owner and the door staff can read.
+    match /tickets/{ticketId}/{fileName} {
+      allow read, write: if false;
+    }
+
     match /{allPaths=**} {
       allow read, write: if false;
     }
