@@ -68,6 +68,8 @@ export const createEvent = onCall<
     availableTickets: 0,
     startDate: null,
     endDate: null,
+    // IANA zone the organizer entered wall-clock times in; set in the wizard.
+    timezone: null,
     bookingOpen: false,
     featured: false,
     branding: { primary: "#3b82f6" },

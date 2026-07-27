@@ -1,3 +1,4 @@
+import { formatInTimeZone, fromZonedTime } from "date-fns-tz";
 import { describe, expect, it } from "vitest";
 
 import {
@@ -47,6 +48,7 @@ describe("event schedule", () => {
     const result = scheduleSchema.safeParse({
       startDate: "2026-08-14T21:00",
       endDate: "2026-08-14T19:00",
+      timezone: "Asia/Riyadh",
     });
     expect(result.success).toBe(false);
     expect(result.error?.issues[0]?.message).toBe("endBeforeStart");
@@ -56,8 +58,22 @@ describe("event schedule", () => {
     const result = scheduleSchema.safeParse({
       startDate: "2026-08-14T23:00",
       endDate: "2026-08-15T03:00",
+      timezone: "Asia/Riyadh",
     });
     expect(result.success).toBe(true);
+  });
+
+  it("anchors wall-clock time to the chosen zone, not the machine's", () => {
+    // 21:00 in Riyadh (UTC+3) is 18:00 UTC, whatever the test runner's zone is.
+    const instant = fromZonedTime("2026-08-14T21:00", "Asia/Riyadh");
+    expect(instant.toISOString()).toBe("2026-08-14T18:00:00.000Z");
+  });
+
+  it("renders an instant back in the event's own zone", () => {
+    const instant = fromZonedTime("2026-08-14T21:00", "Asia/Riyadh");
+    expect(formatInTimeZone(instant, "Asia/Riyadh", "HH:mm")).toBe("21:00");
+    // Same moment, seen from Dubai (UTC+4).
+    expect(formatInTimeZone(instant, "Asia/Dubai", "HH:mm")).toBe("22:00");
   });
 });
 
@@ -120,7 +136,7 @@ describe("i18n coverage", () => {
         currency: "SARS",
         quantity: 0,
       }),
-      scheduleSchema.safeParse({ startDate: "", endDate: "" }),
+      scheduleSchema.safeParse({ startDate: "", endDate: "", timezone: "" }),
     ]
       .flatMap((result) => result.error?.issues ?? [])
       .map((issue) => issue.message)

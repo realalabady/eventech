@@ -210,7 +210,9 @@
       "empty": "No events yet.",
       "emptyHint": "Start one and we will set up its timeline and tasks for you.",
       "untitled": "Untitled event",
-      "noDate": "No date set"
+      "noDate": "No date set",
+      "loadFailed": "We could not load your events.",
+      "loadFailedHint": "This is usually temporary. Refresh in a moment."
     },
     "status": {
       "draft": "Draft",
@@ -262,7 +264,8 @@
     "schedule": {
       "startLabel": "Doors open",
       "endLabel": "Ends",
-      "hint": "Times are in your local timezone."
+      "timezoneLabel": "Timezone",
+      "timezoneHint": "Times are entered in this timezone and shown to attendees in the event's local time."
     },
     "artists": {
       "heading": "Who is playing?",
@@ -340,6 +343,7 @@
       "startRequired": "Set a start time.",
       "endRequired": "Set an end time.",
       "endBeforeStart": "The end time must be after the start.",
+      "timezoneRequired": "Choose a timezone.",
       "artistNameRequired": "Enter the artist's name.",
       "artistNameTooLong": "That name is too long.",
       "ticketNameRequired": "Name this ticket type.",

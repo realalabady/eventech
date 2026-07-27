@@ -40,6 +40,7 @@ export const scheduleSchema = z
   .object({
     startDate: z.string().min(1, { message: "startRequired" }),
     endDate: z.string().min(1, { message: "endRequired" }),
+    timezone: z.string().min(1, { message: "timezoneRequired" }),
   })
   // Times come from datetime-local inputs, so compare as dates not strings.
   .refine((value) => new Date(value.endDate) > new Date(value.startDate), {

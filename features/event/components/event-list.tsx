@@ -13,12 +13,13 @@ import { Link, useRouter } from "@/i18n/navigation";
 
 import { useEvents } from "../hooks/use-events";
 import { createEvent } from "../services/event-service";
+import { formatEventDate } from "../types";
 
 export function EventList() {
   const t = useTranslations("event");
   const { claims } = useAuth();
   const organizationId = claims?.organizationId;
-  const { events, loading } = useEvents(organizationId);
+  const { events, loading, failed } = useEvents(organizationId);
   const router = useRouter();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | undefined>();
@@ -57,6 +58,15 @@ export function EventList() {
           <Skeleton className="h-20 w-full" />
           <Skeleton className="h-20 w-full" />
         </div>
+      ) : failed ? (
+        // An empty list and a broken query look identical to the user unless
+        // we say which one happened.
+        <div className="space-y-2 rounded-xl border border-destructive/30 bg-destructive/10 px-6 py-10 text-center">
+          <p className="font-medium text-destructive">{t("list.loadFailed")}</p>
+          <p className="text-sm text-muted-foreground">
+            {t("list.loadFailedHint")}
+          </p>
+        </div>
       ) : events.length === 0 ? (
         <div className="space-y-2 rounded-xl border border-border bg-card px-6 py-12 text-center">
           <p className="font-medium">{t("list.empty")}</p>
@@ -75,7 +85,8 @@ export function EventList() {
                     {event.title ?? t("list.untitled")}
                   </p>
                   <p className="truncate text-sm text-muted-foreground">
-                    {event.startDate ?? t("list.noDate")}
+                    {formatEventDate(event.startDate, event.timezone) ??
+                      t("list.noDate")}
                   </p>
                 </div>
                 <Badge

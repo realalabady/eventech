@@ -66,8 +66,10 @@ export type EventPatch = {
   category?: string;
   venueId?: string;
   artistIds?: string[];
+  /** ISO 8601 instants with offset — see ScheduleStep for the conversion. */
   startDate?: string;
   endDate?: string;
+  timezone?: string;
   ticketTypes?: Array<Omit<TicketType, "sold">>;
   coverImage?: string;
   branding?: { primary?: string };

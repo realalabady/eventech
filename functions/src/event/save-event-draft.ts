@@ -1,4 +1,4 @@
-import { FieldValue, getFirestore } from "firebase-admin/firestore";
+import { FieldValue, Timestamp, getFirestore } from "firebase-admin/firestore";
 import { HttpsError, onCall } from "firebase-functions/v2/https";
 
 import type { CallableResponse } from "../lib/errors";
@@ -30,8 +30,11 @@ type Payload = {
     category?: string;
     venueId?: string;
     artistIds?: string[];
+    /** Absolute instants (ISO 8601 with offset), resolved on the client. */
     startDate?: string;
     endDate?: string;
+    /** IANA zone the wall-clock times were entered in, e.g. Asia/Riyadh. */
+    timezone?: string;
     ticketTypes?: TicketTypeInput[];
     coverImage?: string;
     branding?: { primary?: string };
@@ -92,11 +95,35 @@ export const saveEventDraft = onCall<Payload, Promise<CallableResponse>>(
     if (patch.artistIds !== undefined) {
       update.artistIds = patch.artistIds.slice(0, 50);
     }
-    if (patch.startDate !== undefined) {
-      update.startDate = patch.startDate || null;
+    // Dates are stored as Timestamps, not wall-clock strings, so reminder
+    // scheduling and live-status transitions have an unambiguous instant to
+    // work from. The IANA zone is kept alongside for local display.
+    for (const key of ["startDate", "endDate"] as const) {
+      const value = patch[key];
+      if (value === undefined) continue;
+      if (!value) {
+        update[key] = null;
+        continue;
+      }
+      const parsed = new Date(value);
+      if (Number.isNaN(parsed.getTime())) {
+        throw new HttpsError("invalid-argument", `Invalid ${key}.`, {
+          code: "VALIDATION_ERROR",
+        });
+      }
+      update[key] = Timestamp.fromDate(parsed);
     }
-    if (patch.endDate !== undefined) {
-      update.endDate = patch.endDate || null;
+
+    if (patch.timezone !== undefined) {
+      // Reject anything Intl cannot resolve rather than storing a bad zone.
+      try {
+        new Intl.DateTimeFormat("en-US", { timeZone: patch.timezone });
+      } catch {
+        throw new HttpsError("invalid-argument", "Unknown timezone.", {
+          code: "VALIDATION_ERROR",
+        });
+      }
+      update.timezone = patch.timezone;
     }
     if (patch.coverImage !== undefined) {
       update.coverImage = patch.coverImage || null;

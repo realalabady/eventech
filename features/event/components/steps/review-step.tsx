@@ -8,7 +8,7 @@ import { AuthError } from "@/features/auth/components/auth-error";
 
 import type { StepProps } from "../event-wizard";
 import { publishEvent } from "../../services/event-service";
-import { isFreeEvent, totalCapacity } from "../../types";
+import { formatEventDate, isFreeEvent, totalCapacity } from "../../types";
 
 export function ReviewStep({ event }: StepProps) {
   const t = useTranslations("event");
@@ -35,7 +35,7 @@ export function ReviewStep({ event }: StepProps) {
   const summary: Array<[string, string]> = [
     ["title", event.title ?? "—"],
     ["category", event.category ? t(`categories.${event.category}`) : "—"],
-    ["startDate", event.startDate ?? "—"],
+    ["startDate", formatEventDate(event.startDate, event.timezone) ?? "—"],
     ["ticketTypes", String((event.ticketTypes ?? []).length)],
   ];
 

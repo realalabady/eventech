@@ -27,6 +27,7 @@ export function useEvents(organizationId: string | undefined) {
   const [snapshot, setSnapshot] = useState<{
     key: string | null;
     items: EventDoc[];
+    failed?: boolean;
   }>({ key: null, items: EMPTY });
 
   useEffect(() => {
@@ -49,7 +50,12 @@ export function useEvents(organizationId: string | undefined) {
             (d) => ({ id: d.id, ...d.data() }) as EventDoc,
           ),
         }),
-      () => setSnapshot({ key: organizationId, items: EMPTY }),
+      (listenError) => {
+        // Never fail silently: a missing composite index or a rules rejection
+        // both surface here, and an empty list looks identical to "no events".
+        console.error("events listener failed", listenError);
+        setSnapshot({ key: organizationId, items: EMPTY, failed: true });
+      },
     );
   }, [status, organizationId]);
 
@@ -59,7 +65,11 @@ export function useEvents(organizationId: string | undefined) {
   if (snapshot.key !== organizationId) {
     return { events: EMPTY, loading: true };
   }
-  return { events: snapshot.items, loading: false };
+  return {
+    events: snapshot.items,
+    loading: false,
+    failed: snapshot.failed ?? false,
+  };
 }
 
 /** Realtime single event, used by the wizard. */
