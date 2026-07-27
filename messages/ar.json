@@ -290,9 +290,11 @@
       "free": "هذه الفعالية مجانية."
     },
     "branding": {
-      "heading": "اللون المميز",
-      "hint": "يُستخدم في صفحة الفعالية العامة.",
-      "colorLabel": "اللون"
+      "heading": "الغلاف واللون",
+      "hint": "كلاهما يظهر في صفحة الفعالية العامة.",
+      "colorLabel": "اللون المميز",
+      "coverLabel": "صورة الغلاف",
+      "upload": "رفع الغلاف"
     },
     "team": {
       "heading": "الفريق والمهام",
@@ -356,6 +358,8 @@
       "quantityNotInteger": "يجب أن تكون الكمية عدداً صحيحاً.",
       "quantityTooLow": "يجب أن تكون الكمية 1 على الأقل.",
       "quantityTooHigh": "الكمية مرتفعة جداً.",
+      "invalidImageType": "استخدم صورة بصيغة JPG أو PNG أو WebP.",
+      "imageTooLarge": "يجب أن تكون الصور أقل من 20 ميجابايت.",
       "eventIncomplete": "لا تزال بعض التفاصيل ناقصة.",
       "paymentDetailsRequired": "أضف تفاصيلك البنكية قبل نشر فعالية مدفوعة.",
       "emailNotVerified": "أكّد بريدك الإلكتروني قبل النشر.",
@@ -366,6 +370,47 @@
       "authRequired": "سجّل الدخول للمتابعة.",
       "unknown": "حدث خطأ ما. حاول مرة أخرى."
     }
+  },
+  "discover": {
+    "title": "اكتشف",
+    "subtitle": "ما الذي يحدث، ومتى.",
+    "searchLabel": "ابحث عن فعاليات",
+    "searchPlaceholder": "ابحث بالاسم أو المدينة أو الفنان",
+    "allCategories": "الكل",
+    "empty": "لا يوجد ما يطابق ذلك بعد.",
+    "emptyHint": "جرّب بحثاً أو تصنيفاً مختلفاً.",
+    "noEvents": "لا توجد فعاليات منشورة بعد.",
+    "free": "مجاني",
+    "fromPrice": "ابتداءً من {price}",
+    "resultCount": "{count, plural, =0 {لا فعاليات} =1 {فعالية واحدة} =2 {فعاليتان} few {# فعاليات} many {# فعالية} other {# فعالية}}"
+  },
+  "publicEvent": {
+    "notFound": "هذه الفعالية غير متاحة.",
+    "notFoundHint": "ربما أُلغي نشرها أو أن الرابط غير صحيح.",
+    "backToDiscover": "تصفّح الفعاليات",
+    "when": "الموعد",
+    "where": "المكان",
+    "lineup": "الفنانون",
+    "tickets": "التذاكر",
+    "hostedBy": "ينظّمها",
+    "verified": "موثّق",
+    "soldOut": "نفدت التذاكر",
+    "bookingClosed": "الحجز مغلق.",
+    "book": "طلب حجز",
+    "bookingSoon": "يفتح الحجز مع الإصدار القادم.",
+    "remaining": "بقي {count}",
+    "about": "عن الفعالية"
+  },
+  "publicOrganizer": {
+    "notFound": "هذا المنظّم غير متاح.",
+    "events": "الفعاليات القادمة",
+    "noEvents": "لا توجد فعاليات منشورة بعد.",
+    "website": "الموقع الإلكتروني"
+  },
+  "publicArtist": {
+    "notFound": "هذا الفنان غير متاح.",
+    "events": "يظهر في",
+    "noEvents": "لا توجد مواعيد معلنة بعد."
   },
   "theme": {
     "toggle": "تغيير المظهر",

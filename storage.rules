@@ -32,6 +32,21 @@ service firebase.storage {
         && withinSizeLimit();
     }
 
+    // Event cover: public to read, writable by owners/managers of the
+    // organization that owns the event. The event document is the only link
+    // between the file path and the membership record, so it is read here.
+    function canManageEvent(eventId) {
+      return isSignedIn()
+        && firestore.exists(/databases/(default)/documents/events/$(eventId))
+        && firestore.exists(/databases/(default)/documents/organizationMembers/$(firestore.get(/databases/(default)/documents/events/$(eventId)).data.organizationId + '_' + request.auth.uid))
+        && firestore.get(/databases/(default)/documents/organizationMembers/$(firestore.get(/databases/(default)/documents/events/$(eventId)).data.organizationId + '_' + request.auth.uid)).data.role in ['owner', 'manager'];
+    }
+
+    match /events/{eventId}/cover/{fileName} {
+      allow read: if true;
+      allow write: if canManageEvent(eventId) && isImage() && withinSizeLimit();
+    }
+
     match /{allPaths=**} {
       allow read, write: if false;
     }

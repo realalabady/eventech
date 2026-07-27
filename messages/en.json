@@ -290,9 +290,11 @@
       "free": "This event is free."
     },
     "branding": {
-      "heading": "Accent colour",
-      "hint": "Used on the public event page.",
-      "colorLabel": "Colour"
+      "heading": "Cover and colour",
+      "hint": "Both appear on the public event page.",
+      "colorLabel": "Accent colour",
+      "coverLabel": "Cover image",
+      "upload": "Upload cover"
     },
     "team": {
       "heading": "Team and tasks",
@@ -356,6 +358,8 @@
       "quantityNotInteger": "Quantity must be a whole number.",
       "quantityTooLow": "Quantity must be at least 1.",
       "quantityTooHigh": "That quantity is too high.",
+      "invalidImageType": "Use a JPG, PNG, or WebP image.",
+      "imageTooLarge": "Images must be under 20 MB.",
       "eventIncomplete": "Some details are still missing.",
       "paymentDetailsRequired": "Add your bank details before publishing a paid event.",
       "emailNotVerified": "Confirm your email address before publishing.",
@@ -366,6 +370,47 @@
       "authRequired": "Sign in to continue.",
       "unknown": "Something went wrong. Try again."
     }
+  },
+  "discover": {
+    "title": "Discover",
+    "subtitle": "What's on, and when.",
+    "searchLabel": "Search events",
+    "searchPlaceholder": "Search by name, city, or artist",
+    "allCategories": "All",
+    "empty": "Nothing matches that yet.",
+    "emptyHint": "Try a different search or category.",
+    "noEvents": "No published events yet.",
+    "free": "Free",
+    "fromPrice": "From {price}",
+    "resultCount": "{count, plural, =0 {No events} =1 {1 event} other {# events}}"
+  },
+  "publicEvent": {
+    "notFound": "That event is not available.",
+    "notFoundHint": "It may have been unpublished or the link is wrong.",
+    "backToDiscover": "Browse events",
+    "when": "When",
+    "where": "Where",
+    "lineup": "Lineup",
+    "tickets": "Tickets",
+    "hostedBy": "Hosted by",
+    "verified": "Verified",
+    "soldOut": "Sold out",
+    "bookingClosed": "Bookings are closed.",
+    "book": "Request a booking",
+    "bookingSoon": "Booking opens with the next release.",
+    "remaining": "{count} left",
+    "about": "About this event"
+  },
+  "publicOrganizer": {
+    "notFound": "That organizer is not available.",
+    "events": "Upcoming events",
+    "noEvents": "No published events yet.",
+    "website": "Website"
+  },
+  "publicArtist": {
+    "notFound": "That artist is not available.",
+    "events": "Appearing at",
+    "noEvents": "No announced dates yet."
   },
   "theme": {
     "toggle": "Change theme",

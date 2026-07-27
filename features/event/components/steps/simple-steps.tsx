@@ -1,20 +1,41 @@
 "use client";
 
+import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { AuthError } from "@/features/auth/components/auth-error";
 import { useOrganization } from "@/features/organization/hooks/use-organization";
 import { Link } from "@/i18n/navigation";
 
 import type { StepProps } from "../event-wizard";
+import { uploadEventCover } from "../../services/event-service";
 import { isFreeEvent } from "../../types";
 
-/** Accent colour used on the public event page. */
+/** Cover image and accent colour, both used on the public event page. */
 export function BrandingStep({ event, save, onDone }: StepProps) {
   const t = useTranslations("event");
   const [color, setColor] = useState(event.branding?.primary ?? "#3b82f6");
+  const [cover, setCover] = useState<string | null>(event.coverImage ?? null);
+  const [error, setError] = useState<string | undefined>();
+  const [uploading, setUploading] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  async function onPickCover(changeEvent: React.ChangeEvent<HTMLInputElement>) {
+    const file = changeEvent.target.files?.[0];
+    if (!file) return;
+    setError(undefined);
+    setUploading(true);
+    const result = await uploadEventCover(event.id, file);
+    setUploading(false);
+    if (!result.ok) {
+      setError(result.errorKey);
+      return;
+    }
+    setCover(result.data?.url ?? null);
+  }
 
   async function onContinue() {
     if (await save({ branding: { primary: color } })) {
@@ -29,6 +50,40 @@ export function BrandingStep({ event, save, onDone }: StepProps) {
           {t("branding.heading")}
         </h2>
         <p className="text-sm text-muted-foreground">{t("branding.hint")}</p>
+      </div>
+
+      <AuthError message={error ? t(`errors.${error}`) : undefined} />
+
+      <div className="grid gap-2">
+        <Label>{t("branding.coverLabel")}</Label>
+        <div className="relative aspect-[16/9] overflow-hidden rounded-md border border-border bg-surface">
+          {cover ? (
+            <Image
+              src={cover}
+              alt={event.title ?? ""}
+              fill
+              unoptimized
+              sizes="32rem"
+              className="object-cover"
+            />
+          ) : null}
+        </div>
+        <input
+          ref={inputRef}
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          className="hidden"
+          onChange={onPickCover}
+        />
+        <Button
+          type="button"
+          size="sm"
+          variant="outline"
+          disabled={uploading}
+          onClick={() => inputRef.current?.click()}
+        >
+          {t("branding.upload")}
+        </Button>
       </div>
 
       <div className="grid gap-2">

@@ -1,6 +1,7 @@
 import { httpsCallable } from "firebase/functions";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-import { getFirebaseFunctions } from "@/firebase/client";
+import { getFirebaseFunctions, getFirebaseStorage } from "@/firebase/client";
 
 import type { TicketType } from "../types";
 
@@ -93,6 +94,37 @@ export function createVenue(
     "createVenue",
     { organizationId, ...venue },
   );
+}
+
+/**
+ * Uploads the event cover and records its URL. Storage rules re-check role,
+ * content type and size server-side; this validation is only for fast feedback.
+ */
+export async function uploadEventCover(
+  eventId: string,
+  file: File,
+): Promise<EventResult<{ url: string }>> {
+  if (!/^image\/(jpeg|png|webp)$/.test(file.type)) {
+    return { ok: false, errorKey: "invalidImageType" };
+  }
+  if (file.size > 20 * 1024 * 1024) {
+    return { ok: false, errorKey: "imageTooLarge" };
+  }
+
+  try {
+    const extension = file.type.split("/")[1];
+    const storageRef = ref(
+      getFirebaseStorage(),
+      `events/${eventId}/cover/cover.${extension}`,
+    );
+    await uploadBytes(storageRef, file, { contentType: file.type });
+    const url = await getDownloadURL(storageRef);
+    const saved = await saveEventDraft(eventId, { coverImage: url });
+    if (!saved.ok) return saved as EventResult<{ url: string }>;
+    return { ok: true, data: { url } };
+  } catch (error) {
+    return { ok: false, ...toError(error) };
+  }
 }
 
 export function createArtist(organizationId: string, name: string) {

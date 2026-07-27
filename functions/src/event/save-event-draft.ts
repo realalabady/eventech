@@ -126,6 +126,21 @@ export const saveEventDraft = onCall<Payload, Promise<CallableResponse>>(
       update.timezone = patch.timezone;
     }
     if (patch.coverImage !== undefined) {
+      // Must point at this event's own Storage prefix, so a caller cannot park
+      // an arbitrary external URL on a public page.
+      if (patch.coverImage) {
+        const expected = encodeURIComponent(`events/${eventId}/`);
+        if (
+          !patch.coverImage.startsWith(
+            "https://firebasestorage.googleapis.com/",
+          ) ||
+          !patch.coverImage.includes(expected)
+        ) {
+          throw new HttpsError("invalid-argument", "Invalid cover URL.", {
+            code: "VALIDATION_ERROR",
+          });
+        }
+      }
       update.coverImage = patch.coverImage || null;
     }
     if (patch.branding?.primary !== undefined) {
