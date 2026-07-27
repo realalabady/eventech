@@ -138,7 +138,9 @@
       "backToSite": "Back to site",
       "scanner": "Scanner",
       "timeline": "Timeline",
-      "tasks": "Tasks"
+      "tasks": "Tasks",
+      "calendar": "Calendar",
+      "messages": "Messages"
     },
     "settings": {
       "title": "Organization settings",
@@ -672,6 +674,83 @@
       "completeMilestone": "Milestone completed",
       "reopenMilestone": "Milestone reopened",
       "unknown": "Activity recorded"
+    }
+  },
+  "calendar": {
+    "title": "Calendar",
+    "subtitle": "Meetings, deadlines and setup dates across every event.",
+    "hint": "Pick any day to add an entry. Task due dates and event dates appear here on their own.",
+    "newEntry": "New entry",
+    "failed": "The calendar could not be loaded. Try again in a moment.",
+    "legend": {
+      "meeting": "Meeting",
+      "setup": "Setup",
+      "deadline": "Deadline",
+      "task": "Task due",
+      "event": "Event"
+    },
+    "kind": {
+      "meeting": "Meeting",
+      "deadline": "Deadline",
+      "setup": "Setup",
+      "other": "Other"
+    },
+    "dialog": {
+      "create": "New calendar entry",
+      "edit": "Edit entry",
+      "titleLabel": "Title",
+      "kindLabel": "Type",
+      "allDayLabel": "All day",
+      "startLabel": "Starts",
+      "endLabel": "Ends",
+      "locationLabel": "Location",
+      "eventLabel": "Event",
+      "eventNone": "Organization-wide",
+      "save": "Save",
+      "delete": "Delete"
+    },
+    "errors": {
+      "permissionDenied": "You do not have permission to do that.",
+      "validationFailed": "Check the details and try again.",
+      "notFound": "We could not find that entry.",
+      "authRequired": "Sign in to continue.",
+      "unknown": "Something went wrong. Try again."
+    }
+  },
+  "messaging": {
+    "title": "Messages",
+    "subtitle": "Channels for the people producing your events.",
+    "hint": "Channels are visible to everyone on the team.",
+    "newChannel": "New channel",
+    "channels": {
+      "empty": "No channels yet.",
+      "failed": "Channels could not be loaded. Try again in a moment."
+    },
+    "thread": {
+      "empty": "No messages yet. Start the conversation.",
+      "failed": "Messages could not be loaded. Try again in a moment.",
+      "noChannel": "Select a channel to read it.",
+      "you": "You",
+      "unknownAuthor": "Former member",
+      "send": "Send",
+      "composerLabel": "Message",
+      "composerPlaceholder": "Write a message"
+    },
+    "dialog": {
+      "create": "New channel",
+      "nameLabel": "Name",
+      "topicLabel": "Topic",
+      "eventLabel": "Event",
+      "eventNone": "Organization-wide",
+      "save": "Create"
+    },
+    "errors": {
+      "permissionDenied": "You do not have permission to do that.",
+      "validationFailed": "Check the details and try again.",
+      "notFound": "We could not find that channel.",
+      "authRequired": "Sign in to continue.",
+      "unknown": "Something went wrong. Try again.",
+      "nameTaken": "A channel with that name already exists."
     }
   }
 }

@@ -1,0 +1,136 @@
+/*
+ * FullCalendar, fully restyled onto the EvenTech tokens (canonical §11 mandates
+ * FullCalendar and requires that it not look like FullCalendar).
+ *
+ * v7 ships hashed internal class names, so its own selectors cannot be targeted
+ * by hand. The supported surface is the theme's variables: we load the classic
+ * theme's *structure* and skip its `palette.css` entirely, redefining every
+ * variable here against `app/globals.css`. Nothing below is a literal colour,
+ * so the calendar follows light/dark and any future palette change for free.
+ *
+ * Scoped to the wrapper rather than `:root` so these win over the theme
+ * regardless of the order the two stylesheets land in.
+ */
+
+.evntech-calendar {
+  /* Surface — transparent so the page's own card provides the elevation. */
+  --fc-classic-background: transparent;
+  --fc-classic-faint: color-mix(in oklab, var(--foreground) 3%, transparent);
+  --fc-classic-muted: color-mix(in oklab, var(--foreground) 6%, transparent);
+  --fc-classic-strong: color-mix(in oklab, var(--foreground) 10%, transparent);
+
+  /* Type */
+  --fc-classic-foreground: var(--foreground);
+  --fc-classic-muted-foreground: var(--muted-foreground);
+  --fc-classic-faint-foreground: color-mix(
+    in oklab,
+    var(--muted-foreground) 60%,
+    transparent
+  );
+
+  /* Rules. Hairlines only — depth comes from spacing first (canonical §8). */
+  --fc-classic-border: var(--border);
+  --fc-classic-strong-border: color-mix(
+    in oklab,
+    var(--border) 70%,
+    var(--foreground)
+  );
+  --fc-classic-border-style: solid;
+
+  /* Accent. Kept under 10% of the surface: today and now, nothing else. */
+  --fc-classic-primary: var(--primary);
+  --fc-classic-primary-foreground: var(--primary-foreground);
+  --fc-classic-today: color-mix(in oklab, var(--primary) 7%, transparent);
+  --fc-classic-now: var(--danger);
+  --fc-classic-highlight: color-mix(in oklab, var(--primary) 12%, transparent);
+  --fc-classic-ring-color: var(--ring);
+
+  /* Toolbar buttons, dressed as our secondary button. */
+  --fc-classic-button: var(--secondary);
+  --fc-classic-button-border: var(--border);
+  --fc-classic-button-strong: var(--accent);
+  --fc-classic-button-strong-border: var(--border);
+  --fc-classic-button-foreground: var(--secondary-foreground);
+  --fc-classic-button-outline: var(--ring);
+
+  --fc-classic-background-event: var(--success);
+  --fc-classic-background-event-opacity: 12%;
+  --fc-classic-background-event-foreground-opacity: 60%;
+  --fc-classic-small-dot-width: 6px;
+  --fc-classic-large-dot-width: 8px;
+
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+}
+
+/*
+ * Per-source colour. Applied through classes we hand FullCalendar ourselves via
+ * `classNames`, so this never depends on its internal markup.
+ *
+ * Entries carry their kind's colour; the two projected sources are deliberately
+ * quieter than real entries, because a task due date is a marker on the
+ * calendar rather than something that happens on it.
+ */
+.evntech-calendar .fc-item-meeting {
+  --fc-event-color: var(--primary);
+  --fc-event-contrast-color: var(--primary-foreground);
+}
+
+.evntech-calendar .fc-item-setup {
+  --fc-event-color: var(--brand);
+  --fc-event-contrast-color: var(--primary-foreground);
+}
+
+.evntech-calendar .fc-item-deadline {
+  --fc-event-color: var(--warning);
+  --fc-event-contrast-color: var(--background);
+}
+
+.evntech-calendar .fc-item-other {
+  --fc-event-color: var(--info);
+  --fc-event-contrast-color: var(--background);
+}
+
+.evntech-calendar .fc-item-task {
+  --fc-event-color: color-mix(
+    in oklab,
+    var(--muted-foreground) 70%,
+    transparent
+  );
+  --fc-event-contrast-color: var(--background);
+}
+
+.evntech-calendar .fc-item-event {
+  --fc-event-color: var(--success);
+  --fc-event-contrast-color: var(--background);
+}
+
+/* Projections are not editable, and the cursor should say so before the click. */
+.evntech-calendar .fc-item-readonly {
+  cursor: default;
+}
+
+/*
+ * Hover lift on interactive entries (design brief §5). Transform and opacity
+ * only, so it stays on the compositor.
+ */
+.evntech-calendar .fc-item-editable {
+  cursor: pointer;
+  transition:
+    transform 150ms ease-out,
+    filter 150ms ease-out;
+}
+
+.evntech-calendar .fc-item-editable:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .evntech-calendar .fc-item-editable {
+    transition: none;
+  }
+  .evntech-calendar .fc-item-editable:hover {
+    transform: none;
+  }
+}

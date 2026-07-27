@@ -152,6 +152,33 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // Phase 8b — Calendar + team communication. All three are org-scoped
+    // production data: any active member reads, nobody writes from the client.
+    match /calendarEvents/{entryId} {
+      allow get, list: if isSignedIn()
+        && resource.data.organizationId is string
+        && isActiveMember(resource.data.organizationId);
+      // createCalendarEvent / updateCalendarEvent / deleteCalendarEvent only.
+      allow write: if false;
+    }
+
+    match /channels/{channelId} {
+      allow get, list: if isSignedIn()
+        && resource.data.organizationId is string
+        && isActiveMember(resource.data.organizationId);
+      allow write: if false;  // createChannel only
+    }
+
+    // Messages carry their channel's organizationId, so a read can be scoped
+    // without a second lookup — rules cannot follow the channel reference
+    // cheaply, and a per-message get() would be billed on every document.
+    match /messages/{messageId} {
+      allow get, list: if isSignedIn()
+        && resource.data.organizationId is string
+        && isActiveMember(resource.data.organizationId);
+      allow write: if false;  // sendMessage only
+    }
+
     match /activityLogs/{logId} {
       allow get, list: if isSignedIn()
         && resource.data.organizationId is string

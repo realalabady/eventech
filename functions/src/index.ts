@@ -38,3 +38,10 @@ export { validateTicket, checkInTicket } from "./ticket/check-in";
 
 export { createTask, updateTask, deleteTask } from "./task/manage-tasks";
 export { setTimelineStage } from "./task/timeline";
+
+export {
+  createCalendarEvent,
+  updateCalendarEvent,
+  deleteCalendarEvent,
+} from "./calendar/manage-calendar";
+export { createChannel, sendMessage } from "./messaging/manage-messaging";
