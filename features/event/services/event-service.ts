@@ -1,7 +1,11 @@
 import { httpsCallable } from "firebase/functions";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-import { getFirebaseFunctions, getFirebaseStorage } from "@/firebase/client";
+import {
+  getFirebaseAuth,
+  getFirebaseFunctions,
+  getFirebaseStorage,
+} from "@/firebase/client";
 
 import type { TicketType } from "../types";
 
@@ -111,11 +115,18 @@ export async function uploadEventCover(
     return { ok: false, errorKey: "imageTooLarge" };
   }
 
+  const uid = getFirebaseAuth().currentUser?.uid;
+  if (!uid) {
+    return { ok: false, errorKey: "authRequired" };
+  }
+
   try {
     const extension = file.type.split("/")[1];
+    // uid-namespaced so Storage rules verify ownership by path; saveEventDraft
+    // enforces organization membership before the URL is stored.
     const storageRef = ref(
       getFirebaseStorage(),
-      `events/${eventId}/cover/cover.${extension}`,
+      `events/${eventId}/cover/${uid}/cover.${extension}`,
     );
     await uploadBytes(storageRef, file, { contentType: file.type });
     const url = await getDownloadURL(storageRef);

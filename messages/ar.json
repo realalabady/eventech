@@ -131,6 +131,7 @@
     },
     "nav": {
       "events": "الفعاليات",
+      "bookings": "الحجوزات",
       "team": "الفريق",
       "settings": "الإعدادات",
       "branding": "الهوية",
@@ -411,6 +412,77 @@
     "notFound": "هذا الفنان غير متاح.",
     "events": "يظهر في",
     "noEvents": "لا توجد مواعيد معلنة بعد."
+  },
+  "booking": {
+    "status": {
+      "pending_payment": "بانتظار الدفع",
+      "pending_review": "بانتظار المراجعة",
+      "approved": "معتمد",
+      "rejected": "مرفوض",
+      "expired": "منتهي",
+      "cancelled": "ملغى"
+    },
+    "request": {
+      "quantityLabel": "كم تذكرة؟",
+      "submit": "طلب حجز",
+      "signInFirst": "سجّل الدخول للحجز",
+      "total": "الإجمالي {amount}"
+    },
+    "detail": {
+      "title": "حجزك",
+      "instructions": "حوّل المبلغ إلى الحساب أدناه، ثم ارفع الإيصال. يؤكده المنظّم وتصلك التذكرة بعدها.",
+      "bank": "البنك",
+      "accountHolder": "صاحب الحساب",
+      "iban": "الآيبان",
+      "reference": "مرجع الدفع",
+      "referenceHint": "أدرجه في التحويل ليتمكن المنظّم من مطابقة دفعتك.",
+      "amount": "المبلغ",
+      "uploadHeading": "الإيصال",
+      "upload": "رفع الإيصال",
+      "uploaded": "تم استلام الإيصال. سيراجعه المنظّم.",
+      "reuploadHint": "ارفع إيصالاً مصححاً للمحاولة مجدداً.",
+      "approved": "تم الاعتماد. تصلك التذكرة في الإصدار القادم.",
+      "rejectedReason": "السبب: {reason}",
+      "cancel": "إلغاء الحجز",
+      "notFound": "لم نتمكن من العثور على هذا الحجز.",
+      "noBankDetails": "لم يضف المنظّم تفاصيله البنكية بعد."
+    },
+    "list": {
+      "title": "حجوزاتي",
+      "subtitle": "كل ما طلبته.",
+      "empty": "لا توجد حجوزات بعد.",
+      "emptyHint": "ابحث عن شيء في صفحة الاكتشاف.",
+      "view": "عرض"
+    },
+    "review": {
+      "title": "الحجوزات",
+      "subtitle": "أكّد المدفوعات واعتمد الحضور.",
+      "pendingHeading": "بانتظار مراجعتك",
+      "otherHeading": "الباقي",
+      "empty": "لا شيء للمراجعة.",
+      "emptyHint": "تظهر الطلبات هنا بعد رفع الحضور لإيصالاتهم.",
+      "viewReceipt": "عرض الإيصال",
+      "approve": "اعتماد",
+      "reject": "رفض",
+      "reasonLabel": "لماذا ترفض هذا الطلب؟",
+      "reasonPlaceholder": "مبلغ التحويل غير مطابق.",
+      "confirmReject": "رفض الحجز",
+      "cancelReject": "الإبقاء عليه",
+      "quantity": "{count} × {type}"
+    },
+    "errors": {
+      "alreadyBooked": "لديك حجز في هذه الفعالية بالفعل.",
+      "bookingClosed": "الحجز مغلق لهذه الفعالية.",
+      "soldOut": "لم يتبقَّ عدد كافٍ من التذاكر.",
+      "emailNotVerified": "أكّد بريدك الإلكتروني قبل اعتماد الحجوزات.",
+      "invalidReceiptType": "ارفع صورة أو ملف PDF.",
+      "receiptTooLarge": "يجب أن يكون الإيصال أقل من 20 ميجابايت.",
+      "permissionDenied": "ليست لديك صلاحية للقيام بذلك.",
+      "validationFailed": "تحقق من البيانات وحاول مجدداً.",
+      "notFound": "لم نتمكن من العثور على ذلك.",
+      "authRequired": "سجّل الدخول للمتابعة.",
+      "unknown": "حدث خطأ ما. حاول مرة أخرى."
+    }
   },
   "theme": {
     "toggle": "تغيير المظهر",

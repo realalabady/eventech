@@ -1,15 +1,28 @@
 rules_version = '2';
 
 // EvenTech Storage rules — deny-by-default (guides/50_CANONICAL_DECISIONS.md §7).
+//
+// Ownership is expressed through the PATH rather than by reading Firestore from
+// these rules. Cross-service rules would cost a Firestore read on every upload
+// and depend on the Storage service agent holding Firestore permissions, which
+// is an extra failure mode. Instead each writable path is namespaced by the
+// uploader's uid, and the Cloud Function that records the resulting URL is what
+// enforces the real authorization: it verifies organization membership and that
+// the URL points at the expected prefix before persisting it. An upload that
+// skips that step is orphaned and can never be referenced by the app.
 service firebase.storage {
   match /b/{bucket}/o {
 
-    function isSignedIn() {
-      return request.auth != null;
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
     }
 
     function isImage() {
       return request.resource.contentType.matches('image/(jpeg|png|webp)');
+    }
+
+    function isReceiptFile() {
+      return isImage() || request.resource.contentType == 'application/pdf';
     }
 
     // 20 MB ceiling (canonical §7).
@@ -17,34 +30,31 @@ service firebase.storage {
       return request.resource.size < 20 * 1024 * 1024;
     }
 
-    function canManageOrg(orgId) {
-      return isSignedIn()
-        && firestore.exists(/databases/(default)/documents/organizationMembers/$(orgId + '_' + request.auth.uid))
-        && firestore.get(/databases/(default)/documents/organizationMembers/$(orgId + '_' + request.auth.uid)).data.role in ['owner', 'manager'];
-    }
-
-    // Organization logo and cover: world-readable, owner/manager to write.
-    match /organizations/{orgId}/{imageType}/{fileName} {
+    // Organization logo and cover: world-readable, written under the uploader's
+    // uid. updateOrganization checks owner/manager before storing the URL.
+    match /organizations/{orgId}/{imageType}/{userId}/{fileName} {
       allow read: if true;
       allow write: if imageType in ['logo', 'cover']
-        && canManageOrg(orgId)
+        && isOwner(userId)
         && isImage()
         && withinSizeLimit();
     }
 
-    // Event cover: public to read, writable by owners/managers of the
-    // organization that owns the event. The event document is the only link
-    // between the file path and the membership record, so it is read here.
-    function canManageEvent(eventId) {
-      return isSignedIn()
-        && firestore.exists(/databases/(default)/documents/events/$(eventId))
-        && firestore.exists(/databases/(default)/documents/organizationMembers/$(firestore.get(/databases/(default)/documents/events/$(eventId)).data.organizationId + '_' + request.auth.uid))
-        && firestore.get(/databases/(default)/documents/organizationMembers/$(firestore.get(/databases/(default)/documents/events/$(eventId)).data.organizationId + '_' + request.auth.uid)).data.role in ['owner', 'manager'];
+    // Event cover: world-readable, same pattern. saveEventDraft checks
+    // owner/manager and the URL prefix before storing it.
+    match /events/{eventId}/cover/{userId}/{fileName} {
+      allow read: if true;
+      allow write: if isOwner(userId) && isImage() && withinSizeLimit();
     }
 
-    match /events/{eventId}/cover/{fileName} {
-      allow read: if true;
-      allow write: if canManageEvent(eventId) && isImage() && withinSizeLimit();
+    // Transfer receipts are financial documents and are NEVER world-readable.
+    // Only the attendee who uploaded one can read it back through the rules.
+    // Organizers reach it through the tokenised download URL recorded on the
+    // booking, and that booking document is itself readable only by the
+    // attendee and the organization's members (see firestore.rules).
+    match /events/{eventId}/receipts/{userId}/{fileName} {
+      allow read: if isOwner(userId);
+      allow write: if isOwner(userId) && isReceiptFile() && withinSizeLimit();
     }
 
     match /{allPaths=**} {

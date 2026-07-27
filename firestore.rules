@@ -91,6 +91,28 @@ service cloud.firestore {
       allow write: if false;  // createArtist only
     }
 
+    // Phase 6 — Booking. Receipts are financial documents, so a booking is
+    // visible only to the attendee who made it and the organizers reviewing it.
+    match /bookings/{bookingId} {
+      allow get: if isSignedIn() && (
+        resource.data.attendeeId == request.auth.uid
+        || isAdmin()
+        || (resource.data.organizationId is string
+            && isActiveMember(resource.data.organizationId))
+      );
+      // Queries must filter by attendeeId or organizationId; both branches are
+      // enforced per returned document.
+      allow list: if isSignedIn() && (
+        resource.data.attendeeId == request.auth.uid
+        || isAdmin()
+        || (resource.data.organizationId is string
+            && isActiveMember(resource.data.organizationId))
+      );
+      // createBooking / submitReceipt / approveBooking / rejectBooking /
+      // cancelBooking only. Status, amount and inventory are never client-set.
+      allow write: if false;
+    }
+
     match /timeline/{itemId} {
       allow get, list: if isSignedIn()
         && resource.data.organizationId is string

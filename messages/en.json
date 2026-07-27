@@ -131,6 +131,7 @@
     },
     "nav": {
       "events": "Events",
+      "bookings": "Bookings",
       "team": "Team",
       "settings": "Settings",
       "branding": "Branding",
@@ -411,6 +412,77 @@
     "notFound": "That artist is not available.",
     "events": "Appearing at",
     "noEvents": "No announced dates yet."
+  },
+  "booking": {
+    "status": {
+      "pending_payment": "Awaiting payment",
+      "pending_review": "Awaiting review",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "expired": "Expired",
+      "cancelled": "Cancelled"
+    },
+    "request": {
+      "quantityLabel": "How many?",
+      "submit": "Request a booking",
+      "signInFirst": "Sign in to book",
+      "total": "Total {amount}"
+    },
+    "detail": {
+      "title": "Your booking",
+      "instructions": "Transfer the total to the account below, then upload your receipt. The organizer confirms it and your ticket follows.",
+      "bank": "Bank",
+      "accountHolder": "Account holder",
+      "iban": "IBAN",
+      "reference": "Payment reference",
+      "referenceHint": "Include this in the transfer so the organizer can match your payment.",
+      "amount": "Amount",
+      "uploadHeading": "Receipt",
+      "upload": "Upload receipt",
+      "uploaded": "Receipt received. The organizer will review it.",
+      "reuploadHint": "Upload a corrected receipt to try again.",
+      "approved": "Approved. Your ticket arrives in the next release.",
+      "rejectedReason": "Reason given: {reason}",
+      "cancel": "Cancel booking",
+      "notFound": "We could not find that booking.",
+      "noBankDetails": "The organizer has not added bank details yet."
+    },
+    "list": {
+      "title": "My bookings",
+      "subtitle": "Everything you have requested.",
+      "empty": "No bookings yet.",
+      "emptyHint": "Find something on Discover.",
+      "view": "View"
+    },
+    "review": {
+      "title": "Bookings",
+      "subtitle": "Confirm payments and approve attendees.",
+      "pendingHeading": "Awaiting your review",
+      "otherHeading": "Everything else",
+      "empty": "Nothing to review.",
+      "emptyHint": "Requests appear here once attendees upload receipts.",
+      "viewReceipt": "View receipt",
+      "approve": "Approve",
+      "reject": "Reject",
+      "reasonLabel": "Why are you rejecting this?",
+      "reasonPlaceholder": "The transfer amount did not match.",
+      "confirmReject": "Reject booking",
+      "cancelReject": "Keep it",
+      "quantity": "{count} × {type}"
+    },
+    "errors": {
+      "alreadyBooked": "You already have a booking for this event.",
+      "bookingClosed": "Bookings are closed for this event.",
+      "soldOut": "There are not enough tickets left.",
+      "emailNotVerified": "Confirm your email before approving bookings.",
+      "invalidReceiptType": "Upload an image or a PDF.",
+      "receiptTooLarge": "Receipts must be under 20 MB.",
+      "permissionDenied": "You do not have permission to do that.",
+      "validationFailed": "Check the details and try again.",
+      "notFound": "We could not find that.",
+      "authRequired": "Sign in to continue.",
+      "unknown": "Something went wrong. Try again."
+    }
   },
   "theme": {
     "toggle": "Change theme",

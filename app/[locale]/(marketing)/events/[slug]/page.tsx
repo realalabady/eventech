@@ -6,6 +6,7 @@ import Image from "next/image";
 import { PublicHeader } from "@/components/navigation/public-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { BookingRequest } from "@/features/booking/components/booking-request";
 import { formatPrice, formatPublicDate } from "@/features/discovery/lib/format";
 import {
   getArtists,
@@ -241,16 +242,18 @@ export default async function PublicEventPage({ params }: PageProps) {
                 ))}
               </ul>
 
-              <Button size="lg" className="w-full" disabled>
-                {soldOut
-                  ? t("soldOut")
-                  : event.bookingOpen
-                    ? t("book")
-                    : t("bookingClosed")}
-              </Button>
-              <p className="text-center text-sm text-muted-foreground">
-                {t("bookingSoon")}
-              </p>
+              <BookingRequest
+                eventId={event.id}
+                soldOut={soldOut}
+                bookingOpen={event.bookingOpen}
+                ticketTypes={event.ticketTypes.map((type) => ({
+                  id: type.id,
+                  name: type.name,
+                  price: type.price,
+                  currency: type.currency,
+                  remaining: Math.max(type.quantity - type.sold, 0),
+                }))}
+              />
             </div>
           </aside>
         </div>

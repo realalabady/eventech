@@ -140,11 +140,18 @@ export async function uploadOrganizationImage(
     return { ok: false, errorKey: "imageTooLarge" };
   }
 
+  const uid = getFirebaseAuth().currentUser?.uid;
+  if (!uid) {
+    return { ok: false, errorKey: "authRequired" };
+  }
+
   try {
     const extension = file.type.split("/")[1];
+    // uid-namespaced so Storage rules verify ownership by path;
+    // updateOrganization enforces owner/manager before the URL is stored.
     const storageRef = ref(
       getFirebaseStorage(),
-      `organizations/${organizationId}/${kind}/${kind}.${extension}`,
+      `organizations/${organizationId}/${kind}/${uid}/${kind}.${extension}`,
     );
     await uploadBytes(storageRef, file, { contentType: file.type });
     const url = await getDownloadURL(storageRef);
