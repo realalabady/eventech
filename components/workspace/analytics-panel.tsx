@@ -21,7 +21,10 @@ export function AnalyticsPanel() {
   const t = useTranslations("analytics");
   const { organization } = useOrganization();
   const [eventId, setEventId] = useState<string | null>(null);
-  const { metrics, loading, failed } = useEventMetrics(eventId ?? undefined);
+  const { metrics, loading, failed } = useEventMetrics(
+    eventId ?? undefined,
+    organization?.id,
+  );
 
   return (
     <div className="space-y-8">

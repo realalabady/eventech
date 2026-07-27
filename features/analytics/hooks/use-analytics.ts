@@ -33,12 +33,24 @@ type State = {
  *
  * Three round trips, and no composite index beyond what already exists:
  *   - the event document, for view count and ticket tiers
- *   - every booking for the event (equality only), which yields the status
- *     breakdown and the time series from one read set
- *   - a server-side *count* of used tickets, which is billed per ~1000 index
- *     entries rather than per document, on the existing `tickets(eventId,status)`
+ *   - every booking for the event, which yields the status breakdown and the
+ *     time series from one read set
+ *   - a server-side *count* of used tickets, billed per ~1000 index entries
+ *     rather than per document
+ *
+ * **Every query is filtered by `organizationId` as well as `eventId`, and that
+ * is load-bearing, not redundant.** Firestore rules are not filters: a `list`
+ * is rejected outright unless the query's own constraints prove that every
+ * possible result satisfies the rule. The `bookings` and `tickets` rules grant
+ * access via `isActiveMember(resource.data.organizationId)`, so a query keyed
+ * only on `eventId` is denied with `permission-denied` even when every document
+ * it would return is readable. Both filters are equalities, which Firestore
+ * serves by merging single-field indexes — so this costs no composite index.
  */
-export function useEventMetrics(eventId: string | undefined): State {
+export function useEventMetrics(
+  eventId: string | undefined,
+  organizationId: string | undefined,
+): State {
   const { status } = useAuth();
   const [state, setState] = useState<{
     key: string | null;
@@ -47,22 +59,27 @@ export function useEventMetrics(eventId: string | undefined): State {
   }>({ key: null, metrics: EMPTY_METRICS, failed: false });
 
   useEffect(() => {
-    if (status !== "authenticated" || !eventId) return;
+    if (status !== "authenticated" || !eventId || !organizationId) return;
 
     let cancelled = false;
 
-    async function load(id: string) {
+    async function load(id: string, orgId: string) {
       const db = getFirebaseFirestore();
       try {
         const [eventSnapshot, bookingSnapshot, attendedSnapshot] =
           await Promise.all([
             getDoc(doc(db, "events", id)),
             getDocs(
-              query(collection(db, "bookings"), where("eventId", "==", id)),
+              query(
+                collection(db, "bookings"),
+                where("organizationId", "==", orgId),
+                where("eventId", "==", id),
+              ),
             ),
             getCountFromServer(
               query(
                 collection(db, "tickets"),
+                where("organizationId", "==", orgId),
                 where("eventId", "==", id),
                 where("status", "==", "used"),
               ),
@@ -124,13 +141,13 @@ export function useEventMetrics(eventId: string | undefined): State {
       }
     }
 
-    void load(eventId);
+    void load(eventId, organizationId);
     return () => {
       cancelled = true;
     };
-  }, [status, eventId]);
+  }, [status, eventId, organizationId]);
 
-  if (status !== "authenticated" || !eventId) {
+  if (status !== "authenticated" || !eventId || !organizationId) {
     return { metrics: EMPTY_METRICS, loading: false, failed: false };
   }
   if (state.key !== eventId) {
