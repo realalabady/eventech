@@ -45,3 +45,5 @@ export {
   deleteCalendarEvent,
 } from "./calendar/manage-calendar";
 export { createChannel, sendMessage } from "./messaging/manage-messaging";
+
+export { trackEventView } from "./analytics/track-event-view";

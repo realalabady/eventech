@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 
 import { PublicHeader } from "@/components/navigation/public-header";
+import { ViewTracker } from "@/features/analytics/components/view-tracker";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BookingRequest } from "@/features/booking/components/booking-request";
@@ -80,6 +81,8 @@ export default async function PublicEventPage({ params }: PageProps) {
 
   return (
     <div className="flex min-h-[100dvh] flex-col">
+      {/* Renders nothing; records one view per browser session. */}
+      <ViewTracker eventId={event.id} />
       <PublicHeader />
 
       <main className="flex-1">

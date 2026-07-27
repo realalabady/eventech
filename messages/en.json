@@ -140,7 +140,8 @@
       "timeline": "Timeline",
       "tasks": "Tasks",
       "calendar": "Calendar",
-      "messages": "Messages"
+      "messages": "Messages",
+      "analytics": "Analytics"
     },
     "settings": {
       "title": "Organization settings",
@@ -751,6 +752,31 @@
       "authRequired": "Sign in to continue.",
       "unknown": "Something went wrong. Try again.",
       "nameTaken": "A channel with that name already exists."
+    }
+  },
+  "analytics": {
+    "title": "Analytics",
+    "subtitle": "How one event is performing, from first view to the door.",
+    "failed": "These figures could not be loaded. Try again in a moment.",
+    "metric": {
+      "views": "Views",
+      "viewsHint": "Opens of the public event page",
+      "bookings": "Bookings",
+      "bookingsHint": "{approved} approved so far",
+      "attended": "Checked in",
+      "attendedHint": "{percent}% of issued tickets",
+      "conversion": "Conversion",
+      "conversionHint": "Approved bookings per view",
+      "noViews": "No views recorded yet",
+      "noTickets": "No tickets issued yet",
+      "unmeasured": "—"
+    },
+    "chart": {
+      "overTime": "Bookings over the last 30 days",
+      "byTier": "Tickets sold by tier",
+      "bookingsLabel": "Bookings",
+      "soldLabel": "Sold",
+      "noTiers": "This event has no ticket tiers yet."
     }
   }
 }

@@ -3,6 +3,7 @@
 import {
   CalendarDays,
   CalendarRange,
+  ChartLine,
   KanbanSquare,
   MessagesSquare,
   Route,
@@ -23,6 +24,7 @@ const ITEMS = [
   { href: "/workspace/calendar", key: "calendar", icon: CalendarRange },
   { href: "/workspace/messages", key: "messages", icon: MessagesSquare },
   { href: "/workspace/bookings", key: "bookings", icon: Ticket },
+  { href: "/workspace/analytics", key: "analytics", icon: ChartLine },
   { href: "/workspace/scanner", key: "scanner", icon: ScanLine },
   { href: "/workspace/team", key: "team", icon: Users },
   { href: "/workspace/settings", key: "settings", icon: Settings },
