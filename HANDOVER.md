@@ -1,6 +1,6 @@
 # EvenTech — Handover
 
-Snapshot for a fresh session. Written 2026-07-27, after Phase 7.
+Snapshot for a fresh session. Written 2026-07-27, after Phase 8a.
 
 ## Read these first, in order
 
@@ -10,7 +10,9 @@ Snapshot for a fresh session. Written 2026-07-27, after Phase 7.
 
 ## Where it stands
 
-Phases 0–7 of the canonical 12-phase plan (guide 50 §2) are done and deployed to the live Firebase project. Phase 7 is deployed but **has not yet had a ticket run through it end to end** — see "Phase 7 verification still owed" below.
+Phases 0–7 of the canonical 12-phase plan (guide 50 §2) are done, deployed and verified against the live Firebase project. **Phase 8a is committed but NOT deployed.**
+
+**Git state matters here.** Everything from Phase 7 onward lives on `feature/phase-7-tickets-checkin`, unpushed, and `main` has none of it. The branch name is now misleading — it holds Phase 7 _and_ Phase 8a. Two commits: `233a735` (phase 7) and `4f557fc` (phase 8a). Start 8b/8c from that branch, not `main`.
 
 | Phase                  | State                                                                     |
 | ---------------------- | ------------------------------------------------------------------------- |
@@ -22,8 +24,11 @@ Phases 0–7 of the canonical 12-phase plan (guide 50 §2) are done and deployed
 | 5 Public pages         | `/events/[slug]`, `/discover` with search, organizer + artist pages       |
 | 6 Booking              | Request → bank details → receipt → organizer approval                     |
 | 7 Tickets & check-in   | Signed QR on approval, ticket wallet, door scanner, Resend delivery (off) |
+| 8a Production tools    | Timeline, Kanban, activity feed — committed, **not deployed**             |
+| 8b Calendar + comms    | Not started                                                               |
+| 8c Analytics           | Not started                                                               |
 
-Recent commits: `4dd44ab` phase 6 · `a45d2ce` phase 5 · `5381a19` timestamps · `cd429f8` phase 4 · `5242156` Gulf deploy + claim fixes.
+Recent commits: `4f557fc` phase 8a · `233a735` phase 7 · `4dd44ab` phase 6 · `a45d2ce` phase 5 · `cd429f8` phase 4 · `5242156` Gulf deploy + claim fixes.
 
 ### Phase 7 verification
 
@@ -38,17 +43,68 @@ Deployed and verified end to end against the live project on 2026-07-27, driving
 
 Set secrets with `--data-file`, never the interactive prompt: on Windows the masked prompt silently captures nothing when you paste into it, and piping a value adds a trailing newline that corrupts the key.
 
-### Phase 8 is sliced
+### Phase 8 is sliced — 8a done, 8b and 8c next
 
-Too large for one pass, so it runs in three:
+Phase 8 (guide 50 §2) is six surfaces and too large for one pass, so it runs in three. **8a is committed but undeployed.** Deploy it before or alongside whatever comes next:
 
-- **8a — done, local only.** Timeline, Kanban, activity feed. `/workspace/timeline` and `/workspace/tasks`, plus `createTask` / `updateTask` / `deleteTask` / `setTimelineStage`. **Needs a deploy of `functions` and `firestore:indexes`** — the activity feed orders by `createdAt` and will show its failed state until `activityLogs(eventId, createdAt)` is built.
-- **8b — not started.** Calendar, team communication. Needs `calendarEvents`, `channels`, `messages` collections + rules, and FullCalendar restyled.
-- **8c — not started.** Analytics dashboards, Recharts lazy-loaded.
+```bash
+firebase deploy --only functions,firestore:indexes --project eventech-2f278
+```
 
-**Open design question for 8c:** canonical §6 specifies `updateDashboardMetrics` as **Firestore triggers**, which this project cannot use (gotcha #0 — Firestore is in `me-central2`, Functions cannot run there). Either aggregate on read, or roll counters up from the callables that already run on approval and check-in. **Verify Cloud Scheduler is available in `me-central1` before designing around `generateDailyAnalytics`.**
+The activity feed orders by `createdAt` and renders its **failed** state until `activityLogs(eventId, createdAt)` finishes building. Indexes take a few minutes after deploy.
 
-Two guide-41 conflicts were resolved in 8a and should not be relitigated: Kanban columns follow canonical §4 (_In Progress / Done_, not guide 41's _Doing / Completed_, which §4 explicitly overrides), and timeline stages keep the vocabulary `createEvent` actually seeds (_planning / venue / artists / production / marketing / published_) rather than guide 41's Idea→Execution list, because those documents already exist in the database.
+Decisions made in 8a — do not relitigate:
+
+- **Kanban columns follow canonical §4** (_To Do / In Progress / Review / Done_). Guide 41 says _Doing / Completed_; §4 explicitly names guide 41 as overridden. `tests/task.test.ts` asserts the columns equal `TASK_STATUSES`.
+- **Timeline stages keep the vocabulary `createEvent` seeds** (_planning / venue / artists / production / marketing / published_), not guide 41's Idea→Execution list. Those documents have existed since Phase 4; renaming orphans them.
+- **Activity feed placement.** Guide 41 treats Timeline and Activity as separate dashboard sections; they share `/workspace/timeline` because both answer questions about one event.
+
+---
+
+#### 8b — Calendar + team communication
+
+New ground: three collections that do not exist yet, with no rules, no functions and no data.
+
+- `calendarEvents` — meetings, deadlines, setup dates (guide 41 "unified production calendar"). Note the seeded `tasks.dueDate` and `timeline` milestones should feed this view rather than being duplicated into it.
+- `channels` + `messages` — canonical §13 **rejects guide 45's `conversations` collection**; use `channels` + `messages`.
+
+Work required: Firestore rules for all three (deny-by-default, client never writes — see below), composite indexes for anything ordered, callables for send/create, and FullCalendar **fully restyled** onto the design tokens (canonical §11 mandates FullCalendar specifically and requires it not look like FullCalendar).
+
+Watch for: message lists need pagination or a `limit` — an unbounded realtime listener on a busy channel is a cost and memory problem. Look at `useEventActivity` in `features/activity/hooks/use-activity.ts` for the capped-listener pattern.
+
+#### 8c — Analytics dashboards
+
+**Resolve this before writing code.** Canonical §6 specifies `updateDashboardMetrics` as **Firestore triggers**, which this project structurally cannot use — Firestore is in `me-central2`, Functions cannot run there, and Phase 7 deliberately avoided betting on cross-region Eventarc (gotcha #0 and #8). Two viable routes:
+
+1. **Aggregate on read** — dashboards query `bookings` / `tickets` / `checkins` live. Simplest, always current, no new infrastructure; gets slow and read-expensive as data grows.
+2. **Callable-driven rollup into `analytics`** — `approveBooking` and `checkInTicket` already run on every relevant write and can bump counters there. Fast reads, closest to §6's intent; counters drift if a write path is ever missed.
+
+**Before designing around `generateDailyAnalytics`, verify Cloud Scheduler exists in `me-central1`:**
+
+```bash
+gcloud scheduler locations list --project eventech-2f278
+```
+
+This is the same class of check that caught the Storage IAM gap in Phase 7 — confirm the service is available in the region _before_ building on it, not at deploy time.
+
+Also required: Recharts, **lazy-loaded** (canonical §11), metrics count up **once** and charts animate **once** (§9), and the JS budget stays under 250KB initial (§11). `features/scanner/components/ticket-scanner.tsx` shows the dynamic-import pattern used to keep a heavy library out of the initial bundle.
+
+### Conventions 8a established — follow these
+
+A fresh session should copy these rather than reinvent them:
+
+- **Feature layout:** `features/<name>/{types,hooks,services,components}`. Features **never import each other** (§11). Where two are needed together, compose in `components/workspace/` — see `task-board-panel.tsx`. `features/event/components/event-picker.tsx` exists so other features never reach into the event feature to pick an event.
+- **Listeners always surface failure.** Every `onSnapshot` logs and exposes a `failed` flag, and the UI renders a distinct error state. Gotcha #4: a missing index otherwise looks exactly like an empty list.
+- **Callable services** return `{ ok: true, data } | { ok: false, errorKey }` and map the `code` from the error envelope to an i18n key. See `features/task/services/task-service.ts`.
+- **The client never writes these collections.** `tasks`, `timeline`, `tickets`, `checkins`, `bookings` are all `allow write: if false` — mutations go through callables that re-check membership from Firestore, never from the payload. New collections in 8b must follow this.
+- **Optimistic UI** is allowed for kanban/favorites/theme only (§11), never payments/approvals/QR. The Kanban drops its override on both success _and_ failure so a rejected move springs back.
+- **i18n:** every string in `messages/en.json` **and** `messages/ar.json`, key-identical (enforced by `tests/messages.test.ts`). `react/jsx-no-literals` catches bare JSX text but **not** visible props (`placeholder`, `alt`, `aria-label`, `title`) — pass those through `t()` by hand.
+- **Clock reads** go through `hooks/use-now.ts` (`useSyncExternalStore`, returns `null` until mount). Never `Date.now()` during render.
+
+### Installed vs not
+
+Already present: `motion`, `dnd-kit` (core/sortable/utilities), `qrcode` (functions), `qr-scanner`, `date-fns`, shadcn primitives incl. `Dialog`, `Tabs`, `Switch`.
+**Not yet installed:** Recharts (8c), FullCalendar (8b).
 
 ## Decisions already locked — do not relitigate
 
@@ -86,7 +142,7 @@ Read this section before debugging anything similar.
 6. **Base UI `Button` rendering a `Link` needs `nativeButton={false}`**, or it strips button semantics.
 7. **Port 3000 is often taken by an unrelated project.** `.claude/launch.json` has `autoPort: true`.
 8. **No Firestore triggers in this project.** Firestore is in `me-central2` and Functions cannot run there, so an `onDocumentUpdated` trigger would depend on cross-region Eventarc delivery. Ticket issuance therefore runs inline at the end of `approveBooking`, and is made safe by being idempotent (the ticket id **is** the booking id) — approving an already-approved booking re-runs issuance and repairs a missing ticket instead of double-claiming inventory.
-9. **`react-hooks` lint rules here are strict.** `Date.now()` during render, writing a ref during render, and `setState` directly inside an effect are all hard errors. For clock reads use `hooks/use-now.ts`, which wraps the clock in `useSyncExternalStore` and returns `null` until mount (also avoiding a hydration mismatch).
+9. **`react-hooks` lint rules here are strict, and they fire late.** `Date.now()` during render, writing a ref during render, and `setState` directly inside an effect are all **hard errors**, not warnings — `pnpm typecheck` and `pnpm build` pass happily and only `pnpm lint` catches them, so run lint before believing a component is finished. The sanctioned fixes, all used in the codebase: clock reads go through `hooks/use-now.ts` (`useSyncExternalStore`); a ref that a long-lived callback reads gets written in an effect, not in render (`ticket-scanner.tsx`); and **resetting form state when a different record is selected uses a changing `key` to remount, never an effect** (`task-dialog.tsx` plus the `session` counter in `task-board-panel.tsx`).
 
 ## Test account — keep it
 
@@ -106,6 +162,7 @@ Because it already owns an org, `createOrganization` and `acceptInvitation` will
 - **Receipt and QR download URLs are bearer tokens.** Firebase tokenised URLs bypass rules, so anyone holding one can view the file. Each URL sits on a document only the owner and the relevant org members can read — that is the protection. The QR _token_ is separately HMAC-signed, so possessing the image URL is not the same as being able to forge a ticket.
 - **Nothing releases a used ticket.** There is no un-check-in, and `cancelBooking` still refuses approved bookings, so a mistaken scan can only be fixed in the console. Worth a proper flow before real doors.
 - **No scheduled expiry** for stale `pending_payment` bookings yet, though the status exists.
+- **No browser UI has been verified by a signed-in user since Phase 6.** The Phase 7 wallet, QR reveal and camera scanner, and all of Phase 8a's timeline, Kanban and activity feed, have only been proven at the callable and build level. Signing in and clicking through is the outstanding check for both.
 - **`roles/iam.serviceAccountTokenCreator` was granted to `fakealabady@gmail.com`** on the runtime service account, so Phase 7 could be tested by minting ID tokens locally. It lets the holder impersonate that service account — revoke it unless you are actively running such tests:
   `gcloud iam service-accounts remove-iam-policy-binding 119928286158-compute@developer.gserviceaccount.com --member="user:fakealabady@gmail.com" --role="roles/iam.serviceAccountTokenCreator" --project eventech-2f278`
 
@@ -121,5 +178,16 @@ pnpm build        # production build
 
 Deploy: `firebase deploy --only functions,firestore:rules,firestore:indexes,storage --project eventech-2f278`.
 Functions typecheck separately: `pnpm --dir functions typecheck` (they are a pnpm workspace package).
+`pnpm format` before committing — `format:check` is stricter than lint and will otherwise fail CI.
 
-Run `pnpm lint && pnpm typecheck && pnpm test` before considering any work done.
+Run `pnpm lint && pnpm typecheck && pnpm test` before considering any work done. **Lint is the one that catches the React rule violations** — typecheck and build pass without it (gotcha #9).
+
+## Testing callables without a browser
+
+Phase 7 was verified end to end without signing in, by minting a real ID token with the Admin SDK and calling the deployed functions over HTTPS. Reuse this for 8b/8c rather than assuming a green deploy means a working feature:
+
+1. `admin.initializeApp({ projectId, serviceAccountId: "119928286158-compute@developer.gserviceaccount.com" })` under ADC.
+2. `createCustomToken(uid)` → exchange at `identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=<NEXT_PUBLIC_FIREBASE_API_KEY>` for an `idToken`.
+3. `POST https://me-central1-eventech-2f278.cloudfunctions.net/<name>` with `Authorization: Bearer <idToken>` and body `{"data": {...}}`.
+
+The resulting token carries the user's real claims and `email_verified`, so guards behave exactly as they do in the browser. **`createCustomToken` needs `roles/iam.serviceAccountTokenCreator`** on the runtime SA — basic Owner does not include `iam.serviceAccounts.signBlob`. Grant it for the test run and revoke after (see Open items). Restore any data the test mutates.
