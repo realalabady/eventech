@@ -15,7 +15,7 @@ import "@fullcalendar/react/skeleton.css";
 import "@fullcalendar/react/themes/classic/theme.css";
 import "../styles/calendar-theme.css";
 
-import { isEditable, type CalendarItem } from "../types";
+import { exclusiveEnd, isEditable, type CalendarItem } from "../types";
 
 const PLUGINS = [
   classicTheme,
@@ -50,7 +50,7 @@ export function CalendarSurface({
         id: item.id,
         title: item.title,
         start: new Date(item.start),
-        end: item.end ? new Date(item.end) : undefined,
+        end: exclusiveEnd(item),
         allDay: item.allDay,
         // v7 renamed this from v6's `classNames` and takes a string rather than
         // an array. The old key still type-checks — `EventInput` has an index

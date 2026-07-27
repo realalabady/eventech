@@ -12,6 +12,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { useId } from "react";
 
 import type { DayPoint, TierSales } from "../types";
 
@@ -49,6 +50,15 @@ export function BookingsOverTime({
   data: DayPoint[];
   label: string;
 }) {
+  // A fixed id would collide the moment a second chart shares the page — two
+  // gradients under one id, and every `url(#…)` resolves to whichever node the
+  // document happens to reach first.
+  //
+  // React decorates generated ids with delimiters that have varied across
+  // versions (`:r0:` before 19, `«r0»` after), and this is interpolated into a
+  // `url(#…)` reference, so everything outside a safe fragment alphabet goes.
+  const gradientId = `bookings-fill-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
+
   return (
     <ResponsiveContainer width="100%" height={260}>
       <AreaChart
@@ -56,7 +66,7 @@ export function BookingsOverTime({
         margin={{ top: 8, right: 8, bottom: 0, left: -20 }}
       >
         <defs>
-          <linearGradient id="bookings-fill" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="var(--chart-1)" stopOpacity={0.35} />
             <stop offset="100%" stopColor="var(--chart-1)" stopOpacity={0} />
           </linearGradient>
@@ -84,7 +94,7 @@ export function BookingsOverTime({
           name={label}
           stroke="var(--chart-1)"
           strokeWidth={2}
-          fill="url(#bookings-fill)"
+          fill={`url(#${gradientId})`}
           {...ANIMATION}
         />
       </AreaChart>

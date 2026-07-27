@@ -202,7 +202,9 @@ export function CalendarDialog({
                 id="calendar-start"
                 type={allDay ? "date" : "datetime-local"}
                 value={allDay ? start.slice(0, 10) : start}
-                onChange={(event) => setStart(event.target.value)}
+                onChange={(event) =>
+                  setStart(mergeDatePart(start, event.target.value))
+                }
               />
             </div>
             <div className="space-y-2">
@@ -211,7 +213,9 @@ export function CalendarDialog({
                 id="calendar-end"
                 type={allDay ? "date" : "datetime-local"}
                 value={allDay ? end.slice(0, 10) : end}
-                onChange={(event) => setEnd(event.target.value)}
+                onChange={(event) =>
+                  setEnd(mergeDatePart(end, event.target.value))
+                }
               />
             </div>
           </div>
@@ -248,6 +252,23 @@ export function CalendarDialog({
       </DialogContent>
     </Dialog>
   );
+}
+
+/**
+ * Keeps the stored value at full `YYYY-MM-DDTHH:mm` width even while an all-day
+ * (date-only) input is driving it.
+ *
+ * Without this, editing the date with All day on would leave a bare
+ * `YYYY-MM-DD` in state; toggling All day back off then hands that to a
+ * `datetime-local` input, which the browser rejects outright — the field blanks
+ * and the organizer sees their date vanish, even though the value is still
+ * there and would save correctly.
+ */
+function mergeDatePart(previous: string, next: string): string {
+  if (!next) return "";
+  if (next.length > 10) return next;
+  const time = previous.length > 10 ? previous.slice(11, 16) : "00:00";
+  return `${next}T${time}`;
 }
 
 /** `datetime-local` wants `YYYY-MM-DDTHH:mm` in the viewer's own timezone. */

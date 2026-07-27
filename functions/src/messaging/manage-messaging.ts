@@ -52,33 +52,42 @@ export const createChannel = onCall<
 
   const cleanName = name.trim().slice(0, MAX_NAME);
 
-  // Channel names are how people refer to a conversation out loud, so a
-  // duplicate is a usability bug rather than a data one. Cheap to prevent.
-  const existing = await getFirestore()
+  const db = getFirestore();
+  const ref = db.collection("channels").doc();
+  const duplicates = db
     .collection("channels")
     .where("organizationId", "==", organizationId)
     .where("name", "==", cleanName)
-    .limit(1)
-    .get();
-  if (!existing.empty) {
-    throw new HttpsError("already-exists", "Channel name is taken.", {
-      code: "ALREADY_EXISTS",
-    });
-  }
+    .limit(1);
 
-  const now = FieldValue.serverTimestamp();
-  const ref = getFirestore().collection("channels").doc();
-  await ref.set({
-    organizationId,
-    eventId,
-    name: cleanName,
-    topic: request.data?.topic?.trim().slice(0, MAX_TOPIC) || null,
-    // Ordering the channel list by activity needs a value from the start, or a
-    // channel nobody has posted in yet would sort out of the query entirely.
-    lastMessageAt: now,
-    createdBy: uid,
-    createdAt: now,
-    updatedAt: now,
+  // Channel names are how people refer to a conversation out loud, so a
+  // duplicate is a usability bug rather than a data one.
+  //
+  // The check and the write share a transaction because separately they are a
+  // read-then-write race: two managers creating "production" in the same second
+  // both see an empty result and both succeed, leaving exactly the pair of
+  // identically named channels the check exists to prevent.
+  await db.runTransaction(async (tx) => {
+    const existing = await tx.get(duplicates);
+    if (!existing.empty) {
+      throw new HttpsError("already-exists", "Channel name is taken.", {
+        code: "ALREADY_EXISTS",
+      });
+    }
+
+    const now = FieldValue.serverTimestamp();
+    tx.set(ref, {
+      organizationId,
+      eventId,
+      name: cleanName,
+      topic: request.data?.topic?.trim().slice(0, MAX_TOPIC) || null,
+      // Ordering the channel list by activity needs a value from the start, or
+      // a channel nobody has posted in yet would sort out of the query.
+      lastMessageAt: now,
+      createdBy: uid,
+      createdAt: now,
+      updatedAt: now,
+    });
   });
 
   return {

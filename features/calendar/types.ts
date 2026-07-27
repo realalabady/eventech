@@ -72,3 +72,20 @@ export function entryToItem(entry: CalendarEntryDoc): CalendarItem | null {
 export function isEditable(item: CalendarItem): boolean {
   return item.source === "entry";
 }
+
+/**
+ * The `end` a calendar renderer should be given.
+ *
+ * FullCalendar treats an all-day `end` as **exclusive**, so an entry stored as
+ * ending on the 30th would paint only through the 29th and read a day shorter
+ * than it is. Timed entries keep their instant untouched.
+ *
+ * The day is added through the date parts rather than by adding 24h, so a range
+ * spanning a daylight-saving change still lands on the right calendar day.
+ */
+export function exclusiveEnd(item: CalendarItem): Date | undefined {
+  if (item.end === null) return undefined;
+  const end = new Date(item.end);
+  if (item.allDay) end.setDate(end.getDate() + 1);
+  return end;
+}

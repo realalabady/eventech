@@ -5,6 +5,7 @@ import {
   CALENDAR_KINDS,
   compareItems,
   entryToItem,
+  exclusiveEnd,
   isEditable,
   type CalendarEntryDoc,
   type CalendarItem,
@@ -88,6 +89,33 @@ describe("isEditable", () => {
   // Editing them here would write to the wrong collection.
   it.each(["task", "event"] as const)("refuses %s projections", (source) => {
     expect(isEditable(item({ source }))).toBe(false);
+  });
+});
+
+describe("exclusiveEnd", () => {
+  it("leaves a timed entry's end exactly where it was", () => {
+    const end = exclusiveEnd(item({ end: NOW + HOUR, allDay: false }));
+    expect(end?.getTime()).toBe(NOW + HOUR);
+  });
+
+  // FullCalendar's all-day end is exclusive, so an entry stored as ending on
+  // the 30th must be handed the 31st or it paints only through the 29th.
+  it("advances an all-day end by one calendar day", () => {
+    const stored = new Date(2026, 6, 30, 0, 0, 0).getTime();
+    const end = exclusiveEnd(item({ end: stored, allDay: true }));
+    expect(end?.getDate()).toBe(31);
+    expect(end?.getMonth()).toBe(6);
+  });
+
+  it("rolls an all-day end across a month boundary", () => {
+    const stored = new Date(2026, 6, 31, 0, 0, 0).getTime();
+    const end = exclusiveEnd(item({ end: stored, allDay: true }));
+    expect(end?.getMonth()).toBe(7);
+    expect(end?.getDate()).toBe(1);
+  });
+
+  it("stays undefined when the entry has no end", () => {
+    expect(exclusiveEnd(item({ end: null }))).toBeUndefined();
   });
 });
 
