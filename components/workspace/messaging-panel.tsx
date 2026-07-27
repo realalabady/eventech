@@ -81,10 +81,11 @@ export function MessagingPanel() {
         />
 
         <section className="rounded-xl border border-border bg-card p-4 sm:p-6">
-          {activeId ? (
+          {activeId && organization ? (
             <MessageThread
               key={activeId}
               channelId={activeId}
+              organizationId={organization.id}
               currentUserId={user?.uid ?? null}
               authorNames={authorNames}
             />

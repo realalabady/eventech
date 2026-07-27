@@ -23,8 +23,17 @@ const SESSION_PREFIX = "evntech:viewed:";
 export function ViewTracker({ eventId }: { eventId: string }) {
   useEffect(() => {
     const key = `${SESSION_PREFIX}${eventId}`;
-    if (sessionStorage.getItem(key)) return;
-    sessionStorage.setItem(key, "1");
+
+    // Reading `sessionStorage` *throws* when storage is blocked (Safari private
+    // browsing, third-party-cookie blocking). Unguarded, that exception escapes
+    // the effect and takes down the public event page — the most important page
+    // in the product — for a view counter nobody asked for.
+    try {
+      if (sessionStorage.getItem(key)) return;
+      sessionStorage.setItem(key, "1");
+    } catch {
+      // No storage means no dedupe. Counting a repeat view beats crashing.
+    }
 
     const track = httpsCallable<{ eventId: string }, unknown>(
       getFirebaseFunctions(),

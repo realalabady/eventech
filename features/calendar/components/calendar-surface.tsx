@@ -52,10 +52,14 @@ export function CalendarSurface({
         start: new Date(item.start),
         end: item.end ? new Date(item.end) : undefined,
         allDay: item.allDay,
-        classNames: [
+        // v7 renamed this from v6's `classNames` and takes a string rather than
+        // an array. The old key still type-checks — `EventInput` has an index
+        // signature for extended props — so it was silently swallowed there,
+        // and every entry rendered unstyled.
+        className: [
           `fc-item-${item.source === "entry" ? (item.kind ?? "other") : item.source}`,
           isEditable(item) ? "fc-item-editable" : "fc-item-readonly",
-        ],
+        ].join(" "),
       })),
     [items],
   );

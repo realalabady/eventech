@@ -33,7 +33,8 @@ export function CalendarPanel() {
 
   const { entries, loading, failed } = useCalendarEntries(organization?.id);
   const { tasks, failed: tasksFailed } = useOrganizationTasks(organization?.id);
-  const { events } = useEvents(organization?.id);
+  // `useEvents` omits `failed` on its early-return branches, hence the default.
+  const { events, failed: eventsFailed = false } = useEvents(organization?.id);
 
   const [editing, setEditing] = useState<CalendarEntryDoc | null>(null);
   const [seed, setSeed] = useState<{ start: number | null; allDay: boolean }>({
@@ -128,9 +129,12 @@ export function CalendarPanel() {
       <ProductionCalendar
         items={items}
         loading={loading}
-        // A broken task listener would silently drop due dates from the grid,
-        // which reads as "nothing is due" — surface it like any other failure.
-        failed={failed || tasksFailed}
+        // A broken task or event listener would silently drop its markers from
+        // the grid, which reads as "nothing is due" rather than "we could not
+        // load this" — the exact confusion gotcha #4 exists to prevent. Any of
+        // the three failing makes the whole calendar untrustworthy, so all
+        // three are surfaced.
+        failed={failed || tasksFailed || eventsFailed}
         onOpen={openItem}
         onCreateAt={openNew}
       />

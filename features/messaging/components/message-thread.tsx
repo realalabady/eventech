@@ -25,18 +25,24 @@ const MAX_BODY = 2000;
  */
 export function MessageThread({
   channelId,
+  organizationId,
   currentUserId,
   /** uid → display name, resolved by the caller from the team roster. */
   authorNames,
 }: {
   channelId: string;
+  /** Required by the query for rules to admit it — see `useChannelMessages`. */
+  organizationId: string;
   currentUserId: string | null;
   authorNames: Record<string, string>;
 }) {
   const t = useTranslations("messaging");
   const locale = useLocale();
   const reduce = useReducedMotion();
-  const { messages, loading, failed } = useChannelMessages(channelId);
+  const { messages, loading, failed } = useChannelMessages(
+    channelId,
+    organizationId,
+  );
 
   const [body, setBody] = useState("");
   const [busy, setBusy] = useState(false);

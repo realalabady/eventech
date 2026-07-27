@@ -84,11 +84,23 @@ export function useChannels(organizationId: string | undefined) {
  * The last {@link PAGE_SIZE} messages in a channel, oldest first.
  *
  * Firestore can only take the *latest* N by ordering descending, so the page is
- * reversed here — a thread reads top to bottom. Needs the composite index
- * `messages(channelId, createdAt)`; without it the listener errors and `failed`
- * surfaces that rather than showing an empty conversation (gotcha #4).
+ * reversed here — a thread reads top to bottom.
+ *
+ * **The `organizationId` filter is load-bearing, not redundant.** Firestore
+ * rules are not filters: a `list` is rejected outright unless the query's own
+ * constraints prove every possible result satisfies the rule. The `messages`
+ * rule grants access via `isActiveMember(resource.data.organizationId)`, so a
+ * query keyed only on `channelId` is denied with `permission-denied` even
+ * though every message it would return is readable by the caller.
+ *
+ * Needs the composite index `messages(organizationId, channelId, createdAt)`;
+ * without it the listener errors and `failed` surfaces that rather than showing
+ * an empty conversation (gotcha #4).
  */
-export function useChannelMessages(channelId: string | undefined) {
+export function useChannelMessages(
+  channelId: string | undefined,
+  organizationId: string | undefined,
+) {
   const { status } = useAuth();
   const [snapshot, setSnapshot] = useState<{
     key: string | null;
@@ -97,11 +109,12 @@ export function useChannelMessages(channelId: string | undefined) {
   }>({ key: null, items: NO_MESSAGES });
 
   useEffect(() => {
-    if (status !== "authenticated" || !channelId) return;
+    if (status !== "authenticated" || !channelId || !organizationId) return;
 
     return onSnapshot(
       query(
         collection(getFirebaseFirestore(), "messages"),
+        where("organizationId", "==", organizationId),
         where("channelId", "==", channelId),
         orderBy("createdAt", "desc"),
         limit(PAGE_SIZE),
@@ -121,9 +134,9 @@ export function useChannelMessages(channelId: string | undefined) {
         setSnapshot({ key: channelId, items: NO_MESSAGES, failed: true });
       },
     );
-  }, [status, channelId]);
+  }, [status, channelId, organizationId]);
 
-  if (status !== "authenticated" || !channelId) {
+  if (status !== "authenticated" || !channelId || !organizationId) {
     return { messages: NO_MESSAGES, loading: false, failed: false };
   }
   if (snapshot.key !== channelId) {
