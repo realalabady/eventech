@@ -49,6 +49,7 @@ export default async function HomePage({ params }: HomePageProps) {
       <main className="relative z-10 mx-auto grid w-full max-w-[90rem] flex-1 items-center gap-16 px-4 pt-12 pb-24 md:px-8 lg:grid-cols-[1fr_24rem] lg:gap-20 lg:pt-20">
         <div className="max-w-2xl">
           <BlurText
+            as="h1"
             text={t("title")}
             animateBy="words"
             delay={70}
@@ -78,9 +79,9 @@ export default async function HomePage({ params }: HomePageProps) {
         </div>
 
         <FadeIn delay={0.25} className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.14em] text-foreground/45 uppercase">
+          <h2 className="text-xs font-medium tracking-[0.14em] text-foreground/50 uppercase">
             {t("upcoming")}
-          </p>
+          </h2>
           {FEATURED_EVENTS.map(({ key, seed, attending, offset }, index) => (
             <div key={key} className={offset}>
               <EventPreviewCard

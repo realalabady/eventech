@@ -1,12 +1,19 @@
 "use client";
 
 import { motion, Transition, Easing, useReducedMotion } from "motion/react";
-import { useEffect, useRef, useState, useMemo } from "react";
+import { useEffect, useRef, useState, useMemo, type ElementType } from "react";
 
 type BlurTextProps = {
   text?: string;
   delay?: number;
   className?: string;
+  /**
+   * Element to render. Vendored ReactBits hardcoded `<p>`, which left the
+   * homepage hero — the largest text on the page — with no heading semantics
+   * and the document with no `h1` at all. Additive, like the reduced-motion
+   * guard below: re-generating this file drops it.
+   */
+  as?: "p" | "h1" | "h2" | "h3";
   animateBy?: "words" | "letters";
   direction?: "top" | "bottom";
   threshold?: number;
@@ -47,10 +54,12 @@ const BlurText: React.FC<BlurTextProps> = ({
   easing = (t: number) => t,
   onAnimationComplete,
   stepDuration = 0.35,
+  as = "p",
 }) => {
   const elements = animateBy === "words" ? text.split(" ") : text.split("");
   const [inView, setInView] = useState(false);
-  const ref = useRef<HTMLParagraphElement>(null);
+  const ref = useRef<HTMLElement>(null);
+  const Tag = as as ElementType;
   // Vendored ReactBits component, but canonical §9 requires reduced motion
   // everywhere and this one renders the homepage hero: a 10px blur plus a 50px
   // per-word translate is exactly the "large transition" that rule strips.
@@ -103,7 +112,7 @@ const BlurText: React.FC<BlurTextProps> = ({
   );
 
   return (
-    <p ref={ref} className={`blur-text ${className} flex flex-wrap`}>
+    <Tag ref={ref} className={`blur-text ${className} flex flex-wrap`}>
       {elements.map((segment, index) => {
         const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
 
@@ -139,7 +148,7 @@ const BlurText: React.FC<BlurTextProps> = ({
           </motion.span>
         );
       })}
-    </p>
+    </Tag>
   );
 };
 
