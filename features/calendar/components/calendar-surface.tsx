@@ -33,14 +33,24 @@ const PLUGINS = [
  * initial bundle (canonical §11's 250KB budget). Same reasoning as the door
  * scanner's deferred `qr-scanner` import.
  */
+/**
+ * Accessible names for the icon-only toolbar buttons. FullCalendar defaults
+ * these to English strings that no locale file overrides, so in Arabic the
+ * chevrons announce in the wrong language — they come from `messages/` instead.
+ * `$0` is FullCalendar's own ordinal placeholder, filled with the current unit.
+ */
+export type CalendarHints = { prev: string; next: string; view: string };
+
 export function CalendarSurface({
   items,
   rtl,
+  hints,
   onOpen,
   onCreateAt,
 }: {
   items: CalendarItem[];
   rtl: boolean;
+  hints: CalendarHints;
   onOpen: (item: CalendarItem) => void;
   onCreateAt: (startMillis: number, allDay: boolean) => void;
 }) {
@@ -79,6 +89,9 @@ export function CalendarSurface({
         // already translated. English is its default and needs no import.
         locale={rtl ? arLocale : undefined}
         direction={rtl ? "rtl" : "ltr"}
+        prevHint={hints.prev}
+        nextHint={hints.next}
+        viewHint={hints.view}
         // Saturday, in both locales. The Gulf working week runs Sunday–Thursday,
         // so a Monday-first grid puts the weekend in the middle of the row.
         firstDay={6}

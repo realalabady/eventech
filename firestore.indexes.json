@@ -44,6 +44,7 @@
       "collectionGroup": "activityLogs",
       "queryScope": "COLLECTION",
       "fields": [
+        { "fieldPath": "organizationId", "order": "ASCENDING" },
         { "fieldPath": "eventId", "order": "ASCENDING" },
         { "fieldPath": "createdAt", "order": "DESCENDING" }
       ]

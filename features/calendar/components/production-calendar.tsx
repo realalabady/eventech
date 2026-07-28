@@ -77,6 +77,11 @@ export function ProductionCalendar({
         <CalendarSurface
           items={items}
           rtl={locale === "ar"}
+          hints={{
+            prev: t("hints.prev"),
+            next: t("hints.next"),
+            view: t("hints.view"),
+          }}
           onOpen={onOpen}
           onCreateAt={onCreateAt}
         />

@@ -38,7 +38,7 @@ export function TicketDetail({ ticketId }: { ticketId: string }) {
 
   const when = formatPublicDate(
     ticket.eventStartDate?.toMillis() ?? null,
-    null,
+    ticket.eventTimezone,
     locale,
   );
   const spent = ticket.status !== "active";

@@ -8,14 +8,22 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 
+import { ACCOUNT_ROLES, type AccountRole } from "@/types/domain";
+
 import { ADMIN_USER_CAP } from "../hooks/use-admin-users";
-import { restoreUser, suspendUser } from "../services/admin-service";
+import {
+  assignUserRole,
+  restoreUser,
+  suspendUser,
+} from "../services/admin-service";
 import {
   canSuspend,
   compareUsers,
   isSuspended,
   type AdminUser,
 } from "../types";
+
+import { SuspendUserDialog } from "./suspend-user-dialog";
 
 /**
  * The platform user list (guide 43's User Management).
@@ -39,6 +47,10 @@ export function UserTable({
   const [filter, setFilter] = useState("");
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [suspending, setSuspending] = useState<AdminUser | null>(null);
+  // Bumped per open so the reason field remounts empty rather than carrying
+  // the previous account's text over (gotcha #9).
+  const [session, setSession] = useState(0);
 
   const visible = useMemo(() => {
     const needle = filter.trim().toLowerCase();
@@ -53,11 +65,34 @@ export function UserTable({
   }, [users, filter]);
 
   async function onToggle(user: AdminUser) {
+    if (!isSuspended(user)) {
+      setSuspending(user);
+      setSession((count) => count + 1);
+      return;
+    }
     setBusy(user.id);
     setError(null);
-    const result = isSuspended(user)
-      ? await restoreUser(user.id)
-      : await suspendUser(user.id, null);
+    const result = await restoreUser(user.id);
+    setBusy(null);
+    if (!result.ok) setError(result.errorKey);
+  }
+
+  async function onConfirmSuspend(reason: string | null) {
+    const user = suspending;
+    if (!user) return;
+    setBusy(user.id);
+    setError(null);
+    const result = await suspendUser(user.id, reason);
+    setBusy(null);
+    setSuspending(null);
+    if (!result.ok) setError(result.errorKey);
+  }
+
+  async function onRoleChange(user: AdminUser, role: AccountRole) {
+    if (role === user.role) return;
+    setBusy(user.id);
+    setError(null);
+    const result = await assignUserRole(user.id, role);
     setBusy(null);
     if (!result.ok) setError(result.errorKey);
   }
@@ -120,10 +155,37 @@ export function UserTable({
                 <p className="truncate text-xs text-muted-foreground">
                   {user.email}
                 </p>
+                {isSuspended(user) && user.suspendedReason ? (
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    {t("users.reasonShown", { reason: user.suspendedReason })}
+                  </p>
+                ) : null}
               </div>
 
-              <div className="flex items-center gap-3">
-                <Badge variant="outline">{t(`role.${user.role}`)}</Badge>
+              <div className="flex flex-wrap items-center gap-3">
+                {user.id === currentUserId ? (
+                  // Demoting yourself drops your own admin claim and locks you
+                  // out of the console you are standing in.
+                  <Badge variant="outline" title={t("users.roleSelf")}>
+                    {t(`role.${user.role}`)}
+                  </Badge>
+                ) : (
+                  <select
+                    value={user.role}
+                    aria-label={t("users.roleLabel")}
+                    disabled={busy === user.id}
+                    onChange={(event) =>
+                      onRoleChange(user, event.target.value as AccountRole)
+                    }
+                    className="h-9 rounded-md border border-input bg-transparent px-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                  >
+                    {ACCOUNT_ROLES.map((role) => (
+                      <option key={role} value={role}>
+                        {t(`role.${role}`)}
+                      </option>
+                    ))}
+                  </select>
+                )}
                 {isSuspended(user) ? (
                   <Badge variant="destructive">{t("users.suspended")}</Badge>
                 ) : null}
@@ -145,6 +207,16 @@ export function UserTable({
           ))}
         </ul>
       )}
+
+      <SuspendUserDialog
+        key={`${suspending?.id ?? "none"}-${session}`}
+        open={suspending !== null}
+        onOpenChange={(next) => {
+          if (!next) setSuspending(null);
+        }}
+        onConfirm={onConfirmSuspend}
+        busy={busy !== null}
+      />
     </div>
   );
 }

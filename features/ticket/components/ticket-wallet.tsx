@@ -106,7 +106,7 @@ function TicketRow({ ticket, locale }: { ticket: TicketDoc; locale: string }) {
   const t = useTranslations("ticket");
   const when = formatPublicDate(
     ticket.eventStartDate?.toMillis() ?? null,
-    null,
+    ticket.eventTimezone,
     locale,
   );
 

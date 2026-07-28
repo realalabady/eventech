@@ -98,8 +98,49 @@ describe("audit actions", () => {
 
   // A future phase writing an action this build has no wording for must degrade
   // to the generic sentence rather than leak a raw key into the UI.
-  it("does not recognise an action from a future phase", () => {
-    expect(isKnownAuditAction("verifyOrganizer")).toBe(false);
+  it("does not recognise an action this build never writes", () => {
+    expect(isKnownAuditAction("deleteEverything")).toBe(false);
+  });
+
+  // The list drifted once already: `verifyOrganizer` and friends shipped in 9b
+  // while this constant still held only the three Phase 9a actions, so every
+  // real row rendered "Recorded an action". This is the guard against a repeat.
+  it("recognises every action the Cloud Functions actually write", async () => {
+    const { readdir, readFile } = await import("node:fs/promises");
+    const { join } = await import("node:path");
+
+    async function sources(dir: string): Promise<string[]> {
+      const entries = await readdir(dir, { withFileTypes: true });
+      const found = await Promise.all(
+        entries.map((entry) => {
+          const path = join(dir, entry.name);
+          if (entry.isDirectory()) return sources(path);
+          return entry.name.endsWith(".ts")
+            ? Promise.resolve([path])
+            : Promise.resolve([]);
+        }),
+      );
+      return found.flat();
+    }
+
+    const written = new Set<string>();
+    for (const file of await sources("functions/src")) {
+      const source = await readFile(file, "utf8");
+      for (const [, action] of source.matchAll(
+        // `[^}]` already spans newlines, so this needs no dotAll flag.
+        /writeAuditLog\(\{[^}]*?action:\s*"([A-Za-z]+)"/g,
+      )) {
+        written.add(action);
+      }
+    }
+
+    expect(written.size).toBeGreaterThan(0);
+    for (const action of written) {
+      expect(
+        isKnownAuditAction(action),
+        `${action} is written by a Cloud Function but has no wording`,
+      ).toBe(true);
+    }
   });
 
   it("translates every known action in both locales", () => {

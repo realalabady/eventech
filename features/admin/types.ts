@@ -33,11 +33,28 @@ export type AuditEntry = {
   createdAt: number | null;
 };
 
-/** Actions with a translated sentence. Anything else renders generically. */
+/**
+ * Actions with a translated sentence. Anything else renders generically.
+ *
+ * This must stay in step with every `writeAuditLog` call in `functions/src` —
+ * an action missing here degrades to "Recorded an action", which makes the row
+ * useless. The 9b/9c entries below were the only ones ever actually fired, so
+ * while they were absent *every* real row rendered as the fallback.
+ */
 export const KNOWN_AUDIT_ACTIONS = [
+  // functions/src/auth/assign-user-role.ts
   "assignUserRole",
+  // functions/src/admin/manage-users.ts
   "suspendUser",
   "restoreUser",
+  // functions/src/admin/moderation.ts
+  "verifyOrganizer",
+  "suspendOrganization",
+  "updateEventStatus",
+  // functions/src/admin/platform.ts
+  "resolveReport",
+  "setFeatureFlag",
+  "updateSystemSettings",
 ] as const;
 
 export function isKnownAuditAction(

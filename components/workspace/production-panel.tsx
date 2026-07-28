@@ -28,11 +28,11 @@ export function ProductionPanel() {
 
       {eventId ? (
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,20rem)]">
-          <EventTimeline eventId={eventId} />
+          <EventTimeline eventId={eventId} organizationId={organization?.id} />
 
           <section className="space-y-3">
             <h2 className="text-lg font-medium tracking-tight">{t("title")}</h2>
-            <ActivityFeed eventId={eventId} />
+            <ActivityFeed eventId={eventId} organizationId={organization?.id} />
           </section>
         </div>
       ) : null}

@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
+import { PublicFooter } from "@/components/navigation/public-footer";
 import { PublicHeader } from "@/components/navigation/public-header";
 import { DiscoverFilters } from "@/features/discovery/components/discover-filters";
 import { DiscoveryEventCard } from "@/features/discovery/components/event-card";
@@ -76,6 +77,8 @@ export default async function DiscoverPage({ params }: PageProps) {
           <DiscoverFilters items={items} categoryLabels={categoryLabels} />
         )}
       </main>
+
+      <PublicFooter />
     </div>
   );
 }

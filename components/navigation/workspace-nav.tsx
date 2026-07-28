@@ -34,6 +34,12 @@ const ITEMS = [
  * Workspace sidebar. The active item is marked by a shared layout indicator
  * that slides between entries (canonical §9: motion communicates position).
  * More sections unlock as their phases land (guide 41).
+ *
+ * Below `lg` this is a horizontal strip, and ten items are far wider than a
+ * phone. It scrolls rather than wraps — wrapping would push the page content
+ * down by several rows — and bleeds to the container edge so the cut-off item
+ * reads as scrollable instead of clipped. Without the scroller the row forced
+ * ~690px of horizontal overflow onto every workspace page at 375px.
  */
 export function WorkspaceNav() {
   const t = useTranslations("organization.nav");
@@ -41,7 +47,7 @@ export function WorkspaceNav() {
   const reduce = useReducedMotion();
 
   return (
-    <nav className="flex gap-1 lg:flex-col">
+    <nav className="-mx-4 flex gap-1 overflow-x-auto px-4 pb-2 lg:mx-0 lg:flex-col lg:overflow-x-visible lg:px-0 lg:pb-0">
       {ITEMS.map(({ href, key, icon: Icon }) => {
         const active = pathname.startsWith(href);
         return (
@@ -49,7 +55,7 @@ export function WorkspaceNav() {
             key={key}
             href={href}
             aria-current={active ? "page" : undefined}
-            className="relative flex items-center gap-2.5 rounded-md px-3 py-2 text-sm transition-colors duration-150 hover:text-foreground data-[active=false]:text-muted-foreground"
+            className="relative flex shrink-0 items-center gap-2.5 rounded-md px-3 py-2 text-sm whitespace-nowrap transition-colors duration-150 hover:text-foreground data-[active=false]:text-muted-foreground"
             data-active={active}
           >
             {active ? (

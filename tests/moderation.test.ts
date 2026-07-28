@@ -75,6 +75,13 @@ describe("canRestore", () => {
   it("refuses an event that was never published", () => {
     expect(canRestore(event({ publishedAt: null }))).toBe(false);
   });
+
+  // How it actually arrives: `useAdminEvents` casts raw Firestore data, and a
+  // draft has no `publishedAt` field at all. A strict `!== null` check passed
+  // this case and offered "Restore" on a never-published draft in production.
+  it("refuses an event whose publishedAt field is absent", () => {
+    expect(canRestore(event({ publishedAt: undefined }))).toBe(false);
+  });
 });
 
 describe("isFlagEnabled", () => {

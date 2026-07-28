@@ -60,6 +60,11 @@ export async function issueTicketForBooking(
     ownerName: booking.attendeeName ?? null,
     eventTitle: event.title ?? "",
     eventStartDate: event.startDate ?? null,
+    // Denormalised so the wallet can render the door time in the event's own
+    // zone. Without it the ticket fell back to UTC while the public event page
+    // used the event doc's timezone — a Riyadh attendee was told to arrive at
+    // 18:00 for a 21:00 show.
+    eventTimezone: event.timezone ?? null,
     ticketTypeId: booking.ticketTypeId,
     ticketTypeName: booking.ticketTypeName,
     quantity: booking.quantity,

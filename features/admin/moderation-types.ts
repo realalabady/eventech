@@ -31,7 +31,12 @@ export type AdminEvent = {
   status: EventStatus;
   organizationId: string;
   startDate: Timestamp | null;
-  publishedAt: Timestamp | null;
+  /**
+   * Optional, not nullable. `useAdminEvents` casts raw Firestore data straight
+   * into this shape, and an event that was never published has no `publishedAt`
+   * field at all — so this really does arrive as `undefined`, never `null`.
+   */
+  publishedAt?: Timestamp | null;
 };
 
 export const REPORT_CATEGORIES = [
@@ -67,9 +72,16 @@ export function isFlagEnabled(
   return flags?.[key] === true;
 }
 
-/** Only an event that was published once can be restored to published. */
+/**
+ * Only an event that was published once can be restored to published.
+ *
+ * Loose `!=` on purpose: a never-published draft has `publishedAt` **absent**
+ * rather than `null`, and a strict check let `undefined` through — offering
+ * "Restore" on a draft, which is exactly the takedown-pushes-a-draft-live case
+ * `event-moderation.tsx` warns about.
+ */
 export function canRestore(event: AdminEvent): boolean {
-  return event.publishedAt !== null;
+  return event.publishedAt != null;
 }
 
 /** Open reports first, then newest — the queue should open on live work. */

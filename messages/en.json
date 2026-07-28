@@ -232,6 +232,8 @@
       "archived": "Archived"
     },
     "wizard": {
+      "pageTitle": "Event setup",
+      "pageSubtitle": "Nine steps. Everything saves as you go.",
       "stepLabel": "Step {current} of {total}",
       "next": "Continue",
       "back": "Back",
@@ -691,6 +693,11 @@
       "task": "Task due",
       "event": "Event"
     },
+    "hints": {
+      "prev": "Previous $0",
+      "next": "Next $0",
+      "view": "$0 view"
+    },
     "kind": {
       "meeting": "Meeting",
       "deadline": "Deadline",
@@ -806,7 +813,17 @@
       "suspended": "Suspended",
       "suspend": "Suspend",
       "restore": "Restore",
-      "capped": "Showing the first {count} accounts. Narrow the search to find others."
+      "capped": "Showing the first {count} accounts. Narrow the search to find others.",
+      "roleLabel": "Account role",
+      "roleSelf": "You cannot change your own role.",
+      "suspendTitle": "Suspend this account",
+      "suspendHint": "Sign-in stops immediately. Any session already open ends within the hour.",
+      "reasonLabel": "Reason",
+      "reasonPlaceholder": "Why this account is being suspended",
+      "reasonHint": "Optional. Stored on the account and in the audit log.",
+      "reasonShown": "Reason: {reason}",
+      "confirm": "Suspend account",
+      "cancel": "Cancel"
     },
     "audit": {
       "title": "Audit log",
@@ -905,6 +922,113 @@
       "flag": {
         "publicArtistPages": "Public artist pages",
         "discoverySearch": "Search on discovery"
+      }
+    }
+  },
+  "marketing": {
+    "footer": {
+      "tagline": "The event operating system for people who put on live shows.",
+      "product": "Product",
+      "browse": "Browse events",
+      "signIn": "Sign in",
+      "company": "Company",
+      "about": "About",
+      "contact": "Contact",
+      "legal": "Legal",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "copyright": "{app} · {year} · All rights reserved."
+    },
+    "about": {
+      "title": "About EvenTech",
+      "intro": "EvenTech is an event operating system. It is built for the people who plan, staff, ticket and run live shows — starting with the music industry.",
+      "sections": {
+        "what": {
+          "heading": "What it is",
+          "body": "Not a ticketing widget. EvenTech carries an event from first idea to the last person through the door: a nine-step setup, a production timeline, a task board, a shared calendar, team messaging, bookings, tickets and door check-in — in one workspace instead of five tools and a spreadsheet."
+        },
+        "who": {
+          "heading": "Who it is for",
+          "body": "Organizers and production teams who are tired of running a show out of group chats. Attendees get the other half: a clean event page, a booking that is actually tracked, and a ticket that lives on their phone."
+        },
+        "how": {
+          "heading": "How it works",
+          "body": "Organizers publish an event and open bookings. Attendees request a place and upload payment where the event is paid. Once an organizer approves, a signed QR ticket is issued and emailed. At the door, the scanner marks it used — once, and only once."
+        }
+      }
+    },
+    "contact": {
+      "title": "Contact",
+      "intro": "Real people read this. Tell us which event or account you are asking about and we can help faster.",
+      "sections": {
+        "support": {
+          "heading": "Support",
+          "body": "Something broken, a ticket that did not arrive, or a booking that looks wrong — write to support@evntech.com and include the event name."
+        },
+        "organizers": {
+          "heading": "Organizers",
+          "body": "Questions about verification, payouts or running a larger production go to the same address. Say that you are an organizer and name your organization."
+        },
+        "feedback": {
+          "heading": "Feedback",
+          "body": "Missing something you need to run your show? We would rather hear it early than guess. The same address reaches us."
+        }
+      }
+    },
+    "privacy": {
+      "title": "Privacy",
+      "intro": "What EvenTech collects, why, and what you can do about it. Plain language, no defined-terms maze.",
+      "sections": {
+        "collect": {
+          "heading": "What we collect",
+          "body": "Your name, email and account role. For organizers: your organization profile, events, venues, team members and payout details. For attendees: your bookings, any payment receipt you upload, and the tickets issued to you. We also record which events you have viewed so organizers can see how their event is performing."
+        },
+        "use": {
+          "heading": "What we use it for",
+          "body": "Running your account, showing organizers their own bookings and attendance, issuing and validating tickets, and sending the emails an event needs — a ticket, a confirmation, a change of plan. We do not sell your data and we do not use it for advertising."
+        },
+        "processors": {
+          "heading": "Who processes it",
+          "body": "Google Firebase hosts authentication, the database and uploaded files. Resend delivers email. Both process data on our behalf under their own terms; we do not hand your data to anyone else."
+        },
+        "retention": {
+          "heading": "How long we keep it",
+          "body": "Account and event records stay while your account is open, because an organizer needs the history of what they ran and an attendee needs proof of what they bought. Ask us to close your account and we remove what we are not required to keep."
+        },
+        "rights": {
+          "heading": "Your choices",
+          "body": "You can see and edit your profile in your account settings, and ask us for a copy of your data or its deletion at support@evntech.com. If you are in a place with statutory data rights, those rights apply and we will honour them."
+        }
+      }
+    },
+    "terms": {
+      "title": "Terms",
+      "intro": "The rules for using EvenTech. Using the service means you accept them.",
+      "sections": {
+        "accounts": {
+          "heading": "Your account",
+          "body": "One account, one person, accurate details. You are responsible for what happens under your sign-in, so keep your password to yourself. We can suspend an account that is used to defraud, harass or impersonate."
+        },
+        "organizers": {
+          "heading": "Running events",
+          "body": "If you publish an event you are the organizer of record. The event must be one you have the right to run, its details must be accurate, and you are responsible for delivering what you sold — including honouring valid tickets at the door."
+        },
+        "tickets": {
+          "heading": "Bookings and tickets",
+          "body": "A booking is a request until the organizer approves it. An approved booking issues a QR ticket tied to one person. Each ticket admits its stated number of people once; sharing or reselling a ticket can invalidate it, and a used ticket cannot be reused."
+        },
+        "payments": {
+          "heading": "Payments and refunds",
+          "body": "Payment for paid events is arranged between you and the organizer — EvenTech records the booking and the receipt you upload, it does not hold your money. Refunds are the organizer's to give, under whatever terms they set for their event."
+        },
+        "conduct": {
+          "heading": "Acceptable use",
+          "body": "Do not attempt to forge tickets, break into other people's accounts, scrape the service, or upload anything unlawful. We remove events and suspend accounts that do."
+        },
+        "changes": {
+          "heading": "Changes and ending",
+          "body": "The product changes as it is built, and these terms change with it — material changes will be announced in the product. You can stop using EvenTech at any time; we can end access for a serious or repeated breach of these terms."
+        }
       }
     }
   }

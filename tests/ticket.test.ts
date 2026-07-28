@@ -1,6 +1,7 @@
 import type { Timestamp } from "firebase/firestore";
 import { describe, expect, it } from "vitest";
 
+import { formatPublicDate } from "@/features/discovery/lib/format";
 import { walletBucket, type TicketDoc } from "@/features/ticket/types";
 import { TICKET_STATUSES } from "@/types/domain";
 
@@ -109,5 +110,54 @@ describe("i18n coverage", () => {
     expect(Object.keys(ar.scanner.errors).sort()).toEqual(
       Object.keys(en.scanner.errors).sort(),
     );
+  });
+});
+
+/**
+ * The wallet and the public event page must agree on the door time. They did
+ * not: the event page passed `event.timezone`, the ticket passed `null`, and
+ * the formatter's UTC fallback then told a Riyadh attendee to arrive at 18:00
+ * for a 21:00 show.
+ */
+describe("ticket door time", () => {
+  // 21:00 in Riyadh (UTC+3) on 27 July 2026.
+  const DOORS = Date.UTC(2026, 6, 27, 18, 0, 0);
+
+  it("renders the door time in the event's own zone", () => {
+    const issued = ticket({
+      eventStartDate: stamp(DOORS),
+      eventTimezone: "Asia/Riyadh",
+    });
+
+    expect(
+      formatPublicDate(
+        issued.eventStartDate?.toMillis() ?? null,
+        issued.eventTimezone,
+      ),
+    ).toContain("21:00");
+  });
+
+  it("matches what the public event page shows for the same event", () => {
+    const issued = ticket({
+      eventStartDate: stamp(DOORS),
+      eventTimezone: "Asia/Riyadh",
+    });
+
+    expect(
+      formatPublicDate(DOORS, issued.eventTimezone),
+      // The event page formats straight off the event doc's timezone.
+    ).toBe(formatPublicDate(DOORS, "Asia/Riyadh"));
+  });
+
+  it("falls back to UTC on a ticket issued before the field existed", () => {
+    const legacy = ticket({ eventStartDate: stamp(DOORS) });
+
+    expect(legacy.eventTimezone).toBeUndefined();
+    expect(
+      formatPublicDate(
+        legacy.eventStartDate?.toMillis() ?? null,
+        legacy.eventTimezone,
+      ),
+    ).toContain("18:00");
   });
 });

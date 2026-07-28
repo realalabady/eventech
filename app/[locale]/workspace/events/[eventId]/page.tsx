@@ -14,12 +14,18 @@ export default async function EventWizardPage({ params }: PageProps) {
 
   return (
     <div className="space-y-8">
-      <Link
-        href="/workspace/events"
-        className="text-sm text-muted-foreground underline-offset-4 transition-colors duration-150 hover:text-foreground hover:underline"
-      >
-        {t("list.title")}
-      </Link>
+      <header className="space-y-2">
+        <Link
+          href="/workspace/events"
+          className="text-sm text-muted-foreground underline-offset-4 transition-colors duration-150 hover:text-foreground hover:underline"
+        >
+          {t("list.title")}
+        </Link>
+        <h1 className="text-3xl font-semibold tracking-tight">
+          {t("wizard.pageTitle")}
+        </h1>
+        <p className="text-muted-foreground">{t("wizard.pageSubtitle")}</p>
+      </header>
       <EventWizard eventId={eventId} />
     </div>
   );

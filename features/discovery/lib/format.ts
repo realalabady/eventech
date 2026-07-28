@@ -12,7 +12,9 @@ import { formatInTimeZone } from "date-fns-tz";
  */
 export function formatPublicDate(
   millis: number | null,
-  timezone: string | null,
+  // Undefined as well as null: a ticket issued before `eventTimezone` existed
+  // has no such field, and both cases fall back to UTC below.
+  timezone: string | null | undefined,
   locale = "en",
   pattern = "EEE d MMM yyyy, HH:mm",
 ): string | null {

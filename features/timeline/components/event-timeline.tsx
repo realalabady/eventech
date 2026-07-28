@@ -18,9 +18,15 @@ import { completionPercent, nextStage } from "../types";
  * guide 41 wants the organizer to see the shape of the job at a glance. The
  * rail animates its scale, never its width (§9).
  */
-export function EventTimeline({ eventId }: { eventId: string }) {
+export function EventTimeline({
+  eventId,
+  organizationId,
+}: {
+  eventId: string;
+  organizationId: string | undefined;
+}) {
   const t = useTranslations("timeline");
-  const { stages, loading, failed } = useEventTimeline(eventId);
+  const { stages, loading, failed } = useEventTimeline(eventId, organizationId);
   const reduce = useReducedMotion();
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);

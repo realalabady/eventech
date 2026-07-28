@@ -16,8 +16,17 @@ const EMPTY: TimelineDoc[] = [];
  * Sorting happens in memory rather than with `orderBy`, so no composite index
  * is needed for a six-document read — and a missing index can therefore never
  * make a populated timeline render as an empty one.
+ *
+ * The `organizationId` filter is not redundant with `eventId`. `firestore.rules`
+ * grants reads through `isActiveMember(resource.data.organizationId)`, and rules
+ * are not filters (gotcha #10) — a query that does not constrain the same field
+ * the rule tests is rejected wholesale, which is what made this listener fail
+ * with `permission-denied` and render the timeline as permanently broken.
  */
-export function useEventTimeline(eventId: string | undefined) {
+export function useEventTimeline(
+  eventId: string | undefined,
+  organizationId: string | undefined,
+) {
   const { status } = useAuth();
   const [snapshot, setSnapshot] = useState<{
     key: string | null;
@@ -26,11 +35,12 @@ export function useEventTimeline(eventId: string | undefined) {
   }>({ key: null, items: EMPTY });
 
   useEffect(() => {
-    if (status !== "authenticated" || !eventId) return;
+    if (status !== "authenticated" || !eventId || !organizationId) return;
 
     return onSnapshot(
       query(
         collection(getFirebaseFirestore(), "timeline"),
+        where("organizationId", "==", organizationId),
         where("eventId", "==", eventId),
       ),
       (result) =>
@@ -48,9 +58,9 @@ export function useEventTimeline(eventId: string | undefined) {
         setSnapshot({ key: eventId, items: EMPTY, failed: true });
       },
     );
-  }, [status, eventId]);
+  }, [status, eventId, organizationId]);
 
-  if (status !== "authenticated" || !eventId) {
+  if (status !== "authenticated" || !eventId || !organizationId) {
     return { stages: EMPTY, loading: false, failed: false };
   }
   if (snapshot.key !== eventId) {

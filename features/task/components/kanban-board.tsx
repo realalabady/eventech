@@ -152,7 +152,7 @@ function Column({
       }`}
     >
       <header className="flex items-center justify-between px-1">
-        <h3 className="text-sm font-medium">{t(`status.${status}`)}</h3>
+        <h2 className="text-sm font-medium">{t(`status.${status}`)}</h2>
         <span className="text-xs text-muted-foreground">{tasks.length}</span>
       </header>
 

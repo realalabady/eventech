@@ -15,10 +15,19 @@ import { isKnownAction } from "../types";
  * fall back to a generic line rather than rendering a raw key — an unknown
  * action degrades quietly instead of leaking internals into the UI.
  */
-export function ActivityFeed({ eventId }: { eventId: string }) {
+export function ActivityFeed({
+  eventId,
+  organizationId,
+}: {
+  eventId: string;
+  organizationId: string | undefined;
+}) {
   const t = useTranslations("activity");
   const locale = useLocale();
-  const { activity, loading, failed } = useEventActivity(eventId);
+  const { activity, loading, failed } = useEventActivity(
+    eventId,
+    organizationId,
+  );
 
   if (loading) {
     return (

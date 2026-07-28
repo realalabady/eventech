@@ -11,6 +11,17 @@ export type TicketDoc = {
   ownerName: string | null;
   eventTitle: string;
   eventStartDate: Timestamp | null;
+  /**
+   * The event's IANA zone, copied at issuance. A ticket must show the door time
+   * where the door is, not where the phone is — and not UTC, which is what it
+   * fell back to before this field existed.
+   *
+   * Optional because `use-tickets` casts raw Firestore data: a ticket issued
+   * before this field existed has no such key at all until
+   * `functions/scripts/backfill-ticket-timezone.mjs` runs. Absent renders UTC,
+   * the same as the old behaviour.
+   */
+  eventTimezone?: string | null;
   ticketTypeName: string;
   quantity: number;
   /** Signed token encoded in the QR. Never rendered as text to the attendee. */

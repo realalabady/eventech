@@ -4,7 +4,8 @@ import { EventPreviewCard } from "@/components/marketing/event-preview-card";
 import { HeroBackdrop } from "@/components/marketing/hero-backdrop";
 import BlurText from "@/components/motion/blur-text";
 import { FadeIn } from "@/components/motion/fade-in";
-import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { PublicFooter } from "@/components/navigation/public-footer";
+import { PublicHeader } from "@/components/navigation/public-header";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 
@@ -27,24 +28,18 @@ export default async function HomePage({ params }: HomePageProps) {
   setRequestLocale(locale);
 
   const t = await getTranslations("home");
-  const tNav = await getTranslations("nav");
-  const tCommon = await getTranslations("common");
 
   return (
     <div className="relative flex min-h-[100dvh] flex-col">
       <HeroBackdrop />
 
-      <header className="relative z-10 mx-auto flex h-16 w-full max-w-[90rem] items-center justify-between px-4 md:px-8">
-        <span className="text-base font-semibold tracking-tight">
-          {tCommon("appName")}
-        </span>
-        <div className="flex items-center gap-1">
-          <ThemeToggle />
-          <Button variant="ghost" size="sm">
-            {tNav("signIn")}
-          </Button>
-        </div>
-      </header>
+      {/*
+        The shared header, not a copy of it. The inline duplicate this replaced
+        had an unwired "Sign in" button and a plain <span> for the app name, so
+        the only working link on the whole page went to the design showcase —
+        a visitor could not reach the product from the homepage at all.
+      */}
+      <PublicHeader />
 
       <main className="relative z-10 mx-auto grid w-full max-w-[90rem] flex-1 items-center gap-16 px-4 pt-12 pb-24 md:px-8 lg:grid-cols-[1fr_24rem] lg:gap-20 lg:pt-20">
         <div className="max-w-2xl">
@@ -65,7 +60,13 @@ export default async function HomePage({ params }: HomePageProps) {
 
           <FadeIn delay={0.5}>
             <div className="mt-9 flex flex-wrap items-center gap-3">
-              <Button size="lg">{t("cta")}</Button>
+              <Button
+                size="lg"
+                nativeButton={false}
+                render={<Link href="/register" />}
+              >
+                {t("cta")}
+              </Button>
               <Button
                 size="lg"
                 variant="ghost"
@@ -96,6 +97,10 @@ export default async function HomePage({ params }: HomePageProps) {
           ))}
         </FadeIn>
       </main>
+
+      <div className="relative z-10">
+        <PublicFooter />
+      </div>
     </div>
   );
 }

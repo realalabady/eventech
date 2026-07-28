@@ -55,7 +55,7 @@ export function BrandingStep({ event, save, onDone }: StepProps) {
       <AuthError message={error ? t(`errors.${error}`) : undefined} />
 
       <div className="grid gap-2">
-        <Label>{t("branding.coverLabel")}</Label>
+        <Label htmlFor="event-cover">{t("branding.coverLabel")}</Label>
         <div className="relative aspect-[16/9] overflow-hidden rounded-md border border-border bg-surface">
           {cover ? (
             <Image
@@ -70,6 +70,7 @@ export function BrandingStep({ event, save, onDone }: StepProps) {
         </div>
         <input
           ref={inputRef}
+          id="event-cover"
           type="file"
           accept="image/jpeg,image/png,image/webp"
           className="hidden"
