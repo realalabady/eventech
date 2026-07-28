@@ -28,7 +28,7 @@ export function TeamManager() {
   const t = useTranslations("organization");
   const { claims, user } = useAuth();
   const { organization } = useOrganization();
-  const { members, loading } = useMembers(claims?.organizationId);
+  const { members, loading, failed } = useMembers(claims?.organizationId);
   const [error, setError] = useState<string | undefined>();
   const [invited, setInvited] = useState(false);
 
@@ -137,6 +137,10 @@ export function TeamManager() {
             <Skeleton className="h-16 w-full" />
             <Skeleton className="h-16 w-full" />
           </div>
+        ) : failed ? (
+          <p className="rounded-md border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+            {t("team.failed")}
+          </p>
         ) : members.length === 0 ? (
           <p className="text-muted-foreground">{t("team.empty")}</p>
         ) : (

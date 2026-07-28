@@ -177,7 +177,8 @@
       "membersHeading": "Members",
       "pending": "Pending",
       "remove": "Remove",
-      "empty": "No one else yet."
+      "empty": "No one else yet.",
+      "failed": "The team list could not be loaded. Try again in a moment."
     },
     "roles": {
       "owner": "Owner",

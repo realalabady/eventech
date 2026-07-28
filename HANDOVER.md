@@ -81,6 +81,40 @@ generic "Recorded an action" sentence.
 do not exist yet — no rules, no data. Feature flags read on the client, so they
 need a public-read rule; the other two are admin-only.
 
+### Phase 10 was started before Phase 9 finished — on request
+
+Canonical §2 and `AGENTS.md` both say never skip a phase, and Phase 9 is one
+slice of three. Phase 10 was begun anyway at the owner's explicit instruction.
+**9b and 9c are still owed** and nothing in 10a depends on them, so they can be
+picked up in either order — but the "production-ready before the next phase"
+rule is currently broken and should be closed deliberately, not forgotten.
+
+#### 10a — done
+
+- `blur-text.tsx` had no `prefers-reduced-motion` guard while rendering the
+  **homepage hero**: a 10px blur and a 50px per-word translate, exactly the
+  large transition canonical §9 strips. It is vendored ReactBits, so the guard
+  is additive — re-generating the file will drop it again.
+- `use-members.ts` and `use-organization.ts` **swallowed listener errors
+  entirely** — no log, no flag. A failed roster rendered as "no team members",
+  indistinguishable from an empty team (gotcha #4, in the two oldest hooks that
+  predate the rule). Both now log; `useMembers` exposes `failed` and the team
+  page renders a distinct error.
+- Audited and found clean: no hardcoded visible string props anywhere
+  (`aria-label`/`placeholder`/`alt`/`title` — the known `jsx-no-literals` gap),
+  icon-only buttons all labelled, and every other motion component already
+  guarded. The Aurora hero backdrop correctly collapses to a static gradient.
+
+#### 10b — still owed
+
+Performance and accessibility. Not yet done: keyboard-only traversal of the
+wizard and the dialogs, focus-visible audit, heading order, colour contrast at
+AA, and the §11 perf budget re-measured (JS < 250KB initial, LCP < 2.5s,
+Lighthouse 95+). Note `hero-backdrop.tsx` passes literal hex values to the
+WebGL Aurora, which is a token violation the design rules otherwise forbid —
+WebGL cannot read CSS variables directly, so it needs a deliberate decision
+rather than a silent exception.
+
 ### There is no admin account, by design
 
 `assignUserRole` requires an existing admin, so the first one cannot be made

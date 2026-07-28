@@ -11,6 +11,7 @@ import type { OrganizationMember } from "../types";
 type Snapshot<TKey> = {
   key: TKey | null;
   items: OrganizationMember[];
+  failed?: boolean;
 };
 
 const EMPTY: OrganizationMember[] = [];
@@ -46,17 +47,26 @@ export function useMembers(organizationId: string | undefined) {
       membersQuery,
       (result) =>
         setSnapshot({ key: organizationId, items: toMembers(result.docs) }),
-      () => setSnapshot({ key: organizationId, items: EMPTY }),
+      (error) => {
+        // Never swallow this: a failed roster renders as "no team members",
+        // which reads as an empty team rather than a broken query (gotcha #4).
+        console.error("members listener failed", error);
+        setSnapshot({ key: organizationId, items: EMPTY, failed: true });
+      },
     );
   }, [status, organizationId]);
 
   if (status !== "authenticated" || !organizationId) {
-    return { members: EMPTY, loading: status === "loading" };
+    return { members: EMPTY, loading: status === "loading", failed: false };
   }
   if (snapshot.key !== organizationId) {
-    return { members: EMPTY, loading: true };
+    return { members: EMPTY, loading: true, failed: false };
   }
-  return { members: snapshot.items, loading: false };
+  return {
+    members: snapshot.items,
+    loading: false,
+    failed: snapshot.failed ?? false,
+  };
 }
 
 /**

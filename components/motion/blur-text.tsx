@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, Transition, Easing } from "motion/react";
+import { motion, Transition, Easing, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState, useMemo } from "react";
 
 type BlurTextProps = {
@@ -51,6 +51,10 @@ const BlurText: React.FC<BlurTextProps> = ({
   const elements = animateBy === "words" ? text.split(" ") : text.split("");
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLParagraphElement>(null);
+  // Vendored ReactBits component, but canonical §9 requires reduced motion
+  // everywhere and this one renders the homepage hero: a 10px blur plus a 50px
+  // per-word translate is exactly the "large transition" that rule strips.
+  const reduce = useReducedMotion();
 
   useEffect(() => {
     if (!ref.current) return;
@@ -89,6 +93,8 @@ const BlurText: React.FC<BlurTextProps> = ({
 
   const fromSnapshot = animationFrom ?? defaultFrom;
   const toSnapshots = animationTo ?? defaultTo;
+  /** Where the animation ends up — the only state reduced motion should see. */
+  const restingSnapshot = toSnapshots[toSnapshots.length - 1] ?? {};
 
   const stepCount = toSnapshots.length + 1;
   const totalDuration = stepDuration * (stepCount - 1);
@@ -111,9 +117,15 @@ const BlurText: React.FC<BlurTextProps> = ({
         return (
           <motion.span
             key={index}
-            initial={fromSnapshot}
-            animate={inView ? animateKeyframes : fromSnapshot}
-            transition={spanTransition}
+            initial={reduce ? restingSnapshot : fromSnapshot}
+            animate={
+              reduce
+                ? restingSnapshot
+                : inView
+                  ? animateKeyframes
+                  : fromSnapshot
+            }
+            transition={reduce ? { duration: 0 } : spanTransition}
             onAnimationComplete={
               index === elements.length - 1 ? onAnimationComplete : undefined
             }

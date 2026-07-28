@@ -48,7 +48,13 @@ export function useOrganization(): State {
             : null,
         });
       },
-      () => setSnapshot({ organizationId, organization: null }),
+      (error) => {
+        // Logged rather than swallowed: a failed read is indistinguishable from
+        // "this user has no organization", and the workspace disables half its
+        // controls on that basis (gotcha #4).
+        console.error("organization listener failed", error);
+        setSnapshot({ organizationId, organization: null });
+      },
     );
   }, [status, organizationId]);
 
