@@ -62,9 +62,9 @@ export function assignUserRole(userId: string, role: AccountRole) {
   });
 }
 
-export function listAuditLogs(before: number | null = null, limit = 50) {
+export function listAuditLogs(beforeId: string | null = null, limit = 50) {
   return call<
-    { before: number | null; limit: number },
+    { beforeId: string | null; limit: number },
     { entries: AuditEntry[] }
-  >("listAuditLogs", { before, limit });
+  >("listAuditLogs", { beforeId, limit });
 }

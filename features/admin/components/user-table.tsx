@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 
+import { ADMIN_USER_CAP } from "../hooks/use-admin-users";
 import { restoreUser, suspendUser } from "../services/admin-service";
 import {
   canSuspend,
@@ -92,6 +93,12 @@ export function UserTable({
       {error ? (
         <p className="rounded-md border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
           {t(`errors.${error}`)}
+        </p>
+      ) : null}
+
+      {users.length >= ADMIN_USER_CAP ? (
+        <p className="rounded-md border border-warning/30 bg-warning/10 px-4 py-3 text-sm text-warning">
+          {t("users.capped", { count: ADMIN_USER_CAP })}
         </p>
       ) : null}
 

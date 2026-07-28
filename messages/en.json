@@ -800,7 +800,8 @@
       "failed": "The user list could not be loaded. Try again in a moment.",
       "suspended": "Suspended",
       "suspend": "Suspend",
-      "restore": "Restore"
+      "restore": "Restore",
+      "capped": "Showing the first {count} accounts. Narrow the search to find others."
     },
     "audit": {
       "title": "Audit log",

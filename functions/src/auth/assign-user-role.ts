@@ -33,7 +33,15 @@ export const assignUserRole = onCall<Payload, Promise<CallableResponse>>(
       });
     }
 
+    // `setCustomUserClaims` REPLACES the whole claims object, so the existing
+    // ones have to be carried forward. Without this, promoting an organizer
+    // drops their `organizationId` claim: `RequireOrganizer` then bounces them
+    // to /organizer/new, where `createOrganization` refuses them with
+    // ALREADY_EXISTS because they still own one — locked out of their own
+    // workspace with no way back through the product.
+    const existing = (await getAuth().getUser(userId)).customClaims ?? {};
     await getAuth().setCustomUserClaims(userId, {
+      ...existing,
       role,
       ...(organizationId ? { organizationId } : {}),
     });

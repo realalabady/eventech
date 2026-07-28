@@ -49,7 +49,14 @@ export const suspendUser = onCall<
 
   // Auth first: if this fails the user must stay usable rather than end up
   // flagged suspended in the UI while still able to sign in and act.
+  //
+  // `disabled` alone only blocks *new* sign-ins. An already-signed-in user
+  // keeps a valid ID token until it expires, so revoking the refresh token is
+  // what actually ends the session. Their current token still passes until it
+  // expires (up to an hour) — callables and rules do not check revocation —
+  // so suspension is "no new access now, all access gone within the hour".
   await getAuth().updateUser(userId, { disabled: true });
+  await getAuth().revokeRefreshTokens(userId);
   await userRef.update({
     accountStatus: "suspended",
     suspendedReason: cleanReason,

@@ -57,7 +57,11 @@ export function AuditLog() {
   }, []);
 
   async function onMore() {
-    const oldest = entries[entries.length - 1]?.createdAt ?? null;
+    // The document id, not the timestamp: a null `createdAt` would page from
+    // the top again and duplicate every row already on screen.
+    const oldest = entries[entries.length - 1]?.id ?? null;
+    if (!oldest) return;
+
     setBusy(true);
     const result = await listAuditLogs(oldest, PAGE);
     setBusy(false);

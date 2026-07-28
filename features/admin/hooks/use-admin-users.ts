@@ -1,6 +1,6 @@
 "use client";
 
-import { collection, onSnapshot, query } from "firebase/firestore";
+import { collection, limit, onSnapshot, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 import { useAuth } from "@/features/auth/hooks/use-auth";
@@ -9,6 +9,14 @@ import { getFirebaseFirestore } from "@/firebase/client";
 import type { AdminUser } from "../types";
 
 const EMPTY: AdminUser[] = [];
+
+/**
+ * A realtime listener over an unbounded collection is a cost and memory problem
+ * that only grows — the same trap the messaging thread is capped against. The
+ * console reports when it is holding the cap rather than quietly implying these
+ * are all the accounts there are.
+ */
+export const ADMIN_USER_CAP = 500;
 
 /**
  * Every user on the platform, for the admin console.
@@ -34,7 +42,7 @@ export function useAdminUsers() {
     if (status !== "authenticated" || !isAdmin) return;
 
     return onSnapshot(
-      query(collection(getFirebaseFirestore(), "users")),
+      query(collection(getFirebaseFirestore(), "users"), limit(ADMIN_USER_CAP)),
       (result) =>
         setSnapshot({
           loaded: true,

@@ -27,11 +27,15 @@ export type AuditEntry = {
  * instead — the rule cannot be relaxed for admins without also making the trail
  * readable to anyone who forges a claim locally.
  *
- * Paged by `before` (an epoch-millis cursor) rather than an offset, so a busy
- * trail cannot shift rows between pages.
+ * Paged by cursor rather than offset, so a busy trail cannot shift rows between
+ * pages. The cursor is the last entry's **document id**, not its timestamp:
+ * `createdAt` crosses the wire as epoch millis, and Firestore stores nanosecond
+ * precision, so a millisecond cursor rounds down and silently skips every entry
+ * written in the sub-millisecond gap. Dropping rows is the one thing an audit
+ * log must not do, so this costs one extra read to resolve the cursor document.
  */
 export const listAuditLogs = onCall<
-  { limit?: number; before?: number | null },
+  { limit?: number; beforeId?: string | null },
   Promise<CallableResponse<{ entries: AuditEntry[] }>>
 >(async (request) => {
   requireAdmin(request);
@@ -41,14 +45,17 @@ export const listAuditLogs = onCall<
     ? Math.min(Math.max(1, requested), MAX_PAGE_SIZE)
     : PAGE_SIZE;
 
-  let query = getFirestore()
-    .collection("auditLogs")
-    .orderBy("createdAt", "desc")
-    .limit(size);
+  const collection = getFirestore().collection("auditLogs");
+  let query = collection.orderBy("createdAt", "desc").limit(size);
 
-  const before = request.data?.before;
-  if (before !== null && before !== undefined && Number.isFinite(before)) {
-    query = query.startAfter(new Date(Number(before)));
+  const beforeId = request.data?.beforeId;
+  if (beforeId) {
+    const cursor = await collection.doc(beforeId).get();
+    // A cursor document that has since been removed would otherwise restart the
+    // trail from the top and duplicate everything already on screen.
+    if (cursor.exists) {
+      query = query.startAfter(cursor);
+    }
   }
 
   const snapshot = await query.get();
