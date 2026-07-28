@@ -93,7 +93,7 @@ export function EventTimeline({ eventId }: { eventId: string }) {
               disabled={busy === stage.id}
               onClick={() => onToggle(stage.id, !stage.completed)}
               aria-pressed={stage.completed}
-              className="flex w-full items-center gap-3 rounded-xl border border-transparent px-3 py-3 text-start transition-colors duration-150 hover:border-border hover:bg-card disabled:opacity-60"
+              className="flex w-full items-center gap-3 rounded-xl border border-transparent px-3 py-3 text-start transition-colors duration-150 outline-none hover:border-border hover:bg-card focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-60"
             >
               <span
                 className={`flex size-6 shrink-0 items-center justify-center rounded-full border transition-colors duration-150 ${

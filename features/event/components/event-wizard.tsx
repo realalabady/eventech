@@ -155,7 +155,7 @@ export function EventWizard({ eventId }: { eventId: string }) {
         <button
           type="button"
           onClick={() => setIndex((current) => Math.max(current - 1, 0))}
-          className="text-sm text-muted-foreground underline-offset-4 transition-colors duration-150 hover:text-foreground hover:underline"
+          className="rounded-sm text-sm text-muted-foreground underline-offset-4 transition-colors duration-150 outline-none hover:text-foreground hover:underline focus-visible:ring-[3px] focus-visible:ring-ring/50"
         >
           {t("wizard.back")}
         </button>

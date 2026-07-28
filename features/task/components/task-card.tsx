@@ -60,7 +60,7 @@ export function TaskCard({
       <button
         type="button"
         onClick={() => onOpen(task)}
-        className="w-full text-start text-sm font-medium"
+        className="w-full rounded-sm text-start text-sm font-medium outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
       >
         {title}
       </button>
