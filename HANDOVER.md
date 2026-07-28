@@ -1,6 +1,10 @@
 # EvenTech — Handover
 
-Snapshot for a fresh session. Written 2026-07-28, during Phase 9.
+Snapshot for a fresh session. Written 2026-07-28, after Phase 9 and Phase 10a.
+
+**If you read only one thing: the next task is Phase 10b** — the performance
+and accessibility audit. Scope is in "Phase 10" below. Everything before it is
+built and deployed.
 
 ## Read these first, in order
 
@@ -33,7 +37,13 @@ Phases 0–9 of the canonical 12-phase plan (guide 50 §2) are done and deployed
 | 10a Motion + error states    | Reduced-motion gap and two swallowed listeners fixed                      |
 | 10b Performance + a11y audit | **Not started — the remaining work**                                      |
 
-Recent commits: `3654e53` phase 10a · `0855ec5` 9a review fixes · `4472ae7` phase 9a · `2325fa6` + `5f3853b` + `4f79816` 8b/8c review fixes · `ee0908a` phase 8c · `ab77817` phase 8b.
+Recent commits: `5e68528` phase 9b/9c · `3654e53` phase 10a · `0855ec5` 9a review fixes · `4472ae7` phase 9a · `2325fa6` + `5f3853b` + `4f79816` 8b/8c review fixes · `ee0908a` phase 8c · `ab77817` phase 8b.
+
+**A fresh worktree needs `.env.local` copied in.** It is gitignored, so a new
+worktree has no Firebase config and `pnpm build` fails during prerender with a
+Zod error about `authDomain`/`projectId` being undefined — which reads like a
+code fault and is not. Copy it from the main checkout at
+`E:\Desktop\web\react\sell\evntech\.env.local`.
 
 ### Phase 7 verification
 
@@ -48,11 +58,11 @@ Deployed and verified end to end against the live project on 2026-07-27, driving
 
 Set secrets with `--data-file`, never the interactive prompt: on Windows the masked prompt silently captures nothing when you paste into it, and piping a value adds a trailing newline that corrupts the key.
 
-### Phase 9 is sliced — 9a done, 9b and 9c next
+### Phase 9 — all three slices done
 
-Phase 9 is as large as Phase 8, so it runs in three slices the same way.
+Phase 9 was as large as Phase 8, so it ran in three slices the same way.
 
-**9a (this commit): admin shell, user management, audit log.** Callables are
+**9a: admin shell, user management, audit log.** Callables are
 deployed. `RequireAdmin` gates `/admin`; `users` was already `allow list: if
 isAdmin()` from Phase 2, so **no rules change was needed**. `auditLogs` stays
 `allow read, write: if false` — canonical §7 makes it never client-readable, so
@@ -130,15 +140,33 @@ nothing is outstanding behind it.
   icon-only buttons all labelled, and every other motion component already
   guarded. The Aurora hero backdrop correctly collapses to a static gradient.
 
-#### 10b — still owed
+#### 10b — the next task
 
-Performance and accessibility. Not yet done: keyboard-only traversal of the
-wizard and the dialogs, focus-visible audit, heading order, colour contrast at
-AA, and the §11 perf budget re-measured (JS < 250KB initial, LCP < 2.5s,
-Lighthouse 95+). Note `hero-backdrop.tsx` passes literal hex values to the
-WebGL Aurora, which is a token violation the design rules otherwise forbid —
-WebGL cannot read CSS variables directly, so it needs a deliberate decision
-rather than a silent exception.
+Performance and accessibility. Audit first and fix only what the audit finds —
+that is how 10a stayed small and honest. Concretely:
+
+- **Keyboard only.** Traverse the 9-step wizard, every dialog (task, calendar,
+  channel), the Kanban, and the scanner without a mouse. Dialogs must trap
+  focus and restore it to the trigger on close.
+- **Focus visibility.** `globals.css` sets `outline-ring/50` globally; confirm
+  it actually survives on the custom chip buttons in `task-dialog.tsx` and
+  `calendar-dialog.tsx`, which set their own borders.
+- **Heading order.** Every page renders one `h1` from its server component;
+  panels below add `h2`. Check nothing skips a level.
+- **Contrast at AA.** The risk spots are `text-muted-foreground` on `--card`,
+  and the `warning`/`success` badges, which use accent colours as text.
+- **RTL.** Arabic is a first-class locale but has barely been looked at. The
+  calendar has an explicit RTL path; most other screens rely on logical
+  properties being used correctly.
+- **Perf budget re-measured** (canonical §11): JS < 250KB initial, LCP < 2.5s,
+  INP < 200ms, CLS < 0.1, Lighthouse 95+. Recharts and FullCalendar are already
+  confined to their own lazy chunks — confirm nothing new leaked into the
+  shared bundle.
+
+One known violation to decide on rather than silently keep:
+`hero-backdrop.tsx` passes literal hex values to the WebGL Aurora, which the
+design rules otherwise forbid. WebGL cannot read CSS variables directly, so it
+needs either a documented exception or a small `getComputedStyle` bridge.
 
 ### There is no admin account, by design
 
@@ -155,8 +183,11 @@ cannot find it. **The claim does not reach the browser until the ID token
 refreshes** (gotcha #2), so the account must sign out and back in; otherwise
 `/admin` bounces them home and it looks like the guard is broken.
 
-The seeded test account was temporarily promoted to admin to verify 9a and
-**has been reverted to `organizer`** — it is exactly as documented below.
+The seeded test account was promoted to admin several times to verify 9a, 9b
+and 9c, and **has been reverted to `organizer` with its `organizationId` claim
+intact** — it is exactly as documented below. If a check script ever dies
+part-way, re-check its claims before trusting them: one crashed run left the
+account as admin and the next script captured that as its "restore to" value.
 
 ## Decisions already locked — do not relitigate
 
@@ -220,7 +251,9 @@ Because it already owns an org, `createOrganization` and `acceptInvitation` will
 - **Receipt and QR download URLs are bearer tokens.** Firebase tokenised URLs bypass rules, so anyone holding one can view the file. Each URL sits on a document only the owner and the relevant org members can read — that is the protection. The QR _token_ is separately HMAC-signed, so possessing the image URL is not the same as being able to forge a ticket.
 - **Nothing releases a used ticket.** There is no un-check-in, and `cancelBooking` still refuses approved bookings, so a mistaken scan can only be fixed in the console. Worth a proper flow before real doors.
 - **No scheduled expiry** for stale `pending_payment` bookings yet, though the status exists.
-- **No browser UI has been verified by a signed-in user since Phase 6.** The Phase 7 wallet, QR reveal and camera scanner, and all of Phase 8a's timeline, Kanban and activity feed, have only been proven at the callable and build level. Signing in and clicking through is the outstanding check for both.
+- **Most UI is still unverified in a real browser.** What _has_ been driven by a signed-in user: the calendar (entry created and read back), messaging (channel created, message sent and rendered), and analytics (metrics and both charts rendered). Everything else — the Phase 7 wallet, QR reveal and camera scanner, Phase 8a's timeline/Kanban/activity feed, and the whole Phase 9 admin console — is proven only at the callable and build level.
+- **The calendar's visual paint is specifically unconfirmed.** Entries reach the DOM with the right classes, but FullCalendar keeps them `visibility: hidden` in a zero-height row whenever `ResizeObserver` does not fire — which is always true in a non-displayed Browser pane (gotcha #12). Open the pane and load `/en/workspace/calendar` to settle it; do not "fix" it before checking that.
+- **Phase 9b left two gaps that are surface, not defects.** `suspendUser` accepts and stores a `reason` that the UI never captures or displays, and `assignUserRole` is exported from `admin-service.ts` but wired to nothing — guide 43 lists "Change role" as an admin action. It is safe to wire now that the claim-wiping bug is fixed.
 - **`roles/iam.serviceAccountTokenCreator` was granted to `fakealabady@gmail.com`** on the runtime service account, so Phase 7 could be tested by minting ID tokens locally. It lets the holder impersonate that service account — revoke it unless you are actively running such tests:
   `gcloud iam service-accounts remove-iam-policy-binding 119928286158-compute@developer.gserviceaccount.com --member="user:fakealabady@gmail.com" --role="roles/iam.serviceAccountTokenCreator" --project eventech-2f278`
 
@@ -235,6 +268,7 @@ pnpm build        # production build
 ```
 
 Deploy: `firebase deploy --only functions,firestore:rules,firestore:indexes,storage --project eventech-2f278`.
+Grant the first admin: `node functions/scripts/grant-admin.mjs <email>` (see above).
 Functions typecheck separately: `pnpm --dir functions typecheck` (they are a pnpm workspace package).
 `pnpm format` before committing — `format:check` is stricter than lint and will otherwise fail CI.
 
@@ -242,7 +276,7 @@ Run `pnpm lint && pnpm typecheck && pnpm test` before considering any work done.
 
 ## Testing callables without a browser
 
-Phase 7 was verified end to end without signing in, by minting a real ID token with the Admin SDK and calling the deployed functions over HTTPS. Reuse this for 8b/8c rather than assuming a green deploy means a working feature:
+Phases 7, 9a, 9b and 9c were all verified this way: mint a real ID token with the Admin SDK and call the deployed functions over HTTPS. **Reuse this rather than assuming a green deploy means a working feature** — it caught a live schema split in 9a and an unenforced suspension gate in 9b, both of which had deployed cleanly.
 
 1. `admin.initializeApp({ projectId, serviceAccountId: "119928286158-compute@developer.gserviceaccount.com" })` under ADC.
 2. `createCustomToken(uid)` → exchange at `identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=<NEXT_PUBLIC_FIREBASE_API_KEY>` for an `idToken`.
