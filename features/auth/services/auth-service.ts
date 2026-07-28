@@ -54,6 +54,31 @@ export function signInWithEmail(
   );
 }
 
+/**
+ * Where a freshly signed-in user belongs. Admins land in the console instead of
+ * the organizer workspace: nothing in the workspace links to /admin, so without
+ * this they sign in, see the ordinary organizer UI, and have no way to reach it.
+ *
+ * Reads the claim off the token that sign-in just minted, so it is already
+ * current — no forced refresh needed here (unlike after `completeOnboarding`,
+ * which writes the claim server-side *after* the token was issued).
+ *
+ * This is convenience, not authorization. `RequireAdmin` and the callables'
+ * `requireAdmin` remain the real boundary (canonical §7).
+ */
+export async function resolvePostSignInPath(): Promise<string> {
+  if (!isFirebaseConfigured()) return "/account";
+  const user = getFirebaseAuth().currentUser;
+  if (!user) return "/account";
+  try {
+    const token = await user.getIdTokenResult();
+    return token.claims.role === "admin" ? "/admin/users" : "/account";
+  } catch {
+    // A claim we cannot read is not a reason to block sign-in.
+    return "/account";
+  }
+}
+
 export function registerWithEmail(
   displayName: string,
   email: string,

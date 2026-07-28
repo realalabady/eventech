@@ -9,7 +9,10 @@ import { Button } from "@/components/ui/button";
 import { Link, useRouter } from "@/i18n/navigation";
 
 import type { AuthErrorKey } from "../lib/auth-errors";
-import { signInWithEmail } from "../services/auth-service";
+import {
+  resolvePostSignInPath,
+  signInWithEmail,
+} from "../services/auth-service";
 import { loginSchema, type LoginValues } from "../validation/auth-schemas";
 
 import { AuthError } from "./auth-error";
@@ -37,7 +40,7 @@ export function LoginForm() {
       setFormError(result.errorKey);
       return;
     }
-    router.replace("/account");
+    router.replace(await resolvePostSignInPath());
   }
 
   return (

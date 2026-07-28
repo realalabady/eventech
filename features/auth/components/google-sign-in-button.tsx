@@ -7,7 +7,10 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "@/i18n/navigation";
 
 import type { AuthErrorKey } from "../lib/auth-errors";
-import { signInWithGoogle } from "../services/auth-service";
+import {
+  resolvePostSignInPath,
+  signInWithGoogle,
+} from "../services/auth-service";
 
 export function GoogleSignInButton({
   onError,
@@ -28,7 +31,8 @@ export function GoogleSignInButton({
       onError(result.errorKey);
       return;
     }
-    startTransition(() => router.replace("/account"));
+    const destination = await resolvePostSignInPath();
+    startTransition(() => router.replace(destination));
   }
 
   return (
