@@ -58,6 +58,20 @@ export const publishEvent = onCall<
     });
   }
 
+  // A suspended organization cannot put anything new in front of the public.
+  // This is what gives `suspendOrganization` teeth — without it the flag would
+  // be decoration. Already-published events are deliberately left alone, since
+  // pulling them would strand attendees holding valid tickets; taking one down
+  // is a separate per-event decision through `updateEventStatus`.
+  const owner = (
+    await db.collection("organizations").doc(event.organizationId).get()
+  ).data();
+  if (owner?.suspended === true) {
+    throw new HttpsError("permission-denied", "Organization is suspended.", {
+      code: "PERMISSION_DENIED",
+    });
+  }
+
   const ticketTypes: Array<{ price: number; quantity: number }> =
     event.ticketTypes ?? [];
   const missing: string[] = [];

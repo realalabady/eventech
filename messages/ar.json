@@ -785,7 +785,11 @@
     "nav": {
       "users": "المستخدمون",
       "audit": "سجل التدقيق",
-      "backToSite": "العودة للموقع"
+      "backToSite": "العودة للموقع",
+      "organizations": "المنظمات",
+      "events": "الفعاليات",
+      "reports": "البلاغات",
+      "platform": "المنصة"
     },
     "role": {
       "attendee": "حاضر",
@@ -814,7 +818,13 @@
         "assignUserRole": "غيّر دور حساب",
         "suspendUser": "أوقف حساباً",
         "restoreUser": "استعاد حساباً",
-        "unknown": "سجّل إجراءً"
+        "unknown": "سجّل إجراءً",
+        "verifyOrganizer": "غيّر شارة التوثيق",
+        "suspendOrganization": "غيّر إيقاف منظمة",
+        "updateEventStatus": "غيّر حالة فعالية",
+        "resolveReport": "أغلق بلاغاً",
+        "setFeatureFlag": "غيّر خاصية تجريبية",
+        "updateSystemSettings": "غيّر إعدادات المنصة"
       }
     },
     "errors": {
@@ -822,7 +832,80 @@
       "validationFailed": "تحقّق من البيانات وحاول مجدداً.",
       "notFound": "لم نتمكن من العثور على هذا الحساب.",
       "authRequired": "سجّل الدخول للمتابعة.",
-      "unknown": "حدث خطأ. حاول مجدداً."
+      "unknown": "حدث خطأ. حاول مجدداً.",
+      "nameTaken": "هذا موجود بالفعل."
+    },
+    "organizations": {
+      "title": "المنظمات",
+      "subtitle": "التوثيق وحالة الحساب لكل منظّم.",
+      "empty": "لا توجد منظمات بعد.",
+      "failed": "تعذّر تحميل المنظمات. حاول مجدداً بعد قليل.",
+      "verified": "موثّقة",
+      "suspended": "موقوفة",
+      "verify": "توثيق",
+      "unverify": "إزالة الشارة",
+      "suspend": "إيقاف",
+      "restore": "استعادة"
+    },
+    "events": {
+      "title": "الفعاليات",
+      "subtitle": "كل ما نُشر على المنصة، وكل ما أُزيل.",
+      "empty": "لا توجد فعاليات مطابقة لهذا البحث.",
+      "failed": "تعذّر تحميل الفعاليات. حاول مجدداً بعد قليل.",
+      "filterLabel": "تصفية الفعاليات",
+      "filterPlaceholder": "ابحث بالعنوان",
+      "takeDown": "إزالة",
+      "restore": "استعادة"
+    },
+    "eventStatus": {
+      "draft": "مسودة",
+      "planning": "قيد التخطيط",
+      "published": "منشورة",
+      "live": "جارية",
+      "completed": "منتهية",
+      "cancelled": "ملغاة",
+      "archived": "مؤرشفة"
+    },
+    "reports": {
+      "title": "البلاغات",
+      "subtitle": "ما أبلغ عنه المجتمع، الأقدم المفتوح أولاً.",
+      "empty": "لا توجد بلاغات.",
+      "failed": "تعذّر تحميل البلاغات. حاول مجدداً بعد قليل.",
+      "dismiss": "تجاهل",
+      "action": "تم اتخاذ إجراء",
+      "category": {
+        "spam": "إزعاج",
+        "inappropriate": "غير لائق",
+        "misleading": "مضلل",
+        "fraud": "احتيال",
+        "other": "أخرى"
+      },
+      "status": {
+        "open": "مفتوح",
+        "resolved": "مغلق"
+      },
+      "target": {
+        "event": "فعالية",
+        "organization": "منظمة"
+      },
+      "resolution": {
+        "dismissed": "تم التجاهل — لا إجراء.",
+        "actioned": "تم اتخاذ إجراء."
+      }
+    },
+    "platform": {
+      "title": "المنصة",
+      "subtitle": "الخصائص التجريبية والحدود العامة للمنصة.",
+      "failed": "تعذّر تحميل إعدادات المنصة. حاول مجدداً بعد قليل.",
+      "flagsHeading": "الخصائص التجريبية",
+      "settingsHeading": "الحدود ووسائل التواصل",
+      "ticketLimit": "أقصى عدد تذاكر لكل حجز",
+      "supportEmail": "بريد الدعم",
+      "save": "حفظ الإعدادات",
+      "flag": {
+        "publicArtistPages": "صفحات الفنانين العامة",
+        "discoverySearch": "البحث في الاستكشاف"
+      }
     }
   }
 }

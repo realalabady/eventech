@@ -785,7 +785,11 @@
     "nav": {
       "users": "Users",
       "audit": "Audit log",
-      "backToSite": "Back to site"
+      "backToSite": "Back to site",
+      "organizations": "Organizations",
+      "events": "Events",
+      "reports": "Reports",
+      "platform": "Platform"
     },
     "role": {
       "attendee": "Attendee",
@@ -814,7 +818,13 @@
         "assignUserRole": "Changed an account role",
         "suspendUser": "Suspended an account",
         "restoreUser": "Restored an account",
-        "unknown": "Recorded an action"
+        "unknown": "Recorded an action",
+        "verifyOrganizer": "Changed a verification badge",
+        "suspendOrganization": "Changed an organization suspension",
+        "updateEventStatus": "Changed an event status",
+        "resolveReport": "Resolved a report",
+        "setFeatureFlag": "Changed a feature flag",
+        "updateSystemSettings": "Changed platform settings"
       }
     },
     "errors": {
@@ -822,7 +832,80 @@
       "validationFailed": "Check the details and try again.",
       "notFound": "We could not find that account.",
       "authRequired": "Sign in to continue.",
-      "unknown": "Something went wrong. Try again."
+      "unknown": "Something went wrong. Try again.",
+      "nameTaken": "That already exists."
+    },
+    "organizations": {
+      "title": "Organizations",
+      "subtitle": "Verification and account standing for every organizer.",
+      "empty": "No organizations yet.",
+      "failed": "Organizations could not be loaded. Try again in a moment.",
+      "verified": "Verified",
+      "suspended": "Suspended",
+      "verify": "Verify",
+      "unverify": "Remove badge",
+      "suspend": "Suspend",
+      "restore": "Restore"
+    },
+    "events": {
+      "title": "Events",
+      "subtitle": "Everything published on the platform, and everything taken down.",
+      "empty": "No events match that search.",
+      "failed": "Events could not be loaded. Try again in a moment.",
+      "filterLabel": "Filter events",
+      "filterPlaceholder": "Search by title",
+      "takeDown": "Take down",
+      "restore": "Restore"
+    },
+    "eventStatus": {
+      "draft": "Draft",
+      "planning": "Planning",
+      "published": "Published",
+      "live": "Live",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "archived": "Archived"
+    },
+    "reports": {
+      "title": "Reports",
+      "subtitle": "What the community has flagged, oldest open first.",
+      "empty": "Nothing has been reported.",
+      "failed": "Reports could not be loaded. Try again in a moment.",
+      "dismiss": "Dismiss",
+      "action": "Mark actioned",
+      "category": {
+        "spam": "Spam",
+        "inappropriate": "Inappropriate",
+        "misleading": "Misleading",
+        "fraud": "Fraud",
+        "other": "Other"
+      },
+      "status": {
+        "open": "Open",
+        "resolved": "Resolved"
+      },
+      "target": {
+        "event": "Event",
+        "organization": "Organization"
+      },
+      "resolution": {
+        "dismissed": "Dismissed — no action taken.",
+        "actioned": "Actioned."
+      }
+    },
+    "platform": {
+      "title": "Platform",
+      "subtitle": "Feature flags and platform-wide limits.",
+      "failed": "Platform configuration could not be loaded. Try again in a moment.",
+      "flagsHeading": "Feature flags",
+      "settingsHeading": "Limits and contacts",
+      "ticketLimit": "Max tickets per booking",
+      "supportEmail": "Support email",
+      "save": "Save settings",
+      "flag": {
+        "publicArtistPages": "Public artist pages",
+        "discoverySearch": "Search on discovery"
+      }
     }
   }
 }

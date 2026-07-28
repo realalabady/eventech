@@ -179,6 +179,32 @@ service cloud.firestore {
       allow write: if false;  // sendMessage only
     }
 
+    // Phase 9c — moderation queue and platform configuration.
+
+    // Reports are write-only from the client's side. A reporter never reads the
+    // queue back — not even their own submissions — because the queue exposes
+    // who reported whom, which is exactly what makes retaliation possible.
+    match /reports/{reportId} {
+      allow get, list: if isAdmin();
+      allow write: if false;  // submitReport / resolveReport only
+    }
+
+    // Feature flags gate UI for everyone, including signed-out visitors on the
+    // marketing pages, so they must be world-readable. Nothing secret goes in
+    // here — a flag name and a boolean are visible to anyone who looks.
+    match /featureFlags/{document} {
+      allow get, list: if true;
+      allow write: if false;  // setFeatureFlag only
+    }
+
+    // Platform settings are read by the booking form (ticket limits) and the
+    // footer (support address), so they are public too. `updateSystemSettings`
+    // writes only an allowlisted set of keys for that reason.
+    match /systemSettings/{document} {
+      allow get, list: if true;
+      allow write: if false;  // updateSystemSettings only
+    }
+
     match /activityLogs/{logId} {
       allow get, list: if isSignedIn()
         && resource.data.organizationId is string

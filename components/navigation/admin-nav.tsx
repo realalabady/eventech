@@ -1,6 +1,13 @@
 "use client";
 
-import { ScrollText, Users } from "lucide-react";
+import {
+  CalendarDays,
+  Flag,
+  ScrollText,
+  SlidersHorizontal,
+  Building2,
+  Users,
+} from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
 
@@ -8,6 +15,10 @@ import { Link, usePathname } from "@/i18n/navigation";
 
 const ITEMS = [
   { href: "/admin/users", key: "users", icon: Users },
+  { href: "/admin/organizations", key: "organizations", icon: Building2 },
+  { href: "/admin/events", key: "events", icon: CalendarDays },
+  { href: "/admin/reports", key: "reports", icon: Flag },
+  { href: "/admin/platform", key: "platform", icon: SlidersHorizontal },
   { href: "/admin/audit", key: "audit", icon: ScrollText },
 ] as const;
 

@@ -50,3 +50,14 @@ export { trackEventView } from "./analytics/track-event-view";
 
 export { suspendUser, restoreUser } from "./admin/manage-users";
 export { listAuditLogs } from "./admin/audit";
+export {
+  verifyOrganizer,
+  suspendOrganization,
+  updateEventStatus,
+} from "./admin/moderation";
+export {
+  submitReport,
+  resolveReport,
+  setFeatureFlag,
+  updateSystemSettings,
+} from "./admin/platform";

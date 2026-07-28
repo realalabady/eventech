@@ -10,7 +10,7 @@ Snapshot for a fresh session. Written 2026-07-28, during Phase 9.
 
 ## Where it stands
 
-Phases 0–8 of the canonical 12-phase plan (guide 50 §2) are done and deployed. **Phase 9a is committed but NOT deployed** beyond its callables.
+Phases 0–9 of the canonical 12-phase plan (guide 50 §2) are done and deployed. Phase 10 is part-done: 10a landed, **10b is the remaining work**.
 
 **Git state matters here.** Nothing has been pushed and `main` has none of it. Phase 7 and 8a live on `feature/phase-7-tickets-checkin`; everything from 8b onward is on `claude/handover-tasks-8b-8c-d21224`, which was branched from that. Work from the latter — `main` is many phases behind.
 
@@ -28,10 +28,12 @@ Phases 0–8 of the canonical 12-phase plan (guide 50 §2) are done and deployed
 | 8b Calendar + comms          | Unified calendar (FullCalendar v7), channels + messages — deployed        |
 | 8c Analytics                 | Aggregate-on-read dashboards, Recharts, `trackEventView` — deployed       |
 | 9a Admin foundation          | Admin shell, user management, audit log — callables deployed              |
-| 9b Verification + moderation | Not started                                                               |
-| 9c Reports, flags, settings  | Not started                                                               |
+| 9b Verification + moderation | Verified badge, org suspension, event takedown — deployed                 |
+| 9c Reports, flags, settings  | Report queue, feature flags, platform settings — deployed                 |
+| 10a Motion + error states    | Reduced-motion gap and two swallowed listeners fixed                      |
+| 10b Performance + a11y audit | **Not started — the remaining work**                                      |
 
-Recent commits: `2325fa6` + `5f3853b` + `4f79816` review fixes · `ee0908a` phase 8c · `ab77817` phase 8b · `4f557fc` phase 8a · `233a735` phase 7.
+Recent commits: `3654e53` phase 10a · `0855ec5` 9a review fixes · `4472ae7` phase 9a · `2325fa6` + `5f3853b` + `4f79816` 8b/8c review fixes · `ee0908a` phase 8c · `ab77817` phase 8b.
 
 ### Phase 7 verification
 
@@ -67,27 +69,50 @@ been writing the canonical names since Phase 3 — a second naming in one
 collection renders every older row with a blank target. That bug was written
 and then caught by the live check; do not reintroduce it.
 
-#### 9b — organizer verification + event moderation
+#### 9b and 9c — done, verified live
 
-`organizations.verified` already exists and drives the public badge. Needs a
-`verifyOrganizer` callable (canonical §6 names it) plus event moderation. Both
-must call `writeAuditLog`, and their actions must be added to
-`KNOWN_AUDIT_ACTIONS` in `features/admin/types.ts` or they render as the
-generic "Recorded an action" sentence.
+Every callable was exercised against the real project with a minted ID token:
+`verifyOrganizer` flipping the badge, `submitReport` accepting one report and
+refusing the duplicate with `ALREADY_EXISTS`, `setFeatureFlag` rejecting a
+dotted key (it would address a nested field instead of creating a flag), and
+`updateSystemSettings` rejecting an out-of-range limit.
 
-#### 9c — reports, feature flags, platform settings
+**Verification is badge-only** (canonical §3): it never gates publishing or
+selling. Suspension is the control that bites, and it is enforced inside
+`publishEvent` — the flag would otherwise be decoration. That gate is verified
+rather than assumed: with the organization suspended, publishing returns `403
+PERMISSION_DENIED`; unsuspended, the same call returns `200`.
 
-`reports`, `featureFlags` and `systemSettings` are canonical §5 collections that
-do not exist yet — no rules, no data. Feature flags read on the client, so they
-need a public-read rule; the other two are admin-only.
+**A takedown is a status change, never a delete.** Discovery and the public
+event pages all query `status == "published"`, so moving an event off it
+removes it from the site while the record, its bookings and its issued tickets
+survive for the people already holding them. Only an event carrying a
+`publishedAt` may be restored, or a takedown would push a never-published draft
+live on the way back.
 
-### Phase 10 was started before Phase 9 finished — on request
+Already-published events are deliberately left alone when an organization is
+suspended: pulling them would strand attendees holding valid tickets, so taking
+one down stays a separate per-event decision.
 
-Canonical §2 and `AGENTS.md` both say never skip a phase, and Phase 9 is one
-slice of three. Phase 10 was begun anyway at the owner's explicit instruction.
-**9b and 9c are still owed** and nothing in 10a depends on them, so they can be
-picked up in either order — but the "production-ready before the next phase"
-rule is currently broken and should be closed deliberately, not forgotten.
+`reports` is admin-read only — a reporter cannot read the queue back, not even
+their own submissions, because it exposes who reported whom. `featureFlags` and
+`systemSettings` are world-readable by design (signed-out marketing pages gate
+on flags), which is exactly why `updateSystemSettings` writes an allowlisted
+set of keys rather than accepting an arbitrary patch.
+
+**`submitReport` is the only non-admin callable here and it is unrated** —
+rate limiting is Phase 11. One open report per person per target is all that
+currently stops the queue being buried.
+
+New audit actions must be added to `KNOWN_AUDIT_ACTIONS` in
+`features/admin/types.ts` or they render as the generic "Recorded an action"
+sentence. All six from 9b/9c are already there.
+
+### Phase 10 — 10a done, 10b owed
+
+10a was begun before Phase 9 finished, at the owner's instruction; 9b and 9c
+were then completed straight afterwards, so the phase order is whole again and
+nothing is outstanding behind it.
 
 #### 10a — done
 

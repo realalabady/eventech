@@ -3,6 +3,11 @@ import { httpsCallable } from "firebase/functions";
 import { getFirebaseFunctions } from "@/firebase/client";
 import type { AccountRole } from "@/types/domain";
 
+import type {
+  ModerationStatus,
+  ReportCategory,
+  ReportResolution,
+} from "../moderation-types";
 import type { AuditEntry } from "../types";
 
 /**
@@ -67,4 +72,80 @@ export function listAuditLogs(beforeId: string | null = null, limit = 50) {
     { beforeId: string | null; limit: number },
     { entries: AuditEntry[] }
   >("listAuditLogs", { beforeId, limit });
+}
+
+// --- Phase 9b: verification and moderation ---
+
+export function verifyOrganizer(organizationId: string, verified: boolean) {
+  return call<{ organizationId: string; verified: boolean }>(
+    "verifyOrganizer",
+    { organizationId, verified },
+  );
+}
+
+export function suspendOrganization(
+  organizationId: string,
+  suspended: boolean,
+  reason: string | null,
+) {
+  return call<{
+    organizationId: string;
+    suspended: boolean;
+    reason: string | null;
+  }>("suspendOrganization", { organizationId, suspended, reason });
+}
+
+export function updateEventStatus(
+  eventId: string,
+  status: ModerationStatus,
+  reason: string | null,
+) {
+  return call<{ eventId: string; status: string; reason: string | null }>(
+    "updateEventStatus",
+    { eventId, status, reason },
+  );
+}
+
+// --- Phase 9c: reports and platform configuration ---
+
+export function submitReport(
+  targetType: "event" | "organization",
+  targetId: string,
+  category: ReportCategory,
+  detail: string | null,
+) {
+  return call<
+    {
+      targetType: string;
+      targetId: string;
+      category: string;
+      detail: string | null;
+    },
+    { reportId: string }
+  >("submitReport", { targetType, targetId, category, detail });
+}
+
+export function resolveReport(
+  reportId: string,
+  resolution: ReportResolution,
+  note: string | null,
+) {
+  return call<{ reportId: string; resolution: string; note: string | null }>(
+    "resolveReport",
+    { reportId, resolution, note },
+  );
+}
+
+export function setFeatureFlag(key: string, enabled: boolean) {
+  return call<{ key: string; enabled: boolean }>("setFeatureFlag", {
+    key,
+    enabled,
+  });
+}
+
+export function updateSystemSettings(patch: {
+  maxTicketsPerBooking?: number;
+  supportEmail?: string;
+}) {
+  return call("updateSystemSettings", patch);
 }
