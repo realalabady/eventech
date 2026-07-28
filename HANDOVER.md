@@ -16,7 +16,9 @@ built and deployed.
 
 Phases 0–9 of the canonical 12-phase plan (guide 50 §2) are done and deployed. Phase 10 is part-done: 10a landed, **10b is the remaining work**.
 
-**Git state matters here.** Nothing has been pushed and **`main` has none of this work** — it is stuck at Phase 6 and its copy of this file still says "Next: Phase 7". Everything through Phase 10a lives on `feature/phase-7-tickets-checkin`, which is what the main checkout at `E:\Desktop\web\react\sell\evntech` has checked out. **The branch name is badly misleading** — it long ago outgrew Phase 7 and now carries through 10a. Do not trust the branch name or `main`; trust this table.
+**Git state.** `main` now carries everything through Phase 10a and is pushed to `origin` (`github.com/realalabady/eventech`). It got there by a clean fast-forward from `feature/phase-7-tickets-checkin`, which had accumulated all 14 commits from Phase 7 onward while `main` sat at Phase 6.
+
+That split is worth remembering, because it hid four phases of finished work for a while: the commits were being made on the feature branch, but `git push` only sends the current branch, so pushing from `main` published nothing. **`feature/phase-7-tickets-checkin` is now fully merged and redundant** — its name never matched its contents anyway. Work on `main`, or cut a branch named for the phase you are actually starting.
 
 **After pulling new commits, run `pnpm install`.** Phases 8b/8c added
 `@fullcalendar/react`, `temporal-polyfill` and `recharts`. Without it the build
