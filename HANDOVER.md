@@ -1,6 +1,6 @@
 # EvenTech — Handover
 
-Snapshot for a fresh session. Written 2026-07-27, after Phase 8a.
+Snapshot for a fresh session. Written 2026-07-28, during Phase 9.
 
 ## Read these first, in order
 
@@ -10,25 +10,28 @@ Snapshot for a fresh session. Written 2026-07-27, after Phase 8a.
 
 ## Where it stands
 
-Phases 0–7 of the canonical 12-phase plan (guide 50 §2) are done, deployed and verified against the live Firebase project. **Phase 8a is committed but NOT deployed.**
+Phases 0–8 of the canonical 12-phase plan (guide 50 §2) are done and deployed. **Phase 9a is committed but NOT deployed** beyond its callables.
 
-**Git state matters here.** Everything from Phase 7 onward lives on `feature/phase-7-tickets-checkin`, unpushed, and `main` has none of it. The branch name is now misleading — it holds Phase 7 _and_ Phase 8a. Two commits: `233a735` (phase 7) and `4f557fc` (phase 8a). Start 8b/8c from that branch, not `main`.
+**Git state matters here.** Nothing has been pushed and `main` has none of it. Phase 7 and 8a live on `feature/phase-7-tickets-checkin`; everything from 8b onward is on `claude/handover-tasks-8b-8c-d21224`, which was branched from that. Work from the latter — `main` is many phases behind.
 
-| Phase                  | State                                                                     |
-| ---------------------- | ------------------------------------------------------------------------- |
-| 0 Foundation           | Next.js 16 + TS strict + Tailwind v4 + pnpm, i18n from day one            |
-| 1 Design system        | 21 shadcn components on canonical tokens, dark-first, motion primitives   |
-| 2 Authentication       | Email + Google, onboarding callable, custom claims, guards                |
-| 3 Organizer foundation | Organizations, branding, team, in-app invites                             |
-| 4 Event management     | 9-step wizard, venues, artists, ticket tiers, publish gates               |
-| 5 Public pages         | `/events/[slug]`, `/discover` with search, organizer + artist pages       |
-| 6 Booking              | Request → bank details → receipt → organizer approval                     |
-| 7 Tickets & check-in   | Signed QR on approval, ticket wallet, door scanner, Resend delivery (off) |
-| 8a Production tools    | Timeline, Kanban, activity feed — committed, **not deployed**             |
-| 8b Calendar + comms    | Not started                                                               |
-| 8c Analytics           | Not started                                                               |
+| Phase                        | State                                                                     |
+| ---------------------------- | ------------------------------------------------------------------------- |
+| 0 Foundation                 | Next.js 16 + TS strict + Tailwind v4 + pnpm, i18n from day one            |
+| 1 Design system              | 21 shadcn components on canonical tokens, dark-first, motion primitives   |
+| 2 Authentication             | Email + Google, onboarding callable, custom claims, guards                |
+| 3 Organizer foundation       | Organizations, branding, team, in-app invites                             |
+| 4 Event management           | 9-step wizard, venues, artists, ticket tiers, publish gates               |
+| 5 Public pages               | `/events/[slug]`, `/discover` with search, organizer + artist pages       |
+| 6 Booking                    | Request → bank details → receipt → organizer approval                     |
+| 7 Tickets & check-in         | Signed QR on approval, ticket wallet, door scanner, Resend delivery (off) |
+| 8a Production tools          | Timeline, Kanban, activity feed — deployed                                |
+| 8b Calendar + comms          | Unified calendar (FullCalendar v7), channels + messages — deployed        |
+| 8c Analytics                 | Aggregate-on-read dashboards, Recharts, `trackEventView` — deployed       |
+| 9a Admin foundation          | Admin shell, user management, audit log — callables deployed              |
+| 9b Verification + moderation | Not started                                                               |
+| 9c Reports, flags, settings  | Not started                                                               |
 
-Recent commits: `4f557fc` phase 8a · `233a735` phase 7 · `4dd44ab` phase 6 · `a45d2ce` phase 5 · `cd429f8` phase 4 · `5242156` Gulf deploy + claim fixes.
+Recent commits: `2325fa6` + `5f3853b` + `4f79816` review fixes · `ee0908a` phase 8c · `ab77817` phase 8b · `4f557fc` phase 8a · `233a735` phase 7.
 
 ### Phase 7 verification
 
@@ -43,68 +46,58 @@ Deployed and verified end to end against the live project on 2026-07-27, driving
 
 Set secrets with `--data-file`, never the interactive prompt: on Windows the masked prompt silently captures nothing when you paste into it, and piping a value adds a trailing newline that corrupts the key.
 
-### Phase 8 is sliced — 8a done, 8b and 8c next
+### Phase 9 is sliced — 9a done, 9b and 9c next
 
-Phase 8 (guide 50 §2) is six surfaces and too large for one pass, so it runs in three. **8a is committed but undeployed.** Deploy it before or alongside whatever comes next:
+Phase 9 is as large as Phase 8, so it runs in three slices the same way.
+
+**9a (this commit): admin shell, user management, audit log.** Callables are
+deployed. `RequireAdmin` gates `/admin`; `users` was already `allow list: if
+isAdmin()` from Phase 2, so **no rules change was needed**. `auditLogs` stays
+`allow read, write: if false` — canonical §7 makes it never client-readable, so
+admins page it through the `listAuditLogs` callable. That is the one deliberate
+break from the realtime-listener pattern in the app.
+
+Verified live with a minted ID token: `listAuditLogs` returns real entries from
+Phase 3, and `suspendUser` refuses a self-suspend with `VALIDATION_ERROR`.
+**Not verified in a browser** — see gotcha #12 and the note below on claims.
+
+Audit entries use `resourceType`/`resourceId` (canonical §5), **not** guide 43's
+`targetType`/`targetId`. Guide 43 is outranked, and `createOrganization` has
+been writing the canonical names since Phase 3 — a second naming in one
+collection renders every older row with a blank target. That bug was written
+and then caught by the live check; do not reintroduce it.
+
+#### 9b — organizer verification + event moderation
+
+`organizations.verified` already exists and drives the public badge. Needs a
+`verifyOrganizer` callable (canonical §6 names it) plus event moderation. Both
+must call `writeAuditLog`, and their actions must be added to
+`KNOWN_AUDIT_ACTIONS` in `features/admin/types.ts` or they render as the
+generic "Recorded an action" sentence.
+
+#### 9c — reports, feature flags, platform settings
+
+`reports`, `featureFlags` and `systemSettings` are canonical §5 collections that
+do not exist yet — no rules, no data. Feature flags read on the client, so they
+need a public-read rule; the other two are admin-only.
+
+### There is no admin account, by design
+
+`assignUserRole` requires an existing admin, so the first one cannot be made
+from the UI. Bootstrap it:
 
 ```bash
-firebase deploy --only functions,firestore:indexes --project eventech-2f278
+node functions/scripts/grant-admin.mjs someone@example.com
 ```
 
-The activity feed orders by `createdAt` and renders its **failed** state until `activityLogs(eventId, createdAt)` finishes building. Indexes take a few minutes after deploy.
+It lives in `functions/` because that is where `firebase-admin` is installed —
+Node resolves from the script's own directory, so a top-level `scripts/` copy
+cannot find it. **The claim does not reach the browser until the ID token
+refreshes** (gotcha #2), so the account must sign out and back in; otherwise
+`/admin` bounces them home and it looks like the guard is broken.
 
-Decisions made in 8a — do not relitigate:
-
-- **Kanban columns follow canonical §4** (_To Do / In Progress / Review / Done_). Guide 41 says _Doing / Completed_; §4 explicitly names guide 41 as overridden. `tests/task.test.ts` asserts the columns equal `TASK_STATUSES`.
-- **Timeline stages keep the vocabulary `createEvent` seeds** (_planning / venue / artists / production / marketing / published_), not guide 41's Idea→Execution list. Those documents have existed since Phase 4; renaming orphans them.
-- **Activity feed placement.** Guide 41 treats Timeline and Activity as separate dashboard sections; they share `/workspace/timeline` because both answer questions about one event.
-
----
-
-#### 8b — Calendar + team communication
-
-New ground: three collections that do not exist yet, with no rules, no functions and no data.
-
-- `calendarEvents` — meetings, deadlines, setup dates (guide 41 "unified production calendar"). Note the seeded `tasks.dueDate` and `timeline` milestones should feed this view rather than being duplicated into it.
-- `channels` + `messages` — canonical §13 **rejects guide 45's `conversations` collection**; use `channels` + `messages`.
-
-Work required: Firestore rules for all three (deny-by-default, client never writes — see below), composite indexes for anything ordered, callables for send/create, and FullCalendar **fully restyled** onto the design tokens (canonical §11 mandates FullCalendar specifically and requires it not look like FullCalendar).
-
-Watch for: message lists need pagination or a `limit` — an unbounded realtime listener on a busy channel is a cost and memory problem. Look at `useEventActivity` in `features/activity/hooks/use-activity.ts` for the capped-listener pattern.
-
-#### 8c — Analytics dashboards
-
-**Resolve this before writing code.** Canonical §6 specifies `updateDashboardMetrics` as **Firestore triggers**, which this project structurally cannot use — Firestore is in `me-central2`, Functions cannot run there, and Phase 7 deliberately avoided betting on cross-region Eventarc (gotcha #0 and #8). Two viable routes:
-
-1. **Aggregate on read** — dashboards query `bookings` / `tickets` / `checkins` live. Simplest, always current, no new infrastructure; gets slow and read-expensive as data grows.
-2. **Callable-driven rollup into `analytics`** — `approveBooking` and `checkInTicket` already run on every relevant write and can bump counters there. Fast reads, closest to §6's intent; counters drift if a write path is ever missed.
-
-**Before designing around `generateDailyAnalytics`, verify Cloud Scheduler exists in `me-central1`:**
-
-```bash
-gcloud scheduler locations list --project eventech-2f278
-```
-
-This is the same class of check that caught the Storage IAM gap in Phase 7 — confirm the service is available in the region _before_ building on it, not at deploy time.
-
-Also required: Recharts, **lazy-loaded** (canonical §11), metrics count up **once** and charts animate **once** (§9), and the JS budget stays under 250KB initial (§11). `features/scanner/components/ticket-scanner.tsx` shows the dynamic-import pattern used to keep a heavy library out of the initial bundle.
-
-### Conventions 8a established — follow these
-
-A fresh session should copy these rather than reinvent them:
-
-- **Feature layout:** `features/<name>/{types,hooks,services,components}`. Features **never import each other** (§11). Where two are needed together, compose in `components/workspace/` — see `task-board-panel.tsx`. `features/event/components/event-picker.tsx` exists so other features never reach into the event feature to pick an event.
-- **Listeners always surface failure.** Every `onSnapshot` logs and exposes a `failed` flag, and the UI renders a distinct error state. Gotcha #4: a missing index otherwise looks exactly like an empty list.
-- **Callable services** return `{ ok: true, data } | { ok: false, errorKey }` and map the `code` from the error envelope to an i18n key. See `features/task/services/task-service.ts`.
-- **The client never writes these collections.** `tasks`, `timeline`, `tickets`, `checkins`, `bookings` are all `allow write: if false` — mutations go through callables that re-check membership from Firestore, never from the payload. New collections in 8b must follow this.
-- **Optimistic UI** is allowed for kanban/favorites/theme only (§11), never payments/approvals/QR. The Kanban drops its override on both success _and_ failure so a rejected move springs back.
-- **i18n:** every string in `messages/en.json` **and** `messages/ar.json`, key-identical (enforced by `tests/messages.test.ts`). `react/jsx-no-literals` catches bare JSX text but **not** visible props (`placeholder`, `alt`, `aria-label`, `title`) — pass those through `t()` by hand.
-- **Clock reads** go through `hooks/use-now.ts` (`useSyncExternalStore`, returns `null` until mount). Never `Date.now()` during render.
-
-### Installed vs not
-
-Already present: `motion`, `dnd-kit` (core/sortable/utilities), `qrcode` (functions), `qr-scanner`, `date-fns`, shadcn primitives incl. `Dialog`, `Tabs`, `Switch`.
-**Not yet installed:** Recharts (8c), FullCalendar (8b).
+The seeded test account was temporarily promoted to admin to verify 9a and
+**has been reverted to `organizer`** — it is exactly as documented below.
 
 ## Decisions already locked — do not relitigate
 
@@ -143,6 +136,12 @@ Read this section before debugging anything similar.
 7. **Port 3000 is often taken by an unrelated project.** `.claude/launch.json` has `autoPort: true`.
 8. **No Firestore triggers in this project.** Firestore is in `me-central2` and Functions cannot run there, so an `onDocumentUpdated` trigger would depend on cross-region Eventarc delivery. Ticket issuance therefore runs inline at the end of `approveBooking`, and is made safe by being idempotent (the ticket id **is** the booking id) — approving an already-approved booking re-runs issuance and repairs a missing ticket instead of double-claiming inventory.
 9. **`react-hooks` lint rules here are strict, and they fire late.** `Date.now()` during render, writing a ref during render, and `setState` directly inside an effect are all **hard errors**, not warnings — `pnpm typecheck` and `pnpm build` pass happily and only `pnpm lint` catches them, so run lint before believing a component is finished. The sanctioned fixes, all used in the codebase: clock reads go through `hooks/use-now.ts` (`useSyncExternalStore`); a ref that a long-lived callback reads gets written in an effect, not in render (`ticket-scanner.tsx`); and **resetting form state when a different record is selected uses a changing `key` to remount, never an effect** (`task-dialog.tsx` plus the `session` counter in `task-board-panel.tsx`).
+
+10. **Firestore rules are NOT filters — this cost two bugs in one session.** A `list` query is rejected outright unless the query's own constraints prove that _every possible_ result satisfies the rule. It is not evaluated per returned document. Every org-scoped collection here grants access via `isActiveMember(resource.data.organizationId)`, so **any list query must filter on `organizationId`**, even when a narrower filter would return only readable documents. Querying `bookings`/`tickets` by `eventId` alone, and `messages` by `channelId` alone, both failed with `permission-denied` while looking like perfectly reasonable queries. The tell is that a `getDoc` on the same data succeeds while the `list` fails. Adding the redundant-looking equality is free: Firestore serves equality-only queries by merging single-field indexes.
+
+11. **FullCalendar v7 is not v6 with a new number.** `@fullcalendar/react` is self-contained — the `@fullcalendar/daygrid`-style plugin packages are obsolete (their latest stable is still 6.x) and plugins now come from subpaths like `@fullcalendar/react/daygrid`. It needs `temporal-polyfill` as a peer dependency. Internal class names are **hashed**, so its own markup cannot be targeted by hand; restyling goes through the theme's CSS variables, which is why `calendar-theme.css` loads the classic theme's structure and skips its `palette.css` entirely. Top-level `buttonText` is gone (locale data supplies it). The event property is `className` (a string), **not** v6's `classNames` array — the old key still type-checks because `EventInput` has an index signature for extended props, so it is silently swallowed and everything renders unstyled.
+
+12. **A headless Browser pane cannot verify anything measurement-driven.** The pane reports `document.visibilityState === "hidden"` when it is not displayed, which means `requestAnimationFrame` never fires and `ResizeObserver` never fires — not even the initial callback it is guaranteed to emit on `observe()`. Anything that sizes itself from layout stays invisible: FullCalendar keeps its events at `visibility: hidden` inside a zero-height row, and `AnimatedCounter` sits frozen at 0. Both look exactly like product bugs and are not. Verify DOM structure with `textContent` (which ignores visibility) rather than `innerText`, and ask for the pane to be opened before concluding anything visual is broken.
 
 ## Test account — keep it
 

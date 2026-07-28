@@ -2,6 +2,7 @@ import { getAuth } from "firebase-admin/auth";
 import { FieldValue, getFirestore } from "firebase-admin/firestore";
 import { HttpsError, onCall } from "firebase-functions/v2/https";
 
+import { requireAdmin, writeAuditLog } from "../lib/admin-guards";
 import type { CallableResponse } from "../lib/errors";
 
 const ACCOUNT_ROLES = ["attendee", "organizer", "admin"] as const;
@@ -15,17 +16,7 @@ type Payload = { userId?: string; role?: string; organizationId?: string };
  */
 export const assignUserRole = onCall<Payload, Promise<CallableResponse>>(
   async (request) => {
-    const auth = request.auth;
-    if (!auth) {
-      throw new HttpsError("unauthenticated", "Sign in required.", {
-        code: "AUTH_REQUIRED",
-      });
-    }
-    if (auth.token.role !== "admin") {
-      throw new HttpsError("permission-denied", "Admin role required.", {
-        code: "PERMISSION_DENIED",
-      });
-    }
+    const { uid } = requireAdmin(request);
 
     const { userId, role, organizationId } = request.data ?? {};
     if (!userId || !ACCOUNT_ROLES.includes(role as AccountRole)) {
@@ -48,13 +39,12 @@ export const assignUserRole = onCall<Payload, Promise<CallableResponse>>(
     });
     await userRef.update({ role, updatedAt: FieldValue.serverTimestamp() });
 
-    await db.collection("auditLogs").add({
-      actorId: auth.uid,
+    await writeAuditLog({
+      actorId: uid,
       action: "assignUserRole",
       resourceType: "user",
       resourceId: userId,
       metadata: { role, organizationId: organizationId ?? null },
-      createdAt: FieldValue.serverTimestamp(),
     });
 
     return { success: true, message: "Role updated." };

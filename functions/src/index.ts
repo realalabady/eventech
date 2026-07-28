@@ -47,3 +47,6 @@ export {
 export { createChannel, sendMessage } from "./messaging/manage-messaging";
 
 export { trackEventView } from "./analytics/track-event-view";
+
+export { suspendUser, restoreUser } from "./admin/manage-users";
+export { listAuditLogs } from "./admin/audit";

@@ -778,5 +778,49 @@
       "soldLabel": "Sold",
       "noTiers": "This event has no ticket tiers yet."
     }
+  },
+  "admin": {
+    "badge": "Admin",
+    "nav": {
+      "users": "Users",
+      "audit": "Audit log",
+      "backToSite": "Back to site"
+    },
+    "role": {
+      "attendee": "Attendee",
+      "organizer": "Organizer",
+      "admin": "Super Admin"
+    },
+    "users": {
+      "title": "Users",
+      "subtitle": "Every account on the platform.",
+      "filterLabel": "Filter users",
+      "filterPlaceholder": "Search by name or email",
+      "empty": "No users match that search.",
+      "failed": "The user list could not be loaded. Try again in a moment.",
+      "suspended": "Suspended",
+      "suspend": "Suspend",
+      "restore": "Restore"
+    },
+    "audit": {
+      "title": "Audit log",
+      "subtitle": "Every administrative action, newest first.",
+      "empty": "Nothing has been recorded yet.",
+      "failed": "The audit log could not be loaded. Try again in a moment.",
+      "more": "Load more",
+      "action": {
+        "assignUserRole": "Changed an account role",
+        "suspendUser": "Suspended an account",
+        "restoreUser": "Restored an account",
+        "unknown": "Recorded an action"
+      }
+    },
+    "errors": {
+      "permissionDenied": "You do not have permission to do that.",
+      "validationFailed": "Check the details and try again.",
+      "notFound": "We could not find that account.",
+      "authRequired": "Sign in to continue.",
+      "unknown": "Something went wrong. Try again."
+    }
   }
 }
