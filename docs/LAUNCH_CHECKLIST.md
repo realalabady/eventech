@@ -11,20 +11,50 @@ collection forever; getting the second out of order takes the live app down.
 
 ## 1. What Phase 11 shipped in code
 
-| Item                  | State                                                                                                                                       |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| Rate limiting         | **Done.** `functions/src/lib/rate-limit.ts`, applied to `createBooking`, `submitReceipt`, `inviteMember`, `submitReport`, `trackEventView`. |
-| App Check client      | **Done, inert.** `firebase/app-check.ts` — skipped entirely without a site key.                                                             |
-| App Check enforcement | **Code-ready, off.** `enforceAppCheck: process.env.APPCHECK_ENFORCE === "true"` in `functions/src/index.ts`.                                |
-| Security rules review | **Done.** `rateLimits` explicitly denied; `suspendedReason` and `email` added to `protectedUserFieldsUnchanged`.                            |
-| Daily backups         | **Not done** — needs §2.2.                                                                                                                  |
-| Monitoring            | **Not done** — needs §4.                                                                                                                    |
+| Item                  | State                                                                                                                                                                                                                                    |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Rate limiting         | **Done and verified live 2026-07-29.** `functions/src/lib/rate-limit.ts`, applied to `createBooking`, `submitReceipt`, `inviteMember`, `submitReport`, `trackEventView`. Both paths exercised against the deployed functions — see §1.1. |
+| App Check client      | **Done, inert.** `firebase/app-check.ts` — skipped entirely without a site key.                                                                                                                                                          |
+| App Check enforcement | **Code-ready, off.** `enforceAppCheck: process.env.APPCHECK_ENFORCE === "true"` in `functions/src/index.ts`.                                                                                                                             |
+| Security rules review | **Done.** `rateLimits` explicitly denied; `suspendedReason` and `email` added to `protectedUserFieldsUnchanged`.                                                                                                                         |
+| Daily backups         | **Declined for now** by the owner, 2026-07-29 — see §2.2.                                                                                                                                                                                |
+| Monitoring            | **Not done** — needs §4.                                                                                                                                                                                                                 |
 
 Deploy the code side with:
 
 ```bash
 firebase deploy --only functions,firestore:rules,firestore:indexes,storage --project eventech-2f278
 ```
+
+### 1.1 Rate limiter — live verification, 2026-07-29
+
+Unit tests pin the numbers to guide 22, but they do not prove the Firestore
+transaction runs correctly against the real database. Both paths were driven
+against the deployed functions:
+
+**Happy path**, through `trackEventView` — the one callable that is
+unauthenticated by design, so it can be driven without a password. Four calls,
+all `200 {"success":true}`, event views 0 → 4, and two counter documents because
+the calls straddled a minute boundary. The IPv6 caller key sanitized correctly
+(`ip_2001-16a2-...`) and `expiresAt` landed at window start + 2 windows.
+
+**Rejection path**, through `enforceRateLimit` directly with a synthetic caller
+key, because proving this through `trackEventView` would have meant 61 real
+calls and 61 fabricated views on a production event. `submitReport` has the
+lowest ceiling at 5/hour:
+
+```
+call 1-5: allowed
+call 6:   REJECTED — resource-exhausted / RATE_LIMITED / retryAfter=1222s
+counter:  count=5   (stopped at the limit, no over-increment)
+```
+
+`details.code = RATE_LIMITED` is what the client maps to the `rateLimited`
+message, so the user-facing wording is on the path that actually fires. Probe
+counters were deleted afterwards rather than left to TTL.
+
+**Side effect worth knowing:** event `4Ke4AXJgRyx9m8NI7QZQ` carries 4 views it
+did not earn.
 
 ---
 
@@ -51,7 +81,13 @@ Confirm it is serving:
 gcloud firestore fields ttls list --project=eventech-2f278
 ```
 
-### 2.2 Daily backups
+### 2.2 Daily backups — DECLINED for now
+
+**The owner decided on 2026-07-29 not to set this up yet.** Recorded so the next
+session does not read it as forgotten and quietly enable it. Canonical §194
+lists daily backups as a Phase 11 enforcement item, so this is a deliberate
+deviation to revisit before real money and real doors depend on the data.
+The commands below are ready when that changes.
 
 Guide 49 lists Firestore exports under "Backup Strategy". Canonical §194 makes
 daily backups a Phase 11 enforcement item.
