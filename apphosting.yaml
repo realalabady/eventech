@@ -1,0 +1,68 @@
+# Firebase App Hosting — build and runtime configuration.
+#
+# These NEXT_PUBLIC_* values are the Firebase web config. They are not secrets:
+# they ship inside the client bundle by design, and access is controlled by
+# firestore.rules, storage.rules and App Check rather than by hiding them.
+# Genuine secrets (RESEND_API_KEY, TICKET_QR_SECRET) belong to the Cloud
+# Functions and stay in Secret Manager — they are deliberately absent here.
+
+runConfig:
+  # The app is idle most of the time and every request is SSR against Firestore.
+  # minInstances 0 keeps it free at rest; the cold start is the trade.
+  minInstances: 0
+  maxInstances: 5
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 512
+
+env:
+  - variable: NEXT_PUBLIC_FIREBASE_API_KEY
+    value: "AIzaSyBMe9wQO5c-jgGtBPxAPW8c_H34dZbRJNk"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+    value: "eventech-2f278.firebaseapp.com"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+    value: "eventech-2f278"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+    value: "eventech-2f278.firebasestorage.app"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+    value: "119928286158"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_FIREBASE_APP_ID
+    value: "1:119928286158:web:1ed5ba55841f81dea2199f"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+    value: "G-JKYYJPBSZN"
+    availability:
+      - BUILD
+      - RUNTIME
+  # Must stay false in production. If this is ever true here, the deployed app
+  # silently points at emulators that do not exist and every call fails.
+  - variable: NEXT_PUBLIC_USE_FIREBASE_EMULATORS
+    value: "false"
+    availability:
+      - BUILD
+      - RUNTIME
+
+  # App Check (docs/LAUNCH_CHECKLIST.md §3). Uncomment once the reCAPTCHA v3
+  # site key exists; until then App Check stays inert, which is intended.
+  # - variable: NEXT_PUBLIC_FIREBASE_APPCHECK_SITE_KEY
+  #   value: ""
+  #   availability:
+  #     - BUILD
+  #     - RUNTIME

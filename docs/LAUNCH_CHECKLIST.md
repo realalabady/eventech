@@ -7,13 +7,11 @@ Guide 49 as an actionable list, with the current state of each item. Written
 (§2.1) and the App Check enforcement _sequence_ (§3). Skipping the first grows a
 collection forever; getting the second out of order takes the live app down.
 
-**The single biggest gap is not on this list, it is upstream of it: the
-frontend has never been deployed.** The backend is live and hardened — 40
-callables, rules, indexes, rate limiting, monitoring — while the app itself
-runs only on localhost. Several items here (App Check enforcement, Performance
-Monitoring, the SEO and domain sections of guide 49) cannot start until that
-changes, and the launch checklist is not really actionable end to end until it
-does.
+**The frontend went live on 2026-07-29** at
+`https://evntech-web--eventech-2f278.europe-west4.hosted.app` (§7). Until then
+the backend was hardened while the app itself ran only on localhost, which
+blocked App Check enforcement and Performance Monitoring. Both are now
+actionable.
 
 ---
 
@@ -117,15 +115,8 @@ once before launch.
 
 ## 3. App Check — order matters
 
-> **BLOCKED as of 2026-07-29: the frontend has never been deployed.**
-> `https://eventech-2f278.web.app` returns "Site Not Found", `firebase.json` has
-> no `hosting` block, and the 2026-07-26 "release" was the empty site being
-> created. Step 2 below has no target and step 3 has no traffic to watch.
->
-> Enforcing App Check now would attest a production client that does not exist
-> while forcing every local dev session onto debug tokens — cost with no
-> benefit. **Deploy the frontend first, then run this sequence.** The code side
-> is already done and inert, so nothing is blocking that deploy.
+> **UNBLOCKED 2026-07-29** — the frontend is now deployed (§7), so step 2 has a
+> real target. Steps 1 and 3–5 are console work and still need doing.
 
 Enforcement rejects every call arriving without a valid attestation token. Turn
 it on before a token-sending client is live and **the whole product stops
@@ -275,7 +266,65 @@ than an oversight:
 
 ---
 
-## 7. Rollback
+## 7. Frontend hosting — Firebase App Hosting
+
+Live at **`https://evntech-web--eventech-2f278.europe-west4.hosted.app`**
+(backend `evntech-web`). Deploy from local source:
+
+```bash
+firebase deploy --only apphosting --project eventech-2f278
+```
+
+Config lives in `apphosting.yaml` (build/runtime env, instance sizing) and the
+`apphosting` block of `firebase.json` (backend id, upload ignores). The
+`NEXT_PUBLIC_*` values there are the Firebase web config — not secrets, they
+ship in the client bundle by design, and rules plus App Check are what control
+access. `RESEND_API_KEY` and `TICKET_QR_SECRET` belong to the Cloud Functions
+and stay in Secret Manager; they are deliberately absent.
+
+### The region compromise — read before assuming data residency
+
+**App Hosting has no Middle East region.** Available: `asia-east1`,
+`asia-southeast1`, `europe-west4`, `us-central1`, `us-east4`, `us-east5`.
+Firestore is in `me-central2` (Dammam) and the callables in `me-central1`
+(Doha), chosen so attendee data and organizer bank details stay in-country.
+
+`europe-west4` was picked as the closest available by network latency. The
+consequence, stated plainly: **server-side rendering now happens in the
+Netherlands.** Data at rest is unchanged — Firestore is still Dammam — but
+every SSR page read transits the EU, and the in-country guarantee that guide 50
+made now holds for storage only, not for processing. Verified working:
+`/en/discover` renders live Firestore data cross-region.
+
+If full in-country processing becomes a hard requirement, App Hosting cannot
+deliver it today; the answer is Cloud Run in `me-central1` behind a load
+balancer. **The backend's region is fixed at creation** — changing it means
+deleting and recreating.
+
+### Three build failures worth not repeating
+
+The first three deploys all failed on the same line, `ERR_PNPM_IGNORED_BUILDS`.
+pnpm 10+ refuses to run dependency build scripts unless they are named, and in
+CI it exits non-zero rather than warning.
+
+1. `pnpm-workspace.yaml` had `ignoredBuiltDependencies: [sharp, unrs-resolver]`
+   — someone had run `pnpm approve-builds` and declined them. Wrong answer for
+   a deployed build: **sharp is what Next.js uses for image optimization**, and
+   without it the server serves unoptimized images.
+2. Putting `onlyBuiltDependencies` in `package.json` did nothing. pnpm 10.16+
+   reads workspace settings from `pnpm-workspace.yaml` and ignores the `pnpm`
+   field at a workspace root, so that edit looked right and had no effect.
+3. The real cause: **the builder installs pnpm v11.13.0 while this repo is
+   validated on v10.26.0.** Different major, different settings semantics.
+   Fixed by pinning `"packageManager": "pnpm@10.26.0"` in `package.json`, so CI
+   runs the version the lockfile and the local workflow were tested against.
+
+Keep that pin in step with local pnpm. If they drift, CI silently builds with a
+different resolver than anyone has run.
+
+---
+
+## 8. Rollback
 
 Functions and rules deploy together but roll back separately.
 

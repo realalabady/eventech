@@ -23,7 +23,11 @@ All 12 phases of the canonical plan (guide 50 §2) are built and deployed, 0 thr
 
 **A caution that this document earned the hard way.** Everything through Phase 9 was once described here as "done and deployed" while two Phase 8a screens were completely dead, ticket times were three hours wrong for every attendee, and the landing page had exactly one working link. None of it showed up, because every claim rested on callable-level and build-level proof. The first sweep with a real signed-in browser found six defects in an afternoon. **Callables passing is not the same as the product working.** Treat any "verified" here as scoped to whatever was actually exercised, and see §8 of `FINAL_PHASES.md` for what has and has not been driven in a browser.
 
-**The frontend has never been deployed.** `https://eventech-2f278.web.app` returns "Site Not Found", and `firebase.json` has no `hosting` block. The backend is live and hardened — 40 callables in `me-central1`, rules, indexes, rate limiting, monitoring — while the app itself runs only on localhost. This blocks App Check enforcement, Firebase Performance Monitoring, and the domain/SEO work in guide 49, so it is the thing standing between here and a real launch.
+**The frontend is deployed** (2026-07-29) on Firebase App Hosting at `https://evntech-web--eventech-2f278.europe-west4.hosted.app`, backend `evntech-web`. Redeploy with `firebase deploy --only apphosting`. Config is `apphosting.yaml` plus the `apphosting` block in `firebase.json`.
+
+**It runs in `europe-west4`, and that is a compromise, not a preference.** App Hosting has no Middle East region. Firestore stays in Dammam, so data at rest is unchanged, but **SSR now happens in the Netherlands** — the in-country guarantee guide 50 made holds for storage, not processing. See `docs/LAUNCH_CHECKLIST.md` §7 before quoting that guarantee to anyone.
+
+**`packageManager` is pinned to `pnpm@10.26.0` and must stay in step with local pnpm.** The App Hosting builder otherwise installs pnpm 11, whose build-script settings differ enough to fail the build — that cost three failed deploys.
 
 **Git state.** `main` now carries everything through Phase 10a and is pushed to `origin` (`github.com/realalabady/eventech`). It got there by a clean fast-forward from `feature/phase-7-tickets-checkin`, which had accumulated all 14 commits from Phase 7 onward while `main` sat at Phase 6.
 

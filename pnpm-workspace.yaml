@@ -1,6 +1,20 @@
 packages:
   - functions
 
-ignoredBuiltDependencies:
+# pnpm 10 blocks dependency build scripts unless they are named here, and in CI
+# it exits non-zero rather than warning — which is what failed the first two App
+# Hosting builds. This used to be `ignoredBuiltDependencies` holding sharp and
+# unrs-resolver, which is the wrong answer for a deployed build: sharp is what
+# Next.js uses for image optimization, and without it the server falls back to
+# serving unoptimized images.
+#
+# These settings live here rather than in package.json because pnpm 10.16+ reads
+# workspace settings from this file and ignores the `pnpm` field at a workspace
+# root — putting them there looks correct and does nothing.
+onlyBuiltDependencies:
+  - "@firebase/util"
+  - "@parcel/watcher"
+  - "@swc/core"
+  - protobufjs
   - sharp
   - unrs-resolver
