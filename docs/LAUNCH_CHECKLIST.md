@@ -7,6 +7,14 @@ Guide 49 as an actionable list, with the current state of each item. Written
 (§2.1) and the App Check enforcement _sequence_ (§3). Skipping the first grows a
 collection forever; getting the second out of order takes the live app down.
 
+**The single biggest gap is not on this list, it is upstream of it: the
+frontend has never been deployed.** The backend is live and hardened — 40
+callables, rules, indexes, rate limiting, monitoring — while the app itself
+runs only on localhost. Several items here (App Check enforcement, Performance
+Monitoring, the SEO and domain sections of guide 49) cannot start until that
+changes, and the launch checklist is not really actionable end to end until it
+does.
+
 ---
 
 ## 1. What Phase 11 shipped in code
@@ -18,7 +26,7 @@ collection forever; getting the second out of order takes the live app down.
 | App Check enforcement | **Code-ready, off.** `enforceAppCheck: process.env.APPCHECK_ENFORCE === "true"` in `functions/src/index.ts`.                                                                                                                             |
 | Security rules review | **Done.** `rateLimits` explicitly denied; `suspendedReason` and `email` added to `protectedUserFieldsUnchanged`.                                                                                                                         |
 | Daily backups         | **Declined for now** by the owner, 2026-07-29 — see §2.2.                                                                                                                                                                                |
-| Monitoring            | **Not done** — needs §4.                                                                                                                                                                                                                 |
+| Monitoring            | **Baseline done 2026-07-29.** Two Cloud Functions alert policies live, routed to email. Performance Monitoring, budget alert and error tracking still open — see §4.                                                                     |
 
 Deploy the code side with:
 
@@ -109,6 +117,16 @@ once before launch.
 
 ## 3. App Check — order matters
 
+> **BLOCKED as of 2026-07-29: the frontend has never been deployed.**
+> `https://eventech-2f278.web.app` returns "Site Not Found", `firebase.json` has
+> no `hosting` block, and the 2026-07-26 "release" was the empty site being
+> created. Step 2 below has no target and step 3 has no traffic to watch.
+>
+> Enforcing App Check now would attest a production client that does not exist
+> while forcing every local dev session onto debug tokens — cost with no
+> benefit. **Deploy the frontend first, then run this sequence.** The code side
+> is already done and inert, so nothing is blocking that deploy.
+
 Enforcement rejects every call arriving without a valid attestation token. Turn
 it on before a token-sending client is live and **the whole product stops
 working**. Do these in order, and do not compress steps 2 and 4.
@@ -133,14 +151,39 @@ build — it bypasses attestation completely.
 
 ## 4. Monitoring
 
-- **Firebase Performance Monitoring** — enable for the web app.
-- **Cloud Functions**: alert on error rate and on p95 latency. The callables are
-  in `me-central1`; the database is in `me-central2`.
-- **Budget alert** on the project. `trackEventView` is unauthenticated and now
-  IP-limited, but Storage uploads under `events/{eventId}/cover/{uid}/` are
-  writable by any signed-in user (see §6), so cost is the signal that catches
-  abuse the rules cannot.
-- **Error tracking**: guide 49 recommends Sentry. Not wired up.
+Before 2026-07-29 this project had **zero** alert policies and **zero**
+notification channels. Two alerts now exist, created through the Monitoring
+REST API (the `gcloud alpha monitoring` component is not installed and cannot
+self-install non-interactively):
+
+| Policy                         | Fires when                                          |
+| ------------------------------ | --------------------------------------------------- |
+| **Callables — 5xx error rate** | 5xx responses exceed ~1/min, sustained 5 minutes    |
+| **Callables — p95 latency**    | p95 request latency exceeds 5s, sustained 5 minutes |
+
+Both are enabled and route to the **EvenTech alerts** email channel
+(`fakealabady@gmail.com`). Grouped by `service_name` so an alert names the
+failing callable rather than the whole project.
+
+**A trap worth recording:** Gen 2 Cloud Functions run on Cloud Run, so their
+metrics live under `run.googleapis.com` against `resource.type =
+"cloud_run_revision"`. Filtering on the `cloud_function` resource type — the
+obvious guess — matches only Gen 1 and would build a policy that silently never
+fires. That failure mode looks exactly like healthy service.
+
+**Confirm the email channel actually delivers.** GCP created it enabled, but an
+alert nobody receives is worse than no alert, because it reads as coverage.
+
+Still open:
+
+- **Firebase Performance Monitoring** — enable for the web app. Pointless until
+  the frontend is deployed (§3).
+- **Budget alert** on the project, which needs billing-account access.
+  `trackEventView` is unauthenticated and now IP-limited, but Storage uploads
+  under `events/{eventId}/cover/{uid}/` are writable by any signed-in user
+  (see §6), so cost is the signal that catches abuse the rules cannot.
+- **Error tracking**: guide 49 recommends Sentry. Not wired up — it adds a
+  dependency and a DSN, so it is a decision rather than a task.
 
 ---
 
