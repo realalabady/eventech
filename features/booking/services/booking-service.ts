@@ -24,6 +24,7 @@ const CODE_TO_KEY: Record<string, string> = {
   BOOKING_CLOSED: "bookingClosed",
   EVENT_FULL: "soldOut",
   EMAIL_NOT_VERIFIED: "emailNotVerified",
+  RATE_LIMITED: "rateLimited",
 };
 
 function toErrorKey(error: unknown): string {

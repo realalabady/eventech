@@ -28,13 +28,15 @@ service cloud.firestore {
         && get(memberPath(orgId)).data.status == 'active';
     }
 
-    function memberRole(orgId) {
-      return get(memberPath(orgId)).data.role;
-    }
-
+    // `suspendedReason` and `email` joined this list at Phase 11. Suspension
+    // disables the account but an already-issued ID token stays valid for up to
+    // an hour (see functions/src/admin/manage-users.ts), so a just-suspended
+    // user had a window in which to blank the reason the admin console shows.
+    // `email` is what that console lists accounts by, and it is mirrored from
+    // Auth — a user editing the mirror only makes the two disagree.
     function protectedUserFieldsUnchanged() {
       return request.resource.data.diff(resource.data).affectedKeys()
-        .hasAny(['role', 'accountStatus', 'organizationIds', 'stats', 'createdAt', 'uid']) == false;
+        .hasAny(['role', 'accountStatus', 'suspendedReason', 'email', 'organizationIds', 'stats', 'createdAt', 'uid']) == false;
     }
 
     // Phase 2 — Authentication.
@@ -214,6 +216,15 @@ service cloud.firestore {
 
     match /auditLogs/{logId} {
       allow read, write: if false;  // server-side only, never client-readable
+    }
+
+    // Phase 11 — rate limiting. Counters are written by enforceRateLimit with
+    // the Admin SDK, which bypasses these rules. Stated explicitly rather than
+    // left to the catch-all below: a client that could read its own counter
+    // learns exactly when its budget resets, and one that could write would
+    // simply erase it.
+    match /rateLimits/{limitId} {
+      allow read, write: if false;
     }
 
     // Everything else stays denied until its phase lands.

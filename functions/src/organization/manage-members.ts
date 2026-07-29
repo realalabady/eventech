@@ -3,6 +3,7 @@ import { FieldValue, getFirestore } from "firebase-admin/firestore";
 import { HttpsError, onCall } from "firebase-functions/v2/https";
 
 import type { CallableResponse } from "../lib/errors";
+import { enforceRateLimit } from "../lib/rate-limit";
 import {
   memberDocId,
   requireAuth,
@@ -39,6 +40,7 @@ export const inviteMember = onCall<
     });
   }
   await requireMemberRole(organizationId, uid, ["owner", "manager"]);
+  await enforceRateLimit("inviteMember", request);
 
   const normalizedEmail = email.trim().toLowerCase();
   const db = getFirestore();

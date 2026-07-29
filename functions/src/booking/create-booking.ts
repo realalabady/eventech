@@ -3,6 +3,7 @@ import { HttpsError, onCall } from "firebase-functions/v2/https";
 
 import type { CallableResponse } from "../lib/errors";
 import { requireAuth } from "../lib/organization-guards";
+import { enforceRateLimit } from "../lib/rate-limit";
 
 type Payload = { eventId?: string; ticketTypeId?: string; quantity?: number };
 
@@ -54,6 +55,11 @@ export const createBooking = onCall<
       code: "VALIDATION_ERROR",
     });
   }
+
+  // After validation, before the inventory transaction: a malformed payload
+  // must not spend the caller's allowance, and an over-budget caller must not
+  // reach the expensive part.
+  await enforceRateLimit("createBooking", request);
 
   const db = getFirestore();
   const eventSnapshot = await db.collection("events").doc(eventId).get();

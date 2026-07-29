@@ -16,6 +16,7 @@ import {
   type FirebaseStorage,
 } from "firebase/storage";
 
+import { initializeAppCheckOnce } from "./app-check";
 import { getFirebaseConfig, shouldUseEmulators } from "./config";
 
 /**
@@ -29,9 +30,15 @@ let emulatorsConnected = false;
 export function getFirebaseApp(): FirebaseApp {
   const existing = getApps();
   if (existing.length > 0) {
+    // App Check attaches to an app that may have been created by an earlier
+    // call, so this runs on every path rather than only on first init. It is
+    // idempotent and a no-op on the server.
+    initializeAppCheckOnce(existing[0]);
     return existing[0];
   }
-  return initializeApp(getFirebaseConfig());
+  const app = initializeApp(getFirebaseConfig());
+  initializeAppCheckOnce(app);
+  return app;
 }
 
 export function getFirebaseAuth(): Auth {

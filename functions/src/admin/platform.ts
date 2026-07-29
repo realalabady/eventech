@@ -3,6 +3,7 @@ import { HttpsError, onCall } from "firebase-functions/v2/https";
 
 import { requireAdmin, writeAuditLog } from "../lib/admin-guards";
 import { requireAuth } from "../lib/organization-guards";
+import { enforceRateLimit } from "../lib/rate-limit";
 import type { CallableResponse } from "../lib/errors";
 
 /** Guide 43's report categories. */
@@ -50,6 +51,8 @@ export const submitReport = onCall<
       code: "VALIDATION_ERROR",
     });
   }
+
+  await enforceRateLimit("submitReport", request);
 
   const db = getFirestore();
   const collection = targetType === "event" ? "events" : "organizations";

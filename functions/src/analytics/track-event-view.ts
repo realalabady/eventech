@@ -2,6 +2,7 @@ import { FieldValue, getFirestore } from "firebase-admin/firestore";
 import { HttpsError, onCall } from "firebase-functions/v2/https";
 
 import type { CallableResponse } from "../lib/errors";
+import { enforceRateLimit } from "../lib/rate-limit";
 
 /**
  * Records a view of a published event page (canonical §6's `trackEventView`).
@@ -14,9 +15,10 @@ import type { CallableResponse } from "../lib/errors";
  * mint a stray `stats` map on a document that may not exist, and drafts would
  * accrue views they can never have had.
  *
- * Not rate limited. Anyone can inflate a view count by calling this in a loop.
- * That is deliberate for now — canonical §7 defers rate limiting to Phase 11 —
- * and it is why views feed a vanity metric and never anything financial.
+ * Rate limited per IP since Phase 11, because there is no uid to meter against.
+ * The old note here said an unbounded loop was tolerable since views feed only
+ * a vanity metric — true of the number, but not of the writes it costs. 60/min
+ * is far above real browsing and far below a loop.
  */
 export const trackEventView = onCall<
   { eventId?: string },
@@ -28,6 +30,8 @@ export const trackEventView = onCall<
       code: "VALIDATION_ERROR",
     });
   }
+
+  await enforceRateLimit("trackEventView", request);
 
   const ref = getFirestore().collection("events").doc(eventId);
   const event = (await ref.get()).data();

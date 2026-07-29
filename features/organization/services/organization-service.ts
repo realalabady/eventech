@@ -29,6 +29,7 @@ const CODE_TO_KEY: Record<string, string> = {
   VALIDATION_ERROR: "validationFailed",
   NOT_FOUND: "notFound",
   AUTH_REQUIRED: "authRequired",
+  RATE_LIMITED: "rateLimited",
 };
 
 function toErrorKey(error: unknown): string {

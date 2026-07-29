@@ -7,7 +7,17 @@ initializeApp();
 // me-central2 is Dammam, Saudi Arabia: co-located with Firestore so the several
 // reads/writes each callable performs stay in-region, and attendee data plus
 // organizer bank details remain in-country.
-setGlobalOptions({ region: "me-central1", maxInstances: 10 });
+setGlobalOptions({
+  region: "me-central1",
+  maxInstances: 10,
+  // Phase 11 App Check enforcement (canonical §194), behind an env flag rather
+  // than hardcoded true. Enforcement rejects every call that arrives without a
+  // valid attestation token — so it must not be switched on until a client that
+  // sends them is deployed and confirmed, or the live app stops working the
+  // moment these functions land. Set APPCHECK_ENFORCE=true in functions/.env
+  // once the client is out. See docs/LAUNCH_CHECKLIST.md.
+  enforceAppCheck: process.env.APPCHECK_ENFORCE === "true",
+});
 
 export { completeOnboarding } from "./auth/complete-onboarding";
 export { assignUserRole } from "./auth/assign-user-role";

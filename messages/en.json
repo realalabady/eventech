@@ -207,7 +207,8 @@
       "validationFailed": "Check the details and try again.",
       "notFound": "We could not find that.",
       "authRequired": "Sign in to continue.",
-      "unknown": "Something went wrong. Try again."
+      "unknown": "Something went wrong. Try again.",
+      "rateLimited": "Too many attempts. Wait a moment and try again."
     }
   },
   "event": {
@@ -493,7 +494,8 @@
       "validationFailed": "Check the details and try again.",
       "notFound": "We could not find that.",
       "authRequired": "Sign in to continue.",
-      "unknown": "Something went wrong. Try again."
+      "unknown": "Something went wrong. Try again.",
+      "rateLimited": "Too many attempts. Wait a moment and try again."
     }
   },
   "theme": {
@@ -850,7 +852,8 @@
       "notFound": "We could not find that account.",
       "authRequired": "Sign in to continue.",
       "unknown": "Something went wrong. Try again.",
-      "nameTaken": "That already exists."
+      "nameTaken": "That already exists.",
+      "rateLimited": "Too many attempts. Wait a moment and try again."
     },
     "organizations": {
       "title": "Organizations",

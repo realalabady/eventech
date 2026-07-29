@@ -3,6 +3,7 @@ import { HttpsError, onCall } from "firebase-functions/v2/https";
 
 import type { CallableResponse } from "../lib/errors";
 import { requireAuth } from "../lib/organization-guards";
+import { enforceRateLimit } from "../lib/rate-limit";
 
 type Payload = { bookingId?: string; receiptUrl?: string };
 
@@ -21,6 +22,8 @@ export const submitReceipt = onCall<Payload, Promise<CallableResponse>>(
         code: "VALIDATION_ERROR",
       });
     }
+
+    await enforceRateLimit("submitReceipt", request);
 
     const db = getFirestore();
     const bookingRef = db.collection("bookings").doc(bookingId);
