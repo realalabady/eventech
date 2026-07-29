@@ -1,20 +1,27 @@
 # EvenTech — Handover
 
-Snapshot for a fresh session. Written 2026-07-28, after Phase 9 and Phase 10a.
+Snapshot for a fresh session. Written 2026-07-28, **substantially revised
+2026-07-29** after a browser verification sweep, a defect sweep across phases
+5–10b, and Phase 11 launch hardening.
 
-**If you read only one thing: the next task is Phase 10b** — the performance
-and accessibility audit. Scope is in "Phase 10" below. Everything before it is
-built and deployed.
+**If you read only one thing: all 12 canonical phases now have their code
+built and deployed.** What remains is not a phase — it is the operational tail
+in **`docs/LAUNCH_CHECKLIST.md`** (backups, monitoring, App Check enforcement)
+plus the known gaps listed there. Read that file before doing launch work.
 
 ## Read these first, in order
 
 1. **`guides/50_CANONICAL_DECISIONS.md`** — the single source of truth. The other 49 guides were generated in multiple passes and contradict each other (six event lifecycles, five role lists, three wizard step lists). Guide 50 resolves every one of those. It outranks every other guide and the README.
 2. **`CLAUDE_TASKS.md`** — standing design brief. All UI work is **refinement, never replacement**. Brand, IA, navigation, page hierarchy and palette are frozen. State what/why/which-files before implementing; report improvements after.
 3. **`AGENTS.md`** — the non-negotiable engineering rules.
+4. **`docs/LAUNCH_CHECKLIST.md`** — Phase 11 state, the infrastructure steps
+   that still need a console, and every known gap that outlives it.
 
 ## Where it stands
 
-Phases 0–9 of the canonical 12-phase plan (guide 50 §2) are done and deployed. Phase 10 is part-done: 10a landed, **10b is the remaining work**.
+All 12 phases of the canonical plan (guide 50 §2) are built and deployed, 0 through 11.
+
+**A caution that this document earned the hard way.** Everything through Phase 9 was once described here as "done and deployed" while two Phase 8a screens were completely dead, ticket times were three hours wrong for every attendee, and the landing page had exactly one working link. None of it showed up, because every claim rested on callable-level and build-level proof. The first sweep with a real signed-in browser found six defects in an afternoon. **Callables passing is not the same as the product working.** Treat any "verified" here as scoped to whatever was actually exercised, and see §8 of `FINAL_PHASES.md` for what has and has not been driven in a browser.
 
 **Git state.** `main` now carries everything through Phase 10a and is pushed to `origin` (`github.com/realalabady/eventech`). It got there by a clean fast-forward from `feature/phase-7-tickets-checkin`, which had accumulated all 14 commits from Phase 7 onward while `main` sat at Phase 6.
 
@@ -24,26 +31,32 @@ That split is worth remembering, because it hid four phases of finished work for
 `@fullcalendar/react`, `temporal-polyfill` and `recharts`. Without it the build
 fails on missing modules, which looks like broken code and is not.
 
-| Phase                        | State                                                                     |
-| ---------------------------- | ------------------------------------------------------------------------- |
-| 0 Foundation                 | Next.js 16 + TS strict + Tailwind v4 + pnpm, i18n from day one            |
-| 1 Design system              | 21 shadcn components on canonical tokens, dark-first, motion primitives   |
-| 2 Authentication             | Email + Google, onboarding callable, custom claims, guards                |
-| 3 Organizer foundation       | Organizations, branding, team, in-app invites                             |
-| 4 Event management           | 9-step wizard, venues, artists, ticket tiers, publish gates               |
-| 5 Public pages               | `/events/[slug]`, `/discover` with search, organizer + artist pages       |
-| 6 Booking                    | Request → bank details → receipt → organizer approval                     |
-| 7 Tickets & check-in         | Signed QR on approval, ticket wallet, door scanner, Resend delivery (off) |
-| 8a Production tools          | Timeline, Kanban, activity feed — deployed                                |
-| 8b Calendar + comms          | Unified calendar (FullCalendar v7), channels + messages — deployed        |
-| 8c Analytics                 | Aggregate-on-read dashboards, Recharts, `trackEventView` — deployed       |
-| 9a Admin foundation          | Admin shell, user management, audit log — callables deployed              |
-| 9b Verification + moderation | Verified badge, org suspension, event takedown — deployed                 |
-| 9c Reports, flags, settings  | Report queue, feature flags, platform settings — deployed                 |
-| 10a Motion + error states    | Reduced-motion gap and two swallowed listeners fixed                      |
-| 10b Performance + a11y audit | **Not started — the remaining work**                                      |
+| Phase                        | State                                                                                  |
+| ---------------------------- | -------------------------------------------------------------------------------------- |
+| 0 Foundation                 | Next.js 16 + TS strict + Tailwind v4 + pnpm, i18n from day one                         |
+| 1 Design system              | 21 shadcn components on canonical tokens, dark-first, motion primitives                |
+| 2 Authentication             | Email + Google, onboarding callable, custom claims, guards                             |
+| 3 Organizer foundation       | Organizations, branding, team, in-app invites                                          |
+| 4 Event management           | 9-step wizard, venues, artists, ticket tiers, publish gates                            |
+| 5 Public pages               | `/events/[slug]`, `/discover` with search, organizer + artist pages                    |
+| 6 Booking                    | Request → bank details → receipt → organizer approval                                  |
+| 7 Tickets & check-in         | Signed QR on approval, ticket wallet, door scanner, Resend delivery (off)              |
+| 8a Production tools          | Timeline, Kanban, activity feed — deployed                                             |
+| 8b Calendar + comms          | Unified calendar (FullCalendar v7), channels + messages — deployed                     |
+| 8c Analytics                 | Aggregate-on-read dashboards, Recharts, `trackEventView` — deployed                    |
+| 9a Admin foundation          | Admin shell, user management, audit log — callables deployed                           |
+| 9b Verification + moderation | Verified badge, org suspension, event takedown — deployed                              |
+| 9c Reports, flags, settings  | Report queue, feature flags, platform settings — deployed                              |
+| 10a Motion + error states    | Reduced-motion gap and two swallowed listeners fixed                                   |
+| 10b Performance + a11y audit | Done — headings, labels, RTL, nav overflow, token bridge. Contrast measured, see below |
+| 11 Launch hardening          | Code done and deployed: rate limiting, rules review, App Check (off by design)         |
 
-Recent commits: `5e68528` phase 9b/9c · `3654e53` phase 10a · `0855ec5` 9a review fixes · `4472ae7` phase 9a · `2325fa6` + `5f3853b` + `4f79816` 8b/8c review fixes · `ee0908a` phase 8c · `ab77817` phase 8b.
+Recent commits: `9124f70` the phase 5–10b defect sweep · `728ad8b` focus rings · `63c2bd4` admin routing · `e6fee97` homepage headings.
+
+**Two measurements that came out of 10b, both worth knowing before touching design or bundling:**
+
+- **Light-theme contrast fails AA** on the `warning` (2.86), `success` (3.35) and `destructive` (4.00) badges, and `muted-foreground` on `--surface` (4.40). Dark — the default — passes everywhere, `muted-foreground` on `--card` at 7.04. Fixing this means changing canonical §8 palette values, which `CLAUDE_TASKS.md` freezes, so it is an owner decision and not a bug to quietly fix.
+- **Initial JS is 167 KB gzipped**, inside canonical §11's 250 KB budget. LCP/INP/CLS are still unmeasured — the Browser pane never composited frames, so any runtime metric taken there would have been fiction.
 
 **A fresh worktree needs `.env.local` copied in.** It is gitignored, so a new
 worktree has no Firebase config and `pnpm build` fails during prerender with a
@@ -146,10 +159,19 @@ nothing is outstanding behind it.
   icon-only buttons all labelled, and every other motion component already
   guarded. The Aurora hero backdrop correctly collapses to a static gradient.
 
-#### 10b — the next task
+#### 10b — done 2026-07-29
 
-Performance and accessibility. Audit first and fix only what the audit finds —
-that is how 10a stayed small and honest. Concretely:
+Delivered: an `h1` on the wizard page (all nine steps had none), kanban headings
+promoted to `h2` to close a level skip, the cover-image input given a label
+association, FullCalendar's prev/next hints routed through `messages/` (its
+defaults are English strings no locale overrides), dialog and sheet close
+buttons moved to logical `end-*` so they flip in RTL, the workspace nav turned
+into a scroll strip — it was forcing ~690px of horizontal overflow onto every
+workspace page at 375px — and the `hero-backdrop` hex removed in favour of
+reading `--primary`/`--brand`/`--info` off `:root`.
+
+The original scope is kept below because it names the right things to re-check
+after any significant UI change:
 
 - **Keyboard only.** Traverse the 9-step wizard, every dialog (task, calendar,
   channel), the Kanban, and the scanner without a mouse. Dialogs must trap
@@ -169,12 +191,32 @@ that is how 10a stayed small and honest. Concretely:
   confined to their own lazy chunks — confirm nothing new leaked into the
   shared bundle.
 
-One known violation to decide on rather than silently keep:
-`hero-backdrop.tsx` passes literal hex values to the WebGL Aurora, which the
-design rules otherwise forbid. WebGL cannot read CSS variables directly, so it
-needs either a documented exception or a small `getComputedStyle` bridge.
+### Phase 11 — launch hardening, code done 2026-07-29
 
-### There is no admin account, by design
+Canonical §194 said App Check, rate limiting and daily backups were "built
+compatible from day 1, ENFORCED at Phase 11". That held up: `RATE_LIMITED` was
+already sitting in `ERROR_CODES` waiting to be used.
+
+- **Rate limiting** — `functions/src/lib/rate-limit.ts`, a Firestore-backed
+  fixed-window limiter. Guide 22's numbers where a callable exists (`createBooking`
+  5/min, `submitReceipt` 10/hr, `inviteMember` 20/hr), plus `submitReport` 5/hr
+  and `trackEventView` 60/min-per-IP. Guide 22's Authentication, Search and
+  Notifications limits have no callable behind them; that is recorded in the file
+  so they do not look forgotten. State lives in `rateLimits`, denied to all
+  clients, reclaimed by a **TTL policy on `expiresAt`** that is declared in
+  `firestore.indexes.json` under `fieldOverrides` — without it that collection
+  grows forever.
+- **Security rules review** — full pass. Two fixes: `rateLimits` explicitly
+  denied, and `suspendedReason` + `email` added to `protectedUserFieldsUnchanged`,
+  because suspension disables an account but its ID token stays valid up to an
+  hour, leaving a window to blank the reason the admin console shows.
+- **App Check** — client in `firebase/app-check.ts`, inert without a site key so
+  fresh clones, emulators and CI keep working. Server side is
+  `enforceAppCheck: process.env.APPCHECK_ENFORCE === "true"` and is **off on
+  purpose**. Turning it on before a token-sending client is deployed rejects
+  every call and takes the product down. The safe order is `docs/LAUNCH_CHECKLIST.md` §3.
+
+### Bootstrapping the first admin
 
 `assignUserRole` requires an existing admin, so the first one cannot be made
 from the UI. Bootstrap it:
@@ -194,6 +236,17 @@ and 9c, and **has been reverted to `organizer` with its `organizationId` claim
 intact** — it is exactly as documented below. If a check script ever dies
 part-way, re-check its claims before trusting them: one crashed run left the
 account as admin and the next script captured that as its "restore to" value.
+
+**This section used to claim there was no admin account "by design". That is
+false and has been since before the 2026-07-29 sweep:** `fakealabady@gmail.com`
+was already Super Admin, and `fakealabady+1@gmail.com` was granted admin during
+the sweep at the owner's instruction and left there. Confirm both are intended
+before launch — it is a row in `docs/LAUNCH_CHECKLIST.md` §5.
+
+A pre-existing inconsistency worth knowing: ahmed's Firestore `users/{uid}.role`
+read `admin` while the token claim read `organizer`. The admin console lists
+roles from the **document**, so an account can display as admin while the route
+guard treats it as an organizer.
 
 ## Decisions already locked — do not relitigate
 
@@ -252,14 +305,19 @@ Because it already owns an org, `createOrganization` and `acceptInvitation` will
 
 ## Open items
 
+**`docs/LAUNCH_CHECKLIST.md` is now the live list.** What follows is the subset that predates it, corrected.
+
+**Closed since this list was written:** marketing pages (about/contact/privacy/terms are built and reachable via `PublicFooter`); the `suspendUser` reason and `assignUserRole` wiring (both now on the admin users page); the calendar paint question (it paints — the old note was the gotcha #12 headless artifact, as was "AnimatedCounter frozen at 0"); and "most UI unverified in a browser", which a full sweep on 2026-07-29 largely settled — see `FINAL_PHASES.md` §8 for the surface-by-surface record.
+
+**Still open, and one item nobody had noticed:**
+
+- **Eight orphaned Cloud Functions in `europe-west1`.** `d61bac8` moved the backend to `me-central1`; Firebase does not move functions between regions, it creates new ones and leaves the originals running. `acceptInvitation`, `assignUserRole`, `completeOnboarding`, `createOrganization`, `inviteMember`, `removeMember`, `updateMemberRole` and `updateOrganization` are still live there, frozen at their 2026-07-26 code — so that `inviteMember` has no rate limiting and that `assignUserRole` still has the claim-clobbering bug fixed in `ab20f39`. Not an open door (the admin check predates the move), but they must go. Command and full reasoning in `docs/LAUNCH_CHECKLIST.md` §5.1. **Run `firebase functions:list` after any future region change.**
 - **Move Storage out of `US-EAST1`.** Receipts (financial documents) and cover images live there while Firestore is in Dammam. Fixable by adding a Gulf bucket and pointing the SDK at it — unlike Firestore this is not permanent, but it gets harder as files accumulate.
-- **Marketing pages** (about, contact, privacy, terms) from guide 15's Phase 2 are not built.
 - **Receipt and QR download URLs are bearer tokens.** Firebase tokenised URLs bypass rules, so anyone holding one can view the file. Each URL sits on a document only the owner and the relevant org members can read — that is the protection. The QR _token_ is separately HMAC-signed, so possessing the image URL is not the same as being able to forge a ticket.
 - **Nothing releases a used ticket.** There is no un-check-in, and `cancelBooking` still refuses approved bookings, so a mistaken scan can only be fixed in the console. Worth a proper flow before real doors.
 - **No scheduled expiry** for stale `pending_payment` bookings yet, though the status exists.
-- **Most UI is still unverified in a real browser.** What _has_ been driven by a signed-in user: the calendar (entry created and read back), messaging (channel created, message sent and rendered), and analytics (metrics and both charts rendered). Everything else — the Phase 7 wallet, QR reveal and camera scanner, Phase 8a's timeline/Kanban/activity feed, and the whole Phase 9 admin console — is proven only at the callable and build level.
-- **The calendar's visual paint is specifically unconfirmed.** Entries reach the DOM with the right classes, but FullCalendar keeps them `visibility: hidden` in a zero-height row whenever `ResizeObserver` does not fire — which is always true in a non-displayed Browser pane (gotcha #12). Open the pane and load `/en/workspace/calendar` to settle it; do not "fix" it before checking that.
-- **Phase 9b left two gaps that are surface, not defects.** `suspendUser` accepts and stores a `reason` that the UI never captures or displays, and `assignUserRole` is exported from `admin-service.ts` but wired to nothing — guide 43 lists "Change role" as an admin action. It is safe to wire now that the claim-wiping bug is fixed.
+- **The rate limiter has never been exercised against the live deployment.** It is unit-tested and deployed, but no real booking has run through `enforceRateLimit` since. It fails closed, so the first person to find a mistake in the transaction would be an attendee. One booking on Layla's org settles it.
+- **`pnpm lint` reports ~900 phantom errors** from `.next` build output inside `.claude/worktrees/`. `.next/**` in `globalIgnores` only anchors at the repo root, so eslint walks the worktree checkouts. Adding `.claude/**` fixes it; `eslint.config.mjs` is protected by a hook, so this needs the hook disabled briefly or the stale worktrees deleted. Until then, lint the source directly: `pnpm exec eslint app components features tests hooks firebase`.
 - **`roles/iam.serviceAccountTokenCreator` was granted to `fakealabady@gmail.com`** on the runtime service account, so Phase 7 could be tested by minting ID tokens locally. It lets the holder impersonate that service account — revoke it unless you are actively running such tests:
   `gcloud iam service-accounts remove-iam-policy-binding 119928286158-compute@developer.gserviceaccount.com --member="user:fakealabady@gmail.com" --role="roles/iam.serviceAccountTokenCreator" --project eventech-2f278`
 
