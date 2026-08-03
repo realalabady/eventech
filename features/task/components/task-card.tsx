@@ -53,8 +53,8 @@ export function TaskCard({
       {...attributes}
       {...listeners}
       // Dragging only moves transform/opacity — never layout properties (§9).
-      className={`cursor-grab space-y-2 rounded-xl border border-border bg-card px-4 py-3 text-start transition-[border-color,opacity] duration-150 hover:border-foreground/20 active:cursor-grabbing ${
-        isDragging ? "opacity-40" : ""
+      className={`cursor-grab space-y-2 rounded-xl border border-border bg-card px-4 py-3 text-start shadow-xs transition-[border-color,opacity,box-shadow,transform] duration-[var(--motion-fast)] ease-out hover:border-foreground/20 hover:shadow-sm active:cursor-grabbing ${
+        isDragging ? "z-10 scale-[1.02] opacity-90 shadow-lg motion-reduce:scale-100" : ""
       }`}
     >
       <button

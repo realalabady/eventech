@@ -1,0 +1,212 @@
+# TASK_02_TYPOGRAPHY_SYSTEM.md
+
+# EvenTech — Phase 02
+## Premium Typography
+
+---
+
+# Objective
+
+Transform typography into a premium editorial system inspired by Apple, Linear and Luma.
+
+Do not change branding.
+
+---
+
+# Read First
+
+README.md
+
+DESIGN_PHILOSOPHY.md
+
+UI_COMPONENT_RULES.md
+
+---
+
+# Font
+
+Use
+
+Geist
+
+Fallback
+
+Inter
+
+---
+
+# Files Expected To Change
+
+app/layout.tsx
+
+tailwind.config.ts
+
+globals.css
+
+components/ui/
+
+components/layout/
+
+---
+
+# Type Scale
+
+Display
+
+72
+
+Hero
+
+64
+
+H1
+
+48
+
+H2
+
+36
+
+H3
+
+30
+
+H4
+
+24
+
+Body
+
+16
+
+Caption
+
+14
+
+Small
+
+13
+
+---
+
+# Font Weight
+
+Display
+
+700
+
+Heading
+
+600
+
+Body
+
+400
+
+Buttons
+
+500
+
+---
+
+# Line Height
+
+Display
+
+1.0
+
+Heading
+
+1.1
+
+Body
+
+1.6
+
+---
+
+# Letter Spacing
+
+Headings
+
+Slightly tighter
+
+Body
+
+Normal
+
+Buttons
+
+Slightly wider
+
+---
+
+# Improve
+
+Hero sections
+
+Dashboard titles
+
+Cards
+
+Forms
+
+Sidebar
+
+Navigation
+
+Tables
+
+Dialogs
+
+Settings
+
+---
+
+# Spacing
+
+Use strict
+
+8px system
+
+---
+
+# Paragraph Width
+
+Limit reading width
+
+Improve readability
+
+---
+
+# Responsive Typography
+
+Desktop
+
+Tablet
+
+Mobile
+
+Fluid scaling
+
+---
+
+# Do Not
+
+Add fonts
+
+Mix fonts
+
+Use decorative fonts
+
+---
+
+# Deliverables
+
+Typography system
+
+Updated scale
+
+Files modified
+
+Accessibility review

@@ -49,7 +49,7 @@ export default async function HomePage({ params }: HomePageProps) {
             animateBy="words"
             delay={70}
             stepDuration={0.3}
-            className="text-4xl leading-[1.1] font-semibold tracking-tight text-balance md:text-6xl"
+            className="text-hero"
           />
 
           <FadeIn delay={0.35}>

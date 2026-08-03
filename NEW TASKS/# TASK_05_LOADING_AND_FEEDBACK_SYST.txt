@@ -1,0 +1,279 @@
+# TASK_05_LOADING_AND_FEEDBACK_SYSTEM.md
+
+# EvenTech — Phase 05
+## Premium Loading Experience
+
+---
+
+# Objective
+
+Replace every generic loading experience with a premium system inspired by Luma and Linear.
+
+Users should never feel the application is waiting.
+
+They should feel it is progressing.
+
+---
+
+# Read First
+
+README.md
+
+DESIGN_PHILOSOPHY.md
+
+FRONTEND_ARCHITECTURE.md
+
+---
+
+# Libraries
+
+Use
+
+- shadcn Skeleton
+- Framer Motion
+- Sonner
+- Next/Image
+
+---
+
+# Files Expected To Change
+
+components/ui/
+
+components/loading/
+
+components/dashboard/
+
+components/cards/
+
+components/events/
+
+components/profile/
+
+components/tickets/
+
+components/layout/
+
+---
+
+# Remove
+
+Loading...
+
+Spinners
+
+Blank screens
+
+Flashing layouts
+
+---
+
+# Replace With
+
+Skeletons
+
+Content placeholders
+
+Progressive loading
+
+Fade-in content
+
+Blur-up images
+
+Animated shimmer
+
+---
+
+# Skeleton System
+
+Create reusable skeletons for
+
+Cards
+
+Tables
+
+Dashboard widgets
+
+Profile
+
+Calendar
+
+Timeline
+
+Kanban
+
+Lists
+
+Forms
+
+Charts
+
+Tickets
+
+Event details
+
+Organizer profile
+
+---
+
+# Image Loading
+
+Use Next.js Image.
+
+Implement
+
+Blur placeholder
+
+Fade transition
+
+Lazy loading
+
+Priority loading for hero content
+
+---
+
+# Progressive Rendering
+
+Render
+
+Layout
+
+↓
+
+Skeleton
+
+↓
+
+Data
+
+↓
+
+Animations
+
+Avoid blocking the page.
+
+---
+
+# Empty States
+
+Every page must have
+
+Illustration
+
+Helpful text
+
+Primary CTA
+
+Secondary CTA
+
+---
+
+# Error States
+
+Friendly messaging
+
+Retry button
+
+Animated appearance
+
+Do not expose technical errors.
+
+---
+
+# Success States
+
+Booking approved
+
+Profile updated
+
+Image uploaded
+
+Event published
+
+Task completed
+
+Show elegant confirmation animation.
+
+---
+
+# Toast System
+
+Use Sonner.
+
+Implement
+
+Success
+
+Warning
+
+Error
+
+Info
+
+Undo where appropriate
+
+Floating stack
+
+Animated entry
+
+Animated exit
+
+---
+
+# Progress Indicators
+
+Uploads
+
+QR generation
+
+Booking approval
+
+Publishing event
+
+Cloud Function processing
+
+Need visual progress.
+
+---
+
+# Dashboard
+
+Widgets should load independently.
+
+Avoid blocking the whole dashboard.
+
+---
+
+# Accessibility
+
+Screen reader support
+
+ARIA live regions
+
+Reduced motion compatibility
+
+---
+
+# Performance
+
+Avoid layout shift.
+
+Reuse skeleton components.
+
+Lazy load heavy modules.
+
+---
+
+# Deliverables
+
+Complete loading system
+
+Reusable skeleton library
+
+Feedback system
+
+Toast system
+
+Files modified
+
+Performance improvements

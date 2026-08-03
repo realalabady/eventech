@@ -1,0 +1,287 @@
+# TASK_06_ORGANIZER_DASHBOARD.md
+
+# EvenTech — Phase 06
+## Premium Organizer Dashboard
+
+---
+
+# Objective
+
+Transform the Organizer Dashboard into a professional production studio.
+
+The organizer should feel like they are managing a live production, not filling out forms.
+
+Inspired by:
+
+- Luma
+- Linear
+- Framer
+- Notion
+- Raycast
+
+---
+
+# Read First
+
+README.md
+
+ORGANIZER_DASHBOARD_SPEC.md
+
+DESIGN_PHILOSOPHY.md
+
+MOTION_SYSTEM.md
+
+---
+
+# Libraries
+
+Use
+
+- Framer Motion
+- ReactBits
+- 21st.dev
+- Recharts
+- dnd-kit
+- FullCalendar
+- Sonner
+- shadcn/ui
+
+---
+
+# Files Expected To Change
+
+app/[locale]/organizer/
+
+components/dashboard/
+
+components/widgets/
+
+components/calendar/
+
+components/kanban/
+
+components/activity/
+
+components/charts/
+
+components/cards/
+
+---
+
+# Dashboard Layout
+
+Sections
+
+Top Overview
+
+↓
+
+Analytics
+
+↓
+
+Timeline
+
+↓
+
+Kanban
+
+↓
+
+Calendar
+
+↓
+
+Recent Activity
+
+↓
+
+Upcoming Events
+
+↓
+
+Quick Actions
+
+---
+
+# Overview Cards
+
+Show
+
+Events
+
+Bookings
+
+Revenue
+
+Pending Requests
+
+Attendees
+
+Messages
+
+Each card should have
+
+Animated counter
+
+Trend indicator
+
+Mini chart
+
+Hover animation
+
+---
+
+# Timeline
+
+Animated progress
+
+Current milestone
+
+Upcoming milestones
+
+Completed milestones
+
+Smooth transitions
+
+---
+
+# Kanban
+
+Use dnd-kit
+
+Columns
+
+Planning
+
+Venue
+
+Marketing
+
+Sales
+
+Ready
+
+Completed
+
+Features
+
+Drag
+
+Drop
+
+Animations
+
+Auto scroll
+
+Column collapse
+
+---
+
+# Calendar
+
+Interactive
+
+Drag events
+
+Resize events
+
+Color coding
+
+Animated transitions
+
+---
+
+# Activity Feed
+
+Live updates
+
+Booking approved
+
+Receipt uploaded
+
+Task completed
+
+Event published
+
+Comments
+
+Animated appearance
+
+---
+
+# Charts
+
+Bookings
+
+Revenue
+
+Attendance
+
+Growth
+
+Real-time updates
+
+---
+
+# Quick Actions
+
+Create Event
+
+Approve Booking
+
+Invite Team
+
+Upload Banner
+
+Publish Event
+
+---
+
+# Team Widget
+
+Online members
+
+Assigned tasks
+
+Current activity
+
+Notifications
+
+---
+
+# Empty States
+
+Beautiful illustrations
+
+Helpful CTA
+
+Create first event
+
+Invite team
+
+---
+
+# Performance
+
+Lazy load charts
+
+Memoize widgets
+
+Virtualize long lists
+
+---
+
+# Deliverables
+
+Production dashboard
+
+Animated widgets
+
+Interactive calendar
+
+Kanban board
+
+Analytics
+
+Files modified

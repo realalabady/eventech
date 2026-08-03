@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { Skeleton } from "@/components/ui/skeleton";
+import { transition } from "@/lib/motion";
 
 import { useEventTimeline } from "../hooks/use-timeline";
 import { setTimelineStage } from "../services/timeline-service";
@@ -80,7 +81,7 @@ export function EventTimeline({
             className="h-full origin-left rounded-full bg-primary"
             initial={reduce ? false : { scaleX: 0 }}
             animate={{ scaleX: percent / 100 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            transition={transition.slow}
           />
         </div>
       </div>
@@ -99,10 +100,10 @@ export function EventTimeline({
               disabled={busy === stage.id}
               onClick={() => onToggle(stage.id, !stage.completed)}
               aria-pressed={stage.completed}
-              className="flex w-full items-center gap-3 rounded-xl border border-transparent px-3 py-3 text-start transition-colors duration-150 outline-none hover:border-border hover:bg-card focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-60"
+              className="flex w-full items-center gap-3 rounded-xl border border-transparent px-3 py-3 text-start transition-[background-color,border-color,box-shadow] duration-[var(--motion-fast)] ease-out outline-none hover:border-border hover:shadow-xs hover:bg-card focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-60"
             >
               <span
-                className={`flex size-6 shrink-0 items-center justify-center rounded-full border transition-colors duration-150 ${
+                className={`flex size-6 shrink-0 items-center justify-center rounded-full border transition-[background-color,border-color,transform] duration-[var(--motion-base)] ease-out ${
                   stage.completed
                     ? "border-success bg-success/15 text-success"
                     : "border-border text-transparent"

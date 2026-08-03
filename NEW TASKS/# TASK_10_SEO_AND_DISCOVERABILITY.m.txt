@@ -1,0 +1,215 @@
+# TASK_10_SEO_AND_DISCOVERABILITY.md
+
+# EvenTech — Phase 10
+## SEO & Discoverability
+
+---
+
+# Objective
+
+Build a production-grade SEO system for EvenTech.
+
+Every public page must be optimized for:
+
+- Google
+- Bing
+- AI Search
+- Social Sharing
+
+---
+
+# Read First
+
+README.md
+
+FRONTEND_ARCHITECTURE.md
+
+PRODUCT_REQUIREMENTS.md
+
+---
+
+# Tools
+
+Use
+
+- Next.js Metadata API
+- next-sitemap
+- JSON-LD
+- Open Graph
+- Twitter Cards
+
+---
+
+# Files Expected To Change
+
+app/
+
+app/sitemap.ts
+
+app/robots.ts
+
+app/manifest.ts
+
+components/seo/
+
+lib/seo/
+
+---
+
+# Metadata
+
+Every public page must have
+
+Title
+
+Description
+
+Canonical URL
+
+Keywords
+
+OpenGraph
+
+Twitter
+
+Theme Color
+
+Authors
+
+Category
+
+---
+
+# Dynamic Metadata
+
+Generate for
+
+Events
+
+Organizer Pages
+
+Public Profiles
+
+Cities
+
+Categories
+
+Landing Pages
+
+---
+
+# Structured Data
+
+Implement
+
+Organization
+
+Event
+
+Person
+
+Breadcrumb
+
+Website
+
+FAQ
+
+SearchAction
+
+---
+
+# Open Graph
+
+Generate dynamic OG images.
+
+Every event should have its own preview image.
+
+---
+
+# Sitemap
+
+Generate automatically.
+
+Include
+
+Events
+
+Profiles
+
+Categories
+
+Cities
+
+Landing Pages
+
+Exclude
+
+Admin
+
+Dashboard
+
+Private pages
+
+---
+
+# Robots
+
+Allow indexing
+
+Block
+
+Admin
+
+Dashboard
+
+Settings
+
+Private APIs
+
+---
+
+# URL Structure
+
+Readable URLs
+
+/events/summer-festival
+
+/organizer/sonara
+
+/category/house-music
+
+---
+
+# AI Optimization
+
+Use semantic HTML.
+
+Clear headings.
+
+Structured sections.
+
+Meaningful metadata.
+
+---
+
+# Performance
+
+Metadata must not delay rendering.
+
+Use static generation where possible.
+
+---
+
+# Deliverables
+
+Complete SEO system
+
+Metadata
+
+Structured data
+
+Dynamic sitemap
+
+Robots
+
+Files modified

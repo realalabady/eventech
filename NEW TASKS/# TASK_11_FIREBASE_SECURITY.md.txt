@@ -1,0 +1,258 @@
+# TASK_11_FIREBASE_SECURITY.md
+
+# EvenTech — Phase 11
+## Firebase Security & Production Hardening
+
+---
+
+# Objective
+
+Prepare Firebase for production.
+
+No client should be trusted.
+
+All sensitive logic belongs on the backend.
+
+---
+
+# Read First
+
+README.md
+
+FIREBASE_ARCHITECTURE.md
+
+SECURITY_ARCHITECTURE.md
+
+FIRESTORE_SECURITY_RULES.md
+
+---
+
+# Firebase Services
+
+Review
+
+Authentication
+
+Firestore
+
+Storage
+
+Cloud Functions
+
+App Check
+
+---
+
+# Files Expected To Change
+
+firebase.json
+
+firestore.rules
+
+storage.rules
+
+functions/
+
+lib/firebase/
+
+middleware.ts
+
+---
+
+# Authentication
+
+Validate
+
+Email Verification
+
+Role Claims
+
+Session Handling
+
+Token Refresh
+
+Unauthorized Access
+
+---
+
+# Firestore Rules
+
+Protect
+
+Users
+
+Bookings
+
+Events
+
+Teams
+
+Payments
+
+Messages
+
+Admin Collections
+
+Only authorized users should read/write.
+
+---
+
+# Storage Rules
+
+Restrict
+
+Profile Images
+
+Event Banners
+
+Receipts
+
+QR Codes
+
+Private Documents
+
+Validate
+
+Owner
+
+File Type
+
+File Size
+
+---
+
+# Cloud Functions
+
+Validate all input.
+
+Never trust frontend values.
+
+Check authentication.
+
+Check roles.
+
+Rate limit sensitive actions.
+
+---
+
+# App Check
+
+Enable App Check.
+
+Protect
+
+Firestore
+
+Storage
+
+Functions
+
+---
+
+# Rate Limiting
+
+Protect
+
+Login
+
+Booking
+
+Receipt Upload
+
+QR Generation
+
+Invitations
+
+Notifications
+
+---
+
+# Validation
+
+Validate
+
+Email
+
+Phone
+
+IBAN
+
+URLs
+
+Images
+
+Booking Requests
+
+---
+
+# Secrets
+
+Move all secrets to
+
+Firebase Secret Manager
+
+Environment Variables
+
+Never expose credentials.
+
+---
+
+# Logging
+
+Log
+
+Errors
+
+Permission Denied
+
+Authentication Failures
+
+Critical Events
+
+---
+
+# Monitoring
+
+Enable
+
+Firebase Performance
+
+Crash Reporting
+
+Cloud Logging
+
+Alerts
+
+---
+
+# Security Review
+
+Review
+
+Authentication
+
+Authorization
+
+Data Validation
+
+Storage Access
+
+Cloud Functions
+
+Firestore Rules
+
+---
+
+# Deliverables
+
+Updated Firestore Rules
+
+Updated Storage Rules
+
+Secure Cloud Functions
+
+App Check
+
+Security report
+
+Files modified

@@ -12,7 +12,7 @@ export default async function VerifyEmailPage({ params }: PageProps) {
   return (
     <div className="space-y-8">
       <header className="space-y-2">
-        <h1 className="text-3xl font-semibold tracking-tight">{t("title")}</h1>
+        <h1 className="text-h1">{t("title")}</h1>
       </header>
       <VerifyEmailPanel />
     </div>

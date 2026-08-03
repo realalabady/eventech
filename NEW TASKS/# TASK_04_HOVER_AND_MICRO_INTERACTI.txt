@@ -1,0 +1,325 @@
+# TASK_04_HOVER_AND_MICRO_INTERACTIONS.md
+
+# EvenTech — Phase 04
+## Premium Hover & Micro Interactions
+
+---
+
+# Objective
+
+Transform every interaction into a premium experience inspired by:
+
+- Luma
+- Linear
+- Raycast
+- Framer
+- Apple
+
+The interface should feel alive.
+
+Every interaction must provide visual feedback.
+
+---
+
+# Read First
+
+README.md
+
+DESIGN_PHILOSOPHY.md
+
+MOTION_SYSTEM.md
+
+UI_COMPONENT_RULES.md
+
+---
+
+# Libraries
+
+Use
+
+- Framer Motion
+- Motion
+- ReactBits
+
+Do not replace existing components.
+
+---
+
+# Files Expected To Change
+
+components/ui/
+
+components/cards/
+
+components/buttons/
+
+components/sidebar/
+
+components/navigation/
+
+components/dashboard/
+
+components/forms/
+
+components/modals/
+
+components/dialogs/
+
+components/calendar/
+
+components/kanban/
+
+---
+
+# Buttons
+
+Implement
+
+Hover
+
+- Scale 1.02
+- TranslateY(-2px)
+- Shadow increase
+- Smooth background transition
+
+Pressed
+
+- Scale 0.98
+
+Loading
+
+- Spinner replaced by elegant loading animation
+
+Disabled
+
+- Reduced opacity
+- No hover animation
+
+---
+
+# Cards
+
+Hover
+
+- Lift
+- Border brightness increase
+- Shadow increase
+- Image parallax
+- Title movement (1–2px)
+
+Click
+
+- Scale feedback
+- Shared element transition
+
+---
+
+# Sidebar
+
+Navigation item
+
+Hover
+
+Active
+
+Focus
+
+Animated active indicator
+
+Smooth icon transitions
+
+---
+
+# Inputs
+
+Focus
+
+Glow
+
+Border transition
+
+Placeholder fade
+
+Validation animation
+
+---
+
+# Checkboxes
+
+Animated checkmark
+
+Smooth state transition
+
+---
+
+# Radio Buttons
+
+Animated fill
+
+Scale transition
+
+---
+
+# Switches
+
+Animated thumb
+
+Spring transition
+
+---
+
+# Dropdown
+
+Animated open
+
+Animated close
+
+Fade
+
+Scale
+
+Slide
+
+---
+
+# Tabs
+
+Animated indicator
+
+Shared layout animation
+
+Smooth transitions
+
+---
+
+# Accordions
+
+Height animation
+
+Opacity animation
+
+Icon rotation
+
+---
+
+# Notifications
+
+Floating
+
+Auto dismiss
+
+Swipe to dismiss
+
+Smooth stack animation
+
+---
+
+# Upload
+
+Animated progress
+
+Success animation
+
+Failure animation
+
+Preview transition
+
+---
+
+# Calendar
+
+Hover
+
+Selection
+
+Month transition
+
+Date selection animation
+
+---
+
+# Kanban
+
+Drag preview
+
+Drop animation
+
+Column highlight
+
+Card reorder animation
+
+---
+
+# Timeline
+
+Animated current step
+
+Progress line animation
+
+Milestone completion animation
+
+---
+
+# Booking Flow
+
+Approve
+
+Reject
+
+Pending
+
+Success
+
+Failure
+
+Need animated feedback.
+
+---
+
+# Dashboard
+
+Widgets
+
+Hover
+
+Expand
+
+Refresh
+
+Counter animation
+
+---
+
+# Rules
+
+No animation longer than 350ms.
+
+Use easing consistently.
+
+Never animate for decoration.
+
+Animation must communicate state.
+
+---
+
+# Accessibility
+
+Respect prefers-reduced-motion.
+
+Maintain keyboard navigation.
+
+Visible focus states.
+
+---
+
+# Deliverables
+
+Updated interactive system
+
+Hover states
+
+Micro interactions
+
+Files modified
+
+Performance report

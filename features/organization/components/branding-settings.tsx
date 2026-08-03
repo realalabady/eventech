@@ -30,6 +30,7 @@ function ImageUploader({
   aspect: string;
 }) {
   const t = useTranslations("organization");
+  const tCommon = useTranslations("common");
   const inputRef = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
   const [preview, setPreview] = useState<string | null>(currentUrl);
@@ -54,18 +55,42 @@ function ImageUploader({
     <div className="space-y-2">
       <Label>{label}</Label>
       <div
-        className={`relative overflow-hidden rounded-md border border-border bg-surface ${aspect}`}
+        className={`relative overflow-hidden rounded-md border border-border bg-surface transition-[border-color,box-shadow] duration-[var(--motion-fast)] ease-out ${aspect} ${
+          busy ? "border-brand/40" : ""
+        }`}
       >
         {preview ? (
+          // Keyed on the URL so a replacement image remounts and fades in
+          // rather than swapping pixels in place under the same node.
           <Image
+            key={preview}
             src={preview}
             alt={label}
             fill
-            className="object-cover"
+            className="animate-in fade-in object-cover duration-[var(--motion-base)]"
             unoptimized
           />
         ) : null}
+
+        {/* Dims the old image while the new one uploads, so the frame reads as
+            occupied-but-changing instead of simply stale. */}
+        {busy ? (
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-background/50 backdrop-blur-[1px]"
+          />
+        ) : null}
       </div>
+
+      {/* Progress track only exists while uploading — a permanently visible
+          empty bar reads as a broken control. */}
+      {busy ? (
+        <div
+          role="progressbar"
+          aria-label={t("settings.upload")}
+          className="progress-indeterminate relative h-1 overflow-hidden rounded-full bg-border"
+        />
+      ) : null}
       <input
         ref={inputRef}
         type="file"
@@ -77,7 +102,8 @@ function ImageUploader({
         type="button"
         size="sm"
         variant="outline"
-        disabled={busy}
+        loading={busy}
+        loadingLabel={tCommon("loading")}
         onClick={() => inputRef.current?.click()}
       >
         {t("settings.upload")}

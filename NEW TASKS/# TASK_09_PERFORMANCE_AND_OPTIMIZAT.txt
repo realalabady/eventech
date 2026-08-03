@@ -1,0 +1,238 @@
+# TASK_09_PERFORMANCE_AND_OPTIMIZATION.md
+
+# EvenTech — Phase 09
+## Performance Optimization
+
+---
+
+# Objective
+
+Optimize EvenTech for production.
+
+Target
+
+Lighthouse
+
+95+
+
+Core Web Vitals
+
+Excellent
+
+---
+
+# Read First
+
+README.md
+
+FRONTEND_ARCHITECTURE.md
+
+FIREBASE_ARCHITECTURE.md
+
+---
+
+# Tools
+
+Use
+
+Next.js App Router
+
+Next Image
+
+Dynamic Import
+
+React.lazy where appropriate
+
+Suspense
+
+Firebase Performance
+
+Vercel Analytics
+
+---
+
+# Files Expected To Change
+
+app/
+
+components/
+
+lib/
+
+hooks/
+
+next.config.ts
+
+package.json
+
+---
+
+# Bundle Size
+
+Reduce JavaScript.
+
+Remove unused libraries.
+
+Tree shake imports.
+
+---
+
+# Images
+
+Use next/image.
+
+Lazy load below fold.
+
+Priority load hero images.
+
+Use AVIF/WebP.
+
+Responsive sizes.
+
+---
+
+# Fonts
+
+Use next/font.
+
+Self-host Geist.
+
+Preload fonts.
+
+Avoid layout shift.
+
+---
+
+# Code Splitting
+
+Lazy load
+
+Charts
+
+Calendar
+
+Kanban
+
+Admin
+
+Organizer
+
+Analytics
+
+Heavy dialogs
+
+---
+
+# Suspense
+
+Implement loading boundaries.
+
+Prevent blocking rendering.
+
+---
+
+# Memoization
+
+Review
+
+useMemo
+
+useCallback
+
+React.memo
+
+Only where beneficial.
+
+---
+
+# Lists
+
+Virtualize
+
+Large attendee lists
+
+Bookings
+
+Activities
+
+Notifications
+
+---
+
+# Firebase
+
+Batch reads
+
+Pagination
+
+Indexed queries
+
+Avoid unnecessary listeners
+
+Cache frequently used data
+
+---
+
+# Animations
+
+Animate only
+
+transform
+
+opacity
+
+Use GPU acceleration.
+
+Maintain 60 FPS.
+
+---
+
+# Network
+
+Prefetch routes.
+
+Optimize API requests.
+
+Reduce waterfall loading.
+
+---
+
+# Lighthouse Targets
+
+Performance >95
+
+Accessibility >95
+
+Best Practices >95
+
+SEO >95
+
+---
+
+# Core Web Vitals
+
+LCP
+
+<2.5s
+
+INP
+
+<200ms
+
+CLS
+
+<0.1
+
+---
+
+# Deliverables
+
+Performance report
+
+Bundle analysis
+
+Optimization summary
+
+Lighthouse results
+
+Files modified

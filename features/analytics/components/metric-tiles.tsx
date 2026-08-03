@@ -90,7 +90,7 @@ function Tile({
   const t = useTranslations("analytics");
 
   return (
-    <div className="space-y-3 rounded-xl border border-border bg-card p-6 transition-colors duration-150 hover:border-border/80">
+    <div className="space-y-3 rounded-xl border border-border bg-card p-6 shadow-xs transition-[border-color,box-shadow,transform] duration-[var(--motion-fast)] ease-out hover:-translate-y-0.5 hover:border-foreground/20 hover:shadow-md motion-reduce:hover:translate-y-0">
       <div className="flex items-center gap-2 text-muted-foreground">
         <Icon className="size-4" aria-hidden />
         <span className="text-sm">{label}</span>

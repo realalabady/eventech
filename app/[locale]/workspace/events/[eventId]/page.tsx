@@ -21,7 +21,7 @@ export default async function EventWizardPage({ params }: PageProps) {
         >
           {t("list.title")}
         </Link>
-        <h1 className="text-3xl font-semibold tracking-tight">
+        <h1 className="text-h1">
           {t("wizard.pageTitle")}
         </h1>
         <p className="text-muted-foreground">{t("wizard.pageSubtitle")}</p>

@@ -54,7 +54,7 @@ export default async function DesignPage({ params }: DesignPageProps) {
     <main className="mx-auto w-full max-w-[90rem] flex-1 px-4 py-16 md:px-8">
       <header className="flex items-start justify-between gap-4">
         <div className="max-w-xl space-y-2">
-          <h1 className="text-4xl font-semibold tracking-tight">
+          <h1 className="text-h1">
             {t("title")}
           </h1>
           <p className="text-muted-foreground">{t("subtitle")}</p>
@@ -198,7 +198,7 @@ export default async function DesignPage({ params }: DesignPageProps) {
                 </div>
                 <BlurText
                   text={t("blurSample")}
-                  className="text-3xl font-semibold tracking-tight"
+                  className="text-h1"
                 />
               </div>
             </FadeIn>

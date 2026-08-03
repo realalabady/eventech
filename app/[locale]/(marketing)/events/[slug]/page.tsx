@@ -117,7 +117,7 @@ export default async function PublicEventPage({ params }: PageProps) {
                   {tEvent(`categories.${event.category}`)}
                 </Badge>
               ) : null}
-              <h1 className="text-4xl font-semibold tracking-tight text-balance md:text-5xl">
+              <h1 className="text-h1">
                 {event.title}
               </h1>
             </header>

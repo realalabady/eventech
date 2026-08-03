@@ -18,7 +18,7 @@ export default async function MyBookingsPage({ params }: PageProps) {
       <main className="mx-auto w-full max-w-2xl flex-1 space-y-8 px-4 py-12">
         <header className="flex flex-wrap items-end justify-between gap-4">
           <div className="space-y-2">
-            <h1 className="text-3xl font-semibold tracking-tight">
+            <h1 className="text-h1">
               {t("title")}
             </h1>
             <p className="text-muted-foreground">{t("subtitle")}</p>

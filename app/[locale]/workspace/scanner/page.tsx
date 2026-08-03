@@ -14,7 +14,7 @@ export default async function WorkspaceScannerPage({ params }: PageProps) {
     // though the rest of the workspace is desktop-first (canonical §11).
     <div className="mx-auto max-w-md space-y-8">
       <header className="space-y-2">
-        <h1 className="text-3xl font-semibold tracking-tight">{t("title")}</h1>
+        <h1 className="text-h1">{t("title")}</h1>
         <p className="text-muted-foreground">{t("subtitle")}</p>
       </header>
       <TicketScanner />

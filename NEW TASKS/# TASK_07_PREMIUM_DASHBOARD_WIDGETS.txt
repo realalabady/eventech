@@ -1,0 +1,207 @@
+# TASK_07_PREMIUM_DASHBOARD_WIDGETS.md
+
+# EvenTech — Phase 07
+## Premium Widget System
+
+---
+
+# Objective
+
+Redesign every dashboard widget into reusable premium components.
+
+Widgets should feel modular, interactive and alive.
+
+---
+
+# Read First
+
+README.md
+
+UI_COMPONENT_RULES.md
+
+DESIGN_PHILOSOPHY.md
+
+---
+
+# Libraries
+
+Use
+
+- shadcn/ui
+- ReactBits
+- Recharts
+- Framer Motion
+
+---
+
+# Files Expected To Change
+
+components/widgets/
+
+components/dashboard/
+
+components/charts/
+
+components/ui/
+
+---
+
+# Widget Standards
+
+Every widget must include
+
+Title
+
+Subtitle
+
+Primary data
+
+Secondary data
+
+Trend
+
+Hover state
+
+Loading state
+
+Empty state
+
+Error state
+
+---
+
+# Required Widgets
+
+Event Statistics
+
+Revenue
+
+Bookings
+
+Pending Approvals
+
+Attendance
+
+Growth
+
+Conversion
+
+Upcoming Events
+
+Task Progress
+
+Notifications
+
+Recent Activity
+
+Top Performing Events
+
+---
+
+# Animations
+
+Hover lift
+
+Animated counter
+
+Chart animation
+
+Fade-in
+
+Layout transition
+
+---
+
+# Chart Rules
+
+Responsive
+
+Accessible
+
+Smooth transitions
+
+No excessive colors
+
+Rounded corners
+
+Soft grid lines
+
+---
+
+# KPI Cards
+
+Animated values
+
+Trend arrows
+
+Percentage changes
+
+Mini sparkline
+
+Interactive hover
+
+---
+
+# Widget Actions
+
+Expand
+
+Refresh
+
+Open Details
+
+Pin
+
+Collapse
+
+Every action should be animated.
+
+---
+
+# Responsive
+
+Desktop
+
+Tablet
+
+Mobile
+
+Widgets should intelligently reflow.
+
+---
+
+# Design Rules
+
+Consistent spacing
+
+Consistent radius
+
+Consistent elevation
+
+Consistent typography
+
+---
+
+# Performance
+
+Memoization
+
+Lazy rendering
+
+Dynamic imports
+
+Optimize chart rendering
+
+---
+
+# Deliverables
+
+Reusable widget library
+
+Animated KPI cards
+
+Responsive charts
+
+Premium interactions
+
+Files modified

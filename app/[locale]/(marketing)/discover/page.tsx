@@ -63,7 +63,7 @@ export default async function DiscoverPage({ params }: PageProps) {
 
       <main className="mx-auto w-full max-w-[90rem] flex-1 px-4 py-12 md:px-8 md:py-16">
         <header className="mb-10 space-y-2">
-          <h1 className="text-4xl font-semibold tracking-tight">
+          <h1 className="text-h1">
             {t("title")}
           </h1>
           <p className="text-lg text-foreground/70">{t("subtitle")}</p>

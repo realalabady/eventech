@@ -57,7 +57,7 @@ export default async function PublicArtistPage({ params }: PageProps) {
       <PublicHeader />
 
       <main className="mx-auto w-full max-w-[90rem] flex-1 px-4 py-16 md:px-8">
-        <h1 className="text-4xl font-semibold tracking-tight">{artist.name}</h1>
+        <h1 className="text-h1">{artist.name}</h1>
 
         <section className="mt-12 space-y-6">
           <h2 className="text-xl font-medium tracking-tight">{t("events")}</h2>

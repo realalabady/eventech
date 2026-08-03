@@ -1,7 +1,7 @@
 import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion";
 
 import { cn } from "@/lib/utils";
-import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
+import { ChevronDownIcon } from "lucide-react";
 
 function Accordion({ className, ...props }: AccordionPrimitive.Root.Props) {
   return (
@@ -39,13 +39,13 @@ function AccordionTrigger({
         {...props}
       >
         {children}
+        {/* One rotating chevron instead of swapping two icons. The swap was an
+            instant visibility toggle, so the arrow teleported between states
+            and there was nothing to animate; rotating a single element gives
+            the open/close a direction the eye can follow. */}
         <ChevronDownIcon
           data-slot="accordion-trigger-icon"
-          className="pointer-events-none shrink-0 group-aria-expanded/accordion-trigger:hidden"
-        />
-        <ChevronUpIcon
-          data-slot="accordion-trigger-icon"
-          className="pointer-events-none hidden shrink-0 group-aria-expanded/accordion-trigger:inline"
+          className="pointer-events-none shrink-0 transition-transform duration-[var(--motion-fast)] ease-out group-aria-expanded/accordion-trigger:-rotate-180 motion-reduce:transition-none"
         />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
@@ -65,7 +65,7 @@ function AccordionContent({
     >
       <div
         className={cn(
-          "h-(--accordion-panel-height) pt-0 pb-2.5 data-ending-style:h-0 data-starting-style:h-0 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4",
+          "h-(--accordion-panel-height) overflow-hidden pt-0 pb-2.5 transition-[height,opacity] duration-[var(--motion-base)] ease-out data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0 motion-reduce:transition-none [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4",
           className,
         )}
       >

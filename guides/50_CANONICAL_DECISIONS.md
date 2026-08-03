@@ -198,10 +198,12 @@ The region is declared twice and the two MUST stay in sync: `functions/src/index
 ## 8. Design Tokens
 
 ### Typography
-- **Geist**, fallback `system-ui, sans-serif`. **Exactly 3 weights: 400 / 500 / 600.** (27+18 win; 02's 300–700 and 13's 800 rejected.)
+- **Geist**, fallback `system-ui, sans-serif`. Weights **400 / 500 / 600**, plus **700 on the display tier only** (13's 800 still rejected).
+  - *Amended by NEW TASKS/TASK_02, which specifies Display 700.* The original rule read "exactly 3 weights: 400/500/600". Geist loads as a variable font (`app/[locale]/layout.tsx` passes no `weight` array), so 700 costs nothing in bundle size. It is confined to `--text-display` and `--text-hero`; product headings stay at 600.
 - Product type scale (13 wins): Hero 64 · Display 48 · H1 40 · H2 32 · H3 24 · H4 20 · Body L 18 · Body 16 · Small 14 · Caption 12.
 - 02's larger marketing sizes (Display 72, H1 56…) allowed **only on marketing pages**.
 - Max line length 75ch. Reading width 720px.
+- **Implementation:** both tiers are tokens in `app/globals.css` — `text-display`/`text-hero` (marketing) and `text-h1`…`text-caption` (product), plus `text-control` and `text-overline`. Each token carries size + line-height + letter-spacing + weight, so a type token is a complete decision: **never pair one with a separate `font-*`, `leading-*`, or `tracking-*` class.** Sizes are `clamp()`'d — fluid, no breakpoint jumps. Raw `text-3xl`-style utilities are no longer used for headings.
 
 ### Layout
 - **Max content width 1440px** (13/27/18 win over 03's 1200). Grid 12 / 8 / 4.

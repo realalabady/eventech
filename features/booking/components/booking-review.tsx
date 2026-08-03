@@ -25,6 +25,7 @@ function BookingRow({
   onError: (key: string | undefined) => void;
 }) {
   const t = useTranslations("booking");
+  const tCommon = useTranslations("common");
   const [busy, setBusy] = useState(false);
   const [rejecting, setRejecting] = useState(false);
   const [reason, setReason] = useState("");
@@ -95,7 +96,15 @@ function BookingRow({
 
         {booking.status === "pending_review" && !rejecting ? (
           <>
-            <Button size="sm" disabled={busy} onClick={onApprove}>
+            {/* Approve is the action that actually waits on a Cloud Function,
+                so it owns the spinner. Reject only opens the reason field —
+                showing a spinner there would imply work that is not happening. */}
+            <Button
+              size="sm"
+              loading={busy}
+              loadingLabel={tCommon("loading")}
+              onClick={onApprove}
+            >
               {t("review.approve")}
             </Button>
             <Button
@@ -128,7 +137,9 @@ function BookingRow({
             <Button
               size="sm"
               variant="destructive"
-              disabled={busy || !reason.trim()}
+              loading={busy}
+              loadingLabel={tCommon("loading")}
+              disabled={!reason.trim()}
               onClick={onReject}
             >
               {t("review.confirmReject")}

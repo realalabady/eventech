@@ -29,7 +29,7 @@ export async function DiscoveryEventCard({
   return (
     <Link
       href={`/events/${event.slug}`}
-      className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-[transform,border-color] duration-150 ease-out hover:-translate-y-0.5 hover:border-foreground/20"
+      className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-xs transition-[transform,border-color,box-shadow] duration-[var(--motion-fast)] ease-out hover:-translate-y-0.5 hover:border-foreground/20 hover:shadow-md motion-reduce:hover:translate-y-0"
     >
       <div className="relative aspect-[16/10] overflow-hidden bg-surface">
         {event.coverImage ? (
@@ -39,7 +39,7 @@ export async function DiscoveryEventCard({
             fill
             unoptimized
             sizes="(min-width: 1024px) 22rem, (min-width: 640px) 45vw, 92vw"
-            className="object-cover transition-transform duration-400 ease-out group-hover:scale-[1.03]"
+            className="object-cover transition-transform duration-[var(--motion-slow)] ease-out group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
           />
         ) : (
           // No cover yet: a tinted field using the event's own accent keeps the
@@ -55,15 +55,15 @@ export async function DiscoveryEventCard({
 
       <div className="flex flex-1 flex-col gap-3 p-5">
         <div className="space-y-1">
-          <h3 className="font-medium tracking-tight">{event.title}</h3>
+          <h3 className="text-h4">{event.title}</h3>
           {event.category ? (
-            <p className="text-xs text-muted-foreground">
+            <p className="text-caption text-muted-foreground">
               {t(`categories.${event.category}`)}
             </p>
           ) : null}
         </div>
 
-        <dl className="mt-auto space-y-1.5 text-sm text-foreground/65">
+        <dl className="mt-auto space-y-1.5 text-small text-foreground/65">
           {date ? (
             <div className="flex items-center gap-2">
               <CalendarDays className="size-4 shrink-0 text-foreground/45" />

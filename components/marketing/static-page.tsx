@@ -26,7 +26,7 @@ export async function StaticPage({
       <PublicHeader />
 
       <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-16 md:px-8 lg:py-24">
-        <h1 className="text-4xl font-semibold tracking-tight text-balance">
+        <h1 className="text-h1">
           {t("title")}
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-muted-foreground">

@@ -1,0 +1,305 @@
+# TASK_01_MOTION_SYSTEM.md
+
+# EvenTech — Phase 01
+## Premium Motion System
+
+---
+
+# Objective
+
+Transform the application into a premium experience through a complete motion system inspired by Luma, Linear, Framer and Apple.
+
+Do NOT redesign the UI.
+
+Only improve interaction quality.
+
+---
+
+# Read First
+
+- README.md
+- DESIGN_PHILOSOPHY.md
+- MOTION_SYSTEM.md
+- FRONTEND_ARCHITECTURE.md
+
+---
+
+# Libraries
+
+Install if missing:
+
+- Framer Motion
+- Motion
+- ReactBits
+- AutoAnimate
+
+---
+
+# Files Expected To Change
+
+app/
+
+components/
+
+components/ui/
+
+components/layout/
+
+components/dashboard/
+
+components/navigation/
+
+components/cards/
+
+components/modals/
+
+components/dialogs/
+
+components/sidebar/
+
+components/calendar/
+
+components/kanban/
+
+lib/
+
+hooks/
+
+---
+
+# Global Motion Rules
+
+Animation Duration
+
+120ms
+180ms
+250ms
+350ms
+
+Never exceed 500ms.
+
+---
+
+Use only
+
+opacity
+
+transform
+
+scale
+
+translate
+
+rotate
+
+layout animations
+
+Never animate
+
+width
+
+height
+
+top
+
+left
+
+margin
+
+padding
+
+---
+
+# Implement
+
+## Page Transition
+
+Every route transition
+
+fade
+
+scale
+
+shared layout
+
+---
+
+## Shared Element Transition
+
+Between
+
+Event Card → Event Details
+
+Organizer Card → Organizer Profile
+
+Dashboard Widget → Details
+
+---
+
+## Scroll Reveal
+
+Every page
+
+Stagger children
+
+Viewport animations
+
+Replay only once
+
+---
+
+## Sidebar
+
+Animated collapse
+
+Animated expand
+
+Animated icons
+
+Animated labels
+
+---
+
+## Cards
+
+Hover lift
+
+Scale 1.015
+
+Soft shadow
+
+Border emphasis
+
+---
+
+## Buttons
+
+Hover
+
+Press
+
+Loading
+
+Disabled
+
+---
+
+## Modals
+
+Scale
+
+Fade
+
+Blur background
+
+---
+
+## Dropdown
+
+Fade
+
+Slide
+
+Scale
+
+---
+
+## Tabs
+
+Animated indicator
+
+Shared layout
+
+---
+
+## Toast
+
+Floating
+
+Slide
+
+Dismiss animation
+
+---
+
+## Dashboard
+
+Animated counters
+
+Timeline progression
+
+Kanban transitions
+
+Calendar transitions
+
+Activity feed animation
+
+---
+
+## Timeline
+
+Progress animation
+
+Milestone animation
+
+Current step highlight
+
+---
+
+## Skeleton
+
+Replace every spinner
+
+Use Skeleton
+
+Progressive loading
+
+---
+
+# Accessibility
+
+Respect
+
+prefers-reduced-motion
+
+Keyboard navigation
+
+Focus states
+
+---
+
+# Performance
+
+60 FPS
+
+GPU transforms only
+
+Memoize animations
+
+Lazy motion where possible
+
+---
+
+# Do Not
+
+Change colors
+
+Change layout
+
+Change architecture
+
+Replace components
+
+---
+
+# Deliverables
+
+Explain
+
+Files modified
+
+Motion system added
+
+Performance considerations
+
+Accessibility considerations

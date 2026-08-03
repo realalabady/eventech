@@ -95,7 +95,7 @@ export default async function PublicOrganizerPage({ params }: PageProps) {
             ) : null}
             <div className="space-y-2">
               <div className="flex flex-wrap items-center gap-3">
-                <h1 className="text-3xl font-semibold tracking-tight">
+                <h1 className="text-h1">
                   {organization.name}
                 </h1>
                 {organization.verified ? (

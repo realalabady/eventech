@@ -1,0 +1,232 @@
+# TASK_08_ACCESSIBILITY.md
+
+# EvenTech — Phase 08
+## Accessibility & Inclusive Experience
+
+---
+
+# Objective
+
+Make EvenTech accessible without sacrificing the premium experience.
+
+Accessibility is a core product feature.
+
+---
+
+# Read First
+
+README.md
+
+DESIGN_PHILOSOPHY.md
+
+UI_COMPONENT_RULES.md
+
+---
+
+# Standards
+
+Follow
+
+WCAG 2.2 AA
+
+ARIA Best Practices
+
+Semantic HTML
+
+---
+
+# Files Expected To Change
+
+app/
+
+components/
+
+hooks/
+
+lib/
+
+globals.css
+
+---
+
+# Keyboard Navigation
+
+Support
+
+Tab
+
+Shift + Tab
+
+Enter
+
+Escape
+
+Arrow Keys
+
+Space
+
+Every interactive component must be usable without a mouse.
+
+---
+
+# Focus System
+
+Replace browser default focus.
+
+Create premium focus rings.
+
+Visible on dark mode.
+
+Never remove focus outlines.
+
+---
+
+# Screen Readers
+
+Every button
+
+Every icon button
+
+Every input
+
+Every dialog
+
+Every menu
+
+Every dropdown
+
+Needs
+
+aria-label
+
+aria-describedby
+
+aria-expanded
+
+aria-controls
+
+aria-hidden
+
+when appropriate.
+
+---
+
+# Reduced Motion
+
+Respect
+
+prefers-reduced-motion
+
+Disable
+
+Heavy transitions
+
+Parallax
+
+Large transforms
+
+Timeline animations
+
+Replace with fades.
+
+---
+
+# Contrast
+
+Review every page.
+
+Meet WCAG AA.
+
+Buttons
+
+Cards
+
+Links
+
+Inputs
+
+Charts
+
+Badges
+
+---
+
+# Forms
+
+Labels
+
+Descriptions
+
+Validation
+
+Errors
+
+Required fields
+
+Autocomplete
+
+Correct input types
+
+---
+
+# Images
+
+Meaningful images require alt text.
+
+Decorative images should be hidden from screen readers.
+
+---
+
+# Dialogs
+
+Focus trap
+
+Escape closes
+
+Return focus after close
+
+Background inaccessible while open
+
+---
+
+# Tables
+
+Accessible headers
+
+Keyboard navigation
+
+Sortable announcements
+
+---
+
+# Charts
+
+Provide accessible summaries.
+
+Do not rely only on color.
+
+---
+
+# Testing
+
+Keyboard only
+
+Screen reader
+
+Reduced motion
+
+Mobile accessibility
+
+---
+
+# Deliverables
+
+Accessibility audit
+
+WCAG improvements
+
+ARIA implementation
+
+Keyboard support
+
+Files modified

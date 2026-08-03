@@ -23,7 +23,7 @@ export default async function AccountPage({ params }: PageProps) {
       </header>
 
       <main className="mx-auto w-full max-w-xl flex-1 px-4 py-16">
-        <h1 className="mb-10 text-3xl font-semibold tracking-tight">
+        <h1 className="mb-10 text-h1">
           {t("title")}
         </h1>
         <RequireAuth>

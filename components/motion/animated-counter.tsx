@@ -1,32 +1,29 @@
 "use client";
 
-import {
-  animate,
-  motion,
-  useMotionValue,
-  useReducedMotion,
-  useTransform,
-} from "motion/react";
+import { animate, motion, useMotionValue, useTransform } from "motion/react";
 import { useEffect } from "react";
+
+import { useMotionSafe } from "@/hooks/use-motion-safe";
+import { MOTION_CEILING, duration as durationTokens, easing } from "@/lib/motion";
 
 type AnimatedCounterProps = {
   value: number;
   className?: string;
-  /** Duration in seconds — capped by the canonical 700ms ceiling. */
+  /** Duration in seconds — clamped to the 500ms ceiling. */
   duration?: number;
 };
 
 /**
- * Count-up metric (ReactBits CountUp pattern, adapted to canonical motion rules:
+ * Count-up metric (ReactBits CountUp pattern, adapted to the motion rules:
  * animates ONCE, spring-free easeOut, respects prefers-reduced-motion).
  * Uses motion values — never React state — for the per-frame updates.
  */
 export function AnimatedCounter({
   value,
   className,
-  duration = 0.7,
+  duration = durationTokens.slow,
 }: AnimatedCounterProps) {
-  const reduce = useReducedMotion();
+  const { reduce } = useMotionSafe();
   const count = useMotionValue(reduce ? value : 0);
   const rounded = useTransform(count, (latest) =>
     Math.round(latest).toLocaleString(),
@@ -38,11 +35,15 @@ export function AnimatedCounter({
       return;
     }
     const controls = animate(count, value, {
-      duration: Math.min(duration, 0.7),
-      ease: "easeOut",
+      duration: Math.min(duration, MOTION_CEILING),
+      ease: easing.out,
     });
     return () => controls.stop();
   }, [count, value, duration, reduce]);
 
-  return <motion.span className={className}>{rounded}</motion.span>;
+  return (
+    <motion.span className={className} style={{ fontVariantNumeric: "tabular-nums" }}>
+      {rounded}
+    </motion.span>
+  );
 }

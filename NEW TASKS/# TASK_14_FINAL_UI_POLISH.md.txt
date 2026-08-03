@@ -1,0 +1,338 @@
+# TASK_14_FINAL_UI_POLISH.md
+
+# EvenTech — Phase 14
+## Final Premium UI Polish
+
+---
+
+# Objective
+
+Transform EvenTech from a great application into a premium product.
+
+This phase is entirely about craftsmanship.
+
+Do NOT add new features.
+
+Do NOT change business logic.
+
+Do NOT redesign layouts.
+
+Refine.
+
+Polish.
+
+Perfect.
+
+---
+
+# Read First
+
+README.md
+
+DESIGN_PHILOSOPHY.md
+
+DESIGN_SYSTEM.md
+
+MOTION_SYSTEM.md
+
+---
+
+# Inspiration
+
+Study
+
+- Luma
+- Linear
+- Framer
+- Raycast
+- Arc Browser
+- Apple
+- Notion Calendar
+
+Extract principles.
+
+Never copy UI.
+
+---
+
+# Files Expected To Change
+
+Entire frontend
+
+components/
+
+app/
+
+styles/
+
+globals.css
+
+---
+
+# Typography Polish
+
+Review every page.
+
+Improve
+
+Headline spacing
+
+Paragraph spacing
+
+Line height
+
+Font weights
+
+Visual rhythm
+
+Reading width
+
+---
+
+# Whitespace
+
+Increase breathing room.
+
+Nothing should feel crowded.
+
+Use strict spacing scale.
+
+---
+
+# Visual Hierarchy
+
+Review every screen.
+
+Primary action
+
+↓
+
+Secondary action
+
+↓
+
+Supporting content
+
+↓
+
+Metadata
+
+Must be obvious.
+
+---
+
+# Cards
+
+Review every card.
+
+Improve
+
+Padding
+
+Spacing
+
+Borders
+
+Hover
+
+Shadows
+
+Radius
+
+Content hierarchy
+
+---
+
+# Buttons
+
+Review every button.
+
+Improve
+
+Padding
+
+Icon alignment
+
+Loading state
+
+Hover
+
+Pressed
+
+Disabled
+
+Focus
+
+---
+
+# Forms
+
+Review
+
+Inputs
+
+Select
+
+Textarea
+
+Date picker
+
+Checkbox
+
+Radio
+
+Upload
+
+Validation
+
+Spacing
+
+Error states
+
+---
+
+# Icons
+
+Normalize icon sizes.
+
+Consistent stroke width.
+
+Consistent spacing.
+
+Correct visual alignment.
+
+---
+
+# Tables
+
+Improve
+
+Spacing
+
+Headers
+
+Sorting
+
+Hover
+
+Selection
+
+Pagination
+
+Loading
+
+Empty state
+
+---
+
+# Dashboard
+
+Review every widget.
+
+Improve
+
+Spacing
+
+Hierarchy
+
+Alignment
+
+Consistency
+
+---
+
+# Empty States
+
+Every page must have
+
+Illustration
+
+Helpful message
+
+Primary CTA
+
+Secondary CTA
+
+---
+
+# Error States
+
+Friendly
+
+Useful
+
+Recoverable
+
+Beautiful
+
+---
+
+# Success States
+
+Booking approved
+
+Event published
+
+Task completed
+
+QR generated
+
+Profile updated
+
+Need premium confirmation.
+
+---
+
+# Mobile Polish
+
+Review every page.
+
+Spacing
+
+Touch targets
+
+Typography
+
+Bottom spacing
+
+Safe area
+
+---
+
+# Consistency Audit
+
+Review
+
+Border radius
+
+Shadows
+
+Buttons
+
+Inputs
+
+Spacing
+
+Icons
+
+Typography
+
+Animations
+
+Colors
+
+Hover states
+
+Everything should feel like one design language.
+
+---
+
+# Deliverables
+
+UI polish report
+
+Updated components
+
+Consistency improvements
+
+Files modified

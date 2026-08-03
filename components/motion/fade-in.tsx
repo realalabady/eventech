@@ -1,7 +1,10 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import type { ReactNode } from "react";
+
+import { useMotionSafe } from "@/hooks/use-motion-safe";
+import { distance } from "@/lib/motion";
 
 type FadeInProps = {
   children: ReactNode;
@@ -13,24 +16,25 @@ type FadeInProps = {
 };
 
 /**
- * Entrance reveal. Durations follow the canonical motion scale
- * (guides/50_CANONICAL_DECISIONS.md §9): 400ms, easeOut, opacity+transform only.
+ * Entrance reveal, played once when scrolled into view.
+ * Timing comes from lib/motion.ts — no durations live here.
  */
 export function FadeIn({
   children,
   delay = 0,
-  y = 16,
+  y = distance.md,
   className,
 }: FadeInProps) {
-  const reduce = useReducedMotion();
+  const motionSafe = useMotionSafe();
 
   return (
     <motion.div
       className={className}
-      initial={reduce ? false : { opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
+      variants={motionSafe.fadeUp(y)}
+      initial="hidden"
+      whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.4, delay, ease: "easeOut" }}
+      transition={{ delay }}
     >
       {children}
     </motion.div>

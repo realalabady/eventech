@@ -1,7 +1,10 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import type { ReactNode } from "react";
+
+import { useMotionSafe } from "@/hooks/use-motion-safe";
+import { stagger as staggerTokens } from "@/lib/motion";
 
 type StaggerProps = {
   children: ReactNode;
@@ -10,35 +13,25 @@ type StaggerProps = {
   step?: number;
 };
 
-const container = (step: number) => ({
-  hidden: {},
-  visible: { transition: { staggerChildren: step } },
-});
-
-const item = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: "easeOut" as const },
-  },
-};
-
 /**
- * Staggered reveal for lists/grids (canonical §9: dashboard stagger on first load).
+ * Staggered reveal for lists and grids (§9: dashboard stagger on first load).
  * Wrap children in <StaggerItem> within the same client tree.
+ *
+ * Under reduced motion the container still mounts, but `staggerChildren` drops
+ * to 0 and each item fades without travel — the cascade disappears, the content
+ * does not. Returning a plain <div> instead would strip the fade too.
  */
-export function Stagger({ children, className, step = 0.06 }: StaggerProps) {
-  const reduce = useReducedMotion();
-
-  if (reduce) {
-    return <div className={className}>{children}</div>;
-  }
+export function Stagger({
+  children,
+  className,
+  step = staggerTokens.base,
+}: StaggerProps) {
+  const motionSafe = useMotionSafe();
 
   return (
     <motion.div
       className={className}
-      variants={container(step)}
+      variants={motionSafe.staggerContainer(step)}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
@@ -55,8 +48,10 @@ export function StaggerItem({
   children: ReactNode;
   className?: string;
 }) {
+  const motionSafe = useMotionSafe();
+
   return (
-    <motion.div className={className} variants={item}>
+    <motion.div className={className} variants={motionSafe.fadeUp()}>
       {children}
     </motion.div>
   );

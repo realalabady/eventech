@@ -117,13 +117,15 @@
 .evntech-calendar .fc-item-editable {
   cursor: pointer;
   transition:
-    transform 150ms ease-out,
-    filter 150ms ease-out;
+    transform var(--motion-fast) ease-out,
+    filter var(--motion-fast) ease-out,
+    box-shadow var(--motion-fast) ease-out;
 }
 
 .evntech-calendar .fc-item-editable:hover {
   transform: translateY(-1px);
   filter: brightness(1.08);
+  box-shadow: var(--elevation-sm);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -132,5 +134,61 @@
   }
   .evntech-calendar .fc-item-editable:hover {
     transform: none;
+  }
+}
+
+/*
+ * Day-cell affordances. FullCalendar ships no hover state, so a grid of 35
+ * cells gave no feedback about which one a click would land in. Background
+ * only — moving a cell would shift the whole grid.
+ */
+.evntech-calendar .fc-daygrid-day,
+.evntech-calendar .fc-timegrid-slot {
+  transition: background-color var(--motion-fast) ease-out;
+}
+
+.evntech-calendar .fc-daygrid-day:hover,
+.evntech-calendar .fc-timegrid-slot:hover {
+  background-color: color-mix(in oklab, var(--foreground) 4%, transparent);
+}
+
+/* Today. An outline rather than a fill, so a busy day still reads its events. */
+.evntech-calendar .fc-day-today {
+  background-color: color-mix(in oklab, var(--brand) 7%, transparent) !important;
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand) 30%, transparent);
+}
+
+/*
+ * Selected date — the three-cue rule from §8: fill, border and ring together,
+ * never colour alone.
+ */
+.evntech-calendar .fc-day-selected,
+.evntech-calendar .fc-highlight {
+  background-color: color-mix(in oklab, var(--brand) 12%, transparent) !important;
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand) 45%, transparent);
+}
+
+/*
+ * Month/view change. FullCalendar rebuilds .fc-view on navigation, so this
+ * animates on mount and reads as the new month fading in rather than snapping.
+ * Opacity only: translating a 7-column grid during a rebuild causes visible
+ * reflow on slower machines.
+ */
+.evntech-calendar .fc-view-harness > .fc-view {
+  animation: evntech-calendar-view-in var(--motion-base) ease-out;
+}
+
+@keyframes evntech-calendar-view-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .evntech-calendar .fc-view-harness > .fc-view {
+    animation: none;
   }
 }

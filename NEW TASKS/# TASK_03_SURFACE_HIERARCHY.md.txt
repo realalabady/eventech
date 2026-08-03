@@ -1,0 +1,360 @@
+# TASK_03_SURFACE_HIERARCHY.md
+
+# EvenTech — Phase 03
+## Premium Surface Hierarchy
+
+---
+
+# Objective
+
+Create a premium visual depth system inspired by Luma, Linear, Raycast and Apple.
+
+Do NOT redesign the interface.
+
+Only improve visual hierarchy.
+
+---
+
+# Read First
+
+README.md
+
+DESIGN_PHILOSOPHY.md
+
+UI_COMPONENT_RULES.md
+
+DESIGN_SYSTEM.md
+
+---
+
+# Files Expected To Change
+
+globals.css
+
+tailwind.config.ts
+
+components/ui/
+
+components/cards/
+
+components/dashboard/
+
+components/dialogs/
+
+components/modals/
+
+components/sidebar/
+
+components/layout/
+
+---
+
+# Goal
+
+The application currently feels flat.
+
+Create a clear elevation hierarchy.
+
+Every layer should feel intentional.
+
+---
+
+# Surface Levels
+
+## Level 0
+
+Application Background
+
+No borders
+
+Very subtle gradient
+
+Soft texture if appropriate
+
+---
+
+## Level 1
+
+Sections
+
+Very low contrast
+
+Soft separation
+
+Large spacing
+
+---
+
+## Level 2
+
+Cards
+
+Rounded corners
+
+Thin border
+
+Minimal shadow
+
+Premium appearance
+
+---
+
+## Level 3
+
+Interactive Cards
+
+Hover elevation
+
+Brighter border
+
+Soft glow
+
+Cursor feedback
+
+---
+
+## Level 4
+
+Focused Elements
+
+Selected state
+
+Active state
+
+Keyboard focus
+
+Primary actions
+
+---
+
+## Level 5
+
+Floating Components
+
+Dropdowns
+
+Popovers
+
+Command Palette
+
+Context Menus
+
+Soft blur
+
+Premium shadow
+
+---
+
+## Level 6
+
+Dialogs
+
+Highest elevation
+
+Background blur
+
+Focus trapping
+
+Smooth entrance animation
+
+---
+
+# Border System
+
+Avoid heavy borders.
+
+Use
+
+1px
+
+Low opacity
+
+Neutral colors
+
+Increase opacity only on hover.
+
+---
+
+# Shadow System
+
+Create reusable shadow tokens.
+
+Example
+
+Shadow XS
+
+Shadow SM
+
+Shadow MD
+
+Shadow LG
+
+Shadow XL
+
+Never use harsh shadows.
+
+Use soft ambient shadows.
+
+---
+
+# Radius System
+
+Standardize radius.
+
+Small
+
+Medium
+
+Large
+
+XL
+
+2XL
+
+Do not use random radius values.
+
+---
+
+# Background System
+
+Avoid flat colors.
+
+Use
+
+Subtle gradients
+
+Layered backgrounds
+
+Noise only if extremely subtle
+
+---
+
+# Glass Effects
+
+Only where appropriate.
+
+Examples
+
+Dialogs
+
+Command Palette
+
+Floating Navigation
+
+Context Menus
+
+Do NOT overuse glassmorphism.
+
+---
+
+# Hover Elevation
+
+Cards
+
+Slight lift
+
+Slight shadow
+
+Border emphasis
+
+Subtle background change
+
+---
+
+# Selected State
+
+Use
+
+Border
+
+Glow
+
+Background
+
+Never rely only on color.
+
+---
+
+# Dashboard
+
+Create visual separation between
+
+Widgets
+
+Charts
+
+Timeline
+
+Calendar
+
+Activity Feed
+
+Kanban
+
+---
+
+# Forms
+
+Inputs
+
+Textarea
+
+Select
+
+Date Picker
+
+Checkbox
+
+Radio
+
+Need consistent surface styling.
+
+---
+
+# Navigation
+
+Sidebar
+
+Top Navigation
+
+Breadcrumbs
+
+Tabs
+
+Need layered hierarchy.
+
+---
+
+# Accessibility
+
+Maintain contrast ratios.
+
+Focus visibility.
+
+Dark mode consistency.
+
+---
+
+# Performance
+
+Avoid excessive blur.
+
+Reuse shadow variables.
+
+Reuse CSS variables.
+
+---
+
+# Deliverables
+
+Surface system
+
+Shadow tokens
+
+Border system
+
+Elevation hierarchy
+
+Updated components
+
+Files modified

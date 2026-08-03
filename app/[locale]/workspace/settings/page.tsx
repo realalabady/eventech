@@ -11,7 +11,7 @@ export default async function WorkspaceSettingsPage({ params }: PageProps) {
 
   return (
     <div className="space-y-10">
-      <h1 className="text-3xl font-semibold tracking-tight">{t("title")}</h1>
+      <h1 className="text-h1">{t("title")}</h1>
       <OrganizationSettings />
     </div>
   );

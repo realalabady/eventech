@@ -147,8 +147,8 @@ function Column({
   return (
     <section
       ref={setNodeRef}
-      className={`flex min-h-48 flex-col gap-3 rounded-2xl border p-3 transition-colors duration-150 ${
-        isOver ? "border-primary/50 bg-primary/5" : "border-border bg-surface"
+      className={`flex min-h-48 flex-col gap-3 rounded-2xl border p-3 transition-[background-color,border-color,box-shadow] duration-[var(--motion-fast)] ease-out ${
+        isOver ? "surface-selected shadow-md" : "border-border bg-surface"
       }`}
     >
       <header className="flex items-center justify-between px-1">
