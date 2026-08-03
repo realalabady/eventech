@@ -268,12 +268,49 @@ than an oversight:
 
 ## 7. Frontend hosting — Firebase App Hosting
 
-Live at **`https://evntech-web--eventech-2f278.europe-west4.hosted.app`**
-(backend `evntech-web`). Deploy from local source:
+Two URLs, both live and serving the same backend `evntech-web`:
+
+| URL                                                           | Served by                                |
+| ------------------------------------------------------------- | ---------------------------------------- |
+| `https://eventech-2f278.web.app` (and `.firebaseapp.com`)     | Firebase Hosting, rewriting to Cloud Run |
+| `https://evntech-web--eventech-2f278.europe-west4.hosted.app` | App Hosting directly                     |
+
+Deploy from local source — **both are needed after a code change**, because the
+Hosting rewrite points at the Cloud Run service that App Hosting builds:
 
 ```bash
 firebase deploy --only apphosting --project eventech-2f278
+firebase deploy --only hosting --project eventech-2f278   # only if firebase.json hosting config changed
 ```
+
+In practice only the first is needed for code; the second re-publishes the
+rewrite and rarely changes.
+
+### Why the `web.app` domain needed extra work
+
+App Hosting and Firebase Hosting are separate products. App Hosting serves its
+own `hosted.app` domain and does not surface on `web.app`, which is why that URL
+returned "Site Not Found" while the app was already live.
+
+The fix is a Firebase Hosting rewrite to the Cloud Run service App Hosting
+builds (`evntech-web`, europe-west4). That requires the service to allow
+unauthenticated invocations — its IAM policy was empty, so the first attempt
+returned **403** on every path:
+
+```bash
+gcloud run services add-iam-policy-binding evntech-web --region=europe-west4 --project=eventech-2f278 --member="allUsers" --role="roles/run.invoker"
+```
+
+**What that binding does and does not mean.** It makes the raw
+`https://evntech-web-y2rtw45o3a-ez.a.run.app` URL publicly reachable as a third
+front door. That exposes no content that was not already public at the
+`hosted.app` address, and Firestore rules, Storage rules and (eventually) App
+Check remain the actual access controls — Cloud Run invoker permission was never
+one. Worth knowing rather than discovering.
+
+**If `web.app` ever 403s again, check this binding first.** App Hosting owns
+that service and may reconcile its IAM on redeploy; re-running the command above
+restores it.
 
 Config lives in `apphosting.yaml` (build/runtime env, instance sizing) and the
 `apphosting` block of `firebase.json` (backend id, upload ignores). The

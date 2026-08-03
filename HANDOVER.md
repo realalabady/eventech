@@ -23,7 +23,9 @@ All 12 phases of the canonical plan (guide 50 §2) are built and deployed, 0 thr
 
 **A caution that this document earned the hard way.** Everything through Phase 9 was once described here as "done and deployed" while two Phase 8a screens were completely dead, ticket times were three hours wrong for every attendee, and the landing page had exactly one working link. None of it showed up, because every claim rested on callable-level and build-level proof. The first sweep with a real signed-in browser found six defects in an afternoon. **Callables passing is not the same as the product working.** Treat any "verified" here as scoped to whatever was actually exercised, and see §8 of `FINAL_PHASES.md` for what has and has not been driven in a browser.
 
-**The frontend is deployed** (2026-07-29) on Firebase App Hosting at `https://evntech-web--eventech-2f278.europe-west4.hosted.app`, backend `evntech-web`. Redeploy with `firebase deploy --only apphosting`. Config is `apphosting.yaml` plus the `apphosting` block in `firebase.json`.
+**The frontend is deployed** (2026-07-29) on Firebase App Hosting, backend `evntech-web`. Redeploy with `firebase deploy --only apphosting`. Config is `apphosting.yaml` plus the `apphosting` block in `firebase.json`.
+
+Two live URLs: **`https://eventech-2f278.web.app`** (Firebase Hosting rewriting to Cloud Run) and `https://evntech-web--eventech-2f278.europe-west4.hosted.app` (App Hosting directly). The `web.app` one needs `allUsers` → `roles/run.invoker` on the `evntech-web` Cloud Run service; **if it starts returning 403, that binding is the first thing to check** — App Hosting owns the service and may reconcile its IAM. Command and reasoning in `docs/LAUNCH_CHECKLIST.md` §7.
 
 **It runs in `europe-west4`, and that is a compromise, not a preference.** App Hosting has no Middle East region. Firestore stays in Dammam, so data at rest is unchanged, but **SSR now happens in the Netherlands** — the in-country guarantee guide 50 made holds for storage, not processing. See `docs/LAUNCH_CHECKLIST.md` §7 before quoting that guarantee to anyone.
 
