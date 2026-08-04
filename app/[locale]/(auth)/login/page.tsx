@@ -1,6 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import { LoginForm } from "@/features/auth/components/login-form";
+import { LazyLoginForm } from "@/features/auth/components/login-form-lazy";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
@@ -15,7 +15,7 @@ export default async function LoginPage({ params }: PageProps) {
         <h1 className="text-h1">{t("title")}</h1>
         <p className="text-muted-foreground">{t("subtitle")}</p>
       </header>
-      <LoginForm />
+      <LazyLoginForm />
     </div>
   );
 }

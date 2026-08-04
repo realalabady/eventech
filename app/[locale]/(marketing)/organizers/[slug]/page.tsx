@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 
 import { PublicHeader } from "@/components/navigation/public-header";
+import { JsonLd } from "@/components/seo/json-ld";
 import { Badge } from "@/components/ui/badge";
 import { DiscoveryEventCard } from "@/features/discovery/components/event-card";
 import {
@@ -10,6 +11,8 @@ import {
   getVenue,
   listEventsByOrganization,
 } from "@/features/discovery/services/public-data";
+import { breadcrumbSchema, organizationSchema } from "@/lib/seo/json-ld";
+import { absoluteUrl, localeAlternates } from "@/lib/seo/site";
 
 export const revalidate = 300;
 
@@ -18,12 +21,22 @@ type PageProps = { params: Promise<{ locale: string; slug: string }> };
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const organization = await getOrganizationBySlug(slug);
-  if (!organization) return {};
+  if (!organization) return { robots: { index: false, follow: false } };
+
+  const path = `/organizers/${organization.slug}`;
   return {
     title: organization.name,
     description: organization.description ?? undefined,
+    alternates: localeAlternates(locale, path),
+    openGraph: {
+      type: "profile",
+      url: absoluteUrl(locale, path),
+      title: organization.name,
+      description: organization.description ?? undefined,
+      images: organization.logoUrl ? [organization.logoUrl] : undefined,
+    },
   };
 }
 
@@ -61,6 +74,23 @@ export default async function PublicOrganizerPage({ params }: PageProps) {
 
   return (
     <div className="flex min-h-[100dvh] flex-col">
+      <JsonLd
+        schema={organizationSchema({
+          name: organization.name,
+          url: absoluteUrl(locale, `/organizers/${organization.slug}`),
+          logoUrl: organization.logoUrl,
+          description: organization.description,
+        })}
+      />
+      <JsonLd
+        schema={breadcrumbSchema([
+          { name: tEvent("backToDiscover"), url: absoluteUrl(locale, "/discover") },
+          {
+            name: organization.name,
+            url: absoluteUrl(locale, `/organizers/${organization.slug}`),
+          },
+        ])}
+      />
       <PublicHeader />
 
       <main className="flex-1">
@@ -71,7 +101,6 @@ export default async function PublicOrganizerPage({ params }: PageProps) {
               alt={organization.name}
               fill
               priority
-              unoptimized
               sizes="100vw"
               className="object-cover"
             />
@@ -87,7 +116,6 @@ export default async function PublicOrganizerPage({ params }: PageProps) {
                   src={organization.logoUrl}
                   alt={organization.name}
                   fill
-                  unoptimized
                   sizes="96px"
                   className="object-cover"
                 />

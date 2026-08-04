@@ -81,6 +81,11 @@ export const updateOrganization = onCall<Payload, Promise<CallableResponse>>(
       }
     }
 
+    let paymentUpdate: {
+      bankName: string;
+      iban: string;
+      accountHolder: string;
+    } | null = null;
     const payment = request.data?.payment;
     if (payment) {
       const iban = (payment.iban ?? "").replace(/\s+/g, "").toUpperCase();
@@ -91,11 +96,21 @@ export const updateOrganization = onCall<Payload, Promise<CallableResponse>>(
           code: "VALIDATION_ERROR",
         });
       }
-      update.payment = { bankName, iban, accountHolder };
+      paymentUpdate = { bankName, iban, accountHolder };
     }
 
     const db = getFirestore();
     await db.collection("organizations").doc(organizationId).update(update);
+
+    // Bank details go to a separate, non-public document. `organizations` is
+    // world-readable and Firestore cannot hide a single field, so keeping the
+    // IBAN there exposed it to unauthenticated readers.
+    if (paymentUpdate) {
+      await db
+        .collection("organizationPayments")
+        .doc(organizationId)
+        .set({ ...paymentUpdate, updatedAt: FieldValue.serverTimestamp() });
+    }
 
     await db.collection("auditLogs").add({
       actorId: uid,

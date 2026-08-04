@@ -1,6 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import { RegisterForm } from "@/features/auth/components/register-form";
+import { LazyRegisterForm } from "@/features/auth/components/register-form-lazy";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
@@ -15,7 +15,7 @@ export default async function RegisterPage({ params }: PageProps) {
         <h1 className="text-h1">{t("title")}</h1>
         <p className="text-muted-foreground">{t("subtitle")}</p>
       </header>
-      <RegisterForm />
+      <LazyRegisterForm />
     </div>
   );
 }

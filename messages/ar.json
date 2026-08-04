@@ -8,7 +8,12 @@
     "loading": "جارٍ التحميل…",
     "errorTitle": "حدث خطأ ما",
     "retry": "حاول مرة أخرى",
-    "comingSoon": "قريباً"
+    "comingSoon": "قريباً",
+    "errorDescription": "تعذّر تحميل هذه الصفحة. تم تسجيل المشكلة.",
+    "notFoundTitle": "الصفحة غير موجودة",
+    "notFoundDescription": "الصفحة التي تبحث عنها غير موجودة أو تم نقلها.",
+    "backHome": "العودة إلى الرئيسية",
+    "skipToContent": "تخطَّ إلى المحتوى"
   },
   "nav": {
     "signIn": "تسجيل الدخول",
@@ -141,7 +146,10 @@
       "tasks": "المهام",
       "calendar": "التقويم",
       "messages": "الرسائل",
-      "analytics": "التحليلات"
+      "analytics": "التحليلات",
+      "dashboard": "نظرة عامة",
+      "openMenu": "فتح القائمة",
+      "menuTitle": "مساحة العمل"
     },
     "settings": {
       "title": "إعدادات المؤسسة",
@@ -161,7 +169,8 @@
       "accountHolderLabel": "اسم صاحب الحساب",
       "ibanLabel": "رقم الآيبان",
       "save": "حفظ التغييرات",
-      "saved": "تم الحفظ."
+      "saved": "تم الحفظ.",
+      "uploadedToast": "تم تحديث الصورة"
     },
     "team": {
       "title": "الفريق",
@@ -209,6 +218,75 @@
       "authRequired": "سجّل الدخول للمتابعة.",
       "unknown": "حدث خطأ ما. حاول مرة أخرى.",
       "rateLimited": "محاولات كثيرة. انتظر قليلاً ثم حاول مجدداً."
+    },
+    "dashboard": {
+      "title": "نظرة عامة",
+      "subtitle": "كل ما هو قيد الإنتاج، في لمحة.",
+      "metric": {
+        "events": "الفعاليات",
+        "eventsHint": "المنشورة وقيد التخطيط",
+        "bookings": "الحجوزات",
+        "bookingsHint": "جميع الطلبات المستلمة",
+        "revenue": "الإيرادات",
+        "revenueHint": "من الحجوزات المعتمدة",
+        "pending": "بانتظار المراجعة",
+        "pendingHint": "إيصالات تنتظر ردك",
+        "attendees": "الحاضرون",
+        "attendeesHint": "التذاكر ضمن الحجوزات المعتمدة",
+        "tasks": "المهام المفتوحة",
+        "tasksHint": "لم تكتمل بعد"
+      },
+      "quickActions": {
+        "heading": "إجراءات سريعة",
+        "createEvent": "إنشاء فعالية",
+        "reviewBookings": "مراجعة الحجوزات",
+        "inviteTeam": "دعوة الفريق",
+        "openScanner": "فتح الماسح"
+      },
+      "upcoming": {
+        "heading": "الفعاليات القادمة",
+        "viewAll": "كل الفعاليات",
+        "empty": "لا توجد فعاليات قادمة",
+        "emptyHint": "أنشئ فعاليتك الأولى لبدء استقبال الحجوزات.",
+        "noDate": "التاريخ غير محدد"
+      },
+      "activity": {
+        "heading": "النشاط الأخير",
+        "viewAll": "عرض الإنتاج"
+      },
+      "sections": {
+        "analytics": "التحليلات",
+        "analyticsHint": "المشاهدات والتحويل والحضور لكل فعالية.",
+        "timeline": "الجدول الزمني",
+        "timelineHint": "مراحل الإنتاج والمحطات الرئيسية.",
+        "tasks": "لوحة المهام",
+        "tasksHint": "أعمال التخطيط عبر الفريق.",
+        "calendar": "التقويم",
+        "calendarHint": "الجدول وأوقات الاستدعاء وورقة التشغيل.",
+        "open": "فتح"
+      },
+      "empty": {
+        "title": "استوديو الإنتاج جاهز",
+        "description": "أنشئ فعاليتك الأولى وستمتلئ النظرة العامة مع وصول الحجوزات.",
+        "primary": "إنشاء فعالية",
+        "secondary": "ادعُ فريقك"
+      },
+      "widget": {
+        "refresh": "تحديث",
+        "collapse": "طي",
+        "expand": "توسيع",
+        "open": "فتح التفاصيل",
+        "errorTitle": "تعذّر التحميل",
+        "errorDescription": "لم تصل البيانات. حاول مرة أخرى بعد قليل.",
+        "emptyTitle": "لا يوجد شيء بعد",
+        "taskProgress": "تقدّم المهام",
+        "taskProgressHint": "عبر كل فعالية قيد الإنتاج.",
+        "taskDone": "{done} من {total} مكتملة",
+        "topEvents": "أفضل الفعاليات أداءً",
+        "topEventsHint": "مرتّبة حسب التذاكر المباعة.",
+        "topEventsEmpty": "لا توجد مبيعات بعد",
+        "soldOf": "{sold} من {capacity} مباعة"
+      }
     }
   },
   "event": {
@@ -481,7 +559,10 @@
       "reasonPlaceholder": "مبلغ التحويل غير مطابق.",
       "confirmReject": "رفض الحجز",
       "cancelReject": "الإبقاء عليه",
-      "quantity": "{count} × {type}"
+      "quantity": "{count} × {type}",
+      "approvedToast": "تمت الموافقة على الحجز",
+      "approvedToastHint": "تم إرسال التذكرة إلى الحاضر عبر البريد الإلكتروني.",
+      "rejectedToast": "تم رفض الحجز"
     },
     "errors": {
       "alreadyBooked": "لديك حجز في هذه الفعالية بالفعل.",
@@ -786,7 +867,9 @@
       "byTier": "التذاكر المباعة حسب الفئة",
       "bookingsLabel": "الحجوزات",
       "soldLabel": "المباع",
-      "noTiers": "لا توجد فئات تذاكر لهذه الفعالية بعد."
+      "noTiers": "لا توجد فئات تذاكر لهذه الفعالية بعد.",
+      "dayLabel": "اليوم",
+      "tierLabel": "نوع التذكرة"
     }
   },
   "admin": {

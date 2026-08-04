@@ -16,6 +16,9 @@ import {
   getVenue,
 } from "@/features/discovery/services/public-data";
 import { Link } from "@/i18n/navigation";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbSchema, eventSchemaOrNull } from "@/lib/seo/json-ld";
+import { absoluteUrl, localeAlternates } from "@/lib/seo/site";
 
 export const revalidate = 300;
 
@@ -24,13 +27,27 @@ type PageProps = { params: Promise<{ locale: string; slug: string }> };
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const event = await getEventBySlug(slug);
-  if (!event) return {};
+  // `robots: noindex` rather than empty metadata: an unknown slug still returns
+  // a rendered page, and without this it would be indexed as a thin duplicate.
+  if (!event) return { robots: { index: false, follow: false } };
+
+  const path = `/events/${event.slug}`;
+
   return {
     title: event.title,
     description: event.description ?? undefined,
+    alternates: localeAlternates(locale, path),
     openGraph: {
+      type: "article",
+      url: absoluteUrl(locale, path),
+      title: event.title,
+      description: event.description ?? undefined,
+      images: event.coverImage ? [event.coverImage] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
       title: event.title,
       description: event.description ?? undefined,
       images: event.coverImage ? [event.coverImage] : undefined,
@@ -52,7 +69,7 @@ export default async function PublicEventPage({ params }: PageProps) {
       <div className="flex min-h-[100dvh] flex-col">
         <PublicHeader />
         <main className="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-center gap-4 px-4 text-center">
-          <h1 className="text-2xl font-semibold tracking-tight">
+          <h1 className="text-h2">
             {t("notFound")}
           </h1>
           <p className="text-muted-foreground">{t("notFoundHint")}</p>
@@ -83,6 +100,42 @@ export default async function PublicEventPage({ params }: PageProps) {
     <div className="flex min-h-[100dvh] flex-col">
       {/* Renders nothing; records one view per browser session. */}
       <ViewTracker eventId={event.id} />
+
+      <JsonLd
+        schema={eventSchemaOrNull({
+          name: event.title,
+          url: absoluteUrl(locale, `/events/${event.slug}`),
+          startDateMs: event.startDateMs,
+          endDateMs: event.endDateMs,
+          description: event.description,
+          image: event.coverImage,
+          venue: venue
+            ? { name: venue.name, address: venue.address, city: venue.city }
+            : null,
+          organizer: organization
+            ? {
+                name: organization.name,
+                url: absoluteUrl(locale, `/organizers/${organization.slug}`),
+              }
+            : null,
+          performers: artists.map((a) => ({ name: a.name })),
+          offers: event.ticketTypes.map((tier) => ({
+            price: tier.price,
+            currency: tier.currency,
+            url: absoluteUrl(locale, `/events/${event.slug}`),
+          })),
+          soldOut,
+        })}
+      />
+      <JsonLd
+        schema={breadcrumbSchema([
+          { name: tDiscover("title"), url: absoluteUrl(locale, "/discover") },
+          {
+            name: event.title,
+            url: absoluteUrl(locale, `/events/${event.slug}`),
+          },
+        ])}
+      />
       <PublicHeader />
 
       <main className="flex-1">
@@ -94,7 +147,6 @@ export default async function PublicEventPage({ params }: PageProps) {
               alt={event.title}
               fill
               priority
-              unoptimized
               sizes="100vw"
               className="object-cover"
             />
@@ -156,7 +208,7 @@ export default async function PublicEventPage({ params }: PageProps) {
 
             {event.description ? (
               <section className="space-y-3">
-                <h2 className="text-lg font-medium tracking-tight">
+                <h2 className="text-h4">
                   {t("about")}
                 </h2>
                 <p className="max-w-[65ch] leading-relaxed text-foreground/70">
@@ -167,7 +219,7 @@ export default async function PublicEventPage({ params }: PageProps) {
 
             {artists.length > 0 ? (
               <section className="space-y-3">
-                <h2 className="text-lg font-medium tracking-tight">
+                <h2 className="text-h4">
                   {t("lineup")}
                 </h2>
                 <ul className="flex flex-wrap gap-2">
@@ -175,7 +227,7 @@ export default async function PublicEventPage({ params }: PageProps) {
                     <li key={artist.id}>
                       <Link
                         href={`/artists/${artist.id}`}
-                        className="inline-flex rounded-full border border-border px-4 py-1.5 text-sm transition-colors duration-150 hover:border-foreground/30"
+                        className="inline-flex rounded-full border border-border px-4 py-1.5 text-sm transition-colors duration-[var(--motion-fast)] ease-out hover:border-foreground/30"
                       >
                         {artist.name}
                       </Link>
@@ -187,12 +239,12 @@ export default async function PublicEventPage({ params }: PageProps) {
 
             {organization ? (
               <section className="space-y-3">
-                <h2 className="text-lg font-medium tracking-tight">
+                <h2 className="text-h4">
                   {t("hostedBy")}
                 </h2>
                 <Link
                   href={`/organizers/${organization.slug}`}
-                  className="inline-flex items-center gap-3 rounded-xl border border-border bg-card px-5 py-4 transition-colors duration-150 hover:border-foreground/20"
+                  className="inline-flex items-center gap-3 rounded-xl border border-border bg-card px-5 py-4 transition-colors duration-[var(--motion-fast)] ease-out hover:border-foreground/20"
                 >
                   {organization.logoUrl ? (
                     <span className="relative size-10 overflow-hidden rounded-full">
@@ -200,7 +252,6 @@ export default async function PublicEventPage({ params }: PageProps) {
                         src={organization.logoUrl}
                         alt={organization.name}
                         fill
-                        unoptimized
                         sizes="40px"
                         className="object-cover"
                       />
@@ -218,7 +269,7 @@ export default async function PublicEventPage({ params }: PageProps) {
           {/* Booking panel. The flow itself lands in Phase 6. */}
           <aside className="lg:sticky lg:top-24 lg:mt-8 lg:self-start">
             <div className="space-y-5 rounded-xl border border-border bg-card p-6">
-              <h2 className="text-lg font-medium tracking-tight">
+              <h2 className="text-h4">
                 {t("tickets")}
               </h2>
 

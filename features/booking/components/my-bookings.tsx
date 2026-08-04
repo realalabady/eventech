@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 
+import { EmptyState } from "@/components/feedback/empty-state";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
@@ -24,10 +25,11 @@ export function MyBookings() {
 
   if (bookings.length === 0) {
     return (
-      <div className="space-y-2 rounded-xl border border-border bg-card px-6 py-12 text-center">
-        <p className="font-medium">{t("list.empty")}</p>
-        <p className="text-sm text-muted-foreground">{t("list.emptyHint")}</p>
-      </div>
+      <EmptyState
+        illustration="ticket"
+        title={t("list.empty")}
+        description={t("list.emptyHint")}
+      />
     );
   }
 

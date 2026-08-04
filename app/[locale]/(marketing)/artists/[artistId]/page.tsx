@@ -2,12 +2,15 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { PublicHeader } from "@/components/navigation/public-header";
+import { JsonLd } from "@/components/seo/json-ld";
 import { DiscoveryEventCard } from "@/features/discovery/components/event-card";
 import {
   getArtist,
   getVenue,
   listEventsByArtist,
 } from "@/features/discovery/services/public-data";
+import { personSchema } from "@/lib/seo/json-ld";
+import { absoluteUrl, localeAlternates } from "@/lib/seo/site";
 
 export const revalidate = 300;
 
@@ -16,9 +19,20 @@ type PageProps = { params: Promise<{ locale: string; artistId: string }> };
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { artistId } = await params;
+  const { locale, artistId } = await params;
   const artist = await getArtist(artistId);
-  return artist ? { title: artist.name } : {};
+  if (!artist) return { robots: { index: false, follow: false } };
+
+  const path = `/artists/${artist.id}`;
+  return {
+    title: artist.name,
+    alternates: localeAlternates(locale, path),
+    openGraph: {
+      type: "profile",
+      url: absoluteUrl(locale, path),
+      title: artist.name,
+    },
+  };
 }
 
 export default async function PublicArtistPage({ params }: PageProps) {
@@ -31,7 +45,7 @@ export default async function PublicArtistPage({ params }: PageProps) {
   if (!artist) {
     return (
       <div className="flex min-h-[100dvh] flex-col">
-        <PublicHeader />
+      <PublicHeader />
         <main className="flex flex-1 items-center justify-center px-4">
           <h1 className="text-2xl font-semibold tracking-tight">
             {t("notFound")}
@@ -54,6 +68,12 @@ export default async function PublicArtistPage({ params }: PageProps) {
 
   return (
     <div className="flex min-h-[100dvh] flex-col">
+      <JsonLd
+        schema={personSchema({
+          name: artist.name,
+          url: absoluteUrl(locale, `/artists/${artist.id}`),
+        })}
+      />
       <PublicHeader />
 
       <main className="mx-auto w-full max-w-[90rem] flex-1 px-4 py-16 md:px-8">

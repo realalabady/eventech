@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+
+import { toast } from "@/lib/toast";
 import { useTranslations } from "next-intl";
 import { useRef, useState } from "react";
 
@@ -49,6 +51,7 @@ function ImageUploader({
       return;
     }
     setPreview(result.data?.url ?? null);
+    toast.success(t("settings.uploadedToast"));
   }
 
   return (

@@ -3,6 +3,7 @@
 import { useLocale, useTranslations } from "next-intl";
 import { useMemo } from "react";
 
+import { EmptyState } from "@/components/feedback/empty-state";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -64,10 +65,11 @@ export function TicketWallet() {
 
   if (tickets.length === 0) {
     return (
-      <div className="space-y-2 rounded-xl border border-border bg-card px-6 py-12 text-center">
-        <p className="font-medium">{t("wallet.empty")}</p>
-        <p className="text-sm text-muted-foreground">{t("wallet.emptyHint")}</p>
-      </div>
+      <EmptyState
+        illustration="ticket"
+        title={t("wallet.empty")}
+        description={t("wallet.emptyHint")}
+      />
     );
   }
 

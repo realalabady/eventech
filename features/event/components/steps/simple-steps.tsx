@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { AuthError } from "@/features/auth/components/auth-error";
 import { useOrganization } from "@/features/organization/hooks/use-organization";
+import { useOrganizationPayment } from "@/features/organization/hooks/use-organization-payment";
 import { Link } from "@/i18n/navigation";
 
 import type { StepProps } from "../event-wizard";
@@ -139,9 +140,11 @@ export function TeamStep({ onDone }: StepProps) {
 export function PaymentStep({ event, onDone }: StepProps) {
   const t = useTranslations("event");
   const { organization } = useOrganization();
+  // Bank details moved off the world-readable organization document.
+  const { payment } = useOrganizationPayment(organization?.id);
 
   const free = isFreeEvent(event.ticketTypes ?? []);
-  const hasBankDetails = Boolean(organization?.payment?.iban);
+  const hasBankDetails = Boolean(payment?.iban);
 
   return (
     <div className="max-w-lg space-y-6">

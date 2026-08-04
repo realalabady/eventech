@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
+import { EmptyState } from "@/components/feedback/empty-state";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -68,10 +69,11 @@ export function EventList() {
           </p>
         </div>
       ) : events.length === 0 ? (
-        <div className="space-y-2 rounded-xl border border-border bg-card px-6 py-12 text-center">
-          <p className="font-medium">{t("list.empty")}</p>
-          <p className="text-sm text-muted-foreground">{t("list.emptyHint")}</p>
-        </div>
+        <EmptyState
+          illustration="calendar"
+          title={t("list.empty")}
+          description={t("list.emptyHint")}
+        />
       ) : (
         <Stagger className="space-y-3">
           {events.map((event) => (

@@ -41,7 +41,10 @@ const TOOLTIP_STYLE = {
 } as const;
 
 /** Charts animate once (canonical §9) — no re-run on hover or data echo. */
-const ANIMATION = { isAnimationActive: true, animationDuration: 600 } as const;
+// 350ms is TASK_01's `slow` token. The previous 600ms broke the 500ms ceiling,
+// and a chart that is still drawing after half a second reads as slow data
+// rather than as motion.
+const ANIMATION = { isAnimationActive: true, animationDuration: 350 } as const;
 
 export function BookingsOverTime({
   data,
@@ -71,7 +74,7 @@ export function BookingsOverTime({
             <stop offset="100%" stopColor="var(--chart-1)" stopOpacity={0} />
           </linearGradient>
         </defs>
-        <CartesianGrid stroke="var(--border)" vertical={false} />
+        <CartesianGrid stroke="var(--hairline)" vertical={false} />
         <XAxis
           dataKey="day"
           {...AXIS}
@@ -112,7 +115,7 @@ export function SalesByTier({
   return (
     <ResponsiveContainer width="100%" height={260}>
       <BarChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: -20 }}>
-        <CartesianGrid stroke="var(--border)" vertical={false} />
+        <CartesianGrid stroke="var(--hairline)" vertical={false} />
         <XAxis dataKey="name" {...AXIS} tickLine={false} axisLine={false} />
         <YAxis
           {...AXIS}

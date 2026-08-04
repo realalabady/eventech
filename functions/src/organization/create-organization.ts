@@ -60,9 +60,8 @@ export const createOrganization = onCall<
     website: null,
     verified: false,
     branding: { primary: "#3b82f6", logoUrl: null, coverUrl: null },
-    // Collected later in settings; publishing a paid event requires it
-    // (canonical §8).
-    payment: null,
+    // Bank details are NOT stored here — `organizations` is world-readable.
+    // They live in `organizationPayments/{orgId}`; see updateOrganization.
     memberCount: 1,
     eventCount: 0,
     createdAt: now,

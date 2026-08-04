@@ -58,6 +58,27 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // Bank details live here, NOT on the organization document.
+    //
+    // `organizations` is world-readable so public organizer pages work without
+    // auth. Firestore has no field-level read security, so while `payment` sat
+    // on that document every organizer's IBAN, bank name and account holder
+    // were readable by anyone on the internet with the public web API key —
+    // no account required. Moving the field is the only way to scope it.
+    //
+    // Read is limited to signed-in users because an attendee must see where to
+    // transfer, and they are not a member of the organization they are paying.
+    // That is still broader than ideal: any authenticated account can read any
+    // organization's details. The tighter design is to snapshot these onto the
+    // booking document at creation (bookings are already restricted to the
+    // attendee plus org members) and drop the read rule to members only. That
+    // is a data-model change, deliberately not bundled with this fix.
+    match /organizationPayments/{orgId} {
+      allow get: if isSignedIn();
+      allow list: if false;  // never enumerable, even signed in
+      allow write: if false; // updateOrganization only
+    }
+
     match /organizationMembers/{memberId} {
       // Team members see their own roster; an invitee can find the invitation
       // addressed to their email (queries must filter on that email).

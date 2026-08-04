@@ -8,7 +8,12 @@
     "loading": "Loading…",
     "errorTitle": "Something went wrong",
     "retry": "Try again",
-    "comingSoon": "Coming soon"
+    "comingSoon": "Coming soon",
+    "errorDescription": "This page could not be loaded. The problem has been logged.",
+    "notFoundTitle": "Page not found",
+    "notFoundDescription": "The page you were looking for does not exist or has moved.",
+    "backHome": "Back to home",
+    "skipToContent": "Skip to content"
   },
   "nav": {
     "signIn": "Sign in",
@@ -141,7 +146,10 @@
       "tasks": "Tasks",
       "calendar": "Calendar",
       "messages": "Messages",
-      "analytics": "Analytics"
+      "analytics": "Analytics",
+      "dashboard": "Overview",
+      "openMenu": "Open menu",
+      "menuTitle": "Workspace"
     },
     "settings": {
       "title": "Organization settings",
@@ -161,7 +169,8 @@
       "accountHolderLabel": "Account holder",
       "ibanLabel": "IBAN",
       "save": "Save changes",
-      "saved": "Saved."
+      "saved": "Saved.",
+      "uploadedToast": "Image updated"
     },
     "team": {
       "title": "Team",
@@ -209,6 +218,75 @@
       "authRequired": "Sign in to continue.",
       "unknown": "Something went wrong. Try again.",
       "rateLimited": "Too many attempts. Wait a moment and try again."
+    },
+    "dashboard": {
+      "title": "Overview",
+      "subtitle": "Everything in production, at a glance.",
+      "metric": {
+        "events": "Events",
+        "eventsHint": "Published and in planning",
+        "bookings": "Bookings",
+        "bookingsHint": "All requests received",
+        "revenue": "Revenue",
+        "revenueHint": "From approved bookings",
+        "pending": "Pending review",
+        "pendingHint": "Receipts waiting on you",
+        "attendees": "Attendees",
+        "attendeesHint": "Tickets across approved bookings",
+        "tasks": "Open tasks",
+        "tasksHint": "Not yet done"
+      },
+      "quickActions": {
+        "heading": "Quick actions",
+        "createEvent": "Create event",
+        "reviewBookings": "Review bookings",
+        "inviteTeam": "Invite team",
+        "openScanner": "Open scanner"
+      },
+      "upcoming": {
+        "heading": "Upcoming events",
+        "viewAll": "All events",
+        "empty": "No upcoming events",
+        "emptyHint": "Create your first event to start taking bookings.",
+        "noDate": "Date not set"
+      },
+      "activity": {
+        "heading": "Recent activity",
+        "viewAll": "Production view"
+      },
+      "sections": {
+        "analytics": "Analytics",
+        "analyticsHint": "Views, conversion and attendance per event.",
+        "timeline": "Timeline",
+        "timelineHint": "Production stages and milestones.",
+        "tasks": "Task board",
+        "tasksHint": "Planning work across the team.",
+        "calendar": "Calendar",
+        "calendarHint": "Schedule, call times and run sheet.",
+        "open": "Open"
+      },
+      "empty": {
+        "title": "Your production studio is ready",
+        "description": "Create your first event and the overview will fill in as bookings arrive.",
+        "primary": "Create event",
+        "secondary": "Invite your team"
+      },
+      "widget": {
+        "refresh": "Refresh",
+        "collapse": "Collapse",
+        "expand": "Expand",
+        "open": "Open details",
+        "errorTitle": "Could not load this",
+        "errorDescription": "The data did not arrive. Try again in a moment.",
+        "emptyTitle": "Nothing here yet",
+        "taskProgress": "Task progress",
+        "taskProgressHint": "Across every event in production.",
+        "taskDone": "{done} of {total} done",
+        "topEvents": "Top performing events",
+        "topEventsHint": "Ranked by tickets sold.",
+        "topEventsEmpty": "No sales yet",
+        "soldOf": "{sold} of {capacity} sold"
+      }
     }
   },
   "event": {
@@ -481,7 +559,10 @@
       "reasonPlaceholder": "The transfer amount did not match.",
       "confirmReject": "Reject booking",
       "cancelReject": "Keep it",
-      "quantity": "{count} × {type}"
+      "quantity": "{count} × {type}",
+      "approvedToast": "Booking approved",
+      "approvedToastHint": "The attendee has been emailed their ticket.",
+      "rejectedToast": "Booking rejected"
     },
     "errors": {
       "alreadyBooked": "You already have a booking for this event.",
@@ -786,7 +867,9 @@
       "byTier": "Tickets sold by tier",
       "bookingsLabel": "Bookings",
       "soldLabel": "Sold",
-      "noTiers": "This event has no ticket tiers yet."
+      "noTiers": "This event has no ticket tiers yet.",
+      "dayLabel": "Day",
+      "tierLabel": "Ticket type"
     }
   },
   "admin": {

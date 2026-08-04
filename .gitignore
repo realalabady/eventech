@@ -47,3 +47,8 @@ ui-debug.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# agent scratch — Claude Code creates git worktrees (full repo checkouts) here.
+# Untracked so they never reach a commit; the lint script also scopes itself to
+# the real source roots so ESLint does not walk into them.
+.claude/worktrees/

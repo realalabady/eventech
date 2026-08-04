@@ -1,8 +1,8 @@
 import { CalendarDays, MapPin } from "lucide-react";
 import { getTranslations } from "next-intl/server";
-import Image from "next/image";
 
 import { Badge } from "@/components/ui/badge";
+import { BlurImage } from "@/components/ui/blur-image";
 import { Link } from "@/i18n/navigation";
 
 import { formatPrice, formatPublicDate, lowestPrice } from "../lib/format";
@@ -16,10 +16,13 @@ export async function DiscoveryEventCard({
   event,
   locale,
   cityLabel,
+  priority = false,
 }: {
   event: PublicEvent;
   locale: string;
   cityLabel?: string | null;
+  /** Set on above-the-fold cards so the LCP candidate is preloaded, not lazy. */
+  priority?: boolean;
 }) {
   const t = await getTranslations("event");
   const tDiscover = await getTranslations("discover");
@@ -33,12 +36,13 @@ export async function DiscoveryEventCard({
     >
       <div className="relative aspect-[16/10] overflow-hidden bg-surface">
         {event.coverImage ? (
-          <Image
+          <BlurImage
             src={event.coverImage}
             alt={event.title}
             fill
-            unoptimized
+            priority={priority}
             sizes="(min-width: 1024px) 22rem, (min-width: 640px) 45vw, 92vw"
+            wrapperClassName="absolute inset-0"
             className="object-cover transition-transform duration-[var(--motion-slow)] ease-out group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
           />
         ) : (

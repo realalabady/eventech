@@ -1,6 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import { ForgotPasswordForm } from "@/features/auth/components/forgot-password-form";
+import { LazyForgotPasswordForm } from "@/features/auth/components/forgot-password-form-lazy";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
@@ -15,7 +15,7 @@ export default async function ForgotPasswordPage({ params }: PageProps) {
         <h1 className="text-h1">{t("title")}</h1>
         <p className="text-muted-foreground">{t("subtitle")}</p>
       </header>
-      <ForgotPasswordForm />
+      <LazyForgotPasswordForm />
     </div>
   );
 }

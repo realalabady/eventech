@@ -40,5 +40,6 @@ export type Organization = {
   website: string | null;
   verified: boolean;
   branding: OrganizationBranding;
-  payment: OrganizationPayment | null;
+  /** Bank details are NOT here: organizations is world-readable and Firestore
+   *  cannot hide a field. See organizationPayments/{orgId}. */
 };

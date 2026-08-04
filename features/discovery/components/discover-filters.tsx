@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useMemo, useState, type ReactNode } from "react";
 
+import { EmptyState } from "@/components/feedback/empty-state";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { EVENT_CATEGORIES } from "@/features/event/types";
@@ -82,10 +83,11 @@ export function DiscoverFilters({
       </p>
 
       {visible.length === 0 ? (
-        <div className="space-y-2 rounded-xl border border-border bg-card px-6 py-12 text-center">
-          <p className="font-medium">{t("empty")}</p>
-          <p className="text-sm text-muted-foreground">{t("emptyHint")}</p>
-        </div>
+        <EmptyState
+          illustration="search"
+          title={t("empty")}
+          description={t("emptyHint")}
+        />
       ) : (
         <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {visible.map((item) => (

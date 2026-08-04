@@ -13,6 +13,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Textarea } from "@/components/ui/textarea";
 
 import { useOrganization } from "../hooks/use-organization";
+import { useOrganizationPayment } from "../hooks/use-organization-payment";
 import { updatePayment, updateProfile } from "../services/organization-service";
 import {
   organizationProfileSchema,
@@ -183,6 +184,9 @@ function PaymentForm({
   const t = useTranslations("organization");
   const [error, setError] = useState<string | undefined>();
   const [saved, setSaved] = useState(false);
+  // Read from organizationPayments, not the organization document — see
+  // features/organization/hooks/use-organization-payment.
+  const { payment } = useOrganizationPayment(organization.id);
 
   const {
     register,
@@ -190,10 +194,13 @@ function PaymentForm({
     formState: { errors, isSubmitting },
   } = useForm<PaymentValues>({
     resolver: zodResolver(paymentSchema),
-    defaultValues: {
-      bankName: organization.payment?.bankName ?? "",
-      accountHolder: organization.payment?.accountHolder ?? "",
-      iban: organization.payment?.iban ?? "",
+    // `values` rather than `defaultValues`: the payment document loads after
+    // first render, and defaultValues are captured once so the fields would
+    // stay blank for an organization that already has bank details.
+    values: {
+      bankName: payment?.bankName ?? "",
+      accountHolder: payment?.accountHolder ?? "",
+      iban: payment?.iban ?? "",
     },
   });
 

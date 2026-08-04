@@ -6,12 +6,15 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Skeleton } from "@/components/ui/skeleton";
+import { EmptyState } from "@/components/feedback/empty-state";
+import { ListSkeleton } from "@/components/ui/skeletons";
 import { Textarea } from "@/components/ui/textarea";
 import { AuthError } from "@/features/auth/components/auth-error";
 import { useAuth } from "@/features/auth/hooks/use-auth";
 
 import { useOrganizationBookings } from "../hooks/use-bookings";
+import { toast } from "@/lib/toast";
+
 import { approveBooking, rejectBooking } from "../services/booking-service";
 import type { BookingDoc } from "../types";
 
@@ -41,7 +44,15 @@ function BookingRow({
     onError(undefined);
     const result = await approveBooking(booking.id);
     setBusy(false);
-    if (!result.ok) onError(result.errorKey);
+    if (!result.ok) {
+      onError(result.errorKey);
+      return;
+    }
+    // The row leaves the pending list on success, so without a toast the only
+    // feedback was a card silently vanishing — indistinguishable from a bug.
+    toast.success(t("review.approvedToast"), {
+      description: t("review.approvedToastHint"),
+    });
   }
 
   async function onReject() {
@@ -56,6 +67,7 @@ function BookingRow({
     }
     setRejecting(false);
     setReason("");
+    toast.success(t("review.rejectedToast"));
   }
 
   return (
@@ -163,6 +175,7 @@ function BookingRow({
 
 export function BookingReview() {
   const t = useTranslations("booking");
+  const tCommon = useTranslations("common");
   const locale = useLocale();
   const { claims } = useAuth();
   const { bookings, loading } = useOrganizationBookings(claims?.organizationId);
@@ -173,12 +186,7 @@ export function BookingReview() {
   const others = bookings.filter((b) => b.status !== "pending_review");
 
   if (loading) {
-    return (
-      <div className="space-y-3">
-        <Skeleton className="h-24 w-full" />
-        <Skeleton className="h-24 w-full" />
-      </div>
-    );
+    return <ListSkeleton label={tCommon("loading")} rows={3} />;
   }
 
   return (
@@ -186,12 +194,11 @@ export function BookingReview() {
       <AuthError message={error ? t(`errors.${error}`) : undefined} />
 
       {bookings.length === 0 ? (
-        <div className="space-y-2 rounded-xl border border-border bg-card px-6 py-12 text-center">
-          <p className="font-medium">{t("review.empty")}</p>
-          <p className="text-sm text-muted-foreground">
-            {t("review.emptyHint")}
-          </p>
-        </div>
+        <EmptyState
+          illustration="ticket"
+          title={t("review.empty")}
+          description={t("review.emptyHint")}
+        />
       ) : null}
 
       {pending.length > 0 ? (

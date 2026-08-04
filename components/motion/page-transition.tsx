@@ -19,6 +19,10 @@ import { useMotionSafe } from "@/hooks/use-motion-safe";
  * settled one. The scale floor is 0.99 and opacity resolves in 350ms, so the
  * first paint difference is imperceptible; the alternative — a mount guard —
  * would suppress the animation on the very navigation it exists to smooth.
+ *
+ * Note for anyone adopting React's <ViewTransition> later: this component must
+ * be removed at the same time. It sets `opacity: 0` on mount, which would be
+ * captured in the new-page snapshot and leave a morph target invisible.
  */
 export function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();

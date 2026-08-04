@@ -35,7 +35,7 @@ export default async function DiscoverPage({ params }: PageProps) {
   );
 
   const items = await Promise.all(
-    events.map(async (event) => {
+    events.map(async (event, index) => {
       const city = event.venueId ? (cityById.get(event.venueId) ?? null) : null;
       return {
         id: event.id,
@@ -44,7 +44,14 @@ export default async function DiscoverPage({ params }: PageProps) {
           .join(" ")
           .toLowerCase(),
         node: (
-          <DiscoveryEventCard event={event} locale={locale} cityLabel={city} />
+          // The first row is above the fold on every breakpoint, so those
+          // covers are the LCP candidates and must not be lazy-loaded.
+          <DiscoveryEventCard
+            event={event}
+            locale={locale}
+            cityLabel={city}
+            priority={index < 3}
+          />
         ),
       };
     }),

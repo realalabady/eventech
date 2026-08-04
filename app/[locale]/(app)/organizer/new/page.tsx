@@ -2,7 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { RequireAuth } from "@/features/auth/components/require-auth";
-import { CreateOrganizationForm } from "@/features/organization/components/create-organization-form";
+import { LazyCreateOrganizationForm } from "@/features/organization/components/create-organization-form-lazy";
 import { PendingInvites } from "@/features/organization/components/pending-invites";
 import { Link } from "@/i18n/navigation";
 
@@ -33,7 +33,7 @@ export default async function CreateOrganizationPage({ params }: PageProps) {
               </h1>
               <p className="text-muted-foreground">{t("subtitle")}</p>
             </header>
-            <CreateOrganizationForm />
+            <LazyCreateOrganizationForm />
           </div>
         </RequireAuth>
       </main>

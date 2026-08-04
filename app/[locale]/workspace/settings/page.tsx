@@ -1,6 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import { OrganizationSettings } from "@/features/organization/components/organization-settings";
+import { LazyOrganizationSettings } from "@/features/organization/components/organization-settings-lazy";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
@@ -12,7 +12,7 @@ export default async function WorkspaceSettingsPage({ params }: PageProps) {
   return (
     <div className="space-y-10">
       <h1 className="text-h1">{t("title")}</h1>
-      <OrganizationSettings />
+      <LazyOrganizationSettings />
     </div>
   );
 }
