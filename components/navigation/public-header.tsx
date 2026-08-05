@@ -19,7 +19,7 @@ export async function PublicHeader() {
           </Link>
           <Link
             href="/discover"
-            className="text-sm text-muted-foreground transition-colors duration-150 hover:text-foreground"
+            className="text-sm text-muted-foreground transition-colors duration-[var(--motion-fast)] hover:text-foreground"
           >
             {tDiscover("title")}
           </Link>

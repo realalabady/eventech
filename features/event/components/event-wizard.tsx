@@ -6,6 +6,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
+import { transition } from "@/lib/motion";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AuthError } from "@/features/auth/components/auth-error";
 import { useAuth } from "@/features/auth/hooks/use-auth";
@@ -168,7 +169,7 @@ export function EventWizard({ eventId }: { eventId: string }) {
             initial={false}
             animate={{ width: `${progress}%` }}
             transition={
-              reduce ? { duration: 0 } : { duration: 0.4, ease: "easeOut" }
+              reduce ? { duration: 0 } : transition.slow
             }
           />
         </div>
@@ -205,7 +206,7 @@ export function EventWizard({ eventId }: { eventId: string }) {
         <button
           type="button"
           onClick={() => setIndex((current) => Math.max(current - 1, 0))}
-          className="rounded-sm text-sm text-muted-foreground underline-offset-4 transition-colors duration-150 outline-none hover:text-foreground hover:underline focus-visible:ring-[3px] focus-visible:ring-ring/50"
+          className="rounded-sm text-sm text-muted-foreground underline-offset-4 transition-colors duration-[var(--motion-fast)] outline-none hover:text-foreground hover:underline focus-visible:ring-[3px] focus-visible:ring-ring/50"
         >
           {t("wizard.back")}
         </button>

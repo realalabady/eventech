@@ -4,6 +4,7 @@ import { CheckCircle2, Eye, XCircle } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
 
+import { transition } from "@/lib/motion";
 import { formatPublicDate } from "@/features/discovery/lib/format";
 
 import type { ScanOutcome } from "../services/scanner-service";
@@ -50,7 +51,7 @@ export function ScanResultCard({
     <motion.div
       initial={reduce ? false : { opacity: 0, scale: 0.96 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.25, ease: "easeOut" }}
+      transition={transition.base}
       role="status"
       aria-live="polite"
       className={`space-y-3 rounded-2xl border px-6 py-6 text-center ${TONE[tone]}`}

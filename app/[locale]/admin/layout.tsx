@@ -33,7 +33,7 @@ export default async function AdminLayout({
           <div className="flex items-center gap-3">
             <Link
               href="/"
-              className="text-sm text-muted-foreground transition-colors duration-150 hover:text-foreground"
+              className="text-sm text-muted-foreground transition-colors duration-[var(--motion-fast)] hover:text-foreground"
             >
               {t("nav.backToSite")}
             </Link>

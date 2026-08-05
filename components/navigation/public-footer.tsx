@@ -58,7 +58,7 @@ export async function PublicFooter() {
                 <li key={link.key}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground transition-colors duration-150 hover:text-foreground"
+                    className="text-sm text-muted-foreground transition-colors duration-[var(--motion-fast)] hover:text-foreground"
                   >
                     {t(link.key)}
                   </Link>

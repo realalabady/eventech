@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 
+import { transition } from "@/lib/motion";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { formatPublicDate } from "@/features/discovery/lib/format";
@@ -76,11 +77,11 @@ export function TicketDetail({ ticketId }: { ticketId: string }) {
           reduce ? false : { opacity: 0, scale: 0.94, filter: "blur(12px)" }
         }
         animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={transition.slow}
         className="mx-auto w-full max-w-sm space-y-4 rounded-3xl border border-border bg-card p-6"
       >
         <div
-          className={`relative aspect-square overflow-hidden rounded-2xl bg-white transition-opacity duration-250 ${
+          className={`relative aspect-square overflow-hidden rounded-2xl bg-white transition-opacity duration-[var(--motion-base)] ${
             spent ? "opacity-30" : ""
           }`}
         >

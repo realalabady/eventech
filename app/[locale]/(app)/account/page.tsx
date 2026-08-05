@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { AnalyticsConsentToggle } from "@/features/account/components/analytics-consent-toggle";
 import { AccountPanel } from "@/features/auth/components/account-panel";
 import { RequireAuth } from "@/features/auth/components/require-auth";
 import { Link } from "@/i18n/navigation";
@@ -27,7 +28,13 @@ export default async function AccountPage({ params }: PageProps) {
           {t("title")}
         </h1>
         <RequireAuth>
-          <AccountPanel />
+          <div className="space-y-12">
+            <AccountPanel />
+            {/* Analytics opt-out (TASK_12 privacy requirement). Behind
+                RequireAuth because the account page already is; the consent
+                value itself is device-local, not per-account. */}
+            <AnalyticsConsentToggle />
+          </div>
         </RequireAuth>
       </main>
     </div>

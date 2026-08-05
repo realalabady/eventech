@@ -1,11 +1,13 @@
 import { httpsCallable } from "firebase/functions";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
+import { track } from "@/firebase/analytics";
 import {
   getFirebaseAuth,
   getFirebaseFunctions,
   getFirebaseStorage,
 } from "@/firebase/client";
+import { AnalyticsEvent } from "@/lib/analytics/events";
 
 /**
  * All booking mutations are Cloud Function calls. Status, amount and inventory
@@ -51,23 +53,33 @@ async function call<TPayload extends object, TData = undefined>(
   }
 }
 
-export function createBooking(
+export async function createBooking(
   eventId: string,
   ticketTypeId: string,
   quantity: number,
 ) {
-  return call<
+  const result = await call<
     { eventId: string; ticketTypeId: string; quantity: number },
     { bookingId: string }
   >("createBooking", { eventId, ticketTypeId, quantity });
+  // Funnel step 5. `quantity` is a count, `eventId` an opaque id — neither
+  // identifies the attendee.
+  if (result.ok) track(AnalyticsEvent.BOOKING_REQUESTED, { eventId, quantity });
+  return result;
 }
 
-export function approveBooking(bookingId: string) {
-  return call("approveBooking", { bookingId });
+export async function approveBooking(bookingId: string) {
+  const result = await call("approveBooking", { bookingId });
+  if (result.ok) track(AnalyticsEvent.BOOKING_APPROVED);
+  return result;
 }
 
-export function rejectBooking(bookingId: string, reason: string) {
-  return call("rejectBooking", { bookingId, reason });
+export async function rejectBooking(bookingId: string, reason: string) {
+  const result = await call("rejectBooking", { bookingId, reason });
+  // The rejection reason is free text an organizer wrote about a specific
+  // person. It stays out of analytics.
+  if (result.ok) track(AnalyticsEvent.BOOKING_REJECTED);
+  return result;
 }
 
 export function cancelBooking(bookingId: string) {

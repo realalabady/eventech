@@ -1,4 +1,6 @@
 import { httpsCallable } from "firebase/functions";
+import { track } from "@/firebase/analytics";
+import { AnalyticsEvent } from "@/lib/analytics/events";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 import {
@@ -58,11 +60,14 @@ async function call<TPayload extends object, TData = undefined>(
   }
 }
 
-export function createEvent(organizationId: string, title?: string) {
-  return call<{ organizationId: string; title?: string }, { eventId: string }>(
-    "createEvent",
-    { organizationId, title },
-  );
+export async function createEvent(organizationId: string, title?: string) {
+  const result = await call<
+    { organizationId: string; title?: string },
+    { eventId: string }
+  >("createEvent", { organizationId, title });
+  // Funnel step 4. The title is organizer-authored free text and is not sent.
+  if (result.ok) track(AnalyticsEvent.EVENT_CREATED);
+  return result;
 }
 
 export type EventPatch = {
@@ -80,14 +85,24 @@ export type EventPatch = {
   branding?: { primary?: string };
 };
 
-export function saveEventDraft(eventId: string, patch: EventPatch) {
-  return call("saveEventDraft", { eventId, patch });
+export async function saveEventDraft(eventId: string, patch: EventPatch) {
+  const result = await call("saveEventDraft", { eventId, patch });
+  // Which fields changed, never their values — a patch carries descriptions,
+  // ticket prices and branding.
+  if (result.ok) {
+    track(AnalyticsEvent.EVENT_EDITED, { fields: Object.keys(patch).join(",") });
+  }
+  return result;
 }
 
-export function publishEvent(eventId: string) {
-  return call<{ eventId: string }, { slug: string }>("publishEvent", {
-    eventId,
-  });
+export async function publishEvent(eventId: string) {
+  const result = await call<{ eventId: string }, { slug: string }>(
+    "publishEvent",
+    { eventId },
+  );
+  // Funnel step 6 — the terminal conversion.
+  if (result.ok) track(AnalyticsEvent.EVENT_PUBLISHED, { eventId });
+  return result;
 }
 
 export function createVenue(

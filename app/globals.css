@@ -371,6 +371,31 @@
   }
 
   /*
+   * Icon stroke — TASK_14 normalization.
+   *
+   * lucide-react defaults to `strokeWidth: 2`, and only 3 of 27 files that use
+   * it ever overrode that. A 2px stroke at 16px is the single most reliable
+   * signal of an un-art-directed interface; Linear, Luma and Raycast all sit
+   * around 1.5 at this size.
+   *
+   * Done in CSS against lucide's own class rather than as a prop on ~200 call
+   * sites: it is one rule, it cannot drift, and every icon added later inherits
+   * it for free.
+   *
+   * To override a single icon, use the Tailwind utility `[stroke-width:2]` —
+   * NOT the `strokeWidth` prop. The prop renders as an SVG presentation
+   * attribute, and those lose to any CSS rule, so this declaration would beat
+   * it. The utility lands in Tailwind's `utilities` layer, which is ordered
+   * after `base`, so it wins on cascade order at equal specificity.
+   *
+   * Scoped to `.lucide`, so the inline SVGs elsewhere (state illustrations,
+   * KPI sparklines, Recharts strokes) are untouched.
+   */
+  .lucide {
+    stroke-width: 1.5;
+  }
+
+  /*
    * Headings balance their line breaks so a two-line title never leaves one
    * orphaned word; body copy uses `pretty`, which only fixes the last line and
    * is far cheaper on long text. Neither is applied to prose blocks wholesale.

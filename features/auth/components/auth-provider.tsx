@@ -3,7 +3,8 @@
 import { onIdTokenChanged } from "firebase/auth";
 import { createContext, useEffect, useMemo, useState } from "react";
 
-import { getFirebaseAuth } from "@/firebase/client";
+import { initAnalyticsOnce } from "@/firebase/analytics";
+import { getFirebaseApp, getFirebaseAuth } from "@/firebase/client";
 import { isFirebaseConfigured } from "@/firebase/config";
 import { ACCOUNT_ROLES, type AccountRole } from "@/types/domain";
 
@@ -37,6 +38,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (!isFirebaseConfigured()) {
       return;
     }
+
+    // Analytics and Performance start here rather than in `getFirebaseApp()`:
+    // both are async, browser-only, and must not run during SSR. This provider
+    // mounts once at the root, which is the earliest safe point.
+    void initAnalyticsOnce(getFirebaseApp());
 
     return onIdTokenChanged(getFirebaseAuth(), async (user) => {
       if (!user) {

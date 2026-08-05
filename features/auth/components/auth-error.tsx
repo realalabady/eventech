@@ -2,6 +2,8 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
+import { transition } from "@/lib/motion";
+
 /** Form-level error banner. Gentle entrance, never a shake on the whole form. */
 export function AuthError({ message }: { message?: string }) {
   const reduce = useReducedMotion();
@@ -15,7 +17,7 @@ export function AuthError({ message }: { message?: string }) {
           initial={reduce ? false : { opacity: 0, y: -6 }}
           animate={{ opacity: 1, y: 0 }}
           exit={reduce ? undefined : { opacity: 0, y: -6 }}
-          transition={{ duration: 0.15, ease: "easeOut" }}
+          transition={transition.fast}
         >
           {message}
         </motion.p>

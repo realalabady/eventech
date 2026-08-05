@@ -68,7 +68,7 @@ export function ChannelList({
               onClick={() => onSelect(channel.id)}
               aria-current={active ? "true" : undefined}
               data-active={active}
-              className="relative flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-start text-sm transition-colors duration-150 outline-none hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[active=false]:text-muted-foreground"
+              className="relative flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-start text-sm transition-colors duration-[var(--motion-fast)] outline-none hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[active=false]:text-muted-foreground"
             >
               {active ? (
                 <motion.span

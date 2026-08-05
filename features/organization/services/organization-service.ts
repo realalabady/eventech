@@ -1,6 +1,9 @@
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { httpsCallable } from "firebase/functions";
 
+import { track } from "@/firebase/analytics";
+import { AnalyticsEvent } from "@/lib/analytics/events";
+
 import {
   getFirebaseAuth,
   getFirebaseFunctions,
@@ -75,6 +78,7 @@ export async function createOrganization(payload: {
   >("createOrganization", payload);
   if (result.ok) {
     await refreshClaims();
+    track(AnalyticsEvent.ORGANIZER_REGISTERED);
   }
   return result;
 }

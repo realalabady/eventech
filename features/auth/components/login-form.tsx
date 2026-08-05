@@ -73,7 +73,7 @@ export function LoginForm() {
           />
           <Link
             href="/forgot-password"
-            className="inline-block text-sm text-muted-foreground underline-offset-4 transition-colors duration-150 hover:text-foreground hover:underline"
+            className="inline-block text-sm text-muted-foreground underline-offset-4 transition-colors duration-[var(--motion-fast)] hover:text-foreground hover:underline"
           >
             {t("fields.forgotLink")}
           </Link>

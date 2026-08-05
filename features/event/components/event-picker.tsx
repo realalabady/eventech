@@ -52,7 +52,7 @@ export function EventPicker({
             role="tab"
             aria-selected={active}
             onClick={() => onSelect(event.id)}
-            className={`max-w-64 truncate rounded-full border px-4 py-1.5 text-sm transition-colors duration-150 outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 ${
+            className={`max-w-64 truncate rounded-full border px-4 py-1.5 text-sm transition-colors duration-[var(--motion-fast)] outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 ${
               active
                 ? "border-primary bg-primary/10 text-primary"
                 : "border-border text-muted-foreground hover:text-foreground"

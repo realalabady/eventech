@@ -25,7 +25,7 @@ export default async function MyBookingsPage({ params }: PageProps) {
           </div>
           <Link
             href="/tickets"
-            className="text-sm text-muted-foreground underline-offset-4 transition-colors duration-150 hover:text-foreground hover:underline"
+            className="text-sm text-muted-foreground underline-offset-4 transition-colors duration-[var(--motion-fast)] hover:text-foreground hover:underline"
           >
             {t("viewTickets")}
           </Link>

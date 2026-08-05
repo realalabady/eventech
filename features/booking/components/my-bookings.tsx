@@ -39,7 +39,7 @@ export function MyBookings() {
         <StaggerItem key={booking.id}>
           <Link
             href={`/bookings/${booking.id}`}
-            className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-border bg-card px-5 py-4 transition-[transform,border-color] duration-150 ease-out hover:-translate-y-0.5 hover:border-foreground/20"
+            className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-border bg-card px-5 py-4 transition-[transform,border-color] duration-[var(--motion-fast)] ease-out hover:-translate-y-0.5 hover:border-foreground/20"
           >
             <div className="min-w-0 space-y-0.5">
               <p className="truncate font-medium">{booking.ticketTypeName}</p>

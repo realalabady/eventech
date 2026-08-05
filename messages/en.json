@@ -13,7 +13,9 @@
     "notFoundTitle": "Page not found",
     "notFoundDescription": "The page you were looking for does not exist or has moved.",
     "backHome": "Back to home",
-    "skipToContent": "Skip to content"
+    "skipToContent": "Skip to content",
+    "offline": "You are offline",
+    "offlineHint": "Changes will sync when the connection returns."
   },
   "nav": {
     "signIn": "Sign in",
@@ -1116,6 +1118,13 @@
           "body": "The product changes as it is built, and these terms change with it — material changes will be announced in the product. You can stop using EvenTech at any time; we can end access for a serious or repeated breach of these terms."
         }
       }
+    }
+  },
+  "account": {
+    "privacy": {
+      "heading": "Analytics",
+      "hint": "Anonymous product usage, used to improve EvenTech. Never includes your name, email or payment details.",
+      "toggle": "Share usage data"
     }
   }
 }

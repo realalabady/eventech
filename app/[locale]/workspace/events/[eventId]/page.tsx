@@ -17,7 +17,7 @@ export default async function EventWizardPage({ params }: PageProps) {
       <header className="space-y-2">
         <Link
           href="/workspace/events"
-          className="text-sm text-muted-foreground underline-offset-4 transition-colors duration-150 hover:text-foreground hover:underline"
+          className="text-sm text-muted-foreground underline-offset-4 transition-colors duration-[var(--motion-fast)] hover:text-foreground hover:underline"
         >
           {t("list.title")}
         </Link>

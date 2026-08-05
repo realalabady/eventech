@@ -155,7 +155,7 @@ export function CalendarDialog({
                   type="button"
                   onClick={() => setKind(option)}
                   aria-pressed={kind === option}
-                  className={`rounded-full border px-3 py-1.5 text-sm transition-colors duration-150 outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 ${
+                  className={`rounded-full border px-3 py-1.5 text-sm transition-colors duration-[var(--motion-fast)] outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 ${
                     kind === option
                       ? "border-primary bg-primary/10 text-primary"
                       : "border-border text-muted-foreground hover:text-foreground"

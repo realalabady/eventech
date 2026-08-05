@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
+import { transition } from "@/lib/motion";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -39,7 +40,7 @@ export function AuthField({
             initial={reduce ? false : { opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={reduce ? undefined : { opacity: 0, y: -4 }}
-            transition={{ duration: 0.15, ease: "easeOut" }}
+            transition={transition.fast}
           >
             {error}
           </motion.p>

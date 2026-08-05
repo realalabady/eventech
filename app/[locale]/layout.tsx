@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Geist, Geist_Mono, Noto_Sans_Arabic } from "next/font/google";
 import { notFound } from "next/navigation";
 
+import { OfflineBanner } from "@/components/feedback/offline-banner";
 import { SkipLink } from "@/components/navigation/skip-link";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Toaster } from "@/components/ui/sonner";
@@ -143,6 +144,8 @@ export default async function LocaleLayout({
             <SkipLink label={t("skipToContent")} />
             {children}
             <Toaster />
+            {/* Fixed to the viewport bottom; renders nothing while online. */}
+            <OfflineBanner />
           </AuthProvider>
         </NextIntlClientProvider>
       </body>

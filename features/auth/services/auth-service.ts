@@ -13,6 +13,9 @@ import { httpsCallable } from "firebase/functions";
 import { getFirebaseAuth, getFirebaseFunctions } from "@/firebase/client";
 import { isFirebaseConfigured } from "@/firebase/config";
 
+import { track } from "@/firebase/analytics";
+import { AnalyticsEvent } from "@/lib/analytics/events";
+
 import { toAuthErrorKey } from "../lib/auth-errors";
 import type { AuthResult } from "../types";
 
@@ -49,9 +52,17 @@ export function signInWithEmail(
   email: string,
   password: string,
 ): Promise<AuthResult> {
-  return run(() =>
-    signInWithEmailAndPassword(getFirebaseAuth(), email, password),
-  );
+  return run(async () => {
+    const credential = await signInWithEmailAndPassword(
+      getFirebaseAuth(),
+      email,
+      password,
+    );
+    // `method` only — never the email address. See the identifier rule in
+    // firebase/analytics.ts.
+    track(AnalyticsEvent.LOGIN, { method: "password" });
+    return credential;
+  });
 }
 
 /**
@@ -96,6 +107,10 @@ export function registerWithEmail(
     await sendEmailVerification(credential.user);
     // Pick up the role claim the Cloud Function just wrote.
     await credential.user.getIdToken(true);
+    // Funnel step 2 (landing → signup). Fires only after onboarding succeeded,
+    // so a half-created account is never counted as a conversion.
+    track(AnalyticsEvent.SIGN_UP, { method: "password" });
+    track(AnalyticsEvent.PROFILE_COMPLETED);
   });
 }
 
@@ -105,6 +120,10 @@ export function signInWithGoogle(): Promise<AuthResult> {
     const credential = await signInWithPopup(auth, new GoogleAuthProvider());
     await completeOnboarding(credential.user.displayName ?? "");
     await credential.user.getIdToken(true);
+    // Google sign-in is both signup and login on first use; Firebase reports
+    // which via the credential, but distinguishing them is not worth an extra
+    // round trip — `method` is the dimension that matters here.
+    track(AnalyticsEvent.LOGIN, { method: "google" });
   });
 }
 
@@ -123,5 +142,10 @@ export function resendVerificationEmail(): Promise<AuthResult> {
 }
 
 export function signOut(): Promise<AuthResult> {
-  return run(() => firebaseSignOut(getFirebaseAuth()));
+  return run(async () => {
+    // Recorded before the call: after sign-out the analytics user context is
+    // cleared, and an event sent then is attributed to nobody.
+    track(AnalyticsEvent.LOGOUT);
+    return firebaseSignOut(getFirebaseAuth());
+  });
 }

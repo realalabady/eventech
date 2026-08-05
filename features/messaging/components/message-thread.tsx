@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 
+import { transition } from "@/lib/motion";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Textarea } from "@/components/ui/textarea";
@@ -100,7 +101,7 @@ export function MessageThread({
                     layout={reduce ? false : "position"}
                     initial={reduce ? false : { opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    transition={transition.base}
                     className={fresh ? "pt-3 first:pt-0" : undefined}
                   >
                     {fresh ? (

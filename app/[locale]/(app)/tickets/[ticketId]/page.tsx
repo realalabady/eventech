@@ -20,7 +20,7 @@ export default async function TicketDetailPage({ params }: PageProps) {
       <main className="mx-auto w-full max-w-xl flex-1 space-y-8 px-4 py-12">
         <Link
           href="/tickets"
-          className="text-sm text-muted-foreground underline-offset-4 transition-colors duration-150 hover:text-foreground hover:underline"
+          className="text-sm text-muted-foreground underline-offset-4 transition-colors duration-[var(--motion-fast)] hover:text-foreground hover:underline"
         >
           {t("title")}
         </Link>
