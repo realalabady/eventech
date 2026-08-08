@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 import { AuthError } from "@/features/auth/components/auth-error";
 import { AuthField } from "@/features/auth/components/auth-field";
@@ -11,6 +11,13 @@ import { useAuth } from "@/features/auth/hooks/use-auth";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { MEMBER_ROLES } from "@/types/domain";
 
@@ -36,6 +43,7 @@ export function TeamManager() {
 
   const {
     register,
+    control,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
@@ -92,17 +100,32 @@ export function TeamManager() {
 
           <div className="grid gap-2">
             <Label htmlFor="invite-role">{t("team.roleLabel")}</Label>
-            <select
-              id="invite-role"
-              className="h-11 rounded-md border border-input bg-transparent px-4 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
-              {...register("role")}
-            >
-              {INVITABLE_ROLES.map((role) => (
-                <option key={role} value={role}>
-                  {t(`roles.${role}`)}
-                </option>
-              ))}
-            </select>
+            <Controller
+              control={control}
+              name="role"
+              render={({ field }) => (
+                <Select
+                  items={INVITABLE_ROLES.map((role) => ({
+                    value: role,
+                    label: t(`roles.${role}`),
+                  }))}
+                  value={field.value ?? null}
+                  onValueChange={(value) => field.onChange(value)}
+                  name={field.name}
+                >
+                  <SelectTrigger id="invite-role" onBlur={field.onBlur}>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {INVITABLE_ROLES.map((role) => (
+                      <SelectItem key={role} value={role}>
+                        {t(`roles.${role}`)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+            />
           </div>
 
           <AuthField

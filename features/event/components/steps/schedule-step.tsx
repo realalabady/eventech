@@ -3,10 +3,17 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { fromZonedTime } from "date-fns-tz";
 import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { AuthField } from "@/features/auth/components/auth-field";
 
 import type { StepProps } from "../event-wizard";
@@ -41,6 +48,7 @@ export function ScheduleStep({ event, save, onDone }: StepProps) {
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<ScheduleValues>({
@@ -93,17 +101,28 @@ export function ScheduleStep({ event, save, onDone }: StepProps) {
 
       <div className="grid gap-2">
         <Label htmlFor="event-timezone">{t("schedule.timezoneLabel")}</Label>
-        <select
-          id="event-timezone"
-          className="h-11 rounded-md border border-input bg-transparent px-4 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
-          {...register("timezone")}
-        >
-          {zones.map((zone) => (
-            <option key={zone} value={zone}>
-              {zone}
-            </option>
-          ))}
-        </select>
+        <Controller
+          control={control}
+          name="timezone"
+          render={({ field }) => (
+            <Select
+              value={field.value ?? null}
+              onValueChange={(value) => field.onChange(value)}
+              name={field.name}
+            >
+              <SelectTrigger id="event-timezone" onBlur={field.onBlur}>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {zones.map((zone) => (
+                  <SelectItem key={zone} value={zone}>
+                    {zone}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        />
         <p className="text-sm text-muted-foreground">
           {t("schedule.timezoneHint")}
         </p>

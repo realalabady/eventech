@@ -1,0 +1,124 @@
+# CLAUDE_PROJECT_GUARDRAILS.md
+
+# EvenTech
+## Project Guardrails
+
+---
+
+# Mission
+
+Protect the architecture.
+
+Protect the product vision.
+
+Protect long-term scalability.
+
+Never sacrifice architecture for short-term speed.
+
+---
+
+# Never Do
+
+❌ Duplicate Components
+
+❌ Duplicate Hooks
+
+❌ Duplicate Services
+
+❌ Duplicate Firestore Collections
+
+❌ Duplicate UI
+
+❌ Hardcode Business Rules
+
+❌ Mix Business Logic with UI
+
+❌ Query Entire Collections
+
+❌ Skip Validation
+
+❌ Skip Permissions
+
+❌ Skip Activity Logs
+
+❌ Skip Documentation
+
+---
+
+# Always Do
+
+✅ Build reusable features
+
+✅ Think enterprise first
+
+✅ Optimize Firestore reads
+
+✅ Create scalable components
+
+✅ Document architectural decisions
+
+✅ Keep modules independent
+
+✅ Integrate modules together
+
+---
+
+# Product Philosophy
+
+Everything starts from
+
+Master Data
+
+↓
+
+Everything creates
+
+Operations
+
+↓
+
+Operations create
+
+Finance
+
+↓
+
+Finance creates
+
+Reports
+
+↓
+
+Reports become
+
+Business Intelligence
+
+---
+
+# Long-Term Thinking
+
+If a shortcut creates future technical debt
+
+↓
+
+Do not implement it.
+
+---
+
+# Success
+
+The architecture should still feel clean after
+
+100 developers
+
+1000 organizations
+
+100,000 events
+
+Millions of database records.
+
+---
+
+# Deliverables
+
+Enterprise architectural guardrails.

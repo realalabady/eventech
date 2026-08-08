@@ -1,0 +1,158 @@
+# SEARCH_AND_GLOBAL_COMMAND.md
+
+# EvenTech
+## Global Search & Command Center
+
+---
+
+# Goal
+
+Allow users to find anything within seconds.
+
+One search for the entire platform.
+
+---
+
+# Global Search
+
+Search
+
+Events
+
+Venues
+
+Artists
+
+Vendors
+
+Equipment
+
+Inventory
+
+Staff
+
+Finance
+
+Tasks
+
+Documents
+
+Reports
+
+CRM
+
+Users
+
+Departments
+
+---
+
+# Filters
+
+Organization
+
+Event
+
+Department
+
+Category
+
+Date
+
+Status
+
+Owner
+
+Tags
+
+---
+
+# Command Palette
+
+Shortcut
+
+Ctrl + K
+
+or
+
+⌘ + K
+
+---
+
+# Commands
+
+Create Event
+
+Create Artist
+
+Create Vendor
+
+Create Expense
+
+Create Budget
+
+Create Task
+
+Open Finance
+
+Open Dashboard
+
+Open Reports
+
+Upload Document
+
+Invite User
+
+---
+
+# Quick Actions
+
+Search
+
+Navigate
+
+Create
+
+Approve
+
+Assign
+
+Export
+
+Open Recent
+
+Favorites
+
+---
+
+# Search Features
+
+Recent Searches
+
+Saved Searches
+
+Pinned Results
+
+Fuzzy Search
+
+Keyboard Navigation
+
+Instant Results
+
+---
+
+# Future
+
+AI Search
+
+Natural Language Search
+
+Voice Search
+
+Semantic Search
+
+---
+
+# Deliverables
+
+Enterprise Search & Command Center integrated across the platform.

@@ -1,0 +1,144 @@
+# CLAUDE_ACCESSIBILITY_STANDARDS.md
+
+# EvenTech
+## Accessibility Standards
+
+---
+
+# Goal
+
+Ensure every feature is accessible to all users.
+
+Accessibility is a requirement.
+
+Not an enhancement.
+
+---
+
+# Standards
+
+WCAG 2.2 AA
+
+Semantic HTML
+
+ARIA
+
+Keyboard Navigation
+
+Screen Reader Support
+
+---
+
+# Keyboard
+
+Every interactive element
+
+Must support
+
+Tab
+
+Shift + Tab
+
+Enter
+
+Escape
+
+Arrow Keys
+
+Space
+
+---
+
+# Focus
+
+Visible Focus Ring
+
+Logical Focus Order
+
+Focus Trap in Dialogs
+
+Restore Focus after Close
+
+---
+
+# Contrast
+
+Text
+
+Icons
+
+Buttons
+
+Charts
+
+Tables
+
+Forms
+
+Must meet WCAG AA.
+
+---
+
+# Forms
+
+Every input
+
+Has Label
+
+Description
+
+Validation
+
+Error Message
+
+Required Indicator
+
+Autocomplete
+
+---
+
+# Tables
+
+Keyboard Navigation
+
+Header Association
+
+Sorting Announcement
+
+Screen Reader Labels
+
+---
+
+# Motion
+
+Respect
+
+prefers-reduced-motion
+
+Reduce
+
+Animations
+
+Transitions
+
+Auto Scroll
+
+---
+
+# Testing
+
+Keyboard Only
+
+Screen Reader
+
+Color Blindness
+
+Zoom 200%
+
+Responsive
+
+---
+
+# Deliverables
+
+Enterprise accessibility standards.

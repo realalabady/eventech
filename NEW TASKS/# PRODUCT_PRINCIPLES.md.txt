@@ -1,0 +1,288 @@
+# PRODUCT_PRINCIPLES.md
+
+# EvenTech
+## Product Principles & Engineering Standards
+
+---
+
+# Vision
+
+EvenTech is NOT an Event Management System.
+
+EvenTech is an Event Operations ERP.
+
+Every feature must answer one question:
+
+> Does this help an event company operate more efficiently?
+
+If not, it does not belong.
+
+---
+
+# Core Philosophy
+
+## Enter Once
+
+Every piece of data should only be entered once.
+
+Reuse forever.
+
+Never duplicate.
+
+---
+
+## Single Source of Truth
+
+Every object exists once.
+
+Examples
+
+Venue
+
+↓
+
+Referenced by Events
+
+Artist
+
+↓
+
+Referenced by Events
+
+Vendor
+
+↓
+
+Referenced by Expenses
+
+Equipment
+
+↓
+
+Referenced by Operations
+
+---
+
+## Connected Modules
+
+Every module must communicate.
+
+Finance
+
+↕
+
+Operations
+
+↕
+
+Marketing
+
+↕
+
+Bookings
+
+↕
+
+CRM
+
+↕
+
+Analytics
+
+Nothing exists in isolation.
+
+---
+
+## Event = Workspace
+
+Every event is its own company.
+
+Every event contains
+
+Operations
+
+Finance
+
+Documents
+
+Tasks
+
+Timeline
+
+Bookings
+
+Marketing
+
+Analytics
+
+Reports
+
+---
+
+## Organization = Database
+
+Every organization owns
+
+Master Data
+
+Templates
+
+Events
+
+Reports
+
+Settings
+
+Employees
+
+Everything belongs to one organization.
+
+---
+
+# User Experience Principles
+
+Never overwhelm users.
+
+Progressive Disclosure.
+
+Show only what's needed.
+
+Advanced features stay hidden until required.
+
+---
+
+# Automation First
+
+Whenever possible
+
+Generate automatically.
+
+Examples
+
+Timeline
+
+Budget
+
+Tasks
+
+Checklists
+
+Notifications
+
+Reports
+
+KPIs
+
+---
+
+# Manual Override
+
+Everything AI generates
+
+must remain editable.
+
+Nothing is locked.
+
+---
+
+# Enterprise Ready
+
+Every feature should support
+
+Permissions
+
+Activity Log
+
+Search
+
+Filters
+
+Export
+
+History
+
+Comments
+
+Attachments
+
+Notifications
+
+---
+
+# Performance Rules
+
+No blocking UI.
+
+Optimistic updates.
+
+Lazy loading.
+
+Pagination.
+
+Virtualization.
+
+Background syncing.
+
+---
+
+# Accessibility
+
+WCAG AA
+
+Keyboard Navigation
+
+Screen Readers
+
+Focus States
+
+Reduced Motion
+
+---
+
+# Mobile
+
+Desktop First
+
+Tablet Second
+
+Mobile Companion
+
+Not Mobile First.
+
+Operations happen on desktop.
+
+---
+
+# Long-Term Goal
+
+EvenTech should support
+
+1000+
+
+Organizations
+
+100,000+
+
+Events
+
+Millions of Tickets
+
+Without architecture changes.
+
+---
+
+# Success
+
+Every feature should reduce
+
+Time
+
+Clicks
+
+Errors
+
+Duplicate Work
+
+Training Time
+
+Operational Cost

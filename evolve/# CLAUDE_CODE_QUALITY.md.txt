@@ -1,0 +1,156 @@
+# CLAUDE_CODE_QUALITY.md
+
+# EvenTech
+## Enterprise Code Standards
+
+---
+
+# Architecture
+
+Feature First
+
+Composition
+
+Reusable Components
+
+Single Source of Truth
+
+Strict TypeScript
+
+No Duplicate Logic
+
+---
+
+# Component Rules
+
+Maximum Responsibility
+
+One purpose per component.
+
+Large pages
+
+↓
+
+Small reusable components.
+
+---
+
+# Hooks
+
+Business logic
+
+↓
+
+Hooks
+
+UI
+
+↓
+
+Components
+
+Never mix them.
+
+---
+
+# Firestore
+
+Never query unnecessary fields.
+
+Always paginate.
+
+Always index.
+
+Always validate.
+
+---
+
+# State Management
+
+Prefer
+
+React Context
+
+↓
+
+Component State
+
+↓
+
+Zustand only when justified.
+
+Avoid unnecessary global state.
+
+---
+
+# Performance
+
+Memoization
+
+Lazy Loading
+
+Dynamic Imports
+
+Virtualization
+
+Optimistic Updates
+
+Debouncing
+
+Throttling
+
+Image Optimization
+
+---
+
+# Error Handling
+
+User Friendly
+
+Developer Friendly
+
+Recoverable
+
+Logged
+
+Traceable
+
+---
+
+# Naming
+
+Clear
+
+Consistent
+
+Readable
+
+Avoid abbreviations.
+
+---
+
+# Documentation
+
+Every complex hook
+
+Every service
+
+Every Cloud Function
+
+Must contain documentation.
+
+---
+
+# Refactoring
+
+If a better architecture is discovered
+
+Refactor immediately.
+
+Never stack technical debt.
+
+---
+
+# Final Standard
+
+Code should be understandable by a senior engineer six months later without additional explanation.

@@ -1,0 +1,114 @@
+# CLAUDE_ERROR_HANDLING.md
+
+# EvenTech
+## Error Handling Standards
+
+---
+
+# Goal
+
+Every failure should be predictable, recoverable and understandable.
+
+---
+
+# Error Types
+
+Validation
+
+Authentication
+
+Authorization
+
+Network
+
+Firestore
+
+Cloud Function
+
+Payment
+
+Storage
+
+Unknown
+
+---
+
+# UI
+
+Always show
+
+Clear Message
+
+Retry Button
+
+Support Action
+
+Error ID
+
+---
+
+# Logging
+
+Store
+
+Timestamp
+
+User
+
+Organization
+
+Module
+
+Action
+
+Stack Trace
+
+Environment
+
+---
+
+# Recovery
+
+Retry
+
+Fallback
+
+Rollback
+
+Offline Queue
+
+Auto Sync
+
+---
+
+# User Messages
+
+Explain
+
+What happened
+
+Why
+
+How to fix it
+
+Never expose internal errors.
+
+---
+
+# Monitoring
+
+Firebase Logs
+
+Cloud Logs
+
+Analytics
+
+Crash Reports
+
+Performance
+
+---
+
+# Deliverables
+
+Enterprise-wide error handling policy.

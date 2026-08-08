@@ -1,0 +1,150 @@
+# CLAUDE_MODULE_TEMPLATE.md
+
+# EvenTech
+## Standard Module Template
+
+---
+
+# Goal
+
+Every future module must follow this exact structure.
+
+---
+
+# Module Name
+
+Purpose
+
+Business Value
+
+Dependencies
+
+---
+
+# Features
+
+Feature 1
+
+Feature 2
+
+Feature 3
+
+---
+
+# Database
+
+Collections
+
+Relationships
+
+Indexes
+
+Security Rules
+
+---
+
+# UI
+
+Pages
+
+Dialogs
+
+Tables
+
+Cards
+
+Forms
+
+Charts
+
+---
+
+# Components
+
+Shared Components
+
+Feature Components
+
+Reusable Components
+
+---
+
+# Business Logic
+
+Services
+
+Hooks
+
+Utilities
+
+Validation
+
+---
+
+# Permissions
+
+View
+
+Create
+
+Update
+
+Delete
+
+Approve
+
+Export
+
+---
+
+# Notifications
+
+Triggers
+
+Recipients
+
+Channels
+
+---
+
+# Reports
+
+KPIs
+
+Charts
+
+Exports
+
+---
+
+# Activity Logs
+
+Create
+
+Update
+
+Delete
+
+Approval
+
+Export
+
+---
+
+# Testing
+
+Unit
+
+Integration
+
+E2E
+
+Accessibility
+
+Performance
+
+---
+
+# Deliverables
+
+Complete production-ready module.

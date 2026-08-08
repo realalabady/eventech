@@ -1,0 +1,22 @@
+# EvenTech Evolution Documentation
+
+This directory contains the complete product, architecture, engineering, UI/UX and implementation documentation for EvenTech.
+
+Reading Order:
+
+1. Product Vision
+2. Product Principles
+3. Architecture
+4. Roadmap
+5. Design System
+6. Database Standards
+7. Module Documentation
+8. Development Standards
+9. Claude Rules
+10. Deployment
+
+Every implementation must follow these documents.
+
+Do not implement features before understanding the architecture.
+
+The documentation inside this folder is the single source of truth for the product.

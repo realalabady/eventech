@@ -7,6 +7,13 @@ import { AuthError } from "@/features/auth/components/auth-error";
 import { useAuth } from "@/features/auth/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Link, useRouter } from "@/i18n/navigation";
 
 import { createBooking } from "../services/booking-service";
@@ -89,41 +96,51 @@ export function BookingRequest({
       {ticketTypes.length > 1 ? (
         <div className="grid gap-2">
           <Label htmlFor="booking-type">{tEvent("tickets")}</Label>
-          <select
-            id="booking-type"
+          <Select
+            items={ticketTypes.map((type) => ({
+              value: type.id,
+              label: type.name,
+            }))}
             value={ticketTypeId}
-            onChange={(event) => {
-              setTicketTypeId(event.target.value);
+            onValueChange={(value) => {
+              setTicketTypeId(value ?? "");
               setQuantity(1);
             }}
-            className="h-11 rounded-md border border-input bg-transparent px-4 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
           >
-            {ticketTypes.map((type) => (
-              <option key={type.id} value={type.id}>
-                {type.name}
-              </option>
-            ))}
-          </select>
+            <SelectTrigger id="booking-type">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {ticketTypes.map((type) => (
+                <SelectItem key={type.id} value={type.id}>
+                  {type.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       ) : null}
 
       <div className="grid gap-2">
         <Label htmlFor="booking-quantity">{t("request.quantityLabel")}</Label>
-        <select
-          id="booking-quantity"
+        <Select
           value={quantity}
-          onChange={(event) => setQuantity(Number(event.target.value))}
-          className="h-11 rounded-md border border-input bg-transparent px-4 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+          onValueChange={(value) => setQuantity(value ?? 1)}
         >
-          {Array.from(
-            { length: Math.max(maxQuantity, 1) },
-            (_, i) => i + 1,
-          ).map((value) => (
-            <option key={value} value={value}>
-              {value}
-            </option>
-          ))}
-        </select>
+          <SelectTrigger id="booking-quantity">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {Array.from(
+              { length: Math.max(maxQuantity, 1) },
+              (_, i) => i + 1,
+            ).map((value) => (
+              <SelectItem key={value} value={value}>
+                {value}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       <Button

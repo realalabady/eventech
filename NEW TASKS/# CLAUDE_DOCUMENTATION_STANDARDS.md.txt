@@ -1,0 +1,128 @@
+# CLAUDE_DOCUMENTATION_STANDARDS.md
+
+# EvenTech
+## Documentation Standards
+
+---
+
+# Goal
+
+Every feature must be documented.
+
+Documentation should remain synchronized with the code.
+
+---
+
+# Every Module
+
+Must include
+
+Overview
+
+Architecture
+
+Dependencies
+
+Database
+
+API
+
+Permissions
+
+Components
+
+Hooks
+
+Services
+
+Testing
+
+Known Limitations
+
+---
+
+# Every Component
+
+Document
+
+Purpose
+
+Props
+
+Examples
+
+Accessibility
+
+Variants
+
+Usage
+
+---
+
+# Every Hook
+
+Document
+
+Purpose
+
+Parameters
+
+Return Values
+
+Examples
+
+Dependencies
+
+---
+
+# Every Service
+
+Document
+
+Business Logic
+
+Inputs
+
+Outputs
+
+Errors
+
+Firestore Collections
+
+---
+
+# Changelog
+
+Every release updates
+
+Features
+
+Fixes
+
+Refactoring
+
+Breaking Changes
+
+Known Issues
+
+---
+
+# README
+
+Always update when
+
+Architecture Changes
+
+New Module
+
+New Dependency
+
+New Environment Variable
+
+Deployment Changes
+
+---
+
+# Deliverables
+
+Enterprise documentation standards.

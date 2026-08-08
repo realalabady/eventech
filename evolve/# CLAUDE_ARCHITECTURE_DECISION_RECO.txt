@@ -1,0 +1,118 @@
+# CLAUDE_ARCHITECTURE_DECISION_RECORDS.md
+
+# EvenTech
+## Architecture Decision Records (ADR)
+
+---
+
+# Goal
+
+Document every important architectural decision.
+
+Future developers should understand *why* decisions were made.
+
+---
+
+# ADR Template
+
+## ID
+
+ADR-001
+
+---
+
+## Title
+
+Example
+
+Use Firestore instead of PostgreSQL
+
+---
+
+## Status
+
+Proposed
+
+Accepted
+
+Deprecated
+
+Replaced
+
+---
+
+## Context
+
+What problem exists?
+
+---
+
+## Decision
+
+What decision was made?
+
+---
+
+## Consequences
+
+Benefits
+
+Trade-offs
+
+Limitations
+
+---
+
+## Alternatives Considered
+
+Option A
+
+Option B
+
+Option C
+
+Reason for rejection.
+
+---
+
+# Decisions To Track
+
+Database
+
+Authentication
+
+State Management
+
+Folder Structure
+
+Animations
+
+Charts
+
+Search
+
+Permissions
+
+Notifications
+
+Deployment
+
+Performance
+
+Caching
+
+Offline Support
+
+AI
+
+---
+
+# Rules
+
+Never make major architectural changes without creating an ADR.
+
+---
+
+# Deliverables
+
+Architecture Decision Log for long-term maintainability.

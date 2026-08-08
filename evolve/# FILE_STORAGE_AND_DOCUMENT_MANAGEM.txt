@@ -1,0 +1,207 @@
+# FILE_STORAGE_AND_DOCUMENT_MANAGEMENT.md
+
+# EvenTech
+## Enterprise Document Management System
+
+---
+
+# Goal
+
+Centralize every document related to the organization.
+
+Every document should be searchable, versioned and permission-controlled.
+
+---
+
+# Categories
+
+Contracts
+
+Invoices
+
+Receipts
+
+Purchase Orders
+
+Permits
+
+Insurance
+
+Artist Riders
+
+Technical Riders
+
+Stage Plans
+
+Venue Layouts
+
+Marketing Assets
+
+Photos
+
+Videos
+
+Reports
+
+Legal Documents
+
+HR Documents
+
+Custom
+
+---
+
+# Folder Structure
+
+Organization
+
+↓
+
+Event
+
+↓
+
+Department
+
+↓
+
+Category
+
+↓
+
+Files
+
+---
+
+# File Information
+
+Store
+
+- File Name
+- Category
+- Event
+- Department
+- Organization
+- Uploaded By
+- Upload Date
+- Version
+- Tags
+- Size
+- MIME Type
+- Storage Path
+- Status
+- Notes
+
+---
+
+# Features
+
+Upload
+
+Preview
+
+Rename
+
+Move
+
+Duplicate
+
+Archive
+
+Restore
+
+Delete
+
+Download
+
+Share
+
+Version History
+
+Favorites
+
+Recent Files
+
+Search
+
+Filters
+
+---
+
+# Version Control
+
+v1
+
+↓
+
+v2
+
+↓
+
+v3
+
+↓
+
+Latest
+
+Restore previous version anytime.
+
+---
+
+# Permissions
+
+View
+
+Upload
+
+Edit
+
+Delete
+
+Download
+
+Share
+
+Approve
+
+Archive
+
+---
+
+# Search
+
+Search by
+
+Name
+
+Tag
+
+Category
+
+Event
+
+Department
+
+Uploader
+
+Date
+
+---
+
+# Future
+
+OCR
+
+PDF Preview
+
+Image Annotation
+
+Digital Signature
+
+AI File Search
+
+---
+
+# Deliverables
+
+Enterprise Document Management integrated with all modules.

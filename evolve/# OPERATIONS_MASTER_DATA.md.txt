@@ -1,0 +1,272 @@
+# OPERATIONS_MASTER_DATA.md
+
+# EvenTech
+## Master Data Management (MDM)
+
+---
+
+# Goal
+
+Build a reusable company database.
+
+The organizer should never enter the same information twice.
+
+Every event is created by selecting existing data from the Master Data module.
+
+---
+
+# Master Data Modules
+
+## Venues
+
+Store
+
+- Name
+- Country
+- City
+- District
+- Google Maps
+- Capacity
+- Indoor / Outdoor
+- Daily Cost
+- Deposit
+- Contact Person
+- Phone
+- Email
+- Website
+- Parking
+- Internet
+- Power Capacity
+- Restrictions
+- Images
+- Documents
+- Notes
+
+---
+
+## Artists
+
+Store
+
+- Artist Name
+- Stage Name
+- Genre
+- Music Style
+- Nationality
+- Manager
+- Contact
+- Email
+- Booking Fee
+- Deposit
+- Remaining Balance
+- Hotel
+- Transportation
+- Arrival
+- Departure
+- Technical Rider
+- Hospitality Rider
+- Documents
+- Notes
+
+---
+
+## Vendors
+
+Categories
+
+- Sound
+- Lighting
+- Stage
+- LED
+- Security
+- Cleaning
+- Catering
+- Beverage
+- Photography
+- Videography
+- Decoration
+- Internet
+- Transportation
+- Printing
+
+Store
+
+- Company
+- Category
+- Contact
+- Phone
+- Email
+- IBAN
+- VAT Number
+- Daily Rate
+- Payment Terms
+- Contract
+- Previous Events
+- Notes
+
+---
+
+## Equipment
+
+Categories
+
+- Speakers
+- Lighting
+- LED
+- Lasers
+- Truss
+- Smoke
+- Mixers
+- DJ Booth
+- Generator
+- Tables
+- Chairs
+- Barriers
+- Radios
+- Cameras
+
+Store
+
+- Quantity
+- Vendor
+- Daily Cost
+- Maintenance Date
+- Status
+- Notes
+
+---
+
+## Staff
+
+Store
+
+- Name
+- Position
+- Phone
+- Email
+- Salary
+- Daily Rate
+- Skills
+- Availability
+- Notes
+
+---
+
+## Catering
+
+Store
+
+- Water
+- Drinks
+- Coffee
+- Food
+- Ice
+- Snacks
+- VIP Items
+
+Each Item
+
+- Supplier
+- Unit Cost
+- Quantity
+- Notes
+
+---
+
+## Logistics
+
+Store
+
+- Hotels
+- Vehicles
+- Drivers
+- Flights
+- Fuel
+- Parking
+- Warehouses
+
+---
+
+## Documents
+
+Reusable
+
+- Contracts
+- Licenses
+- Insurance
+- Permits
+- Agreements
+
+---
+
+# Event Creation Flow
+
+Create Event
+
+↓
+
+Select Venue
+
+↓
+
+Auto Fill
+
+↓
+
+Select Artists
+
+↓
+
+Auto Fill
+
+↓
+
+Select Vendors
+
+↓
+
+Auto Fill
+
+↓
+
+Select Equipment
+
+↓
+
+Auto Fill
+
+↓
+
+Select Staff
+
+↓
+
+Auto Fill
+
+↓
+
+Generate Event Workspace
+
+---
+
+# Requirements
+
+- CRUD
+- Search
+- Filters
+- Categories
+- Soft Delete
+- Archive
+- Import CSV
+- Export CSV
+- Duplicate Record
+- Activity Log
+- Attach Documents
+- Image Upload
+- Global Search
+
+---
+
+# Deliverables
+
+Complete Master Data module integrated with Event Creation.

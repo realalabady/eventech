@@ -52,3 +52,5 @@ next-env.d.ts
 # Untracked so they never reach a commit; the lint script also scopes itself to
 # the real source roots so ESLint does not walk into them.
 .claude/worktrees/
+
+NEW TASKS/eventech re.txt

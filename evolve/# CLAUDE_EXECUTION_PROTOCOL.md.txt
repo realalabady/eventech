@@ -1,0 +1,206 @@
+# CLAUDE_EXECUTION_PROTOCOL.md
+
+# EvenTech
+## Enterprise Execution Protocol
+
+---
+
+# Mission
+
+Execute every implementation with enterprise quality.
+
+Never implement features in isolation.
+
+Every implementation must improve the overall platform.
+
+---
+
+# Phase 1
+
+Read Documentation
+
+↓
+
+Understand Business Goal
+
+↓
+
+Understand User Workflow
+
+↓
+
+Identify Dependencies
+
+↓
+
+Review Existing Code
+
+---
+
+# Phase 2
+
+Architecture Review
+
+Verify
+
+Database
+
+Components
+
+Hooks
+
+Services
+
+Permissions
+
+Notifications
+
+Reports
+
+Analytics
+
+---
+
+# Phase 3
+
+Implementation Plan
+
+Define
+
+UI
+
+Database
+
+Business Logic
+
+Cloud Functions
+
+Firestore Rules
+
+Activity Logs
+
+Testing
+
+---
+
+# Phase 4
+
+Development
+
+Implement
+
+Foundation
+
+↓
+
+Business Logic
+
+↓
+
+UI
+
+↓
+
+Animations
+
+↓
+
+Integrations
+
+↓
+
+Testing
+
+---
+
+# Phase 5
+
+Validation
+
+TypeScript
+
+ESLint
+
+Responsive
+
+Dark Mode
+
+Accessibility
+
+Localization
+
+Performance
+
+Security
+
+---
+
+# Phase 6
+
+Integration
+
+Verify compatibility with
+
+Operations
+
+Finance
+
+CRM
+
+Reports
+
+Analytics
+
+Notifications
+
+Master Data
+
+---
+
+# Phase 7
+
+Documentation
+
+Update
+
+README
+
+Architecture
+
+Database
+
+API
+
+Module Documentation
+
+---
+
+# Final Rule
+
+Never mark a task complete until
+
+Implementation
+
+↓
+
+Testing
+
+↓
+
+Documentation
+
+↓
+
+Review
+
+↓
+
+Optimization
+
+are all finished.
+
+---
+
+# Deliverables
+
+Enterprise implementation execution protocol.

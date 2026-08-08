@@ -468,6 +468,7 @@
     "searchLabel": "Search events",
     "searchPlaceholder": "Search by name, city, or artist",
     "allCategories": "All",
+    "categoryLabel": "Category",
     "empty": "Nothing matches that yet.",
     "emptyHint": "Try a different search or category.",
     "noEvents": "No published events yet.",

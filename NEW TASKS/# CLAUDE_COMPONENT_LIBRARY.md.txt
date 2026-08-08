@@ -1,0 +1,144 @@
+# CLAUDE_COMPONENT_LIBRARY.md
+
+# EvenTech
+## Shared Component Standards
+
+---
+
+# Goal
+
+Build one reusable component library for the entire application.
+
+---
+
+# Components
+
+Buttons
+
+Inputs
+
+Textarea
+
+Checkbox
+
+Radio
+
+Switch
+
+Select
+
+Multi Select
+
+Search
+
+Date Picker
+
+Time Picker
+
+Calendar
+
+Avatar
+
+Badge
+
+Chip
+
+Tag
+
+Tooltip
+
+Popover
+
+Dropdown
+
+Menu
+
+Tabs
+
+Accordion
+
+Breadcrumb
+
+Pagination
+
+Progress
+
+Skeleton
+
+Empty State
+
+Error State
+
+Loading Spinner
+
+Charts
+
+Timeline
+
+Kanban
+
+Data Table
+
+Metric Card
+
+Stat Card
+
+Dialog
+
+Drawer
+
+Toast
+
+Command Palette
+
+File Upload
+
+Image Upload
+
+PDF Viewer
+
+QR Viewer
+
+---
+
+# Rules
+
+Every component
+
+Supports Dark Mode
+
+Supports Accessibility
+
+Supports Keyboard
+
+Supports Localization
+
+Supports Disabled State
+
+Supports Loading State
+
+Supports Error State
+
+Supports Variants
+
+---
+
+# Documentation
+
+Each component includes
+
+Usage
+
+Props
+
+Examples
+
+Variants
+
+Accessibility Notes
+
+---
+
+# Deliverables
+
+Enterprise component library used across the platform.

@@ -1,0 +1,133 @@
+# STAFF_AND_WORKFORCE_MANAGEMENT.md
+
+# EvenTech
+## Workforce & Staff Management
+
+---
+
+# Goal
+
+Create a complete workforce management system for permanent staff, freelancers and volunteers.
+
+Every employee should have availability, assignments, payroll and performance tracking.
+
+---
+
+# Staff Types
+
+- Full-Time
+- Part-Time
+- Freelancer
+- Volunteer
+- Contractor
+- Intern
+
+---
+
+# Staff Profile
+
+Store
+
+- Employee ID
+- Full Name
+- Photo
+- Position
+- Department
+- Phone
+- Email
+- Nationality
+- Emergency Contact
+- Skills
+- Certifications
+- Languages
+- Daily Rate
+- Monthly Salary
+- Overtime Rate
+- Bank Details
+- Availability
+- Status
+- Notes
+
+---
+
+# Scheduling
+
+Assign
+
+- Event
+- Shift
+- Role
+- Start Time
+- End Time
+- Break
+- Supervisor
+
+---
+
+# Attendance
+
+Clock In
+
+↓
+
+Break
+
+↓
+
+Resume
+
+↓
+
+Clock Out
+
+GPS (Optional)
+
+QR (Optional)
+
+---
+
+# Performance
+
+Track
+
+- Completed Tasks
+- Attendance
+- Punctuality
+- Incidents
+- Performance Rating
+- Feedback
+
+---
+
+# Payroll
+
+Calculate
+
+- Daily Rate
+- Hours Worked
+- Overtime
+- Bonuses
+- Deductions
+- Final Payment
+
+---
+
+# Reports
+
+Staff Utilization
+
+Payroll Summary
+
+Attendance
+
+Performance
+
+Overtime
+
+Department Allocation
+
+---
+
+# Deliverables
+
+Complete Workforce Management Module.

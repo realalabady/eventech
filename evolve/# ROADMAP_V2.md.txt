@@ -1,0 +1,226 @@
+# ROADMAP_V2.md
+
+# EvenTech
+## Enterprise Product Roadmap
+
+---
+
+# Phase 1
+
+Foundation
+
+✅ Authentication
+
+✅ Dashboard
+
+✅ Event Management
+
+✅ Ticketing
+
+---
+
+# Phase 2
+
+Master Data
+
+- Venues
+- Artists
+- Vendors
+- Equipment
+- Staff
+- Logistics
+- Inventory
+
+---
+
+# Phase 3
+
+Operations
+
+- Timeline
+- Tasks
+- Departments
+- Checklists
+- Daily Operations
+- Documents
+
+---
+
+# Phase 4
+
+Finance
+
+- Budget
+- Expenses
+- Revenue
+- Cash Flow
+- Reports
+- Purchase Requests
+- Payment Requests
+
+---
+
+# Phase 5
+
+Marketing
+
+- Campaigns
+- Sponsors
+- CRM
+- Loyalty
+- Audience
+
+---
+
+# Phase 6
+
+Analytics
+
+- Executive Dashboard
+- Financial Analytics
+- Operational Analytics
+- KPI Center
+- BI Reports
+
+---
+
+# Phase 7
+
+Automation
+
+- AI Planner
+- AI Finance
+- AI Operations
+- AI Reports
+- AI Marketing
+
+---
+
+# Phase 8
+
+Enterprise
+
+- Multi Organization
+- White Label
+- API
+- Integrations
+- Marketplace
+- Mobile App
+
+---
+
+# Future Integrations
+
+Google Calendar
+
+Outlook
+
+Stripe
+
+Tamara
+
+Tabby
+
+Twilio
+
+WhatsApp Business
+
+Slack
+
+Discord
+
+Zoom
+
+Google Meet
+
+Microsoft Teams
+
+Mailgun
+
+Resend
+
+Firebase Extensions
+
+---
+
+# Enterprise Features
+
+Approval Chains
+
+Audit Logs
+
+Version History
+
+Workflow Automation
+
+Custom Fields
+
+Custom Forms
+
+Custom Statuses
+
+Custom Dashboards
+
+API Keys
+
+Webhooks
+
+SSO
+
+2FA
+
+RBAC
+
+Activity Timeline
+
+---
+
+# Success Vision
+
+EvenTech becomes the operating system for event companies.
+
+One platform.
+
+One database.
+
+One workflow.
+
+Everything connected.
+
+Master Data
+
+↓
+
+Planning
+
+↓
+
+Operations
+
+↓
+
+Finance
+
+↓
+
+Execution
+
+↓
+
+Analytics
+
+↓
+
+Reports
+
+↓
+
+Archive
+
+No duplicated work.
+
+No disconnected modules.
+
+No manual tracking.
+
+A complete Event ERP platform.

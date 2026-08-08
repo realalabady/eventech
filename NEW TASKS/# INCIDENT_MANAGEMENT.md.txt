@@ -1,0 +1,140 @@
+# INCIDENT_MANAGEMENT.md
+
+# EvenTech
+## Incident & Risk Management
+
+---
+
+# Goal
+
+Track, manage and resolve every issue that occurs before, during and after an event.
+
+Every incident must be documented.
+
+Every action must be traceable.
+
+---
+
+# Incident Types
+
+Medical
+
+Security
+
+Fire
+
+Power Failure
+
+Internet Failure
+
+Equipment Failure
+
+Artist Delay
+
+Vendor Delay
+
+Staff Issue
+
+Customer Complaint
+
+Ticket Fraud
+
+Weather
+
+Emergency
+
+Custom
+
+---
+
+# Incident Information
+
+Store
+
+- Incident Number
+- Event
+- Category
+- Severity
+- Status
+- Reported By
+- Assigned To
+- Department
+- Date & Time
+- Location
+- Description
+- Attachments
+- Images
+- Videos
+- Resolution
+- Root Cause
+- Lessons Learned
+
+---
+
+# Severity
+
+Low
+
+Medium
+
+High
+
+Critical
+
+Emergency
+
+---
+
+# Workflow
+
+Reported
+
+↓
+
+Assigned
+
+↓
+
+Investigating
+
+↓
+
+Resolved
+
+↓
+
+Closed
+
+---
+
+# Escalation
+
+Department Manager
+
+↓
+
+Operations Manager
+
+↓
+
+Executive
+
+---
+
+# Reports
+
+Incident Trends
+
+Resolution Time
+
+Department Performance
+
+Root Cause Analysis
+
+Risk Heatmap
+
+---
+
+# Deliverables
+
+Enterprise Incident Management integrated into every Event.

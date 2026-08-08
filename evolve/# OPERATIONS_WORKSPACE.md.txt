@@ -1,0 +1,243 @@
+# OPERATIONS_WORKSPACE.md
+
+# EvenTech
+## Event Operations Workspace
+
+---
+
+# Goal
+
+Every Event becomes its own operational workspace.
+
+The workspace should manage the event from the first idea until the final financial report.
+
+This is NOT a booking page.
+
+This is the company's operational headquarters.
+
+---
+
+# Workspace Navigation
+
+Overview
+
+Timeline
+
+Operations
+
+Finance
+
+Bookings
+
+Tickets
+
+Marketing
+
+Artists
+
+Vendors
+
+Equipment
+
+Inventory
+
+Staff
+
+Documents
+
+Analytics
+
+Reports
+
+Settings
+
+---
+
+# Overview
+
+Display
+
+- Event Status
+- Days Remaining
+- Revenue
+- Expenses
+- Budget
+- Profit
+- Pending Tasks
+- Pending Payments
+- Team Activity
+- Recent Updates
+
+---
+
+# Timeline
+
+Stages
+
+Concept
+
+Planning
+
+Venue Confirmed
+
+Artists Confirmed
+
+Marketing
+
+Ticket Sales
+
+Production
+
+Event Day
+
+Breakdown
+
+Financial Closing
+
+Archived
+
+---
+
+# Operations
+
+Manage
+
+Venue
+
+Artists
+
+Vendors
+
+Equipment
+
+Inventory
+
+Staff
+
+Transportation
+
+Hotels
+
+Food & Beverage
+
+Security
+
+Cleaning
+
+Printing
+
+Decoration
+
+Power
+
+Internet
+
+Medical
+
+Emergency
+
+Permits
+
+Insurance
+
+---
+
+# Task Management
+
+Task
+
+Priority
+
+Owner
+
+Department
+
+Deadline
+
+Status
+
+Attachments
+
+Comments
+
+Dependencies
+
+---
+
+# Documents
+
+Contracts
+
+Invoices
+
+Permits
+
+Insurance
+
+Receipts
+
+Technical Riders
+
+Hospitality Riders
+
+Floor Plans
+
+Stage Plans
+
+Emergency Plans
+
+Images
+
+Videos
+
+---
+
+# Team
+
+Members
+
+Departments
+
+Assignments
+
+Permissions
+
+Availability
+
+Current Status
+
+---
+
+# Daily Operations
+
+Morning Checklist
+
+Venue Ready
+
+Stage Ready
+
+Lighting Ready
+
+Sound Ready
+
+Security Ready
+
+Water Delivered
+
+Food Delivered
+
+Artist Arrived
+
+Doors Open
+
+Event Running
+
+Cleanup
+
+Financial Closing
+
+---
+
+# Deliverables
+
+Complete Operations Workspace integrated with Master Data.

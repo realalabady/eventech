@@ -1,0 +1,126 @@
+# CLAUDE_PROJECT_SUCCESS_METRICS.md
+
+# EvenTech
+## Product Success Metrics
+
+---
+
+# Goal
+
+Measure whether EvenTech delivers real business value.
+
+---
+
+# Product Metrics
+
+Average Event Creation Time
+
+Average Budget Creation Time
+
+Average Planning Time
+
+Average Approval Time
+
+Average Check-in Time
+
+Average Report Generation Time
+
+---
+
+# User Metrics
+
+Daily Active Users
+
+Weekly Active Users
+
+Monthly Active Users
+
+Retention
+
+Session Duration
+
+Feature Adoption
+
+---
+
+# Operational Metrics
+
+Task Completion Rate
+
+On-Time Completion
+
+Vendor Performance
+
+Artist Performance
+
+Equipment Utilization
+
+Incident Resolution Time
+
+---
+
+# Financial Metrics
+
+Budget Accuracy
+
+Profit Margin
+
+Revenue Growth
+
+Expense Growth
+
+Cash Flow Health
+
+ROI
+
+---
+
+# Technical Metrics
+
+System Uptime
+
+Response Time
+
+Build Time
+
+Deployment Frequency
+
+Error Rate
+
+Performance Score
+
+Accessibility Score
+
+---
+
+# Quality Metrics
+
+Bugs per Release
+
+Regression Rate
+
+Test Coverage
+
+Support Tickets
+
+Customer Satisfaction
+
+NPS
+
+---
+
+# Success Target
+
+Reduce manual event planning by at least 70%.
+
+Reduce duplicate data entry by at least 90%.
+
+Generate operational and financial reports automatically.
+
+Support enterprise-scale organizations with predictable performance.
+
+---
+
+# Deliverables
+
+Enterprise KPI framework for measuring EvenTech's long-term success.

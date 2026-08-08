@@ -1,0 +1,199 @@
+# INVENTORY_AND_ASSET_MANAGEMENT.md
+
+# EvenTech
+## Enterprise Inventory & Asset Management
+
+---
+
+# Goal
+
+Track every physical asset owned or rented by the company.
+
+Assets should be reusable across events.
+
+Nothing should ever be lost or manually tracked.
+
+---
+
+# Categories
+
+Lighting
+
+Sound
+
+LED
+
+Stage
+
+Power
+
+Networking
+
+Furniture
+
+Decorations
+
+Cables
+
+Generators
+
+Vehicles
+
+Radios
+
+Security
+
+Medical
+
+Cleaning
+
+Office
+
+Custom
+
+---
+
+# Asset Information
+
+Store
+
+- Asset ID
+- QR Code
+- Barcode
+- Name
+- Category
+- Brand
+- Model
+- Serial Number
+- Quantity
+- Purchase Date
+- Purchase Price
+- Current Value
+- Supplier
+- Warranty
+- Maintenance Schedule
+- Current Status
+- Current Location
+- Assigned Event
+- Assigned Staff
+- Notes
+
+---
+
+# Status
+
+Available
+
+Reserved
+
+Assigned
+
+In Use
+
+Maintenance
+
+Damaged
+
+Lost
+
+Retired
+
+---
+
+# Asset Assignment
+
+Assign Asset
+
+↓
+
+Event
+
+↓
+
+Department
+
+↓
+
+Staff Member
+
+↓
+
+Return
+
+↓
+
+Inspection
+
+↓
+
+Available
+
+---
+
+# Maintenance
+
+Schedule
+
+Inspection
+
+Cleaning
+
+Repair
+
+Replacement
+
+History
+
+Technician
+
+Cost
+
+---
+
+# QR Features
+
+Scan Asset
+
+↓
+
+View Details
+
+↓
+
+Assign
+
+↓
+
+Return
+
+↓
+
+Report Damage
+
+↓
+
+Maintenance
+
+---
+
+# Reports
+
+Inventory Value
+
+Assets by Category
+
+Maintenance Cost
+
+Missing Assets
+
+Damaged Assets
+
+Utilization
+
+Upcoming Maintenance
+
+---
+
+# Deliverables
+
+Enterprise Asset Management System integrated with Operations.

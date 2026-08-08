@@ -1,0 +1,170 @@
+# AI_AUTOMATION_MODULE.md
+
+# EvenTech
+## AI Assistant & Automation
+
+---
+
+# Goal
+
+Use AI to reduce repetitive work.
+
+AI should assist—not replace—the organizer.
+
+---
+
+# AI Features
+
+Budget Suggestions
+
+Vendor Suggestions
+
+Artist Suggestions
+
+Timeline Generation
+
+Task Generation
+
+Checklist Generation
+
+Risk Detection
+
+Profit Forecast
+
+Expense Prediction
+
+Attendance Prediction
+
+---
+
+# AI Event Planner
+
+Input
+
+Event Type
+
+↓
+
+Budget
+
+↓
+
+Capacity
+
+↓
+
+Location
+
+↓
+
+Artists
+
+↓
+
+Generate
+
+Timeline
+
+Budget
+
+Tasks
+
+Equipment
+
+Vendors
+
+Staff
+
+Checklist
+
+---
+
+# AI Finance
+
+Suggest
+
+Budget Allocation
+
+Overspending Alerts
+
+Profit Forecast
+
+Cash Flow Forecast
+
+Expense Optimization
+
+---
+
+# AI Operations
+
+Suggest
+
+Missing Vendors
+
+Missing Equipment
+
+Missing Staff
+
+Scheduling Conflicts
+
+Timeline Conflicts
+
+Duplicate Tasks
+
+Risk Warnings
+
+---
+
+# AI Marketing
+
+Suggest
+
+Campaign Budget
+
+Best Time to Launch
+
+Audience
+
+Content Calendar
+
+Expected Reach
+
+Expected Ticket Sales
+
+---
+
+# AI Reports
+
+Generate
+
+Executive Summary
+
+Lessons Learned
+
+Event Performance
+
+Department Performance
+
+Financial Summary
+
+Risk Summary
+
+---
+
+# Future Integrations
+
+OpenAI
+
+Claude
+
+Gemini
+
+DeepSeek
+
+Custom AI Models
+
+---
+
+# Deliverables
+
+AI Assistant integrated across Operations, Finance and Planning.

@@ -1,0 +1,130 @@
+# CLAUDE_SYSTEM_THINKING.md
+
+# EvenTech
+## System Thinking Principles
+
+---
+
+# Goal
+
+Build systems.
+
+Not pages.
+
+Not features.
+
+Not isolated modules.
+
+---
+
+# Every Feature Must Connect To
+
+Master Data
+
+↓
+
+Operations
+
+↓
+
+Finance
+
+↓
+
+CRM
+
+↓
+
+Analytics
+
+↓
+
+Reports
+
+↓
+
+Archive
+
+---
+
+# Every Entity
+
+Should answer
+
+Who owns it?
+
+Where is it used?
+
+Who can edit it?
+
+Who can approve it?
+
+Who reports on it?
+
+What depends on it?
+
+---
+
+# Every Module
+
+Must provide
+
+Search
+
+Filters
+
+Permissions
+
+Activity Logs
+
+Reports
+
+Notifications
+
+Attachments
+
+Comments
+
+History
+
+---
+
+# Before Creating New Data
+
+Ask
+
+Can this reference existing data?
+
+Can this be reused?
+
+Can this become a template?
+
+Can this be automated?
+
+---
+
+# Product Principle
+
+One change
+
+↓
+
+Updates everywhere.
+
+One source
+
+↓
+
+Many consumers.
+
+---
+
+# Success
+
+The platform behaves as one connected ecosystem instead of many disconnected pages.
+
+---
+
+# Deliverables
+
+Enterprise system-thinking guidelines.

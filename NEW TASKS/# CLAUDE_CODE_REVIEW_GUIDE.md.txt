@@ -1,0 +1,140 @@
+# CLAUDE_CODE_REVIEW_GUIDE.md
+
+# EvenTech
+## Senior Engineer Code Review Guide
+
+---
+
+# Architecture
+
+✅ Reusable
+
+✅ Modular
+
+✅ Feature Based
+
+✅ Scalable
+
+❌ No duplication
+
+---
+
+# Components
+
+Single Responsibility
+
+Composable
+
+Reusable
+
+Accessible
+
+Documented
+
+---
+
+# Business Logic
+
+Lives inside
+
+Hooks
+
+Services
+
+Utilities
+
+Never inside UI Components.
+
+---
+
+# Firestore
+
+Indexes
+
+Pagination
+
+Security Rules
+
+Reference Integrity
+
+Minimal Reads
+
+---
+
+# Performance
+
+Lazy Loading
+
+Memoization
+
+Dynamic Imports
+
+Optimistic Updates
+
+Minimal Re-renders
+
+---
+
+# UX
+
+Loading
+
+Empty
+
+Error
+
+Success
+
+Responsive
+
+Dark Mode
+
+Accessibility
+
+---
+
+# Security
+
+Authentication
+
+Authorization
+
+RBAC
+
+Validation
+
+Audit Logs
+
+---
+
+# Documentation
+
+Updated
+
+README
+
+Architecture
+
+Database
+
+API
+
+---
+
+# Decision
+
+Approve
+
+↓
+
+Merge
+
+OR
+
+Request Changes
+
+---
+
+# Deliverables
+
+Senior engineering review standards.

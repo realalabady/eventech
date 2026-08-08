@@ -1,0 +1,158 @@
+# SETTINGS_MODULE.md
+
+# EvenTech
+## Organization Settings
+
+---
+
+# Goal
+
+Centralize all organization configuration.
+
+---
+
+# Company
+
+- Company Name
+- Logo
+- Brand Colors
+- Address
+- Phone
+- Email
+- Website
+- VAT Number
+- CR Number
+
+---
+
+# Localization
+
+Language
+
+Timezone
+
+Currency
+
+Date Format
+
+Time Format
+
+Number Format
+
+---
+
+# Finance
+
+Tax Rate
+
+Invoice Prefix
+
+Currency
+
+Payment Terms
+
+Fiscal Year
+
+Budget Defaults
+
+---
+
+# Notifications
+
+Email
+
+SMS
+
+Push
+
+In-App
+
+Reminder Rules
+
+Digest Mode
+
+---
+
+# Branding
+
+Logo
+
+Favicon
+
+Primary Color
+
+Secondary Color
+
+Email Branding
+
+Invoice Branding
+
+PDF Branding
+
+---
+
+# Security
+
+2FA
+
+Password Policy
+
+Session Timeout
+
+IP Restrictions
+
+Device Management
+
+API Keys
+
+---
+
+# Organization
+
+Departments
+
+Roles
+
+Permissions
+
+Working Hours
+
+Business Days
+
+Holiday Calendar
+
+---
+
+# Templates
+
+Budget Templates
+
+Timeline Templates
+
+Checklist Templates
+
+Email Templates
+
+Report Templates
+
+Invoice Templates
+
+---
+
+# Backup
+
+Automatic Backup
+
+Restore
+
+Export Data
+
+Import Data
+
+Data Retention
+
+---
+
+# Deliverables
+
+Complete Organization Settings Center.

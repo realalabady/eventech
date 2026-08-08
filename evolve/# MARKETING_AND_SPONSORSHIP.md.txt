@@ -1,0 +1,149 @@
+# MARKETING_AND_SPONSORSHIP.md
+
+# EvenTech
+## Marketing & Sponsorship Management
+
+---
+
+# Goal
+
+Manage every marketing campaign and sponsor from planning to ROI.
+
+---
+
+# Marketing Dashboard
+
+Display
+
+- Active Campaigns
+- Budget
+- Reach
+- Engagement
+- Ticket Conversions
+- Revenue
+- ROI
+
+---
+
+# Campaign Types
+
+- Instagram
+- TikTok
+- Snapchat
+- X
+- Facebook
+- Google Ads
+- Email
+- SMS
+- Influencers
+- Offline
+- Custom
+
+---
+
+# Campaign
+
+Store
+
+- Campaign Name
+- Event
+- Objective
+- Budget
+- Platform
+- Audience
+- Start Date
+- End Date
+- Status
+- Owner
+- Notes
+
+---
+
+# Sponsor Management
+
+Store
+
+- Company
+- Contact
+- Phone
+- Email
+- Sponsorship Tier
+- Contract
+- Contribution
+- Payment Status
+- Branding Assets
+- Deliverables
+- Activation Requirements
+- Notes
+
+---
+
+# Sponsor Deliverables
+
+Track
+
+- Logo Placement
+- Stage Branding
+- Booth
+- Social Media Posts
+- Website Banner
+- VIP Tickets
+- Announcements
+- Giveaways
+
+---
+
+# Marketing Assets
+
+Store
+
+- Posters
+- Videos
+- Logos
+- Social Media Posts
+- Press Kit
+- Brand Guidelines
+
+---
+
+# KPIs
+
+Impressions
+
+Reach
+
+CTR
+
+Ticket Sales
+
+Revenue
+
+CPA
+
+ROAS
+
+Conversions
+
+Engagement
+
+---
+
+# Reports
+
+Campaign Performance
+
+Sponsor ROI
+
+Marketing Spend
+
+Revenue Attribution
+
+Audience Growth
+
+Top Channels
+
+---
+
+# Deliverables
+
+Complete Marketing & Sponsorship Management Module integrated with Finance and Analytics.

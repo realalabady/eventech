@@ -1,0 +1,146 @@
+# CLAUDE_CONTINUOUS_IMPROVEMENT.md
+
+# EvenTech
+## Continuous Improvement Policy
+
+---
+
+# Goal
+
+EvenTech should continuously improve after every release.
+
+---
+
+# After Every Feature
+
+Review
+
+Architecture
+
+UX
+
+Performance
+
+Accessibility
+
+Maintainability
+
+Developer Experience
+
+---
+
+# After Every Release
+
+Analyze
+
+User Feedback
+
+Bug Reports
+
+Performance
+
+Support Requests
+
+Analytics
+
+Feature Adoption
+
+---
+
+# Improvement Cycle
+
+Build
+
+↓
+
+Measure
+
+↓
+
+Learn
+
+↓
+
+Improve
+
+↓
+
+Repeat
+
+---
+
+# Refactoring Triggers
+
+Duplicate Code
+
+Slow Queries
+
+Complex Components
+
+Large Files
+
+Poor UX
+
+Performance Issues
+
+Accessibility Issues
+
+---
+
+# Monthly Reviews
+
+Architecture
+
+Database
+
+Security
+
+Dependencies
+
+Performance
+
+Documentation
+
+Design System
+
+Technical Debt
+
+---
+
+# Quarterly Reviews
+
+Scalability
+
+Product Direction
+
+Enterprise Readiness
+
+Customer Requests
+
+New Technologies
+
+AI Opportunities
+
+---
+
+# Long-Term Vision
+
+Every release should leave
+
+Cleaner Code
+
+Better UX
+
+Higher Performance
+
+Lower Complexity
+
+Less Technical Debt
+
+Greater Scalability
+
+---
+
+# Deliverables
+
+Continuous Improvement framework for the lifetime of the EvenTech platform.

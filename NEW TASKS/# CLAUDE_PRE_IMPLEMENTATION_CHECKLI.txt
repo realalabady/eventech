@@ -1,0 +1,169 @@
+# CLAUDE_PRE_IMPLEMENTATION_CHECKLIST.md
+
+# EvenTech
+## Mandatory Checklist Before Writing Code
+
+---
+
+# Step 1
+
+Read
+
+- README.md
+- Product Vision
+- Architecture
+- Database Standards
+- Design System
+- Current Module
+
+---
+
+# Step 2
+
+Understand
+
+Business Goal
+
+Users
+
+Dependencies
+
+Permissions
+
+Database
+
+Integrations
+
+Reports
+
+Notifications
+
+---
+
+# Step 3
+
+Search Existing Code
+
+Components
+
+Hooks
+
+Services
+
+Utilities
+
+Schemas
+
+Types
+
+Animations
+
+Icons
+
+---
+
+# Step 4
+
+Review
+
+Firestore Collections
+
+Security Rules
+
+Indexes
+
+Cloud Functions
+
+Storage
+
+---
+
+# Step 5
+
+Plan
+
+UI
+
+Database
+
+Business Logic
+
+Validation
+
+Permissions
+
+Notifications
+
+Activity Logs
+
+Testing
+
+---
+
+# Step 6
+
+Implementation
+
+Backend
+
+↓
+
+Business Logic
+
+↓
+
+Hooks
+
+↓
+
+Components
+
+↓
+
+Pages
+
+↓
+
+Animations
+
+---
+
+# Step 7
+
+Verification
+
+Build
+
+TypeScript
+
+ESLint
+
+Responsive
+
+Dark Mode
+
+Accessibility
+
+Performance
+
+Localization
+
+---
+
+# Step 8
+
+Documentation
+
+Architecture
+
+README
+
+Changelog
+
+Module Docs
+
+---
+
+# Deliverables
+
+Every feature must complete this checklist before implementation.

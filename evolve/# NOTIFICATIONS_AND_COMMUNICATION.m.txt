@@ -1,0 +1,172 @@
+# NOTIFICATIONS_AND_COMMUNICATION.md
+
+# EvenTech
+## Notification & Communication Center
+
+---
+
+# Goal
+
+Create a centralized communication system.
+
+Every important action should notify the right people automatically.
+
+---
+
+# Notification Types
+
+System
+
+Task
+
+Finance
+
+Bookings
+
+Tickets
+
+Marketing
+
+Security
+
+Operations
+
+Documents
+
+Incidents
+
+Approvals
+
+Custom
+
+---
+
+# Delivery Channels
+
+In-App
+
+Email
+
+SMS
+
+WhatsApp (Future)
+
+Push Notifications
+
+Slack (Future)
+
+Discord (Future)
+
+Webhook
+
+---
+
+# Trigger Events
+
+Event Created
+
+Task Assigned
+
+Task Completed
+
+Budget Exceeded
+
+Expense Approved
+
+Payment Due
+
+Payment Completed
+
+Booking Received
+
+Booking Approved
+
+QR Generated
+
+Artist Assigned
+
+Vendor Assigned
+
+Incident Reported
+
+Document Uploaded
+
+Comment Added
+
+Mentioned User
+
+---
+
+# Notification Center
+
+Features
+
+Unread
+
+Read
+
+Archive
+
+Pin
+
+Search
+
+Filter
+
+Priority
+
+Category
+
+Date
+
+---
+
+# User Preferences
+
+Enable
+
+Disable
+
+Channel Selection
+
+Quiet Hours
+
+Digest Mode
+
+Emergency Override
+
+---
+
+# Automation
+
+Rules
+
+If Budget > 90%
+
+↓
+
+Notify Finance
+
+If Artist Delayed
+
+↓
+
+Notify Operations
+
+If Vendor Missing
+
+↓
+
+Notify Production
+
+If Incident Critical
+
+↓
+
+Notify Management
+
+---
+
+# Deliverables
+
+Enterprise Notification Center integrated across the platform.

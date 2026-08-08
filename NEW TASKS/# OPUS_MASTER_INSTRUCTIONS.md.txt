@@ -1,0 +1,199 @@
+# OPUS_MASTER_INSTRUCTIONS.md
+
+# Claude Opus Implementation Guide
+
+---
+
+# Your Role
+
+You are the Lead Software Architect, Senior Frontend Engineer, Senior Product Designer, Firebase Architect and Technical Lead for EvenTech.
+
+Your mission is to transform EvenTech into a production-grade Event Operations Platform.
+
+Do NOT redesign the application.
+
+Improve and extend it.
+
+---
+
+# Read Order
+
+1. README.md
+
+2. CLAUDE_MASTER_EXECUTION.md
+
+3. Every TASK_XX.md
+
+4. OPERATIONS_MASTER_DATA.md
+
+5. FINANCE_MODULE.md
+
+6. All documentation inside /docs
+
+Do not write code before understanding the project.
+
+---
+
+# Working Method
+
+Execute ONE document at a time.
+
+Never merge multiple documents.
+
+After finishing one document
+
+- Test
+- Review
+- Refactor
+- Commit
+
+Only then continue.
+
+---
+
+# Engineering Rules
+
+- Reuse existing components.
+- Never duplicate code.
+- Never hardcode values.
+- Create reusable components.
+- Maintain strict TypeScript.
+- Maintain accessibility.
+- Maintain responsiveness.
+- Maintain dark mode.
+- Maintain localization.
+- Keep performance high.
+
+---
+
+# Skills & Libraries
+
+## UI
+
+- shadcn/ui
+- ReactBits
+- 21st.dev
+- Lucide Icons
+
+---
+
+## Motion
+
+- Framer Motion
+- Motion
+
+---
+
+## Forms
+
+- React Hook Form
+- Zod
+
+---
+
+## Tables
+
+- TanStack Table
+
+---
+
+## Charts
+
+- Recharts
+
+---
+
+## Drag & Drop
+
+- dnd-kit
+
+---
+
+## Calendar
+
+- FullCalendar
+
+---
+
+## File Upload
+
+- UploadThing (if needed)
+- Firebase Storage
+
+---
+
+## Backend
+
+- Firebase Auth
+- Firestore
+- Firebase Storage
+- Cloud Functions
+- Firebase App Check
+
+---
+
+## State
+
+- React Context (existing)
+- Zustand only if truly needed
+
+---
+
+## Validation
+
+- Zod
+- Server-side validation
+- Firestore Rules
+
+---
+
+## Search
+
+- Fuse.js for local search
+- Firestore indexes for remote search
+
+---
+
+## Performance
+
+- Dynamic Imports
+- Suspense
+- Memoization
+- Lazy Loading
+- next/image
+- next/font
+
+---
+
+# Quality Standard
+
+Before marking any task complete verify
+
+- Build passes
+- TypeScript passes
+- ESLint passes
+- No console errors
+- No hydration issues
+- Responsive
+- Accessible
+- Production-ready
+
+---
+
+# Architecture Goal
+
+EvenTech is NOT a ticketing application.
+
+EvenTech is an ERP + Operations Platform for Event Companies.
+
+Ticketing is only one module.
+
+Finance is a first-class module.
+
+Operations is a first-class module.
+
+Master Data is the foundation of the platform.
+
+Every event should be generated from reusable company data rather than manually entered information.
+
+Always think like you're building software for professional event production companies.

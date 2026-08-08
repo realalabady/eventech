@@ -1,0 +1,290 @@
+# ERP_WORKFLOW.md
+
+# EvenTech
+## Complete ERP Workflow
+
+---
+
+# Vision
+
+EvenTech is an Event ERP.
+
+Everything starts with reusable company data.
+
+---
+
+# Workflow
+
+Company Setup
+
+↓
+
+Master Data
+
+↓
+
+Templates
+
+↓
+
+Create Event
+
+↓
+
+Operations
+
+↓
+
+Finance
+
+↓
+
+Marketing
+
+↓
+
+Bookings
+
+↓
+
+Execution
+
+↓
+
+Closing
+
+↓
+
+Reports
+
+↓
+
+Archive
+
+---
+
+# Company Setup
+
+Configure
+
+Organization
+
+Users
+
+Departments
+
+Permissions
+
+Settings
+
+Finance
+
+Branding
+
+---
+
+# Master Data
+
+Manage
+
+Venues
+
+Artists
+
+Vendors
+
+Equipment
+
+Inventory
+
+Staff
+
+Vehicles
+
+Hotels
+
+Catering
+
+Documents
+
+---
+
+# Templates
+
+Store reusable
+
+Event Templates
+
+Budget Templates
+
+Task Templates
+
+Timeline Templates
+
+Marketing Templates
+
+Equipment Packages
+
+Vendor Packages
+
+Staff Packages
+
+---
+
+# Event Creation
+
+Generate
+
+Workspace
+
+Budget
+
+Timeline
+
+Tasks
+
+Calendar
+
+Documents
+
+Departments
+
+---
+
+# Operations
+
+Manage
+
+Daily Operations
+
+Tasks
+
+Equipment
+
+Vendors
+
+Artists
+
+Staff
+
+Incidents
+
+Deliveries
+
+Checklists
+
+---
+
+# Finance
+
+Manage
+
+Budget
+
+Expenses
+
+Revenue
+
+Cash Flow
+
+Invoices
+
+Payments
+
+Purchase Requests
+
+Reports
+
+---
+
+# Marketing
+
+Campaigns
+
+Sponsors
+
+Social Media
+
+Email
+
+Influencers
+
+Assets
+
+Content Calendar
+
+---
+
+# Booking
+
+Ticket Sales
+
+Approvals
+
+QR
+
+Check-in
+
+Attendance
+
+Refunds
+
+Waiting List
+
+---
+
+# Execution
+
+Live Dashboard
+
+Operations Center
+
+Team Tracking
+
+Incident Reporting
+
+Vendor Tracking
+
+Real-time Updates
+
+---
+
+# Closing
+
+Financial Closing
+
+Vendor Settlement
+
+Reports
+
+Lessons Learned
+
+Archive
+
+---
+
+# Archive
+
+Store
+
+Reports
+
+Financials
+
+Documents
+
+Photos
+
+Videos
+
+Attendance
+
+Analytics
+
+Everything remains searchable forever.
+
+---
+
+# Deliverables
+
+Complete ERP workflow connecting every module into one continuous system.

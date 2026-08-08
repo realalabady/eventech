@@ -1,0 +1,210 @@
+# FIREBASE_ARCHITECTURE_GUIDE.md
+
+# EvenTech
+## Firebase Best Practices
+
+---
+
+# Goal
+
+Build Firebase like an enterprise backend.
+
+---
+
+# Services
+
+Use
+
+Firebase Auth
+
+Firestore
+
+Storage
+
+Cloud Functions
+
+App Check
+
+Cloud Messaging
+
+Analytics
+
+Performance
+
+Remote Config (Future)
+
+---
+
+# Authentication
+
+Support
+
+Email
+
+Google
+
+Apple (Future)
+
+Microsoft (Future)
+
+Organization Invitation
+
+Password Reset
+
+Email Verification
+
+MFA Ready
+
+---
+
+# Firestore
+
+Collections
+
+Should be
+
+Flat
+
+Reference-Based
+
+Indexed
+
+Scalable
+
+Never deeply nested.
+
+---
+
+# Security Rules
+
+Every request validates
+
+Authentication
+
+↓
+
+Organization
+
+↓
+
+Role
+
+↓
+
+Permission
+
+↓
+
+Ownership
+
+↓
+
+Business Rules
+
+---
+
+# Storage
+
+Separate folders
+
+Organizations
+
+Events
+
+Artists
+
+Vendors
+
+Invoices
+
+Receipts
+
+Contracts
+
+Images
+
+Videos
+
+Reports
+
+---
+
+# Cloud Functions
+
+Move business logic
+
+out of the frontend.
+
+Examples
+
+Generate Reports
+
+QR Generation
+
+Notifications
+
+Financial Calculations
+
+Email Sending
+
+PDF Generation
+
+Scheduled Jobs
+
+---
+
+# Scheduled Functions
+
+Daily
+
+Financial Summary
+
+Task Reminder
+
+Upcoming Payments
+
+Upcoming Events
+
+Expired Documents
+
+Maintenance Alerts
+
+---
+
+# Indexing
+
+Create composite indexes for
+
+Events
+
+Finance
+
+Tasks
+
+Artists
+
+Vendors
+
+Inventory
+
+CRM
+
+Analytics
+
+---
+
+# Offline Support
+
+Firestore Cache
+
+Offline Queue
+
+Automatic Sync
+
+Conflict Resolution
+
+---
+
+# Deliverables
+
+Enterprise Firebase Architecture optimized for scale.

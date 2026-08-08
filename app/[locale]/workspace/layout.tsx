@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 
 import { WorkspaceNav } from "@/components/navigation/workspace-nav";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { SignOutButton } from "@/features/auth/components/sign-out-button";
 import { RequireOrganizer } from "@/features/organization/components/require-organizer";
 import { Link } from "@/i18n/navigation";
 
@@ -19,8 +20,8 @@ export default async function WorkspaceLayout({
 
   return (
     <div className="flex min-h-[100dvh] flex-col">
-      <header className="sticky top-0 z-30 border-b border-border bg-background/80 backdrop-blur-md">
-        <div className="mx-auto flex h-16 w-full max-w-[90rem] items-center justify-between px-4 md:px-8">
+      <header className="sticky top-0 z-30 border-b border-border bg-background/80 shadow-sm backdrop-blur-md">
+        <div className="flex h-16 w-full items-center justify-between px-4 md:px-6">
           <Link href="/" className="text-base font-semibold tracking-tight">
             {tCommon("appName")}
           </Link>
@@ -32,15 +33,24 @@ export default async function WorkspaceLayout({
               {tNav("backToSite")}
             </Link>
             <ThemeToggle />
+            <SignOutButton className="lg:hidden" />
           </div>
         </div>
       </header>
 
-      <div className="mx-auto flex w-full max-w-[90rem] flex-1 flex-col gap-8 px-4 py-8 md:px-8 lg:flex-row lg:gap-14 lg:py-12">
-        <aside className="lg:w-56 lg:shrink-0">
-          <WorkspaceNav />
+      <div className="flex w-full flex-1 flex-col lg:flex-row">
+        {/* The rail is flush to the viewport edge and separated by its own
+            border + surface tint, so the nav reads as chrome rather than as
+            the first column of the page content. */}
+        <aside className="border-b border-border px-4 py-4 lg:sticky lg:top-16 lg:h-[calc(100dvh-4rem)] lg:w-60 lg:shrink-0 lg:border-b-0 lg:border-e lg:overflow-y-auto lg:bg-card/40 lg:px-3 lg:py-6">
+          <div className="flex h-full flex-col">
+            <WorkspaceNav />
+            <div className="mt-auto hidden border-t border-border pt-3 lg:block">
+              <SignOutButton className="w-full justify-start px-3 text-muted-foreground hover:text-foreground" />
+            </div>
+          </div>
         </aside>
-        <main className="min-w-0 flex-1">
+        <main className="min-w-0 flex-1 px-4 py-8 md:px-8 lg:py-12">
           <RequireOrganizer>{children}</RequireOrganizer>
         </main>
       </div>

@@ -6,6 +6,13 @@ import { useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import { ACCOUNT_ROLES, type AccountRole } from "@/types/domain";
@@ -170,21 +177,32 @@ export function UserTable({
                     {t(`role.${user.role}`)}
                   </Badge>
                 ) : (
-                  <select
+                  <Select
+                    items={ACCOUNT_ROLES.map((role) => ({
+                      value: role,
+                      label: t(`role.${role}`),
+                    }))}
                     value={user.role}
-                    aria-label={t("users.roleLabel")}
                     disabled={busy === user.id}
-                    onChange={(event) =>
-                      onRoleChange(user, event.target.value as AccountRole)
-                    }
-                    className="h-9 rounded-md border border-input bg-transparent px-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                    onValueChange={(role) => {
+                      if (role) onRoleChange(user, role as AccountRole);
+                    }}
                   >
-                    {ACCOUNT_ROLES.map((role) => (
-                      <option key={role} value={role}>
-                        {t(`role.${role}`)}
-                      </option>
-                    ))}
-                  </select>
+                    <SelectTrigger
+                      size="sm"
+                      aria-label={t("users.roleLabel")}
+                      className="w-36"
+                    >
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {ACCOUNT_ROLES.map((role) => (
+                        <SelectItem key={role} value={role}>
+                          {t(`role.${role}`)}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 )}
                 {isSuspended(user) ? (
                   <Badge variant="destructive">{t("users.suspended")}</Badge>

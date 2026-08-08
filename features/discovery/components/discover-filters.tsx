@@ -6,6 +6,13 @@ import { useMemo, useState, type ReactNode } from "react";
 import { EmptyState } from "@/components/feedback/empty-state";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { EVENT_CATEGORIES } from "@/features/event/types";
 
 export type FilterableItem = {
@@ -38,6 +45,19 @@ export function DiscoverFilters({
   const [term, setTerm] = useState("");
   const [category, setCategory] = useState("");
 
+  // `items` lets the trigger render the selected category's label instead of
+  // its raw value, and keeps "All" as a real option rather than a placeholder.
+  const categoryItems = useMemo(
+    () => [
+      { value: "", label: t("allCategories") },
+      ...EVENT_CATEGORIES.map((value) => ({
+        value,
+        label: categoryLabels[value] ?? value,
+      })),
+    ],
+    [t, categoryLabels],
+  );
+
   const visible = useMemo(() => {
     const needle = term.trim().toLowerCase();
     return items.filter((item) => {
@@ -60,21 +80,24 @@ export function DiscoverFilters({
             onChange={(event) => setTerm(event.target.value)}
           />
         </div>
-        <div className="grid gap-2">
-          <Label htmlFor="discover-category">{t("allCategories")}</Label>
-          <select
-            id="discover-category"
+        <div className="grid gap-2 sm:w-56">
+          <Label htmlFor="discover-category">{t("categoryLabel")}</Label>
+          <Select
+            items={categoryItems}
             value={category}
-            onChange={(event) => setCategory(event.target.value)}
-            className="h-11 rounded-md border border-input bg-transparent px-4 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+            onValueChange={(value) => setCategory(value ?? "")}
           >
-            <option value="">{t("allCategories")}</option>
-            {EVENT_CATEGORIES.map((value) => (
-              <option key={value} value={value}>
-                {categoryLabels[value] ?? value}
-              </option>
-            ))}
-          </select>
+            <SelectTrigger id="discover-category">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {categoryItems.map((item) => (
+                <SelectItem key={item.value} value={item.value}>
+                  {item.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </div>
 

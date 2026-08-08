@@ -1,0 +1,138 @@
+# CLAUDE_PERFORMANCE_GUIDE.md
+
+# EvenTech
+## Performance Standards
+
+---
+
+# Goal
+
+Every interaction should feel instant.
+
+Performance is a product feature.
+
+---
+
+# Loading
+
+Use
+
+Skeletons
+
+Optimistic Updates
+
+Streaming
+
+Lazy Loading
+
+---
+
+# Components
+
+Memoize expensive components.
+
+Avoid unnecessary re-renders.
+
+Split large pages.
+
+Virtualize long lists.
+
+---
+
+# Images
+
+Compress
+
+Lazy Load
+
+Responsive Sizes
+
+Modern Formats
+
+Placeholder Blur
+
+---
+
+# Firestore
+
+Paginate
+
+Index
+
+Limit
+
+Batch Writes
+
+Transactions
+
+Realtime only when necessary.
+
+---
+
+# Bundle
+
+Dynamic Imports
+
+Code Splitting
+
+Tree Shaking
+
+Remove unused dependencies.
+
+---
+
+# Navigation
+
+Instant page transitions.
+
+Preserve state where possible.
+
+Prefetch routes.
+
+---
+
+# Charts
+
+Load on demand.
+
+Memoize datasets.
+
+Avoid rendering hidden charts.
+
+---
+
+# Monitoring
+
+Track
+
+First Contentful Paint
+
+Largest Contentful Paint
+
+Interaction to Next Paint
+
+Cumulative Layout Shift
+
+Bundle Size
+
+Memory Usage
+
+---
+
+# Performance Budget
+
+Lighthouse
+
+Performance > 90
+
+Accessibility > 95
+
+Best Practices > 95
+
+SEO > 90
+
+---
+
+# Deliverables
+
+Performance standards for every future implementation.

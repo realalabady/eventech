@@ -1,0 +1,122 @@
+# CLAUDE_COMPLETION_PROTOCOL.md
+
+# EvenTech
+## Task Completion Protocol
+
+---
+
+# Goal
+
+Ensure every completed task meets enterprise standards.
+
+---
+
+# Functional Review
+
+✓ Feature works
+
+✓ Business rules implemented
+
+✓ Edge cases handled
+
+✓ Permissions enforced
+
+---
+
+# Technical Review
+
+✓ No duplicate code
+
+✓ Reusable components
+
+✓ Clean architecture
+
+✓ Optimized queries
+
+✓ No console errors
+
+---
+
+# UX Review
+
+✓ Responsive
+
+✓ Accessible
+
+✓ Dark Mode
+
+✓ Loading State
+
+✓ Empty State
+
+✓ Error State
+
+✓ Success Feedback
+
+---
+
+# Integration Review
+
+✓ Finance
+
+✓ Operations
+
+✓ Notifications
+
+✓ Activity Logs
+
+✓ Reports
+
+✓ Analytics
+
+✓ Master Data
+
+---
+
+# Quality Review
+
+✓ TypeScript
+
+✓ ESLint
+
+✓ Tests
+
+✓ Performance
+
+✓ Security
+
+---
+
+# Documentation Review
+
+✓ README Updated
+
+✓ Architecture Updated
+
+✓ Database Updated
+
+✓ Changelog Updated
+
+---
+
+# Definition of Complete
+
+A task is complete only if
+
+It is implemented.
+
+It is tested.
+
+It is documented.
+
+It is reviewed.
+
+It is optimized.
+
+It integrates with the platform.
+
+---
+
+# Deliverables
+
+Enterprise completion protocol for all future development.

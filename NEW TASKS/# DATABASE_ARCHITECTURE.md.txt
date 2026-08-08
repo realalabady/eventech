@@ -1,0 +1,161 @@
+# DATABASE_ARCHITECTURE.md
+
+# EvenTech
+## Enterprise Database Architecture
+
+---
+
+# Goal
+
+Design Firestore as an ERP database, not a ticketing database.
+
+Everything should be reusable.
+
+Events reference Master Data instead of duplicating it.
+
+---
+
+# Root Collections
+
+users/
+
+organizations/
+
+events/
+
+venues/
+
+artists/
+
+vendors/
+
+equipment/
+
+inventory/
+
+staff/
+
+catering/
+
+transportation/
+
+documents/
+
+finance/
+
+reports/
+
+notifications/
+
+templates/
+
+settings/
+
+---
+
+# Organization
+
+Every organization owns its own data.
+
+organization
+├── venues
+├── artists
+├── vendors
+├── equipment
+├── inventory
+├── staff
+├── finance
+├── events
+├── reports
+
+---
+
+# Event Structure
+
+event
+
+Overview
+
+Operations
+
+Finance
+
+Bookings
+
+Marketing
+
+Timeline
+
+Tasks
+
+Reports
+
+Documents
+
+Analytics
+
+Settings
+
+Nothing duplicated.
+
+Only references.
+
+---
+
+# References
+
+Venue ID
+
+Artist IDs
+
+Vendor IDs
+
+Equipment IDs
+
+Staff IDs
+
+Inventory IDs
+
+Finance IDs
+
+Document IDs
+
+---
+
+# Benefits
+
+Single source of truth
+
+Easy updates
+
+No duplicated data
+
+Scalable
+
+Fast queries
+
+---
+
+# Firestore Rules
+
+Every collection must support
+
+createdAt
+
+updatedAt
+
+createdBy
+
+organizationId
+
+status
+
+deletedAt
+
+activityLog
+
+---
+
+# Deliverables
+
+Enterprise Firestore architecture.

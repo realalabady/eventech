@@ -1,0 +1,220 @@
+# CLAUDE_DEVELOPMENT_RULES.md
+
+# EvenTech
+## Mandatory Development Rules
+
+---
+
+# Mission
+
+Build EvenTech like enterprise software.
+
+Never build demo-quality code.
+
+Every implementation must be production-ready.
+
+---
+
+# Before Writing Code
+
+Always
+
+- Read README.md
+- Read all Architecture documents
+- Read the current module document
+- Search the project for existing implementations
+- Reuse existing components
+
+Never start coding immediately.
+
+---
+
+# Never
+
+Never duplicate components.
+
+Never duplicate business logic.
+
+Never duplicate Firestore queries.
+
+Never create another button if one already exists.
+
+Never hardcode colors.
+
+Never hardcode spacing.
+
+Never hardcode permissions.
+
+Never hardcode IDs.
+
+Never hardcode roles.
+
+---
+
+# Always
+
+Reuse
+
+Components
+
+Hooks
+
+Utilities
+
+Helpers
+
+Validators
+
+Types
+
+Interfaces
+
+Animations
+
+Icons
+
+---
+
+# Folder Rules
+
+Every feature contains
+
+components/
+
+hooks/
+
+services/
+
+types/
+
+schemas/
+
+utils/
+
+constants/
+
+firebase/
+
+---
+
+# Every Page Must Have
+
+Loading State
+
+Empty State
+
+Error State
+
+Permission State
+
+Responsive Layout
+
+Dark Mode
+
+Accessibility
+
+Search
+
+Filters
+
+---
+
+# Every Form
+
+Validation
+
+Autosave
+
+Draft Support
+
+Keyboard Navigation
+
+Error Handling
+
+Success Feedback
+
+---
+
+# Every Table
+
+Search
+
+Sorting
+
+Filtering
+
+Pagination
+
+Column Visibility
+
+Export
+
+Bulk Actions
+
+---
+
+# Every Firebase Query
+
+Validation
+
+Security Rules
+
+Indexes
+
+Pagination
+
+Error Handling
+
+Optimistic Updates
+
+Caching
+
+---
+
+# Every Feature
+
+Must support
+
+Activity Log
+
+Permissions
+
+Comments
+
+Attachments
+
+Notifications
+
+History
+
+Audit Trail
+
+---
+
+# Before Completing A Task
+
+Verify
+
+TypeScript
+
+ESLint
+
+Responsive
+
+Accessibility
+
+Dark Mode
+
+Localization
+
+Performance
+
+No Console Errors
+
+No Dead Code
+
+---
+
+# Final Goal
+
+Every new feature should feel like it has always existed inside EvenTech.

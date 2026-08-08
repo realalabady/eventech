@@ -1,0 +1,108 @@
+# CLAUDE_IMPLEMENTATION_PRIORITY.md
+
+# EvenTech
+## Priority Matrix
+
+---
+
+# P0 (Critical)
+
+Authentication
+
+Organizations
+
+RBAC
+
+Master Data
+
+Event Creation
+
+Operations Workspace
+
+Finance
+
+Firestore Architecture
+
+Security
+
+---
+
+# P1 (High)
+
+CRM
+
+Marketing
+
+Inventory
+
+Documents
+
+Notifications
+
+Analytics
+
+Reports
+
+Departments
+
+Tasks
+
+Timeline
+
+---
+
+# P2 (Medium)
+
+AI
+
+Automation
+
+Templates
+
+Command Palette
+
+Global Search
+
+Incident Management
+
+Approvals
+
+Knowledge Base
+
+---
+
+# P3 (Future)
+
+Mobile App
+
+Marketplace
+
+Public API
+
+Plugin System
+
+Workflow Builder
+
+RFID
+
+NFC
+
+OCR
+
+Voice Search
+
+---
+
+# Rule
+
+Never start P1 before P0 is complete.
+
+Never start P2 before P1 is stable.
+
+Never start P3 before production release.
+
+---
+
+# Deliverables
+
+Feature priority roadmap.

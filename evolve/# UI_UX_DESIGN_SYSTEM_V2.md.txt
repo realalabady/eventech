@@ -1,0 +1,383 @@
+# UI_UX_DESIGN_SYSTEM_V2.md
+
+# EvenTech
+## Enterprise Design System
+
+---
+
+# Goal
+
+Create one unified design language across the entire platform.
+
+Every page must feel like it belongs to the same product.
+
+Inspired by
+
+- Linear
+- Luma
+- Stripe Dashboard
+- Vercel
+- Notion
+- Raycast
+
+Never copy.
+
+Only learn from their UX principles.
+
+---
+
+# Design Principles
+
+Minimal
+
+Elegant
+
+Functional
+
+Professional
+
+Fast
+
+Readable
+
+Consistent
+
+Accessible
+
+---
+
+# Layout
+
+Desktop First
+
+Adaptive
+
+Responsive
+
+Max Width
+
+Sidebar
+
+Top Navigation
+
+Resizable Panels
+
+Command Palette
+
+Global Search
+
+---
+
+# Grid
+
+8px Grid System
+
+Spacing Scale
+
+4
+
+8
+
+12
+
+16
+
+20
+
+24
+
+32
+
+40
+
+48
+
+64
+
+80
+
+96
+
+128
+
+Never use random spacing.
+
+---
+
+# Border Radius
+
+Small
+
+Medium
+
+Large
+
+Extra Large
+
+Consistent everywhere.
+
+---
+
+# Shadows
+
+Subtle
+
+Elevation 1
+
+Elevation 2
+
+Elevation 3
+
+Dialogs
+
+Dropdowns
+
+Never excessive.
+
+---
+
+# Motion
+
+Fast
+
+Purposeful
+
+Smooth
+
+Only animate
+
+Opacity
+
+Transform
+
+Scale
+
+Shared Element Transition
+
+Page Transition
+
+Loading Skeletons
+
+Progressive Reveal
+
+---
+
+# Colors
+
+Neutral First
+
+Accent Color
+
+Semantic Colors
+
+Success
+
+Warning
+
+Error
+
+Info
+
+Finance Colors
+
+Operations Colors
+
+Marketing Colors
+
+Analytics Colors
+
+---
+
+# Typography
+
+Headings
+
+Display
+
+Title
+
+Subtitle
+
+Body
+
+Caption
+
+Badge
+
+Button
+
+Numbers
+
+Tables
+
+Monospace
+
+---
+
+# Components
+
+Buttons
+
+Inputs
+
+Select
+
+Multi Select
+
+Search
+
+Cards
+
+Tables
+
+Dialogs
+
+Drawer
+
+Sheet
+
+Accordion
+
+Tabs
+
+Calendar
+
+Timeline
+
+Charts
+
+KPIs
+
+Metrics
+
+Widgets
+
+Command Menu
+
+Toast
+
+Tooltip
+
+Dropdown
+
+Context Menu
+
+Avatar
+
+Badge
+
+Progress
+
+Breadcrumb
+
+Pagination
+
+Stat Cards
+
+Filters
+
+---
+
+# Dashboard Standards
+
+Every dashboard contains
+
+Header
+
+KPIs
+
+Charts
+
+Recent Activity
+
+Quick Actions
+
+Filters
+
+Search
+
+Responsive Layout
+
+---
+
+# Tables
+
+Sticky Header
+
+Sorting
+
+Filtering
+
+Search
+
+Column Visibility
+
+Export
+
+Pagination
+
+Bulk Actions
+
+Responsive
+
+---
+
+# Forms
+
+Wizard Support
+
+Validation
+
+Autosave
+
+Draft
+
+Undo
+
+Keyboard Shortcuts
+
+Accessibility
+
+---
+
+# Empty States
+
+Illustration
+
+Title
+
+Description
+
+Primary Action
+
+Secondary Action
+
+---
+
+# Loading
+
+Skeleton
+
+Progress
+
+Placeholder
+
+Optimistic UI
+
+---
+
+# Error States
+
+Friendly Message
+
+Retry
+
+Support Link
+
+Logs
+
+---
+
+# Deliverables
+
+Complete Enterprise Design System shared across the entire platform.

@@ -2,10 +2,17 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { AuthField } from "@/features/auth/components/auth-field";
 
@@ -21,6 +28,7 @@ export function BasicsStep({ event, save, onDone }: StepProps) {
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<BasicsValues>({
@@ -54,21 +62,36 @@ export function BasicsStep({ event, save, onDone }: StepProps) {
 
       <div className="grid gap-2">
         <Label htmlFor="event-category">{t("basics.categoryLabel")}</Label>
-        <select
-          id="event-category"
-          defaultValue=""
-          className="h-11 rounded-md border border-input bg-transparent px-4 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
-          {...register("category")}
-        >
-          <option value="" disabled>
-            {t("basics.categoryPlaceholder")}
-          </option>
-          {EVENT_CATEGORIES.map((category) => (
-            <option key={category} value={category}>
-              {t(`categories.${category}`)}
-            </option>
-          ))}
-        </select>
+        <Controller
+          control={control}
+          name="category"
+          render={({ field }) => (
+            <Select
+              items={EVENT_CATEGORIES.map((category) => ({
+                value: category,
+                label: t(`categories.${category}`),
+              }))}
+              value={field.value ?? null}
+              onValueChange={(value) => field.onChange(value)}
+              name={field.name}
+            >
+              <SelectTrigger
+                id="event-category"
+                onBlur={field.onBlur}
+                aria-invalid={errors.category ? true : undefined}
+              >
+                <SelectValue placeholder={t("basics.categoryPlaceholder")} />
+              </SelectTrigger>
+              <SelectContent>
+                {EVENT_CATEGORIES.map((category) => (
+                  <SelectItem key={category} value={category}>
+                    {t(`categories.${category}`)}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        />
         {errors.category ? (
           <p role="alert" className="text-sm text-destructive">
             {t(`errors.${errors.category.message}`)}

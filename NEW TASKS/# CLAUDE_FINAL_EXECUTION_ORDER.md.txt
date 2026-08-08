@@ -1,0 +1,279 @@
+# CLAUDE_FINAL_EXECUTION_ORDER.md
+
+# EvenTech
+## Final Execution Plan for Claude Opus
+
+---
+
+# Mission
+
+Transform EvenTech into a production-ready Event ERP.
+
+Do not think in pages.
+
+Think in systems.
+
+Every module must integrate with every other module.
+
+---
+
+# Execution Order
+
+## Foundation
+
+- Review entire project
+- Read all documentation
+- Audit architecture
+- Identify reusable components
+
+---
+
+## Core Infrastructure
+
+- Design System
+- Shared Components
+- Forms
+- Tables
+- Modals
+- Drawers
+- Charts
+- File Upload
+- Search
+- Filters
+
+---
+
+## Master Data
+
+Implement
+
+- Venues
+- Artists
+- Vendors
+- Equipment
+- Inventory
+- Staff
+- Catering
+- Logistics
+- Documents
+
+---
+
+## Event Creation
+
+Build
+
+- Event Wizard
+- Templates
+- Auto Budget
+- Auto Timeline
+- Auto Checklist
+- Auto Tasks
+
+---
+
+## Operations
+
+Implement
+
+- Workspace
+- Timeline
+- Tasks
+- Checklists
+- Departments
+- Team
+- Daily Operations
+
+---
+
+## Finance
+
+Implement
+
+- Budget
+- Actual
+- Revenue
+- Expenses
+- Cash Flow
+- Reports
+- Charts
+- Purchase Requests
+- Payment Requests
+
+---
+
+## CRM
+
+Implement
+
+Customer Profiles
+
+Loyalty
+
+History
+
+Marketing Integration
+
+---
+
+## Marketing
+
+Implement
+
+Campaigns
+
+Sponsors
+
+Assets
+
+ROI
+
+Analytics
+
+---
+
+## Analytics
+
+Implement
+
+Executive Dashboard
+
+Financial Dashboard
+
+Operational Dashboard
+
+Department Dashboard
+
+---
+
+## Enterprise
+
+Implement
+
+RBAC
+
+Audit Logs
+
+Activity Timeline
+
+Notifications
+
+Approvals
+
+Automation
+
+AI
+
+---
+
+## Final Phase
+
+Refactor
+
+Optimize
+
+Test
+
+Accessibility
+
+Performance
+
+SEO
+
+Animations
+
+Documentation
+
+---
+
+# Rules
+
+Never skip a dependency.
+
+Never duplicate functionality.
+
+Always search the project before creating anything new.
+
+Always reuse components before building new ones.
+
+Every module must support
+
+- Loading State
+- Empty State
+- Error State
+- Responsive Layout
+- Dark Mode
+- Localization
+- Accessibility
+
+---
+
+# Engineering Principles
+
+Single Source of Truth
+
+Composition over Duplication
+
+Reusable Components
+
+Strict TypeScript
+
+Feature-Based Architecture
+
+Scalable Firestore Design
+
+Enterprise UI
+
+Performance First
+
+Accessibility First
+
+Maintainability First
+
+---
+
+# Definition of Success
+
+EvenTech should feel like software used by professional event production companies.
+
+Every event should operate like a company.
+
+Every company should operate from one platform.
+
+Everything should be connected.
+
+Master Data
+
+↓
+
+Planning
+
+↓
+
+Operations
+
+↓
+
+Finance
+
+↓
+
+Marketing
+
+↓
+
+Execution
+
+↓
+
+Analytics
+
+↓
+
+Reports
+
+↓
+
+Archive
+
+Build for the next 10 years, not the next demo.

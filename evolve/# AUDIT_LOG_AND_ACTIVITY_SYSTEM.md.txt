@@ -1,0 +1,179 @@
+# AUDIT_LOG_AND_ACTIVITY_SYSTEM.md
+
+# EvenTech
+## Enterprise Audit Log & Activity Timeline
+
+---
+
+# Goal
+
+Every action inside EvenTech must be traceable.
+
+Nothing happens without being logged.
+
+---
+
+# Log Events
+
+Authentication
+
+Users
+
+Permissions
+
+Events
+
+Finance
+
+Operations
+
+Marketing
+
+CRM
+
+Documents
+
+Reports
+
+Settings
+
+System
+
+---
+
+# Capture
+
+- Timestamp
+- User
+- Organization
+- Department
+- Module
+- Action
+- Previous Value
+- New Value
+- IP Address
+- Device
+- Browser
+- Session ID
+
+---
+
+# Actions
+
+Login
+
+Logout
+
+Create
+
+Update
+
+Delete
+
+Archive
+
+Restore
+
+Approve
+
+Reject
+
+Assign
+
+Upload
+
+Download
+
+Export
+
+Import
+
+Payment
+
+Refund
+
+Generate Report
+
+Permission Change
+
+---
+
+# Activity Timeline
+
+Organization
+
+↓
+
+Event
+
+↓
+
+Department
+
+↓
+
+User
+
+↓
+
+Action
+
+↓
+
+Timestamp
+
+---
+
+# Search
+
+User
+
+Department
+
+Module
+
+Action
+
+Date
+
+Event
+
+Status
+
+---
+
+# Filters
+
+Today
+
+Yesterday
+
+Last 7 Days
+
+Last 30 Days
+
+Custom Range
+
+---
+
+# Reports
+
+User Activity
+
+Financial Changes
+
+Permission Changes
+
+Deleted Records
+
+Login History
+
+Approval History
+
+Export History
+
+---
+
+# Deliverables
+
+Enterprise Audit System integrated into every module.

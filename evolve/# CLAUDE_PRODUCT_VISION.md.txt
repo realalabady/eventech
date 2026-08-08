@@ -1,0 +1,134 @@
+# CLAUDE_PRODUCT_VISION.md
+
+# EvenTech
+## Product Vision 2030
+
+---
+
+# Vision
+
+Become the operating system for the global event industry.
+
+---
+
+# Company
+
+↓
+
+Master Data
+
+↓
+
+Departments
+
+↓
+
+Resources
+
+↓
+
+Templates
+
+↓
+
+Event
+
+↓
+
+Planning
+
+↓
+
+Operations
+
+↓
+
+Finance
+
+↓
+
+Marketing
+
+↓
+
+Execution
+
+↓
+
+Analytics
+
+↓
+
+Reports
+
+↓
+
+Archive
+
+---
+
+# User Experience
+
+Every organizer should feel
+
+"I don't need Excel anymore."
+
+"I don't need WhatsApp groups."
+
+"I don't need paper checklists."
+
+"I don't need multiple systems."
+
+Everything exists inside EvenTech.
+
+---
+
+# Success Criteria
+
+Create event
+
+< 10 minutes
+
+Generate budget
+
+< 30 seconds
+
+Generate reports
+
+Instant
+
+Track operations
+
+Real Time
+
+Financial visibility
+
+100%
+
+Operational visibility
+
+100%
+
+---
+
+# Long-Term Principles
+
+One Platform
+
+One Database
+
+One Workflow
+
+One Source of Truth
+
+Zero Duplicate Data
+
+Maximum Automation
+
+Enterprise Scalability
+
+---
+
+# Final Goal
+
+If a professional event company can operate its entire business without leaving EvenTech, then the product vision has been achieved.

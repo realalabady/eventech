@@ -1,0 +1,160 @@
+# CLAUDE_UI_IMPLEMENTATION.md
+
+# EvenTech
+## UI Implementation Standards
+
+---
+
+# Goal
+
+Every screen should feel like it belongs to one premium product.
+
+---
+
+# UI Inspiration
+
+Study
+
+Linear
+
+Luma
+
+Stripe Dashboard
+
+Notion
+
+Raycast
+
+Vercel
+
+GitHub
+
+Do NOT copy.
+
+Understand the UX patterns.
+
+---
+
+# Every Screen
+
+Header
+
+Breadcrumb
+
+Search
+
+Filters
+
+Quick Actions
+
+Content
+
+Sidebar (if needed)
+
+Empty State
+
+Loading State
+
+Error State
+
+---
+
+# Cards
+
+Consistent padding
+
+Consistent radius
+
+Consistent shadows
+
+Consistent spacing
+
+---
+
+# Tables
+
+Sticky Header
+
+Responsive
+
+Bulk Actions
+
+Column Selector
+
+Export
+
+Search
+
+Filter
+
+Pagination
+
+---
+
+# Dashboard
+
+KPIs
+
+Charts
+
+Recent Activity
+
+Quick Actions
+
+Timeline
+
+Alerts
+
+---
+
+# Forms
+
+Step-by-step
+
+Validation
+
+Autosave
+
+Progress Indicator
+
+Undo
+
+Keyboard Friendly
+
+---
+
+# Motion
+
+Only meaningful animations.
+
+Fast.
+
+Subtle.
+
+Professional.
+
+Never distract.
+
+---
+
+# Accessibility
+
+Keyboard Navigation
+
+ARIA
+
+Focus States
+
+Screen Readers
+
+Contrast
+
+Reduced Motion
+
+---
+
+# Final Goal
+
+Every page should look like it was designed by the same team on the same day.
+
+Consistency over creativity.

@@ -1,0 +1,238 @@
+# PERMISSIONS_AND_RBAC.md
+
+# EvenTech
+## Enterprise Role Based Access Control
+
+---
+
+# Goal
+
+Build an enterprise permission system.
+
+Every action must be permission-based.
+
+---
+
+# Roles
+
+Super Admin
+
+Organization Owner
+
+General Manager
+
+Operations Manager
+
+Finance Manager
+
+Marketing Manager
+
+Production Manager
+
+Department Manager
+
+Team Leader
+
+Employee
+
+Volunteer
+
+Viewer
+
+Custom
+
+---
+
+# Permission Categories
+
+Dashboard
+
+Events
+
+Finance
+
+Bookings
+
+Tickets
+
+Artists
+
+Vendors
+
+Equipment
+
+Inventory
+
+Staff
+
+Marketing
+
+Reports
+
+Analytics
+
+Settings
+
+Documents
+
+Notifications
+
+CRM
+
+Master Data
+
+Templates
+
+---
+
+# CRUD Permissions
+
+Create
+
+Read
+
+Update
+
+Delete
+
+Approve
+
+Export
+
+Import
+
+Assign
+
+Archive
+
+Restore
+
+---
+
+# Financial Permissions
+
+Budget Approval
+
+Expense Approval
+
+Payment Approval
+
+Invoice Approval
+
+Purchase Approval
+
+Financial Reports
+
+Payroll
+
+Refund Approval
+
+---
+
+# Event Permissions
+
+Create Event
+
+Publish Event
+
+Archive Event
+
+Delete Event
+
+Manage Timeline
+
+Manage Team
+
+Manage Documents
+
+Manage Tasks
+
+---
+
+# Organization Permissions
+
+Manage Users
+
+Manage Departments
+
+Manage Roles
+
+Manage Branding
+
+Manage Settings
+
+Manage Subscription
+
+---
+
+# Document Permissions
+
+View
+
+Upload
+
+Edit
+
+Delete
+
+Share
+
+Download
+
+Approve
+
+---
+
+# Security
+
+Every API
+
+↓
+
+Validate User
+
+↓
+
+Validate Organization
+
+↓
+
+Validate Role
+
+↓
+
+Validate Permission
+
+↓
+
+Execute Request
+
+---
+
+# Audit Log
+
+Track
+
+Login
+
+Logout
+
+Permission Changes
+
+Financial Changes
+
+Approvals
+
+Data Updates
+
+Deleted Records
+
+Exports
+
+Imports
+
+---
+
+# Deliverables
+
+Enterprise RBAC integrated across the entire platform.

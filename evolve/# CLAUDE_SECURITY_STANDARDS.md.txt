@@ -1,0 +1,124 @@
+# CLAUDE_SECURITY_STANDARDS.md
+
+# EvenTech
+## Enterprise Security Standards
+
+---
+
+# Goal
+
+Protect organization data at every layer.
+
+Security is mandatory.
+
+---
+
+# Authentication
+
+Firebase Auth
+
+Email Verification
+
+MFA Ready
+
+Session Validation
+
+---
+
+# Authorization
+
+RBAC
+
+Permission Checks
+
+Organization Isolation
+
+Ownership Validation
+
+---
+
+# Firestore
+
+Least Privilege
+
+Security Rules
+
+Indexes
+
+Validation
+
+Audit Logs
+
+---
+
+# API
+
+HTTPS
+
+JWT
+
+Rate Limiting
+
+Input Validation
+
+Output Sanitization
+
+---
+
+# Storage
+
+Permission Validation
+
+Signed URLs
+
+Virus Scan (Future)
+
+Access Logging
+
+---
+
+# Secrets
+
+Never commit secrets.
+
+Use Environment Variables.
+
+Rotate keys regularly.
+
+---
+
+# Compliance
+
+GDPR Ready
+
+Audit Logs
+
+Data Retention
+
+Soft Delete
+
+Export User Data
+
+Delete User Data
+
+---
+
+# Security Reviews
+
+Authentication
+
+Permissions
+
+Firestore Rules
+
+Dependencies
+
+Secrets
+
+Cloud Functions
+
+---
+
+# Deliverables
+
+Enterprise security standards for the entire platform.

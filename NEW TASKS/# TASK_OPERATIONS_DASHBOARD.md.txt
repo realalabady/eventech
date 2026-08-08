@@ -1,0 +1,183 @@
+# TASK_OPERATIONS_DASHBOARD.md
+
+# EvenTech
+## Enterprise Operations Dashboard
+
+---
+
+# Goal
+
+Build the primary dashboard used daily by Event Managers.
+
+The dashboard should provide a complete operational overview of the event.
+
+---
+
+# Dashboard Sections
+
+## Executive Summary
+
+Display
+
+- Event Status
+- Countdown
+- Budget
+- Actual Cost
+- Revenue
+- Profit
+- Completion %
+- Team Status
+
+---
+
+## Today's Operations
+
+Display
+
+- Tasks Due Today
+- Vendors Arriving
+- Artists Arriving
+- Equipment Delivery
+- Pending Payments
+- Pending Approvals
+
+---
+
+## Timeline
+
+Interactive Timeline
+
+Planning
+
+↓
+
+Venue
+
+↓
+
+Artists
+
+↓
+
+Marketing
+
+↓
+
+Production
+
+↓
+
+Event Day
+
+↓
+
+Closing
+
+Each milestone
+
+- Status
+- Owner
+- Deadline
+- Progress
+
+---
+
+## Department Status
+
+Cards
+
+Operations
+
+Finance
+
+Marketing
+
+Production
+
+Security
+
+Hospitality
+
+Ticketing
+
+Each shows
+
+- Progress
+- Issues
+- Tasks
+- Alerts
+
+---
+
+## Quick Actions
+
+- Create Purchase Request
+- Approve Payment
+- Assign Task
+- Upload Document
+- Add Vendor
+- Register Artist
+- Create Expense
+- Create Revenue
+
+---
+
+## Notifications
+
+Priority
+
+Critical
+
+Warning
+
+Info
+
+Success
+
+Grouped by department.
+
+---
+
+## Calendar
+
+Display
+
+Meetings
+
+Deliveries
+
+Artist Arrival
+
+Vendor Arrival
+
+Deadlines
+
+Payments
+
+Tasks
+
+---
+
+## KPIs
+
+Budget Usage
+
+Revenue
+
+Profit
+
+Tickets Sold
+
+Attendance
+
+Pending Tasks
+
+Completed Tasks
+
+Pending Approvals
+
+---
+
+## Deliverables
+
+Enterprise Operations Dashboard.

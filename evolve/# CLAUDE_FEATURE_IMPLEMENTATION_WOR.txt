@@ -1,0 +1,187 @@
+# CLAUDE_FEATURE_IMPLEMENTATION_WORKFLOW.md
+
+# EvenTech
+## Feature Development Workflow
+
+---
+
+# Goal
+
+Every feature follows the exact same implementation lifecycle.
+
+No shortcuts.
+
+No skipped steps.
+
+---
+
+# Phase 1
+
+Understand
+
+Read
+
+- README.md
+- Architecture
+- Current Module
+- Related Modules
+
+Understand dependencies before writing code.
+
+---
+
+# Phase 2
+
+Analyze
+
+Search project for
+
+Components
+
+Hooks
+
+Services
+
+Utilities
+
+Schemas
+
+Types
+
+Animations
+
+Database Collections
+
+Never duplicate existing functionality.
+
+---
+
+# Phase 3
+
+Design
+
+Define
+
+UI
+
+Database
+
+Permissions
+
+Activity Logs
+
+Notifications
+
+Relationships
+
+Performance
+
+---
+
+# Phase 4
+
+Implement
+
+Backend First
+
+↓
+
+Business Logic
+
+↓
+
+Hooks
+
+↓
+
+Components
+
+↓
+
+Pages
+
+↓
+
+Animations
+
+---
+
+# Phase 5
+
+Integrate
+
+Finance
+
+Operations
+
+Notifications
+
+Reports
+
+Analytics
+
+Audit Logs
+
+Permissions
+
+Documents
+
+---
+
+# Phase 6
+
+Test
+
+Unit
+
+Integration
+
+E2E
+
+Accessibility
+
+Responsive
+
+Dark Mode
+
+Localization
+
+Performance
+
+---
+
+# Phase 7
+
+Optimize
+
+Refactor
+
+Reduce Complexity
+
+Remove Duplicates
+
+Improve Performance
+
+Improve UX
+
+---
+
+# Phase 8
+
+Document
+
+Architecture
+
+Database
+
+API
+
+README
+
+Changelog
+
+---
+
+# Deliverables
+
+Standard implementation lifecycle for every feature.

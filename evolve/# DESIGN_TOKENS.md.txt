@@ -1,0 +1,258 @@
+# DESIGN_TOKENS.md
+
+# EvenTech
+## Design Tokens
+
+---
+
+# Goal
+
+Create a single source of truth for the UI.
+
+---
+
+# Colors
+
+Primary
+
+Secondary
+
+Accent
+
+Background
+
+Surface
+
+Border
+
+Text
+
+Muted
+
+Success
+
+Warning
+
+Danger
+
+Info
+
+Finance
+
+Operations
+
+Marketing
+
+Analytics
+
+---
+
+# Typography
+
+Display
+
+H1
+
+H2
+
+H3
+
+H4
+
+Body
+
+Caption
+
+Label
+
+Button
+
+Code
+
+---
+
+# Font Weights
+
+Light
+
+Regular
+
+Medium
+
+Semibold
+
+Bold
+
+---
+
+# Spacing
+
+4
+
+8
+
+12
+
+16
+
+20
+
+24
+
+32
+
+40
+
+48
+
+64
+
+80
+
+96
+
+128
+
+---
+
+# Radius
+
+XS
+
+SM
+
+MD
+
+LG
+
+XL
+
+2XL
+
+Full
+
+---
+
+# Shadows
+
+XS
+
+SM
+
+MD
+
+LG
+
+XL
+
+Overlay
+
+---
+
+# Borders
+
+Thin
+
+Medium
+
+Strong
+
+Focus Ring
+
+---
+
+# Motion
+
+Fast
+
+Normal
+
+Slow
+
+Page Transition
+
+Modal
+
+Drawer
+
+Hover
+
+Press
+
+Loading
+
+---
+
+# Z-Index
+
+Base
+
+Dropdown
+
+Sticky
+
+Overlay
+
+Modal
+
+Toast
+
+Tooltip
+
+Command Palette
+
+---
+
+# Icons
+
+16px
+
+20px
+
+24px
+
+32px
+
+48px
+
+---
+
+# Charts
+
+Grid
+
+Axis
+
+Legend
+
+Tooltip
+
+Primary Series
+
+Secondary Series
+
+Success
+
+Warning
+
+Danger
+
+---
+
+# Breakpoints
+
+Mobile
+
+Tablet
+
+Laptop
+
+Desktop
+
+Ultra Wide
+
+---
+
+# Deliverables
+
+Global design tokens used across the entire platform.

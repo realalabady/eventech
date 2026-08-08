@@ -1,0 +1,172 @@
+# CLAUDE_DATABASE_STANDARDS.md
+
+# EvenTech
+## Database Development Standards
+
+---
+
+# Goal
+
+Ensure the Firestore database remains scalable, maintainable, and performant for years.
+
+---
+
+# Design Principles
+
+Single Source of Truth
+
+Reference-Based Relationships
+
+No Data Duplication
+
+Predictable Collections
+
+Scalable Queries
+
+Organization Isolation
+
+---
+
+# Collection Rules
+
+Every collection must include
+
+- id
+- organizationId
+- createdAt
+- updatedAt
+- createdBy
+- updatedBy
+- status
+- archived
+- deletedAt
+
+---
+
+# Document Rules
+
+Keep documents small.
+
+Avoid deeply nested objects.
+
+Prefer references over embedded data.
+
+Split large datasets into subcollections only when justified.
+
+---
+
+# Naming
+
+Collections
+
+plural
+
+Examples
+
+events
+
+artists
+
+vendors
+
+venues
+
+equipment
+
+Documents
+
+camelCase
+
+Fields
+
+camelCase
+
+---
+
+# Relationships
+
+Use IDs
+
+Example
+
+event
+
+↓
+
+venueId
+
+artistIds
+
+vendorIds
+
+staffIds
+
+Never duplicate the full object.
+
+---
+
+# Query Rules
+
+Always
+
+Filter
+
+↓
+
+Sort
+
+↓
+
+Paginate
+
+↓
+
+Return only required fields
+
+Never fetch entire collections.
+
+---
+
+# Indexes
+
+Create indexes before production.
+
+Composite indexes
+
+Single-field indexes
+
+Review slow queries regularly.
+
+---
+
+# Soft Delete
+
+Never permanently delete business data.
+
+Instead
+
+archived = true
+
+deletedAt = timestamp
+
+---
+
+# Audit
+
+Critical collections must log
+
+Create
+
+Update
+
+Delete
+
+Approve
+
+Restore
+
+---
+
+# Deliverables
+
+Enterprise Firestore standards for the entire platform.

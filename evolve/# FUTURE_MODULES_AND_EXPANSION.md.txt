@@ -1,0 +1,162 @@
+# FUTURE_MODULES_AND_EXPANSION.md
+
+# EvenTech
+## Future Enterprise Modules
+
+---
+
+# Goal
+
+Design EvenTech to grow into a complete Event ERP without major architectural changes.
+
+Every future module should plug into the existing platform.
+
+---
+
+# Visitor Management
+
+Features
+
+- Guest Lists
+- VIP Guests
+- Media Guests
+- Sponsors
+- QR Invitations
+- Digital Badges
+- Check-in History
+- Seating Assignment
+
+---
+
+# Accreditation
+
+Manage
+
+- Staff Badges
+- Media Passes
+- Vendor Passes
+- Artist Passes
+- VIP Passes
+- Temporary Access
+
+Support
+
+QR
+
+NFC (Future)
+
+RFID (Future)
+
+---
+
+# Venue Mapping
+
+Interactive Venue Map
+
+Manage
+
+- Stages
+- Food Areas
+- VIP Areas
+- Toilets
+- Parking
+- Emergency Exits
+- Medical Stations
+- Security Checkpoints
+
+---
+
+# Seating Management
+
+Support
+
+- Reserved Seats
+- VIP Tables
+- Zones
+- Sections
+- Capacity
+- Live Availability
+
+---
+
+# Warehouse
+
+Manage
+
+Inventory Storage
+
+Incoming
+
+Outgoing
+
+Transfers
+
+Returns
+
+Damaged Items
+
+Locations
+
+---
+
+# Fleet Management
+
+Manage
+
+Vehicles
+
+Drivers
+
+Trips
+
+Fuel
+
+Maintenance
+
+Assignments
+
+GPS (Future)
+
+---
+
+# Legal
+
+Store
+
+Contracts
+
+Insurance
+
+Licenses
+
+Government Approvals
+
+Legal Documents
+
+Expiration Alerts
+
+---
+
+# Knowledge Base
+
+Store
+
+SOPs
+
+Training
+
+Guidelines
+
+Videos
+
+Manuals
+
+FAQs
+
+Department Documentation
+
+---
+
+# Deliverables
+
+Future-ready architecture for enterprise expansion.

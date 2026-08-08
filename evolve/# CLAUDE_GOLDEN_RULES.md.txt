@@ -1,0 +1,128 @@
+# CLAUDE_GOLDEN_RULES.md
+
+# EvenTech
+## Golden Rules
+
+---
+
+# Rule 1
+
+Never duplicate data.
+
+---
+
+# Rule 2
+
+Never duplicate business logic.
+
+---
+
+# Rule 3
+
+Always reuse components.
+
+---
+
+# Rule 4
+
+Every feature integrates with Operations.
+
+---
+
+# Rule 5
+
+Every financial action integrates with Finance.
+
+---
+
+# Rule 6
+
+Every critical action creates an Activity Log.
+
+---
+
+# Rule 7
+
+Every module supports Permissions.
+
+---
+
+# Rule 8
+
+Every screen supports
+
+Loading
+
+Empty
+
+Error
+
+Responsive
+
+Dark Mode
+
+Accessibility
+
+Localization
+
+---
+
+# Rule 9
+
+Every collection belongs to an Organization.
+
+---
+
+# Rule 10
+
+Every Event is a Workspace.
+
+---
+
+# Rule 11
+
+Master Data is the only source of reusable information.
+
+---
+
+# Rule 12
+
+Everything must be searchable.
+
+---
+
+# Rule 13
+
+Everything important must be reportable.
+
+---
+
+# Rule 14
+
+Automation before manual work.
+
+---
+
+# Rule 15
+
+Enterprise quality over implementation speed.
+
+---
+
+# Rule 16
+
+Never implement demo code.
+
+Implement production code.
+
+---
+
+# Rule 17
+
+Build for 10 years of growth, not today's MVP.
+
+---
+
+# Final Principle
+
+Every line of code should make EvenTech easier to operate, easier to scale and easier to maintain.

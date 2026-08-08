@@ -1,0 +1,182 @@
+# FINANCE_DATABASE_DESIGN.md
+
+# EvenTech
+## Enterprise Finance Database
+
+---
+
+# Goal
+
+Design a scalable finance database where every financial transaction is linked to an Event while remaining reusable across the organization.
+
+---
+
+# Collections
+
+budgets/
+
+expenses/
+
+revenues/
+
+cashflows/
+
+purchaseRequests/
+
+paymentRequests/
+
+invoices/
+
+receipts/
+
+transactions/
+
+financialReports/
+
+---
+
+# Budget
+
+Fields
+
+- Event
+- Category
+- Planned Amount
+- Actual Amount
+- Remaining
+- Variance
+- Forecast
+- Progress
+- Status
+- Notes
+
+---
+
+# Expense
+
+Fields
+
+- Event
+- Vendor
+- Category
+- Description
+- Amount
+- VAT
+- Currency
+- Due Date
+- Paid Date
+- Payment Method
+- Invoice
+- Receipt
+- Status
+- Approved By
+- Created By
+
+---
+
+# Revenue
+
+Fields
+
+- Event
+- Source
+- Amount
+- Forecast
+- Actual
+- Currency
+- Payment Method
+- Status
+- Customer
+- Notes
+
+---
+
+# Cash Flow
+
+Fields
+
+- Event
+- Date
+- Type
+- Amount
+- Description
+- Balance
+- Category
+
+---
+
+# Purchase Request
+
+Workflow
+
+Employee
+
+↓
+
+Department Manager
+
+↓
+
+Finance
+
+↓
+
+Purchase
+
+↓
+
+Completed
+
+Fields
+
+- Title
+- Department
+- Requested By
+- Vendor
+- Budget
+- Amount
+- Status
+- Notes
+
+---
+
+# Payment Request
+
+Fields
+
+- Vendor
+- Event
+- Invoice
+- Amount
+- Due Date
+- Approved By
+- Paid Date
+- Status
+
+---
+
+# Reports
+
+Automatically Generate
+
+Budget Report
+
+Profit Report
+
+Cash Flow
+
+Vendor Spending
+
+Artist Spending
+
+Expense Report
+
+Revenue Report
+
+Annual Report
+
+---
+
+# Deliverables
+
+Enterprise Finance Database Schema

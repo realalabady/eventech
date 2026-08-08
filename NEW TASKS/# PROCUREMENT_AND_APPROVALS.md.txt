@@ -1,0 +1,185 @@
+# PROCUREMENT_AND_APPROVALS.md
+
+# EvenTech
+## Procurement & Approval Workflow
+
+---
+
+# Goal
+
+Manage every purchase from request until payment.
+
+Every purchase must be approved and fully traceable.
+
+---
+
+# Workflow
+
+Employee
+
+↓
+
+Purchase Request
+
+↓
+
+Department Manager
+
+↓
+
+Finance Review
+
+↓
+
+Executive Approval (Optional)
+
+↓
+
+Purchase Order
+
+↓
+
+Vendor
+
+↓
+
+Delivery
+
+↓
+
+Invoice
+
+↓
+
+Payment
+
+↓
+
+Completed
+
+---
+
+# Purchase Request
+
+Fields
+
+- Request Number
+- Event
+- Department
+- Requested By
+- Vendor
+- Category
+- Items
+- Quantity
+- Estimated Cost
+- Priority
+- Needed By
+- Justification
+- Attachments
+
+---
+
+# Approval Levels
+
+Department
+
+Finance
+
+Operations
+
+Executive
+
+Auto Approval Rules
+
+---
+
+# Purchase Order
+
+Store
+
+- PO Number
+- Vendor
+- Delivery Date
+- Payment Terms
+- Tax
+- Discount
+- Total
+- Currency
+
+---
+
+# Goods Receiving
+
+Receive
+
+Partial
+
+Complete
+
+Rejected
+
+Damaged
+
+Missing
+
+Attach Photos
+
+---
+
+# Invoice Matching
+
+Compare
+
+Purchase Request
+
+↓
+
+Purchase Order
+
+↓
+
+Invoice
+
+↓
+
+Payment
+
+Flag mismatches automatically.
+
+---
+
+# Approval Dashboard
+
+Pending Requests
+
+Pending Payments
+
+Over Budget
+
+Urgent
+
+Rejected
+
+Completed
+
+---
+
+# Reports
+
+Purchase History
+
+Vendor Performance
+
+Department Spending
+
+Approval Time
+
+Pending Orders
+
+Budget Impact
+
+---
+
+# Deliverables
+
+Enterprise Procurement & Approval Module fully integrated with Finance and Operations.

@@ -1,0 +1,144 @@
+# CUSTOMER_CRM.md
+
+# EvenTech
+## Customer Relationship Management (CRM)
+
+---
+
+# Goal
+
+Manage every attendee before, during and after every event.
+
+Build long-term relationships instead of only selling tickets.
+
+---
+
+# Customer Profile
+
+Store
+
+- Customer ID
+- Full Name
+- Email
+- Phone
+- Nationality
+- Birthday
+- Gender
+- Preferred Language
+- Social Media
+- Notes
+
+---
+
+# Purchase History
+
+Track
+
+- Events Attended
+- Total Tickets
+- Total Spending
+- VIP Purchases
+- Refund History
+- No Shows
+- Loyalty Points
+
+---
+
+# Preferences
+
+Store
+
+- Favorite Genres
+- Favorite Artists
+- Preferred Cities
+- Favorite Venues
+- VIP Preference
+- Communication Preference
+
+---
+
+# Customer Tags
+
+VIP
+
+Influencer
+
+Sponsor
+
+Partner
+
+Media
+
+Frequent Buyer
+
+Blacklist
+
+Staff
+
+Custom
+
+---
+
+# Loyalty
+
+Track
+
+Points
+
+Tier
+
+Rewards
+
+Coupons
+
+Discounts
+
+Referral Bonus
+
+---
+
+# Customer Timeline
+
+Signup
+
+↓
+
+Ticket Purchase
+
+↓
+
+Check-in
+
+↓
+
+Attendance
+
+↓
+
+Feedback
+
+↓
+
+Future Purchases
+
+---
+
+# Reports
+
+Customer Lifetime Value
+
+Repeat Customers
+
+Top Customers
+
+Inactive Customers
+
+Customer Growth
+
+Retention Rate
+
+---
+
+# Deliverables
+
+Complete CRM integrated with Bookings, Marketing and Finance.

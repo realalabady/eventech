@@ -1,0 +1,182 @@
+# CLAUDE_ENTERPRISE_REVIEW.md
+
+# EvenTech
+## Enterprise Review Checklist
+
+---
+
+# Goal
+
+Before any Pull Request is merged, perform a complete enterprise review.
+
+No feature is complete until it passes every checkpoint.
+
+---
+
+# Product Review
+
+Does it solve a real business problem?
+
+Does it reduce manual work?
+
+Does it reduce clicks?
+
+Does it improve productivity?
+
+Is it intuitive?
+
+---
+
+# UI Review
+
+Consistent spacing
+
+Consistent typography
+
+Responsive
+
+Dark Mode
+
+Accessibility
+
+Loading States
+
+Empty States
+
+Error States
+
+Animations
+
+Visual hierarchy
+
+---
+
+# Engineering Review
+
+Reusable Components
+
+No Duplicate Logic
+
+No Dead Code
+
+Strict TypeScript
+
+Clean Architecture
+
+Small Components
+
+Proper Hooks
+
+Proper Services
+
+---
+
+# Database Review
+
+Indexes
+
+Firestore Rules
+
+Pagination
+
+Reference Integrity
+
+Organization Isolation
+
+Audit Logs
+
+Performance
+
+---
+
+# Performance Review
+
+Bundle Size
+
+Render Performance
+
+Network Requests
+
+Firestore Reads
+
+Firestore Writes
+
+Memory Usage
+
+Animations
+
+---
+
+# Security Review
+
+Authentication
+
+Authorization
+
+RBAC
+
+Validation
+
+Sanitization
+
+Environment Variables
+
+---
+
+# QA Review
+
+Manual Testing
+
+Unit Tests
+
+Integration Tests
+
+Accessibility
+
+Cross Browser
+
+Responsive
+
+---
+
+# Documentation Review
+
+README
+
+Architecture
+
+Database
+
+API
+
+Changelog
+
+Module Documentation
+
+---
+
+# Release Decision
+
+Approve
+
+↓
+
+Merge
+
+↓
+
+Deploy
+
+OR
+
+Reject
+
+↓
+
+Create Fix Tasks
+
+---
+
+# Deliverables
+
+Enterprise Review Process.

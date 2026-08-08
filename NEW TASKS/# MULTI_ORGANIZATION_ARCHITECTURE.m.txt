@@ -1,0 +1,135 @@
+# MULTI_ORGANIZATION_ARCHITECTURE.md
+
+# EvenTech
+## Multi-Tenant Organization Architecture
+
+---
+
+# Goal
+
+Allow thousands of event companies to use EvenTech independently.
+
+Every organization owns completely isolated data.
+
+---
+
+# Organization
+
+Each Organization contains
+
+- Company Profile
+- Users
+- Departments
+- Events
+- Finance
+- Operations
+- Master Data
+- CRM
+- Reports
+- Subscription
+- Branding
+
+---
+
+# Organization Profile
+
+Store
+
+- Company Name
+- Logo
+- Industry
+- Country
+- City
+- Timezone
+- Currency
+- Language
+- VAT Number
+- CR Number
+- Address
+- Contact
+- Website
+- Social Media
+
+---
+
+# Organization Settings
+
+Configure
+
+Brand Colors
+
+Logo
+
+Email Templates
+
+Invoice Template
+
+Roles
+
+Permissions
+
+Working Hours
+
+Business Days
+
+Tax Settings
+
+Currency
+
+Notification Rules
+
+---
+
+# Organization Isolation
+
+Every collection includes
+
+organizationId
+
+Every query filters by
+
+organizationId
+
+No cross-company access.
+
+---
+
+# White Label
+
+Support
+
+Logo
+
+Primary Color
+
+Secondary Color
+
+Email Branding
+
+Invoice Branding
+
+Report Branding
+
+Custom Domain (Future)
+
+---
+
+# Subscription Ready
+
+Plans
+
+Starter
+
+Professional
+
+Business
+
+Enterprise
+
+Custom
+
+---
+
+# Deliverables
+
+Enterprise Multi-Tenant SaaS Architecture.

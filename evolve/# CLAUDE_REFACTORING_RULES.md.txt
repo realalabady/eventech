@@ -1,0 +1,120 @@
+# CLAUDE_REFACTORING_RULES.md
+
+# EvenTech
+## Refactoring & Technical Debt Policy
+
+---
+
+# Goal
+
+Keep the codebase clean from the first commit until production.
+
+Technical debt is not acceptable unless explicitly documented.
+
+---
+
+# Refactoring Rules
+
+Always improve existing code.
+
+Never stack bad code on top of bad code.
+
+Never duplicate logic.
+
+Never duplicate UI.
+
+Never duplicate Firestore queries.
+
+---
+
+# Before Creating Anything
+
+Search
+
+↓
+
+Reuse
+
+↓
+
+Extend
+
+↓
+
+Create New (only if necessary)
+
+---
+
+# Components
+
+If two components share more than 80% of their logic
+
+↓
+
+Merge them.
+
+---
+
+# Pages
+
+Pages should orchestrate.
+
+Business logic belongs inside
+
+Hooks
+
+Services
+
+Utilities
+
+---
+
+# Services
+
+One responsibility.
+
+No UI.
+
+No React.
+
+Pure business logic.
+
+---
+
+# Technical Debt
+
+Every temporary solution must contain
+
+Reason
+
+Owner
+
+Deadline
+
+Replacement Plan
+
+---
+
+# Code Reviews
+
+Verify
+
+Architecture
+
+Naming
+
+Performance
+
+Security
+
+Accessibility
+
+Scalability
+
+Maintainability
+
+---
+
+# Success
+
+Every release leaves the project cleaner than before.

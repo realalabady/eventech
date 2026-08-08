@@ -1,0 +1,262 @@
+# EVENT_CREATION_WORKFLOW.md
+
+# EvenTech
+## Smart Event Creation Wizard
+
+---
+
+# Goal
+
+Creating an event should take minutes.
+
+Everything should be selected from Master Data.
+
+---
+
+# Wizard
+
+Step 1
+
+General Information
+
+- Event Name
+- Description
+- Category
+- Theme
+- Capacity
+
+---
+
+Step 2
+
+Venue
+
+Select Existing Venue
+
+or
+
+Create New
+
+Auto-fill
+
+Capacity
+
+Cost
+
+Location
+
+Restrictions
+
+---
+
+Step 3
+
+Artists
+
+Search
+
+Filter
+
+Select
+
+Auto-fill
+
+Fee
+
+Genre
+
+Manager
+
+Hotel
+
+Transportation
+
+---
+
+Step 4
+
+Vendors
+
+Lighting
+
+Sound
+
+LED
+
+Security
+
+Cleaning
+
+Food
+
+Transport
+
+Printing
+
+Decoration
+
+Internet
+
+Medical
+
+---
+
+Step 5
+
+Equipment
+
+Select equipment
+
+Quantity
+
+Rental
+
+Assignment
+
+---
+
+Step 6
+
+Staff
+
+Assign
+
+Managers
+
+Security
+
+Volunteers
+
+Stage Crew
+
+Ticket Staff
+
+Photographers
+
+Videographers
+
+---
+
+Step 7
+
+Finance
+
+Generate default budget automatically.
+
+Venue
+
+↓
+
+Artist
+
+↓
+
+Vendor
+
+↓
+
+Equipment
+
+↓
+
+Staff
+
+↓
+
+Transportation
+
+↓
+
+Marketing
+
+↓
+
+Emergency Fund
+
+Organizer edits values if needed.
+
+---
+
+Step 8
+
+Timeline
+
+Automatically generate milestones.
+
+Planning
+
+Contracts
+
+Marketing
+
+Ticket Sales
+
+Production
+
+Event Day
+
+Closing
+
+---
+
+Step 9
+
+Review
+
+Summary
+
+Warnings
+
+Budget
+
+Missing Items
+
+Estimated Profit
+
+---
+
+Step 10
+
+Publish
+
+Create Event Workspace
+
+Generate Tasks
+
+Generate Budget
+
+Generate Timeline
+
+Generate Operations
+
+Generate Finance
+
+Ready for execution.
+
+---
+
+# Smart Features
+
+Templates
+
+Duplicate previous event
+
+Auto Budget
+
+Auto Timeline
+
+Auto Tasks
+
+Auto Assign Vendors
+
+Suggested Equipment
+
+Suggested Staff
+
+Suggested Marketing Plan
+
+---
+
+# Deliverables
+
+Complete guided Event Creation Wizard with reusable company data.

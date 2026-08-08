@@ -1,0 +1,172 @@
+# TASK_CHECKLIST_SYSTEM.md
+
+# EvenTech
+## Smart Checklist Engine
+
+---
+
+# Goal
+
+Every event should automatically generate operational checklists.
+
+No manual setup.
+
+Everything should be reusable.
+
+---
+
+# Checklist Categories
+
+Pre Planning
+
+Planning
+
+Venue
+
+Artists
+
+Production
+
+Marketing
+
+Security
+
+Finance
+
+Food
+
+Hospitality
+
+Ticketing
+
+Setup
+
+Live Event
+
+Breakdown
+
+Closing
+
+---
+
+# Example
+
+Venue Checklist
+
+- Venue Contract Signed
+- Deposit Paid
+- Insurance Verified
+- Emergency Exit Checked
+- Internet Tested
+- Parking Confirmed
+- Power Tested
+- Cleaning Scheduled
+
+---
+
+# Production Checklist
+
+- Stage Installed
+- Lighting Installed
+- Audio Installed
+- LED Installed
+- Generator Ready
+- Backup Generator Ready
+- DJ Booth Ready
+- Microphones Tested
+
+---
+
+# Artist Checklist
+
+- Contract Signed
+- Deposit Paid
+- Flight Confirmed
+- Hotel Booked
+- Transportation Assigned
+- Hospitality Ready
+- Rider Completed
+- Arrival Confirmed
+
+---
+
+# Finance Checklist
+
+- Budget Approved
+- Purchase Requests Approved
+- Vendor Payments Scheduled
+- Receipts Uploaded
+- Cash Flow Verified
+- Final Budget Reviewed
+
+---
+
+# Event Day Checklist
+
+Morning
+
+Doors
+
+Artist Arrival
+
+Sound Check
+
+Lighting Test
+
+Security Briefing
+
+Medical Ready
+
+Food Ready
+
+Water Ready
+
+Cleaning Ready
+
+Ticket Scanners Ready
+
+Emergency Team Ready
+
+Opening
+
+Live Monitoring
+
+Closing
+
+Cleanup
+
+Financial Closing
+
+---
+
+# Smart Features
+
+Generate automatically from
+
+Template
+
+↓
+
+Venue
+
+↓
+
+Artists
+
+↓
+
+Vendors
+
+↓
+
+Equipment
+
+↓
+
+Staff
+
+---
+
+# Deliverables
+
+Reusable Smart Checklist System integrated into every Event.

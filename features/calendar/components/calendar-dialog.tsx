@@ -13,6 +13,13 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 
 import {
@@ -170,19 +177,29 @@ export function CalendarDialog({
           {entry ? null : (
             <div className="space-y-2">
               <Label htmlFor="calendar-event">{t("dialog.eventLabel")}</Label>
-              <select
-                id="calendar-event"
+              <Select
+                items={[
+                  { value: "", label: t("dialog.eventNone") },
+                  ...eventOptions.map((option) => ({
+                    value: option.id,
+                    label: option.title,
+                  })),
+                ]}
                 value={eventId}
-                onChange={(event) => setEventId(event.target.value)}
-                className="h-9 w-full rounded-md border border-input bg-transparent px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                onValueChange={(value) => setEventId(value ?? "")}
               >
-                <option value="">{t("dialog.eventNone")}</option>
-                {eventOptions.map((option) => (
-                  <option key={option.id} value={option.id}>
-                    {option.title}
-                  </option>
-                ))}
-              </select>
+                <SelectTrigger id="calendar-event" size="sm">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="">{t("dialog.eventNone")}</SelectItem>
+                  {eventOptions.map((option) => (
+                    <SelectItem key={option.id} value={option.id}>
+                      {option.title}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           )}
 

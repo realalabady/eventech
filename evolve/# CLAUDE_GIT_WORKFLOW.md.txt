@@ -1,0 +1,122 @@
+# CLAUDE_GIT_WORKFLOW.md
+
+# EvenTech
+## Git Workflow Standards
+
+---
+
+# Goal
+
+Maintain a clean, predictable Git history.
+
+Every commit should be understandable.
+
+---
+
+# Branch Strategy
+
+main
+
+Production
+
+develop
+
+Integration
+
+feature/*
+
+New Features
+
+fix/*
+
+Bug Fixes
+
+hotfix/*
+
+Production Fixes
+
+release/*
+
+Release Preparation
+
+---
+
+# Branch Naming
+
+feature/event-finance
+
+feature/master-data
+
+feature/vendor-module
+
+fix/expense-calculation
+
+hotfix/payment-bug
+
+release/v1.2.0
+
+---
+
+# Commit Format
+
+feat:
+
+fix:
+
+refactor:
+
+perf:
+
+docs:
+
+style:
+
+test:
+
+build:
+
+ci:
+
+chore:
+
+---
+
+# Pull Requests
+
+Must include
+
+Summary
+
+Screenshots
+
+Testing Notes
+
+Related Documents
+
+Checklist
+
+---
+
+# Before Merge
+
+- Rebase
+- Resolve conflicts
+- Pass CI
+- Update documentation
+- Review architecture
+
+---
+
+# Rules
+
+Never commit directly to main.
+
+Never merge broken code.
+
+Never ignore failing tests.
+
+---
+
+# Deliverables
+
+Enterprise Git workflow.

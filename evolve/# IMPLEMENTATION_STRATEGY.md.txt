@@ -1,0 +1,303 @@
+# IMPLEMENTATION_STRATEGY.md
+
+# Claude Opus
+## Implementation Strategy
+
+---
+
+# Objective
+
+Implement EvenTech like a real enterprise software product.
+
+Never jump randomly between features.
+
+Follow the implementation roadmap exactly.
+
+---
+
+# Phase 1
+
+Infrastructure
+
+Tasks
+
+- Review architecture
+- Identify reusable components
+- Create missing shared components
+- Review design system
+- Review Firestore schema
+- Review folder structure
+
+Deliverable
+
+Stable foundation.
+
+---
+
+# Phase 2
+
+Master Data
+
+Implement
+
+Venues
+
+Artists
+
+Vendors
+
+Equipment
+
+Staff
+
+Catering
+
+Inventory
+
+Logistics
+
+Documents
+
+Deliverable
+
+Reusable company database.
+
+---
+
+# Phase 3
+
+Event Creation
+
+Build
+
+Step-by-step event creation wizard.
+
+Every section pulls data from Master Data.
+
+No duplicated information.
+
+Deliverable
+
+Fast event creation.
+
+---
+
+# Phase 4
+
+Operations Workspace
+
+Build the operational dashboard.
+
+Timeline
+
+Tasks
+
+Team
+
+Documents
+
+Equipment
+
+Vendors
+
+Artists
+
+Inventory
+
+Operations
+
+Deliverable
+
+Complete production workspace.
+
+---
+
+# Phase 5
+
+Finance
+
+Implement
+
+Budget
+
+Actual
+
+Revenue
+
+Expenses
+
+Cash Flow
+
+Reports
+
+Charts
+
+Invoices
+
+Purchase Requests
+
+Payment Requests
+
+Deliverable
+
+Enterprise finance module.
+
+---
+
+# Phase 6
+
+Bookings
+
+Improve
+
+Approvals
+
+Receipts
+
+QR
+
+Emails
+
+Notifications
+
+Status Tracking
+
+Deliverable
+
+Professional booking workflow.
+
+---
+
+# Phase 7
+
+Analytics
+
+Implement
+
+Business KPIs
+
+Finance KPIs
+
+Attendance
+
+Sales
+
+Revenue
+
+Growth
+
+Performance
+
+Deliverable
+
+Executive dashboard.
+
+---
+
+# Phase 8
+
+Polish
+
+Animations
+
+Loading
+
+Accessibility
+
+Performance
+
+Responsive
+
+Dark Mode
+
+SEO
+
+Testing
+
+Documentation
+
+Deliverable
+
+Production-ready platform.
+
+---
+
+# Rules
+
+Never skip a phase.
+
+Never mix unfinished phases.
+
+Always complete.
+
+Review.
+
+Refactor.
+
+Test.
+
+Only then continue.
+
+---
+
+# Success Criteria
+
+Every phase must
+
+Compile successfully.
+
+Pass TypeScript.
+
+Pass ESLint.
+
+Remain responsive.
+
+Support dark mode.
+
+Support localization.
+
+Have loading states.
+
+Have empty states.
+
+Have error states.
+
+Be production-ready.
+
+---
+
+# Final Vision
+
+EvenTech should become an Event ERP platform where
+
+Master Data
+
+↓
+
+Event Creation
+
+↓
+
+Operations
+
+↓
+
+Finance
+
+↓
+
+Execution
+
+↓
+
+Analytics
+
+↓
+
+Reports
+
+↓
+
+Archive
+
+forms one continuous workflow with no duplicated data entry.

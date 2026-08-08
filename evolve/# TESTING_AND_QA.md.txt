@@ -1,0 +1,166 @@
+# TESTING_AND_QA.md
+
+# EvenTech
+## Testing & Quality Assurance
+
+---
+
+# Goal
+
+Every feature must be production-ready before release.
+
+---
+
+# Unit Testing
+
+Components
+
+Hooks
+
+Utilities
+
+Helpers
+
+Validation
+
+Business Logic
+
+---
+
+# Integration Testing
+
+Firebase
+
+Authentication
+
+Firestore
+
+Storage
+
+Cloud Functions
+
+Notifications
+
+Finance
+
+Operations
+
+---
+
+# End-to-End Testing
+
+User Login
+
+Create Event
+
+Book Ticket
+
+Approve Booking
+
+Create Expense
+
+Generate Report
+
+Upload Document
+
+Assign Task
+
+---
+
+# Accessibility
+
+Keyboard Navigation
+
+Screen Readers
+
+Focus States
+
+Color Contrast
+
+Reduced Motion
+
+Responsive Layout
+
+---
+
+# Performance
+
+Lighthouse
+
+Bundle Size
+
+Lazy Loading
+
+Image Optimization
+
+Code Splitting
+
+Caching
+
+---
+
+# Security
+
+Authentication
+
+Authorization
+
+Firestore Rules
+
+XSS
+
+CSRF
+
+Input Validation
+
+Rate Limiting
+
+---
+
+# Manual QA Checklist
+
+Build Success
+
+No Console Errors
+
+No TypeScript Errors
+
+Responsive
+
+Dark Mode
+
+Localization
+
+Loading States
+
+Empty States
+
+Error States
+
+Offline Support
+
+---
+
+# Production Checklist
+
+Environment Variables
+
+Indexes
+
+Security Rules
+
+Monitoring
+
+Analytics
+
+Error Tracking
+
+Backups
+
+Deployment Verification
+
+---
+
+# Deliverables
+
+Complete QA strategy for enterprise production releases.
